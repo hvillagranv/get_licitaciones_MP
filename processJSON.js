@@ -7,7 +7,7 @@ const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
 const archivoDetalles = 'detalles.csv';
 
 // Tiempo de espera entre consultas de fechas (en milisegundos)
-const TIEMPO_ESPERA_FECHAS = 3000; // 3 segundos
+const TIEMPO_ESPERA_FECHAS = 2000; // 3 segundos
 
 // Función para esperar un tiempo determinado
 function esperar(ms) {
@@ -75,12 +75,18 @@ async function obtenerDetallesLicitacion(codigoExterno) {
 
         return {
             codigo: detalles.CodigoExterno || "",
-            institucion_nombre: detalles.Comprador?.Nombre || "",
+            nombre: detalles.Nombre || "",
+            institucion_nombre: detalles.Comprador?.NombreOrganismo || "",
             institucion_rut: detalles.Comprador?.RutUnidad || "",
+            institucion_unidad: detalles.Comprador?.NombreUnidad || "",
+            institucion_direccion: detalles.Comprador?.DireccionUnidad || "",
+            institucion_comuna: detalles.Comprador?.ComunaUnidad || "",
+            institucion_region: detalles.Comprador?.RegionUnidad || "",
             tipo: detalles.Tipo || "",
             descripcion: limpiarDescripcion(detalles.Descripcion),
-            fechaInicio: detalles.Fecha?.Inicio || "",
-            fechaFinal: detalles.Fecha?.Final || "",
+            fechaInicio: detalles.Fechas?.FechaInicio || "",
+            fechaFinal: detalles.Fechas?.FechaCierre || "",
+            fechaEstAdj: detalles.Fechas?.FechaAdjudicacion || "",
             monto_estimado: detalles.MontoEstimado || "",
             unidad_monetaria: detalles.Moneda || "",
             proveedores_participantes: detalles.Proveedores?.length || 0,
@@ -101,12 +107,12 @@ async function guardarDetallesCSV(detalles) {
 
         // Escribir encabezados si el archivo no existe
         if (!existeArchivo) {
-            stream.write('\uFEFFcodigo;institucion_nombre;institucion_rut;tipo;descripcion;fecha_inicio;fecha_final;monto_estimado;unidad_monetaria;proveedores_participantes;adjudicados\n');
+            stream.write('\uFEFFcodigo;nombre;institucion_nombre;institucion_rut;unidad;direccion;comuna;region;tipo;descripcion;fecha_inicio;fecha_final;fecha_adjudicacion;monto_estimado;unidad_monetaria;proveedores_participantes;adjudicados\n');
         }
 
         // Escribir cada fila en el archivo CSV
         detalles.forEach(d => {
-            stream.write(`${d.codigo};"${d.institucion_nombre}";"${d.institucion_rut}";"${d.tipo}";"${d.descripcion}";${d.fechaInicio};${d.fechaFinal};${d.monto_estimado};"${d.unidad_monetaria}";${d.proveedores_participantes};${d.adjudicados}\n`);
+            stream.write(`${d.codigo};"${d.nombre}";"${d.institucion_nombre}";"${d.institucion_rut}";"${d.institucion_unidad}";"${d.institucion_direccion}";"${d.institucion_comuna}";"${d.institucion_region}";"${d.tipo}";"${d.descripcion}";${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};"${d.unidad_monetaria}";${d.proveedores_participantes};${d.adjudicados}\n`);
         });
 
         stream.end();
@@ -138,7 +144,7 @@ async function procesarLicitacionesPorFecha(fechas) {
                 continue;
             }
 
-            await new Promise(resolve => setTimeout(resolve, 1500)); // Evitar sobrecarga de API
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Evitar sobrecarga de API
             const detalles = await obtenerDetallesLicitacion(licitacion.CodigoExterno);
 
             if (detalles) {
@@ -162,8 +168,8 @@ async function procesarLicitacionesPorFecha(fechas) {
 }
 
 // **Configurar rango de fechas**
-const fechaInicio = "2025-02-20"; // Formato: YYYY-MM-DD
-const fechaFin = "2025-02-26";
+const fechaInicio = "2025-03-27"; // Formato: YYYY-MM-DD
+const fechaFin = "2025-03-28";
 const fechas = generarFechas(fechaInicio, fechaFin);
 
 // Ejecutar el proceso por fechas
