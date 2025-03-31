@@ -2,18 +2,14 @@ import fs from 'fs';
 
 // Ticket de autenticación
 const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
-
-// Archivo CSV donde se guardan los detalles de licitaciones
 const archivoDetalles = 'detalles.csv';
+const TIEMPO_ESPERA_FECHAS = 2000;
 
-// Tiempo de espera entre consultas de fechas (en milisegundos)
-const TIEMPO_ESPERA_FECHAS = 2000; // 3 segundos
-
-// Función para esperar un tiempo determinado
 function esperar(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//REVISAR: considerar que tome las fechas tal como están
 // Función para generar un rango de fechas en formato `ddMMyyyy`
 function generarFechas(inicio, fin) {
     const fechas = [];
@@ -31,6 +27,9 @@ function generarFechas(inicio, fin) {
 }
 
 // Función para obtener datos de la API
+//REVISAR: Forma de incluir enlace
+//Usar todos los datos de la API
+
 async function obtenerDatos(url, fecha) {
     try {
         const response = await fetch(url);
@@ -57,7 +56,7 @@ function obtenerCodigosProcesados() {
 
 // Función para limpiar la descripción eliminando saltos de línea
 function limpiarDescripcion(texto) {
-    return texto ? texto.replace(/\r?\n|\r/g, ' ').trim() : "";
+    return texto ? texto.replace(/[\r\n\"]+/g, ' ').trim() : "";
 }
 
 // Función para obtener detalles de una licitación
@@ -78,13 +77,13 @@ async function obtenerDetallesLicitacion(codigoExterno) {
             nombre: detalles.Nombre || "",
             institucion_nombre: detalles.Comprador?.NombreOrganismo || "",
             institucion_rut: detalles.Comprador?.RutUnidad || "",
-            institucion_unidad: detalles.Comprador?.NombreUnidad || "",
-            institucion_direccion: detalles.Comprador?.DireccionUnidad || "",
+            institucion_unidad: limpiarDescripcion(detalles.Comprador?.NombreUnidad) || "",
+            institucion_direccion: limpiarDescripcion(detalles.Comprador?.DireccionUnidad) || "",
             institucion_comuna: detalles.Comprador?.ComunaUnidad || "",
             institucion_region: detalles.Comprador?.RegionUnidad || "",
             tipo: detalles.Tipo || "",
             descripcion: limpiarDescripcion(detalles.Descripcion),
-            fechaInicio: detalles.Fechas?.FechaInicio || "",
+            fechaInicio: detalles.Fechas?.FechaPublicacion || "",
             fechaFinal: detalles.Fechas?.FechaCierre || "",
             fechaEstAdj: detalles.Fechas?.FechaAdjudicacion || "",
             monto_estimado: detalles.MontoEstimado || "",
@@ -168,8 +167,8 @@ async function procesarLicitacionesPorFecha(fechas) {
 }
 
 // **Configurar rango de fechas**
-const fechaInicio = "2025-03-27"; // Formato: YYYY-MM-DD
-const fechaFin = "2025-03-28";
+const fechaInicio = "2025-03-25"; // Formato: YYYY-MM-DD
+const fechaFin = "2025-04-01";
 const fechas = generarFechas(fechaInicio, fechaFin);
 
 // Ejecutar el proceso por fechas

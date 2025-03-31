@@ -3,30 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabla de Datos CSV</title>
+  <title>Licitaciones 2025</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
 
-<div class="container">
-  <h2>Licitaciones publicadas</h2>
-  <input type="text" id="filtroTexto" class="form-control my-3" placeholder="Filtrar por ID o Institución" oninput="filtrarDatos()">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h5>Filtros</h5>
+      <div id="filtrosInstituciones" class="form-check"></div>
+      <button class="btn btn-primary btn-sm mb-2" onclick="seleccionarTodasYFiltrar()">Seleccionar todo</button>
+      <button class="btn btn-secondary btn-sm" onclick="limpiarFiltros()">Limpiar filtros</button>
+    </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Institución</th>
-        <th>Detalles</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Final</th>
-      </tr>
-    </thead>
-    <tbody id="tablaDatos"></tbody>
-  </table>
+    <div class="col-md-9">
+      <h2>Licitaciones publicadas</h2>
+      <input type="text" id="filtroTexto" class="form-control my-3" placeholder="Filtrar por ID o Institución" oninput="filtrarDatos()">
+
+      <div id="contenedorCards"></div>
+
+    <nav>
+      <ul class="pagination justify-content-center" id="pagination"></ul>
+    </nav>
+    </div>
+  </div>
 </div>
+
 
 <script type="text/javascript" src="visualization.js"></script>
 </body>
