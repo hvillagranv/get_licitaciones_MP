@@ -6,7 +6,7 @@ const filasPorPagina = 10;
 let textoFiltro = '';
 let institucionesSeleccionadas = [];
 
-Papa.parse('publicadas.csv', {
+Papa.parse('csv/publicadas_sin_duplicados.csv', {
 download: true,
 header: true,
 delimiter: ';',
@@ -20,7 +20,7 @@ complete: (results) => {
 
 let aliasInstituciones = {};
 
-Papa.parse('instituciones.csv', {
+Papa.parse('csv/instituciones.csv', {
   download: true,
   header: true,
   delimiter: ';',

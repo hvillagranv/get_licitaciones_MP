@@ -1,12 +1,13 @@
 import fs from 'fs';
-import path from 'path';
-const { createReadStream, writeFileSync } = fs;
-import csv from 'csv-parser';
 
 //Ticket de autenticación
 const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
-const archivoPublicadas = 'publicadas.csv';
-const archivoDesiertas = 'desiertas.csv';
+const archivoPublicadas = 'csv/publicadas.csv';
+const archivoDesiertas = 'csv/desiertas.csv';
+const archivoCerradas = 'csv/cerradas.csv';
+const archivoRevocadas = 'csv/revocadas.csv';
+const archivoSuspendidas = 'csv/suspendidas.csv';
+const archivoAdjudicadas = 'csv/adjudicadas.csv';
 const TIEMPO_ESPERA_FECHAS = 3000;
 
 function esperar(ms) {
@@ -126,26 +127,33 @@ async function guardarDetallesCSV(detalles,archivo) {
 
 //Función principal para procesar las licitaciones por fecha
 async function procesarLicitacionesPorFecha(fechas, estado, archivo) {
-    const codigosProcesados = obtenerCodigosProcesados(archivo);
+    let codigosProcesados = obtenerCodigosProcesados(archivo);  // Obtener códigos procesados previos
     let totalNuevas = 0;
+    let totalLicitaciones = 0;  // Total de todas las licitaciones (procesadas y no procesadas)
+    let totalProcesadas = 0;  // Contador de licitaciones procesadas (nuevas y previas)
 
     for (const fecha of fechas) {
         try {
             console.log(`📅 Procesando licitaciones de la fecha: ${fecha}`);
             const url = `https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?fecha=${fecha}&estado=${estado}&ticket=${ticket}`;
 
-            const licitaciones = await obtenerDatos(url, fecha);
+            let licitaciones = await obtenerDatos(url, fecha);
             if (!licitaciones.length) {
                 console.log(`⚠️ No se encontraron licitaciones para la fecha ${fecha}.`);
-                await esperar(1000)
-                continue;
+                await esperar(2000);
+                continue;  // Si no hay licitaciones, continuamos con la siguiente fecha
             }
 
-            const detallesLicitaciones = [];
+            totalLicitaciones += licitaciones.length;  // Incrementa el total de licitaciones
 
+            let detallesLicitaciones = [];
+            let licitacionesProcesadas = 0;
+
+            // Ejecutar hasta que todas las licitaciones se procesen
             for (const licitacion of licitaciones) {
+                // Verifica si la licitación ya ha sido procesada
                 if (codigosProcesados.has(licitacion.CodigoExterno)) {
-                    console.log(`⏩ Licitación ${licitacion.CodigoExterno} ya procesada. Se omite.`);
+                    totalProcesadas++;  // Se cuenta como procesada, pero no imprimimos mensaje
                     continue;
                 }
 
@@ -155,76 +163,58 @@ async function procesarLicitacionesPorFecha(fechas, estado, archivo) {
                 if (detalles) {
                     console.log(`✅ Detalles obtenidos: ${detalles.codigo}`);
                     detallesLicitaciones.push(detalles);
-                    totalNuevas++;
+                    totalNuevas++;  // Solo contar las nuevas licitaciones procesadas
+                    codigosProcesados.add(licitacion.CodigoExterno);  // Agregar código procesado
                 } else {
                     console.log(`⚠️ No se encontraron detalles para ${licitacion.CodigoExterno}`);
                 }
+                licitacionesProcesadas++;  // Contamos las licitaciones procesadas
             }
 
+            // Guardar las licitaciones procesadas en el archivo CSV
             if (detallesLicitaciones.length > 0) {
                 await guardarDetallesCSV(detallesLicitaciones, archivo);
             } else {
                 console.log('✅ No hay nuevos detalles para guardar.');
             }
 
+            // Mostrar información de licitaciones procesadas por fecha
+            const licitacionesFaltantes = totalLicitaciones - totalProcesadas;
+            console.log(`\n📊 Fecha: ${fecha}`);
+            console.log(`📊 Total de licitaciones: ${totalLicitaciones}`);
+            console.log(`📊 Licitaciones procesadas: ${totalProcesadas}`);
+            console.log(`📊 Licitaciones faltantes por procesar: ${licitacionesFaltantes}`);
+
+            if (licitacionesFaltantes > 0) {
+                console.log(`⚠️ Aún faltan ${licitacionesFaltantes} licitaciones por procesar en esta fecha. Reintentando...`);
+                // Reintentar el procesamiento de esta fecha
+                await esperar(2000);
+                await procesarLicitacionesPorFecha([fecha], estado, archivo);  // Reintentar solo la fecha actual
+            } else {
+                console.log("✅ Todas las licitaciones de esta fecha han sido procesadas!");
+            }
+
+            // Esperar solo una vez después de procesar todas las licitaciones de la fecha actual
+            console.log(`⏳ Esperando ${TIEMPO_ESPERA_FECHAS / 1000} segundos antes de la siguiente fecha...`);
+            await esperar(TIEMPO_ESPERA_FECHAS);
+
         } catch (error) {
             console.error(`❌ Error procesando la fecha ${fecha}: ${error.message}`);
         }
-
-        console.log(`⏳ Esperando ${TIEMPO_ESPERA_FECHAS / 1000} segundos antes de la siguiente fecha...`);
-        await esperar(TIEMPO_ESPERA_FECHAS);
     }
-
-    console.log(`\n📊 Total de nuevas licitaciones procesadas: ${totalNuevas}`);
 }
 
-const fechaInicio = "2025-03-24"; //Formato: YYYY-MM-DD
+
+const fechaInicio = "2025-04-01"; //Formato: YYYY-MM-DD
 const fechas = generarFechas(fechaInicio);
 
 //Ejecutar el proceso por la fecha de inicio indicada
-//procesarLicitacionesPorFecha(fechas,"publicada",archivoPublicadas);
-//procesarLicitacionesPorFecha(fechas,"desierta",archivoDesiertas);
-
-const outputPath = 'publicadas_filtrado.csv';
-
-const leerCSV = async (filePath) => {
-  return new Promise((resolve, reject) => {
-    const rows = [];
-    createReadStream(filePath)
-      .pipe(csv({ separator: ';' }))
-      .on('data', (data) => rows.push(data))
-      .on('end', () => resolve(rows))
-      .on('error', reject);
-  });
-};
-
-const main = async () => {
-  try {
-    const publicadas = await leerCSV(archivoPublicadas);
-    const desiertas = await leerCSV(archivoDesiertas);
-
-    const codigosDesiertas = new Set(desiertas.map(row => row.codigo));
-    const publicadasFiltrado = publicadas.filter(row => !codigosDesiertas.has(row.codigo));
-
-    if (publicadasFiltrado.length === 0) {
-      console.log('⚠️ No hay registros restantes en publicadas después del filtrado.');
-      return;
-    }
-
-    const headers = Object.keys(publicadasFiltrado[0]);
-    const contenido = [
-      headers.join(';'),
-      ...publicadasFiltrado.map(row => headers.map(h => row[h]).join(';'))
-    ].join('\n');
-
-    writeFileSync(outputPath, contenido, 'utf8');
-    console.log(`✅ Archivo filtrado guardado en: ${outputPath}`);
-  } catch (err) {
-    console.error('❌ Error al procesar los archivos:', err);
-  }
-};
-
-main();
+procesarLicitacionesPorFecha(fechas,"publicada",archivoPublicadas);
+procesarLicitacionesPorFecha(fechas,"cerrada",archivoCerradas);
+procesarLicitacionesPorFecha(fechas,"desierta",archivoDesiertas);
+procesarLicitacionesPorFecha(fechas,"revocada",archivoRevocadas);
+procesarLicitacionesPorFecha(fechas,"suspendida",archivoSuspendidas);
+//procesarLicitacionesPorFecha(fechas,"adjudicada",archivoAdjudicadas);
 
 
 /*
