@@ -61,6 +61,7 @@ const archivosACombinar = [
   'csv/desiertas.csv',
   'csv/revocadas.csv',
   'csv/suspendidas.csv',
+  'csv/adjudicadas.csv'
   // Agrega aquí cualquier otro archivo que quieras combinar
 ];
 

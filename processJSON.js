@@ -214,12 +214,11 @@ procesarLicitacionesPorFecha(fechas,"cerrada",archivoCerradas);
 procesarLicitacionesPorFecha(fechas,"desierta",archivoDesiertas);
 procesarLicitacionesPorFecha(fechas,"revocada",archivoRevocadas);
 procesarLicitacionesPorFecha(fechas,"suspendida",archivoSuspendidas);
-//procesarLicitacionesPorFecha(fechas,"adjudicada",archivoAdjudicadas);
+procesarLicitacionesPorFecha(fechas,"adjudicada",archivoAdjudicadas);
 
 
 /*
 PENDIENTES MVP1: Listado de licitaciones publicadas
-Actualizar licitaciones cerradas, revocadas, desiertas y suspendidas y eliminarlas del listado de publicadas
 Utilizar todos los campos de la API
 
 Etapa 2: Información de licitaciones cerradas y adjudicadas
