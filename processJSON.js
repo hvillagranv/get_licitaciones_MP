@@ -1,8 +1,12 @@
 import fs from 'fs';
+import { promises as fsp } from 'fs';
 import PQueue from 'p-queue';
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+import path from 'path';
 
-// Configuración general
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
+// ---------------- CONFIGURACIÓN GENERAL ----------------
+
 const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
 const estados = {
     publicada: 'csv/publicadas.csv',
@@ -16,87 +20,77 @@ const CONCURRENCIA_ESTADO = 2;
 const CONCURRENCIA_DETALLES = 10;
 const TIEMPO_ESPERA_FECHAS = 2000;
 
-// Utilidades
-function generarFechas(inicio) {
+const fallidosPendientes = new Set();
+const queueFallidos = new PQueue({ concurrency: 1 });
+
+// ---------------- LOG CON FECHA LOCAL (SANTIAGO) ----------------
+
+const now = new Date();
+const fechaStr = now.toLocaleString('sv-SE', { timeZone: 'America/Santiago' }).replace(/:/g, '-').replace(' ', '_');
+const logFileName = path.join('logs', `log_${fechaStr}.txt`);
+
+if (!fs.existsSync('logs')) fs.mkdirSync('logs');
+
+const logMensaje = (mensaje, tipo = 'info') => {
+    const fechaHora = new Date().toLocaleString('es-CL', {
+        timeZone: 'America/Santiago',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+    const texto = `[${fechaHora}] [${tipo.toUpperCase()}] ${mensaje}\n`;
+    fs.appendFileSync(logFileName, texto);
+};
+
+// ---------------- UTILIDADES ----------------
+
+const esperar = (ms) => new Promise(res => setTimeout(res, ms));
+
+const limpiarTexto = (t) => t ? t.replace(/[\r\n\"]+/g, ' ').trim() : '';
+
+const generarFechas = (inicio) => {
     const fechas = [];
     const [y, m, d] = inicio.split('-').map(Number);
-    let actual = new Date(y, m - 1, d);
+    const actual = new Date(y, m - 1, d);
     const hoy = new Date();
 
     while (actual <= hoy) {
         if (actual.getDay() !== 0) {
-            const dia = String(actual.getDate()).padStart(2, '0');
-            const mes = String(actual.getMonth() + 1).padStart(2, '0');
-            const año = actual.getFullYear();
-            fechas.push(`${dia}${mes}${año}`);
+            fechas.push(
+                String(actual.getDate()).padStart(2, '0') +
+                String(actual.getMonth() + 1).padStart(2, '0') +
+                actual.getFullYear()
+            );
         }
         actual.setDate(actual.getDate() + 1);
     }
     return fechas;
-}
+};
 
-function esperar(ms) {
-    return new Promise(res => setTimeout(res, ms));
-}
-
-function obtenerCodigosProcesados(archivo) {
+const obtenerCodigosProcesados = (archivo) => {
     if (!fs.existsSync(archivo)) return new Set();
     return new Set(fs.readFileSync(archivo, 'utf-8').split('\n').slice(1).map(l => l.split(';')[0]));
-}
+};
 
-function limpiarTexto(t) {
-    return t ? t.replace(/[\r\n\"]+/g, ' ').trim() : '';
-}
-
-// Fetch con backoff limitado
-async function obtenerDetallesLicitacionConReintentos(codigo, maxIntentos = 5) {
-    const url = `https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?codigo=${codigo}&ticket=${ticket}`;
-    let intentos = 0;
-
-    while (intentos < maxIntentos) {
+const fetchJSON = async (url, maxIntentos = 3) => {
+    let intento = 0;
+    while (intento < maxIntentos) {
         try {
             const res = await fetch(url);
-            if (!res.ok) throw new Error(res.statusText);
-
-            const json = await res.json();
-            const d = json.Listado?.[0];
-            if (!d) throw new Error("No se encontró información en la respuesta.");
-
-            return {
-                codigo: d.CodigoExterno || "",
-                nombre: d.Nombre || "",
-                institucion_nombre: d.Comprador?.NombreOrganismo || "",
-                institucion_rut: d.Comprador?.RutUnidad || "",
-                institucion_unidad: limpiarTexto(d.Comprador?.NombreUnidad),
-                institucion_direccion: limpiarTexto(d.Comprador?.DireccionUnidad),
-                institucion_comuna: d.Comprador?.ComunaUnidad || "",
-                institucion_region: d.Comprador?.RegionUnidad || "",
-                tipo: d.Tipo || "",
-                descripcion: limpiarTexto(d.Descripcion),
-                fechaInicio: d.Fechas?.FechaPublicacion || "",
-                fechaFinal: d.Fechas?.FechaCierre || "",
-                fechaEstAdj: d.Fechas?.FechaAdjudicacion || "",
-                monto_estimado: d.MontoEstimado || "",
-                unidad_monetaria: d.Moneda || "",
-                proveedores_participantes: d.Proveedores?.length || 0,
-                adjudicados: d.Items?.length || 0
-            };
-
-        } catch (error) {
-            intentos++;
-            const waitTime = 1000 * Math.pow(2, intentos);
-            if (intentos === 1) {
-                console.log(`🔁 Reintentando ${codigo}...`);
-            }
-            await esperar(waitTime);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            intento++;
+            if (intento < maxIntentos) await esperar(1000 * intento);
         }
     }
-
     return null;
-}
+};
 
-// Guardar CSV
-async function guardarDetallesCSV(detalles, archivo) {
+const guardarDetallesCSV = async (detalles, archivo) => {
     const existe = fs.existsSync(archivo);
     const stream = fs.createWriteStream(archivo, { flags: 'a', encoding: 'utf-8' });
 
@@ -104,67 +98,102 @@ async function guardarDetallesCSV(detalles, archivo) {
         stream.write('\uFEFFcodigo;nombre;institucion_nombre;institucion_rut;unidad;direccion;comuna;region;tipo;descripcion;fecha_inicio;fecha_final;fecha_adjudicacion;monto_estimado;unidad_monetaria;proveedores_participantes;adjudicados\n');
     }
 
-    detalles.forEach(d => {
+    for (const d of detalles) {
         stream.write(`${d.codigo};"${d.nombre}";"${d.institucion_nombre}";"${d.institucion_rut}";"${d.institucion_unidad}";"${d.institucion_direccion}";"${d.institucion_comuna}";"${d.institucion_region}";"${d.tipo}";"${d.descripcion}";${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};"${d.unidad_monetaria}";${d.proveedores_participantes};${d.adjudicados}\n`);
-    });
+    }
 
     stream.end();
-}
+};
 
-// Cola de fallidos
-const queueFallidos = new PQueue({ concurrency: 1 });
-const fallidosPendientes = new Set();
+// ---------------- DETALLES Y RECUPERACIÓN ----------------
 
-async function reintentarDetalleHastaExito(codigo) {
-    let intento = 0;
+const obtenerDetallesLicitacionConReintentos = async (codigo, maxIntentos = 5) => {
+    const url = `https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?codigo=${codigo}&ticket=${ticket}`;
+    const data = await fetchJSON(url, maxIntentos);
+    const d = data?.Listado?.[0];
+    if (!d) return null;
 
+    return {
+        codigo: d.CodigoExterno || "",
+        nombre: d.Nombre || "",
+        institucion_nombre: d.Comprador?.NombreOrganismo || "",
+        institucion_rut: d.Comprador?.RutUnidad || "",
+        institucion_unidad: limpiarTexto(d.Comprador?.NombreUnidad),
+        institucion_direccion: limpiarTexto(d.Comprador?.DireccionUnidad),
+        institucion_comuna: d.Comprador?.ComunaUnidad || "",
+        institucion_region: d.Comprador?.RegionUnidad || "",
+        tipo: d.Tipo || "",
+        descripcion: limpiarTexto(d.Descripcion),
+        fechaInicio: d.Fechas?.FechaPublicacion || "",
+        fechaFinal: d.Fechas?.FechaCierre || "",
+        fechaEstAdj: d.Fechas?.FechaAdjudicacion || "",
+        monto_estimado: d.MontoEstimado || "",
+        unidad_monetaria: d.Moneda || "",
+        proveedores_participantes: d.Proveedores?.length || 0,
+        adjudicados: d.Items?.length || 0
+    };
+};
+
+const reintentarDetalleHastaExito = async (codigo) => {
     while (true) {
-        intento++;
         const detalle = await obtenerDetallesLicitacionConReintentos(codigo, 3);
-
         if (detalle) {
             for (const [estado, archivo] of Object.entries(estados)) {
-                if (!fs.existsSync(archivo)) continue;
-                const codigos = obtenerCodigosProcesados(archivo);
-                if (!codigos.has(codigo)) {
-                    await guardarDetallesCSV([detalle], archivo);
-                    console.log(`🟢 Recuperado ${codigo} y guardado en ${estado}`);
-                    break;
+                if (fs.existsSync(archivo)) {
+                    const codigos = obtenerCodigosProcesados(archivo);
+                    if (!codigos.has(codigo)) {
+                        await guardarDetallesCSV([detalle], archivo);
+                        logMensaje(`🟢 Recuperado ${codigo} y guardado en ${estado}`, 'success');
+                        break;
+                    }
                 }
             }
             fallidosPendientes.delete(codigo);
             return;
         }
 
-        console.log(`🔁 Fallido persistente ${codigo}, reintentando en 30s...`);
+        logMensaje(`🔁 Fallido persistente ${codigo}, reintentando en 30s...`, 'warning');
         await esperar(30000);
     }
-}
+};
 
-async function obtenerDetallesLicitacionRobusto(codigo) {
+const obtenerDetallesLicitacionRobusto = async (codigo) => {
     const detalle = await obtenerDetallesLicitacionConReintentos(codigo, 5);
-
     if (!detalle && !fallidosPendientes.has(codigo)) {
         fallidosPendientes.add(codigo);
         queueFallidos.add(() => reintentarDetalleHastaExito(codigo));
     }
-
     return detalle;
-}
+};
 
-// Procesar una fecha y estado
-async function procesarFechaEstado(fecha, estado, archivo, queueDetalles, codigosProcesados) {
+// ---------------- PROCESAR POR FECHA Y ESTADO ----------------
+
+const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigosProcesados) => {
     const url = `https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?fecha=${fecha}&estado=${estado}&ticket=${ticket}`;
-    try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const licitaciones = data.Listado || [];
+    let intento = 0;
+    const MAX_INTENTOS = 3;
+
+    while (intento < MAX_INTENTOS) {
+        const data = await fetchJSON(url, 1);
+        intento++;
+
+        if (!data || !Array.isArray(data.Listado)) {
+            logMensaje(`❌ Respuesta inválida o vacía en ${estado} - ${fecha} (intento ${intento})`, 'error');
+            await esperar(2000 * intento);
+            continue;
+        }
+
+        const licitaciones = data.Listado;
+        logMensaje(`📄 ${estado} - ${fecha}: Total obtenidas = ${licitaciones.length}`, 'info');
+
+        if (licitaciones.length === 0 && intento < MAX_INTENTOS) {
+            logMensaje(`📭 ${estado} - ${fecha}: sin resultados, reintentando...`, 'warning');
+            await esperar(2000);
+            continue;
+        }
 
         const nuevas = licitaciones.filter(l => !codigosProcesados.has(l.CodigoExterno));
-        if (!nuevas.length) {
-            console.log(`📭 ${estado} - ${fecha}: sin nuevas`);
-            return;
-        }
+        logMensaje(`📌 ${estado} - ${fecha}: Nuevas = ${nuevas.length}`, 'info');
 
         nuevas.forEach(l => {
             queueDetalles.add(async () => {
@@ -172,20 +201,21 @@ async function procesarFechaEstado(fecha, estado, archivo, queueDetalles, codigo
                 if (detalle) {
                     await guardarDetallesCSV([detalle], archivo);
                     codigosProcesados.add(l.CodigoExterno);
-                    console.log(`✅ Guardado ${detalle.codigo} (${estado} - ${fecha})`);
+                    logMensaje(`✅ Guardado ${detalle.codigo} (${estado} - ${fecha})`, 'success');
                 }
             });
         });
 
-    } catch (error) {
-        console.error(`❌ Error obteniendo ${estado} - ${fecha}: ${error.message}`);
+        return;
     }
-}
 
-// Main
-async function main() {
-    const fechaInicio = "2025-04-01";
-    const fechas = generarFechas(fechaInicio);
+    logMensaje(`❌ ${estado} - ${fecha} falló tras ${MAX_INTENTOS} intentos`, 'error');
+};
+
+// ---------------- MAIN ----------------
+
+const main = async () => {
+    const fechas = generarFechas("2025-04-03");
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {
@@ -199,16 +229,19 @@ async function main() {
             }
 
             await queueDetalles.onIdle();
-            console.log(`🏁 Finalizado: ${estado}`);
+            logMensaje(`🏁 Finalizado: ${estado}`, 'info');
         });
     }
 
     await queueEstados.onIdle();
     await queueFallidos.onIdle();
-    console.log("✅ Todas las licitaciones procesadas (incluyendo reintentos).");
-}
+    logMensaje("✅ Todas las licitaciones procesadas (incluyendo reintentos).", 'success');
+    logMensaje("📝 Log completo guardado en: " + logFileName, 'info');
+};
 
 main();
+
+
 
 
 

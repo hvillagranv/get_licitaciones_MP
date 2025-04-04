@@ -1,0 +1,4 @@
+2025-04-04T14:33:09.579Z - revocada - 03042025 - Fallo tras 3 intentos
+2025-04-04T14:37:56.106Z - suspendida - 04042025 - Fallo tras 3 intentos
+2025-04-04T14:51:51.269Z - adjudicada - 03042025 - Fallo tras 3 intentos
+2025-04-04T15:10:46.736Z - suspendida - 04042025 - Fallo tras 3 intentos
