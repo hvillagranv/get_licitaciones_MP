@@ -1,0 +1,66 @@
+[2025-04-04T15:16:45.776Z] [ERROR] ❌ Respuesta inválida o vacía en publicada - 03042025 (intento 1)
+[2025-04-04T15:17:03.377Z] [INFO] 📄 cerrada - 03042025: Total obtenidas = 333
+[2025-04-04T15:17:03.379Z] [INFO] 📌 cerrada - 03042025: Nuevas = 0
+[2025-04-04T15:17:06.191Z] [INFO] 📄 publicada - 03042025: Total obtenidas = 450
+[2025-04-04T15:17:06.192Z] [INFO] 📌 publicada - 03042025: Nuevas = 0
+[2025-04-04T15:17:27.731Z] [INFO] 📄 cerrada - 04042025: Total obtenidas = 93
+[2025-04-04T15:17:27.731Z] [INFO] 📌 cerrada - 04042025: Nuevas = 3
+[2025-04-04T15:17:28.400Z] [INFO] 📄 publicada - 04042025: Total obtenidas = 142
+[2025-04-04T15:17:28.402Z] [INFO] 📌 publicada - 04042025: Nuevas = 6
+[2025-04-04T15:17:46.683Z] [SUCCESS] ✅ Guardado 2467-32-LE25 (cerrada - 04042025)
+[2025-04-04T15:17:49.174Z] [SUCCESS] ✅ Guardado 729-40-LE25 (cerrada - 04042025)
+[2025-04-04T15:17:52.295Z] [SUCCESS] ✅ Guardado 3693-70-LE25 (cerrada - 04042025)
+[2025-04-04T15:17:52.297Z] [INFO] 🏁 Finalizado: cerrada
+[2025-04-04T15:17:56.414Z] [SUCCESS] ✅ Guardado 1208107-4-LE25 (publicada - 04042025)
+[2025-04-04T15:17:56.415Z] [INFO] 🏁 Finalizado: publicada
+[2025-04-04T15:18:02.425Z] [SUCCESS] 🟢 Recuperado 3729-21-LE25 y guardado en publicada
+[2025-04-04T15:18:09.530Z] [INFO] 📄 desierta - 03042025: Total obtenidas = 79
+[2025-04-04T15:18:09.531Z] [INFO] 📌 desierta - 03042025: Nuevas = 0
+[2025-04-04T15:18:13.954Z] [INFO] 📄 revocada - 03042025: Total obtenidas = 8
+[2025-04-04T15:18:13.956Z] [INFO] 📌 revocada - 03042025: Nuevas = 0
+[2025-04-04T15:18:19.374Z] [SUCCESS] 🟢 Recuperado 2825-23-LQ25 y guardado en publicada
+[2025-04-04T15:18:36.357Z] [INFO] 📄 desierta - 04042025: Total obtenidas = 36
+[2025-04-04T15:18:36.358Z] [INFO] 📌 desierta - 04042025: Nuevas = 1
+[2025-04-04T15:18:38.685Z] [INFO] 📄 revocada - 04042025: Total obtenidas = 14
+[2025-04-04T15:18:38.686Z] [INFO] 📌 revocada - 04042025: Nuevas = 0
+[2025-04-04T15:18:40.693Z] [INFO] 🏁 Finalizado: revocada
+[2025-04-04T15:18:43.143Z] [SUCCESS] 🟢 Recuperado 3334-10-LE25 y guardado en publicada
+[2025-04-04T15:19:00.086Z] [SUCCESS] ✅ Guardado 1305552-2-LE24 (desierta - 04042025)
+[2025-04-04T15:19:00.087Z] [INFO] 🏁 Finalizado: desierta
+[2025-04-04T15:19:03.830Z] [INFO] 📄 suspendida - 03042025: Total obtenidas = 0
+[2025-04-04T15:19:03.832Z] [WARNING] 📭 suspendida - 03042025: sin resultados, reintentando...
+[2025-04-04T15:19:05.189Z] [SUCCESS] 🟢 Recuperado 1080095-1-LR25 y guardado en publicada
+[2025-04-04T15:19:05.867Z] [ERROR] ❌ Respuesta inválida o vacía en suspendida - 03042025 (intento 2)
+[2025-04-04T15:19:18.121Z] [INFO] 📄 adjudicada - 03042025: Total obtenidas = 340
+[2025-04-04T15:19:18.123Z] [INFO] 📌 adjudicada - 03042025: Nuevas = 0
+[2025-04-04T15:19:21.661Z] [SUCCESS] 🟢 Recuperado 548856-9-CO25 y guardado en publicada
+[2025-04-04T15:19:23.685Z] [INFO] 📄 suspendida - 03042025: Total obtenidas = 0
+[2025-04-04T15:19:23.686Z] [INFO] 📌 suspendida - 03042025: Nuevas = 0
+[2025-04-04T15:19:23.688Z] [WARNING] 📭 suspendida - 03042025: sin resultados definitivos
+[2025-04-04T15:19:33.359Z] [INFO] 📄 adjudicada - 04042025: Total obtenidas = 136
+[2025-04-04T15:19:33.360Z] [INFO] 📌 adjudicada - 04042025: Nuevas = 15
+[2025-04-04T15:19:36.279Z] [INFO] 📄 suspendida - 04042025: Total obtenidas = 0
+[2025-04-04T15:19:36.280Z] [WARNING] 📭 suspendida - 04042025: sin resultados, reintentando...
+[2025-04-04T15:19:38.305Z] [ERROR] ❌ Respuesta inválida o vacía en suspendida - 04042025 (intento 2)
+[2025-04-04T15:19:42.190Z] [SUCCESS] ✅ Guardado 1260-15-LE25 (adjudicada - 04042025)
+[2025-04-04T15:19:42.338Z] [ERROR] ❌ Respuesta inválida o vacía en suspendida - 04042025 (intento 3)
+[2025-04-04T15:19:44.259Z] [SUCCESS] ✅ Guardado 2332-167-LQ24 (adjudicada - 04042025)
+[2025-04-04T15:19:45.626Z] [SUCCESS] ✅ Guardado 886954-27-LP25 (adjudicada - 04042025)
+[2025-04-04T15:19:46.559Z] [SUCCESS] ✅ Guardado 732-6-LE25 (adjudicada - 04042025)
+[2025-04-04T15:19:46.629Z] [WARNING] 🔁 Fallido persistente 3017-26-LE25, reintentando en 30s...
+[2025-04-04T15:19:48.342Z] [ERROR] ❌ suspendida - 04042025 falló tras 3 intentos
+[2025-04-04T15:19:48.684Z] [SUCCESS] ✅ Guardado 5043-2-LE25 (adjudicada - 04042025)
+[2025-04-04T15:19:50.184Z] [SUCCESS] ✅ Guardado 4309-32-LE25 (adjudicada - 04042025)
+[2025-04-04T15:19:50.348Z] [INFO] 🏁 Finalizado: suspendida
+[2025-04-04T15:19:53.988Z] [SUCCESS] ✅ Guardado 853-14-LE25 (adjudicada - 04042025)
+[2025-04-04T15:19:58.658Z] [SUCCESS] ✅ Guardado 1641-377-LR24 (adjudicada - 04042025)
+[2025-04-04T15:20:02.428Z] [SUCCESS] ✅ Guardado 5240-194-LQ24 (adjudicada - 04042025)
+[2025-04-04T15:20:02.428Z] [INFO] 🏁 Finalizado: adjudicada
+[2025-04-04T15:20:38.286Z] [SUCCESS] 🟢 Recuperado 3017-26-LE25 y guardado en publicada
+[2025-04-04T15:20:50.861Z] [SUCCESS] 🟢 Recuperado 5061-17-L125 y guardado en publicada
+[2025-04-04T15:21:07.946Z] [SUCCESS] 🟢 Recuperado 3603-24-LE25 y guardado en publicada
+[2025-04-04T15:21:18.452Z] [SUCCESS] 🟢 Recuperado 4476-14-LE25 y guardado en publicada
+[2025-04-04T15:21:29.325Z] [SUCCESS] 🟢 Recuperado 3540-31-LE25 y guardado en publicada
+[2025-04-04T15:21:37.322Z] [SUCCESS] 🟢 Recuperado 5056-21-LE25 y guardado en cerrada
+[2025-04-04T15:21:37.323Z] [SUCCESS] ✅ Todas las licitaciones procesadas (incluyendo reintentos).
+[2025-04-04T15:21:37.323Z] [INFO] 📝 Log completo guardado en: logs\log_2025-04-04T15-16-45.txt
