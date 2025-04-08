@@ -178,6 +178,7 @@ function renderizarPaginacion(totalDatos) {
 
 function cambiarPagina(pagina) {
   paginaActual = pagina;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   filtrarDatos(false);
 }
 

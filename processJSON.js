@@ -17,13 +17,13 @@ const estados = {
     adjudicada: 'csv/adjudicadas.csv'
 };
 const CONCURRENCIA_ESTADO = 2;
-const CONCURRENCIA_DETALLES = 10;
+const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 2000;
 
 const fallidosPendientes = new Set();
 const queueFallidos = new PQueue({ concurrency: 1 });
 
-// ---------------- LOG CON FECHA LOCAL (SANTIAGO) ----------------
+// ---------------- LOGS ----------------
 
 const now = new Date();
 const fechaStr = now.toLocaleString('sv-SE', { timeZone: 'America/Santiago' }).replace(/:/g, '-').replace(' ', '_');
@@ -95,11 +95,11 @@ const guardarDetallesCSV = async (detalles, archivo) => {
     const stream = fs.createWriteStream(archivo, { flags: 'a', encoding: 'utf-8' });
 
     if (!existe) {
-        stream.write('\uFEFFcodigo;nombre;institucion_nombre;institucion_rut;unidad;direccion;comuna;region;tipo;descripcion;fecha_inicio;fecha_final;fecha_adjudicacion;monto_estimado;unidad_monetaria;proveedores_participantes;adjudicados\n');
+        stream.write('\uFEFFcodigo;nombre;institucion_nombre;institucion_rut;unidad;direccion;comuna;region;tipo;estado;descripcion;fecha_inicio;fecha_final;fecha_adjudicacion;monto_estimado;unidad_monetaria;proveedores_participantes;adjudicados\n');
     }
 
     for (const d of detalles) {
-        stream.write(`${d.codigo};"${d.nombre}";"${d.institucion_nombre}";"${d.institucion_rut}";"${d.institucion_unidad}";"${d.institucion_direccion}";"${d.institucion_comuna}";"${d.institucion_region}";"${d.tipo}";"${d.descripcion}";${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};"${d.unidad_monetaria}";${d.proveedores_participantes};${d.adjudicados}\n`);
+        stream.write(`${d.codigo};"${d.nombre}";"${d.institucion_nombre}";"${d.institucion_rut}";"${d.institucion_unidad}";"${d.institucion_direccion}";"${d.institucion_comuna}";"${d.institucion_region}";"${d.tipo}";"${d.estado}";"${d.descripcion}";${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};"${d.unidad_monetaria}";${d.proveedores_participantes};${d.adjudicados}\n`);
     }
 
     stream.end();
@@ -123,6 +123,7 @@ const obtenerDetallesLicitacionConReintentos = async (codigo, maxIntentos = 5) =
         institucion_comuna: d.Comprador?.ComunaUnidad || "",
         institucion_region: d.Comprador?.RegionUnidad || "",
         tipo: d.Tipo || "",
+        estado: d.Estado || "",
         descripcion: limpiarTexto(d.Descripcion),
         fechaInicio: d.Fechas?.FechaPublicacion || "",
         fechaFinal: d.Fechas?.FechaCierre || "",
@@ -134,37 +135,67 @@ const obtenerDetallesLicitacionConReintentos = async (codigo, maxIntentos = 5) =
     };
 };
 
+const mapearEstado = (estado) => {
+    if (!estado) return '';
+    
+    // Convertir a minúsculas y quitar tildes
+    const base = estado.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // Mapeo de estados especiales
+    if (base.includes('desierta')) return 'desierta';
+    if (base.includes('revocada')) return 'revocada';
+    if (base.includes('adjudicada')) return 'adjudicada';
+    if (base.includes('cerrada')) return 'cerrada';
+    if (base.includes('publicada')) return 'publicada';
+    if (base.includes('suspendida')) return 'suspendida';
+
+    return base;
+};
+
 const reintentarDetalleHastaExito = async (codigo) => {
     while (true) {
         const detalle = await obtenerDetallesLicitacionConReintentos(codigo, 3);
         if (detalle) {
-            for (const [estado, archivo] of Object.entries(estados)) {
-                if (fs.existsSync(archivo)) {
-                    const codigos = obtenerCodigosProcesados(archivo);
-                    if (!codigos.has(codigo)) {
-                        await guardarDetallesCSV([detalle], archivo);
-                        logMensaje(`🟢 Recuperado ${codigo} y guardado en ${estado}`, 'success');
-                        break;
-                    }
+            const estadoNormalizado = mapearEstado(detalle.estado);
+            const archivo = estados[estadoNormalizado];
+
+            if (archivo) {
+                const codigos = obtenerCodigosProcesados(archivo);
+                if (!codigos.has(codigo)) {
+                    await guardarDetallesCSV([detalle], archivo);
+                    logMensaje(`🟢 Recuperado ${codigo} y guardado en ${estadoNormalizado}`, 'success');
+                } else {
+                    logMensaje(`ℹ️ ${codigo} ya estaba registrado en ${estadoNormalizado}`, 'info');
                 }
+            } else {
+                logMensaje(`⚠️ Estado no mapeado: '${detalle.estado}' para ${codigo}`, 'warning');
             }
+
             fallidosPendientes.delete(codigo);
             return;
         }
 
-        logMensaje(`🔁 Fallido persistente ${codigo}, reintentando en 30s...`, 'warning');
-        await esperar(30000);
+        logMensaje(`🔁 Fallido persistente ${codigo}, reintentando en 15s...`, 'warning');
+        await esperar(15000);
     }
 };
 
+
 const obtenerDetallesLicitacionRobusto = async (codigo) => {
     const detalle = await obtenerDetallesLicitacionConReintentos(codigo, 5);
-    if (!detalle && !fallidosPendientes.has(codigo)) {
-        fallidosPendientes.add(codigo);
-        queueFallidos.add(() => reintentarDetalleHastaExito(codigo));
+
+    if (!detalle) {
+        if (!fallidosPendientes.has(codigo)) {
+            fallidosPendientes.add(codigo);
+            queueFallidos.add(() => reintentarDetalleHastaExito(codigo));
+        } else {
+            logMensaje(`⏩ ${codigo} ya está en cola de reintento`, 'info');
+        }
     }
+
     return detalle;
 };
+
 
 // ---------------- PROCESAR POR FECHA Y ESTADO ----------------
 
@@ -215,7 +246,7 @@ const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigo
 // ---------------- MAIN ----------------
 
 const main = async () => {
-    const fechas = generarFechas("2025-04-03");
+    const fechas = generarFechas("2025-04-07");
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {
@@ -240,9 +271,6 @@ const main = async () => {
 };
 
 main();
-
-
-
 
 
 /*
