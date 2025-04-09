@@ -246,7 +246,7 @@ const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigo
 // ---------------- MAIN ----------------
 
 const main = async () => {
-    const fechas = generarFechas("2025-04-07");
+    const fechas = generarFechas("2025-04-08");
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {

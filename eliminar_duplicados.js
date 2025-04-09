@@ -43,11 +43,11 @@ async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile
 // ------------- CONFIGURACIÓN -------------
 
 const archivosACombinar = [
-  //'csv/cerradas.csv',
+  'csv/cerradas.csv',
   'csv/desiertas.csv',
   'csv/revocadas.csv',
   'csv/suspendidas.csv',
-  //'csv/adjudicadas.csv'
+  'csv/adjudicadas.csv'
 ];
 
 const archivoPublicadas = 'csv/publicadas.csv';
