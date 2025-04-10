@@ -16,7 +16,7 @@ const estados = {
     suspendida: 'csv/suspendidas.csv',
     adjudicada: 'csv/adjudicadas.csv'
 };
-const CONCURRENCIA_ESTADO = 2;
+const CONCURRENCIA_ESTADO = 1;
 const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 2000;
 
@@ -49,7 +49,9 @@ const logMensaje = (mensaje, tipo = 'info') => {
 
 const esperar = (ms) => new Promise(res => setTimeout(res, ms));
 
-const limpiarTexto = (t) => t ? t.replace(/[\r\n\"]+/g, ' ').trim() : '';
+const limpiarTexto = (t) => t ? t.replace(/[\r\n\";]+/g, ' ').trim() : '';
+
+const campoTextoCSV = (t) => `"${limpiarTexto(t).replace(/"/g, '""')}"`;
 
 const generarFechas = (inicio) => {
     const fechas = [];
@@ -99,8 +101,8 @@ const guardarDetallesCSV = async (detalles, archivo) => {
     }
 
     for (const d of detalles) {
-        stream.write(`${d.codigo};"${d.nombre}";"${d.institucion_nombre}";"${d.institucion_rut}";"${d.institucion_unidad}";"${d.institucion_direccion}";"${d.institucion_comuna}";"${d.institucion_region}";"${d.tipo}";"${d.estado}";"${d.descripcion}";${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};"${d.unidad_monetaria}";${d.proveedores_participantes};${d.adjudicados}\n`);
-    }
+        stream.write(`${d.codigo};${campoTextoCSV(d.nombre)};${campoTextoCSV(d.institucion_nombre)};${campoTextoCSV(d.institucion_rut)};${campoTextoCSV(d.institucion_unidad)};${campoTextoCSV(d.institucion_direccion)};${campoTextoCSV(d.institucion_comuna)};${campoTextoCSV(d.institucion_region)};${campoTextoCSV(d.tipo)};${campoTextoCSV(d.estado)};${campoTextoCSV(d.descripcion)};${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};${campoTextoCSV(d.unidad_monetaria)};${d.proveedores_participantes};${d.adjudicados}\n`);
+        }
 
     stream.end();
 };
@@ -246,7 +248,7 @@ const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigo
 // ---------------- MAIN ----------------
 
 const main = async () => {
-    const fechas = generarFechas("2025-04-08");
+    const fechas = generarFechas("2025-04-09");
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {

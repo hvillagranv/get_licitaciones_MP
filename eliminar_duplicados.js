@@ -1,47 +1,119 @@
 import fs from 'fs/promises';
 import Papa from 'papaparse';
+import path from 'path';
 
-// Leer un CSV y parsear como JSON
-async function leerCSV(ruta) {
-  const contenido = await fs.readFile(ruta, 'utf-8');
-  const resultado = Papa.parse(contenido, { header: true, skipEmptyLines: true });
-  return resultado.data;
+// Limpieza profunda
+function limpiarTexto(valor) {
+  if (!valor) return '';
+  return valor
+    .toString()
+    .normalize('NFC')                  // normaliza acentos
+    .replace(/\u00a0/g, ' ')
+    .replace(/\u200B/g, '')
+    .replace(/\ufeff/g, '')
+    .replace(/[\u2000-\u206F]/g, '')
+    .replace(/[\uF000-\uFFFF]/g, '')
+    .replace(/[“”‘’•●…¨ºª«»¬°²³´]/g, '')
+    .replace(/^"+|"+$/g, '')
+    .replace(/""+/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
-// Guardar datos en CSV
+// 📄 Nueva función robusta para leer cualquier CSV, incluso si tiene errores de formato
+async function leerCSV(ruta) {
+  const contenido = await fs.readFile(ruta, 'utf-8');
+  const lineas = contenido.split(/\r?\n/);
+
+  if (lineas.length === 0) return [];
+
+  const encabezadoCrudo = lineas[0].split(';').map(h => limpiarTexto(h));
+  const totalColumnas = encabezadoCrudo.length;
+
+  const datos = [];
+  let omitidas = 0;
+
+  for (let i = 1; i < lineas.length; i++) {
+    const linea = lineas[i];
+    if (!linea.trim()) continue;
+
+    let columnas = linea.split(';').map(col => limpiarTexto(col));
+
+    // Rellenar si faltan columnas
+    if (columnas.length < totalColumnas) {
+      columnas = [...columnas, ...Array(totalColumnas - columnas.length).fill('')];
+    }
+
+    // Cortar si hay columnas de más
+    if (columnas.length > totalColumnas) {
+      columnas = columnas.slice(0, totalColumnas);
+    }
+
+    // Reconstruir objeto fila
+    const fila = {};
+    for (let j = 0; j < totalColumnas; j++) {
+      fila[encabezadoCrudo[j]] = columnas[j];
+    }
+
+    // Validación mínima
+    if (fila[encabezadoCrudo[0]]) {
+      datos.push(fila);
+    } else {
+      omitidas++;
+    }
+  }
+
+  console.log(`📄 ${ruta} => ${datos.length} filas procesadas, ${omitidas} omitidas`);
+  return datos;
+}
+
+
 async function guardarCSV(data, ruta) {
   const csv = Papa.unparse(data, { delimiter: ';' });
   await fs.writeFile(ruta, csv, 'utf-8');
 }
 
-// Unir múltiples archivos CSV en un solo array de objetos
 async function unirArchivos(rutas) {
-  const datosCombinados = [];
-
+  const todos = [];
   for (const ruta of rutas) {
     const datos = await leerCSV(ruta);
-    datosCombinados.push(...datos);
+    todos.push(...datos);
   }
-
-  return datosCombinados;
+  return todos;
 }
 
-// Eliminar registros de 'origen' que existan en 'referencia' según un campo único
 async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile, campoUnico = 'codigo') {
   try {
     const publicadas = await leerCSV(publicadasFile);
-    const codigosReferencia = new Set(archivosReferencia.map(item => item[campoUnico]));
+    const codigosReferencia = new Set(
+      archivosReferencia.map(r => limpiarTexto(r[campoUnico])).filter(Boolean)
+    );
 
-    const publicadasFiltradas = publicadas.filter(item => !codigosReferencia.has(item[campoUnico]));
+    console.log(`🔍 Total códigos únicos en referencia: ${codigosReferencia.size}`);
+
+    const publicadasFiltradas = [];
+    const duplicados = [];
+
+    for (const item of publicadas) {
+      const codigoLimpio = limpiarTexto(item[campoUnico]);
+      if (!codigosReferencia.has(codigoLimpio)) {
+        publicadasFiltradas.push(item);
+      } else {
+        duplicados.push(item);
+      }
+    }
+
+    console.log(`✅ Publicadas sin menciones: ${publicadasFiltradas.length}`);
+    console.log(`🗑️  Registros descartados por duplicados: ${duplicados.length}`);
 
     await guardarCSV(publicadasFiltradas, salidaFile);
+    await guardarCSV(duplicados, salidaFile.replace('.csv', '_duplicados.csv'));
   } catch (error) {
     console.error("❌ Error al eliminar duplicados:", error);
   }
 }
 
-// ------------- CONFIGURACIÓN -------------
-
+// CONFIGURACIÓN
 const archivosACombinar = [
   'csv/cerradas.csv',
   'csv/desiertas.csv',
@@ -53,8 +125,7 @@ const archivosACombinar = [
 const archivoPublicadas = 'csv/publicadas.csv';
 const archivoResultado = 'csv/publicadas_sin_duplicados.csv';
 
-// ------------- EJECUCIÓN PRINCIPAL -------------
-
+// EJECUCIÓN
 (async () => {
   const combinados = await unirArchivos(archivosACombinar);
   await eliminarDuplicados(archivoPublicadas, combinados, archivoResultado);
