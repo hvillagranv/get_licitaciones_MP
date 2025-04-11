@@ -119,11 +119,12 @@ function filtrarDatos(resetPagina = true) {
   if (resetPagina) paginaActual = 1;
 
   const datosFiltrados = datos.filter(item =>
-    (item.institucion_nombre.toLowerCase().includes(textoFiltro) || 
-    item.nombre.toLowerCase().includes(textoFiltro) || 
-    item.descripcion.toLowerCase().includes(textoFiltro)) &&
-    (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre))
-  );
+  (item.codigo.toLowerCase().includes(textoFiltro) ||
+   item.institucion_nombre.toLowerCase().includes(textoFiltro) || 
+   item.nombre.toLowerCase().includes(textoFiltro) || 
+   item.descripcion.toLowerCase().includes(textoFiltro)) &&
+  (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre))
+);
 
   mostrarDatos(datosFiltrados);
 }

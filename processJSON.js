@@ -10,15 +10,15 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
 const estados = {
     publicada: 'csv/publicadas.csv',
-    cerrada: 'csv/cerradas.csv',
-    desierta: 'csv/desiertas.csv',
-    revocada: 'csv/revocadas.csv',
-    suspendida: 'csv/suspendidas.csv',
-    adjudicada: 'csv/adjudicadas.csv'
+    //cerrada: 'csv/cerradas.csv',
+    //desierta: 'csv/desiertas.csv',
+    //revocada: 'csv/revocadas.csv',
+    //suspendida: 'csv/suspendidas.csv',
+    //adjudicada: 'csv/adjudicadas.csv'
 };
-const CONCURRENCIA_ESTADO = 1;
+const CONCURRENCIA_ESTADO = 2;
 const CONCURRENCIA_DETALLES = 20;
-const TIEMPO_ESPERA_FECHAS = 2000;
+const TIEMPO_ESPERA_FECHAS = 4000;
 
 const fallidosPendientes = new Set();
 const queueFallidos = new PQueue({ concurrency: 1 });
@@ -248,7 +248,7 @@ const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigo
 // ---------------- MAIN ----------------
 
 const main = async () => {
-    const fechas = generarFechas("2025-04-09");
+    const fechas = generarFechas("2024-03-01");
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {

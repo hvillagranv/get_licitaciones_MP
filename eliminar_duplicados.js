@@ -76,30 +76,43 @@ async function guardarCSV(data, ruta) {
 async function unirArchivos(rutas) {
   const todos = [];
   for (const ruta of rutas) {
+    const nombre = path.basename(ruta, '.csv'); // por ejemplo 'cerradas'
     const datos = await leerCSV(ruta);
-    todos.push(...datos);
+    for (const item of datos) {
+      item.__estado_origen = nombre;
+      todos.push(item);
+    }
   }
   return todos;
 }
 
+
 async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile, campoUnico = 'codigo') {
   try {
     const publicadas = await leerCSV(publicadasFile);
-    const codigosReferencia = new Set(
-      archivosReferencia.map(r => limpiarTexto(r[campoUnico])).filter(Boolean)
-    );
 
-    console.log(`🔍 Total códigos únicos en referencia: ${codigosReferencia.size}`);
+    const mapaReferencias = new Map(); // codigo → estado real
+    for (const item of archivosReferencia) {
+      const codigo = limpiarTexto(item[campoUnico]);
+      const estado = limpiarTexto(item.__estado_origen || '');
+      if (codigo && estado && !mapaReferencias.has(codigo)) {
+        mapaReferencias.set(codigo, estado);
+      }
+    }
 
     const publicadasFiltradas = [];
     const duplicados = [];
 
     for (const item of publicadas) {
       const codigoLimpio = limpiarTexto(item[campoUnico]);
-      if (!codigosReferencia.has(codigoLimpio)) {
+      if (!codigoLimpio) continue;
+
+      if (!mapaReferencias.has(codigoLimpio)) {
         publicadasFiltradas.push(item);
       } else {
-        duplicados.push(item);
+        const copia = { ...item };
+        copia['estado'] = mapaReferencias.get(codigoLimpio); // cambiar de 'publicada' a 'cerrada', etc.
+        duplicados.push(copia);
       }
     }
 
@@ -107,11 +120,12 @@ async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile
     console.log(`🗑️  Registros descartados por duplicados: ${duplicados.length}`);
 
     await guardarCSV(publicadasFiltradas, salidaFile);
-    await guardarCSV(duplicados, salidaFile.replace('.csv', '_duplicados.csv'));
+    await guardarCSV(duplicados, salidaFile.replace('.csv', '_repetidos.csv'));
   } catch (error) {
     console.error("❌ Error al eliminar duplicados:", error);
   }
 }
+
 
 // CONFIGURACIÓN
 const archivosACombinar = [
