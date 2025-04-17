@@ -7,7 +7,7 @@ function limpiarTexto(valor) {
   if (!valor) return '';
   return valor
     .toString()
-    .normalize('NFC')                  // normaliza acentos
+    .normalize('NFC')
     .replace(/\u00a0/g, ' ')
     .replace(/\u200B/g, '')
     .replace(/\ufeff/g, '')
@@ -20,11 +20,10 @@ function limpiarTexto(valor) {
     .trim();
 }
 
-// 📄 Nueva función robusta para leer cualquier CSV, incluso si tiene errores de formato
+// 📄 Nueva función robusta para leer cualquier CSV
 async function leerCSV(ruta) {
   const contenido = await fs.readFile(ruta, 'utf-8');
   const lineas = contenido.split(/\r?\n/);
-
   if (lineas.length === 0) return [];
 
   const encabezadoCrudo = lineas[0].split(';').map(h => limpiarTexto(h));
@@ -39,23 +38,19 @@ async function leerCSV(ruta) {
 
     let columnas = linea.split(';').map(col => limpiarTexto(col));
 
-    // Rellenar si faltan columnas
     if (columnas.length < totalColumnas) {
       columnas = [...columnas, ...Array(totalColumnas - columnas.length).fill('')];
     }
 
-    // Cortar si hay columnas de más
     if (columnas.length > totalColumnas) {
       columnas = columnas.slice(0, totalColumnas);
     }
 
-    // Reconstruir objeto fila
     const fila = {};
     for (let j = 0; j < totalColumnas; j++) {
       fila[encabezadoCrudo[j]] = columnas[j];
     }
 
-    // Validación mínima
     if (fila[encabezadoCrudo[0]]) {
       datos.push(fila);
     } else {
@@ -67,7 +62,6 @@ async function leerCSV(ruta) {
   return datos;
 }
 
-
 async function guardarCSV(data, ruta) {
   const csv = Papa.unparse(data, { delimiter: ';' });
   await fs.writeFile(ruta, csv, 'utf-8');
@@ -76,27 +70,40 @@ async function guardarCSV(data, ruta) {
 async function unirArchivos(rutas) {
   const todos = [];
   for (const ruta of rutas) {
-    const nombre = path.basename(ruta, '.csv'); // por ejemplo 'cerradas'
+    const nombre = path.basename(ruta, '.csv'); // ej: 'cerradas'
     const datos = await leerCSV(ruta);
     for (const item of datos) {
-      item.__estado_origen = nombre;
+      item.__estado_origen = nombre.toLowerCase();
       todos.push(item);
     }
   }
   return todos;
 }
 
-
 async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile, campoUnico = 'codigo') {
   try {
     const publicadas = await leerCSV(publicadasFile);
 
-    const mapaReferencias = new Map(); // codigo → estado real
+    const ordenPrioridadEstado = ['adjudicadas', 'revocadas', 'desiertas', 'suspendidas', 'cerradas'];
+
+    const mapaReferencias = new Map(); // codigo → estado más prioritario
     for (const item of archivosReferencia) {
       const codigo = limpiarTexto(item[campoUnico]);
-      const estado = limpiarTexto(item.__estado_origen || '');
-      if (codigo && estado && !mapaReferencias.has(codigo)) {
+      const estado = limpiarTexto(item.__estado_origen || '').toLowerCase();
+
+      if (!codigo || !estado) continue;
+
+      const prioridadNueva = ordenPrioridadEstado.indexOf(estado);
+      if (prioridadNueva === -1) continue;
+
+      if (!mapaReferencias.has(codigo)) {
         mapaReferencias.set(codigo, estado);
+      } else {
+        const estadoExistente = mapaReferencias.get(codigo);
+        const prioridadExistente = ordenPrioridadEstado.indexOf(estadoExistente);
+        if (prioridadNueva < prioridadExistente) {
+          mapaReferencias.set(codigo, estado);
+        }
       }
     }
 
@@ -111,7 +118,7 @@ async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile
         publicadasFiltradas.push(item);
       } else {
         const copia = { ...item };
-        copia['estado'] = mapaReferencias.get(codigoLimpio); // cambiar de 'publicada' a 'cerrada', etc.
+        copia['estado'] = mapaReferencias.get(codigoLimpio);
         duplicados.push(copia);
       }
     }
@@ -126,14 +133,13 @@ async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile
   }
 }
 
-
 // CONFIGURACIÓN
 const archivosACombinar = [
-  'csv/cerradas.csv',
   'csv/desiertas.csv',
   'csv/revocadas.csv',
   'csv/suspendidas.csv',
-  'csv/adjudicadas.csv'
+  'csv/adjudicadas.csv',
+  'csv/cerradas.csv',
 ];
 
 const archivoPublicadas = 'csv/publicadas.csv';

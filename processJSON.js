@@ -16,7 +16,7 @@ const estados = {
     //suspendida: 'csv/suspendidas.csv',
     //adjudicada: 'csv/adjudicadas.csv'
 };
-const CONCURRENCIA_ESTADO = 2;
+const CONCURRENCIA_ESTADO = 1;
 const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 4000;
 
@@ -60,13 +60,12 @@ const generarFechas = (inicio) => {
     const hoy = new Date();
 
     while (actual <= hoy) {
-        if (actual.getDay() !== 0) {
             fechas.push(
                 String(actual.getDate()).padStart(2, '0') +
                 String(actual.getMonth() + 1).padStart(2, '0') +
                 actual.getFullYear()
             );
-        }
+        
         actual.setDate(actual.getDate() + 1);
     }
     return fechas;
@@ -204,7 +203,7 @@ const obtenerDetallesLicitacionRobusto = async (codigo) => {
 const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigosProcesados) => {
     const url = `https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?fecha=${fecha}&estado=${estado}&ticket=${ticket}`;
     let intento = 0;
-    const MAX_INTENTOS = 3;
+    const MAX_INTENTOS = 1;
 
     while (intento < MAX_INTENTOS) {
         const data = await fetchJSON(url, 1);
@@ -248,7 +247,7 @@ const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigo
 // ---------------- MAIN ----------------
 
 const main = async () => {
-    const fechas = generarFechas("2024-03-01");
+    const fechas = generarFechas("2024-07-01");
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {
