@@ -2,20 +2,24 @@ import fs from 'fs';
 import { promises as fsp } from 'fs';
 import PQueue from 'p-queue';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-// ---------------- CONFIGURACIÓN GENERAL ----------------
-
 const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
 const estados = {
-    publicada: 'csv/publicadas.csv',
-    //cerrada: 'csv/cerradas.csv',
-    //desierta: 'csv/desiertas.csv',
-    //revocada: 'csv/revocadas.csv',
-    //suspendida: 'csv/suspendidas.csv',
-    //adjudicada: 'csv/adjudicadas.csv'
+    publicada: path.join(__dirname, 'csv/publicadas.csv'),
+    cerrada: path.join(__dirname, 'csv/cerradas.csv'),
+    desierta: path.join(__dirname, 'csv/desiertas.csv'),
+    revocada: path.join(__dirname, 'csv/revocadas.csv'),
+    suspendida: path.join(__dirname, 'csv/suspendidas.csv'),
+    adjudicada: path.join(__dirname, 'csv/adjudicadas.csv')
 };
+
 const CONCURRENCIA_ESTADO = 1;
 const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 4000;
@@ -23,13 +27,11 @@ const TIEMPO_ESPERA_FECHAS = 4000;
 const fallidosPendientes = new Set();
 const queueFallidos = new PQueue({ concurrency: 1 });
 
-// ---------------- LOGS ----------------
-
 const now = new Date();
 const fechaStr = now.toLocaleString('sv-SE', { timeZone: 'America/Santiago' }).replace(/:/g, '-').replace(' ', '_');
-const logFileName = path.join('logs', `log_${fechaStr}.txt`);
+const logFileName = path.join(__dirname, 'logs', `log_${fechaStr}.txt`);
 
-if (!fs.existsSync('logs')) fs.mkdirSync('logs');
+if (!fs.existsSync(path.join(__dirname, 'logs'))) fs.mkdirSync(path.join(__dirname, 'logs'));
 
 const logMensaje = (mensaje, tipo = 'info') => {
     const fechaHora = new Date().toLocaleString('es-CL', {
@@ -45,8 +47,6 @@ const logMensaje = (mensaje, tipo = 'info') => {
     fs.appendFileSync(logFileName, texto);
 };
 
-// ---------------- UTILIDADES ----------------
-
 const esperar = (ms) => new Promise(res => setTimeout(res, ms));
 
 const limpiarTexto = (t) => t ? t.replace(/[\r\n\";]+/g, ' ').trim() : '';
@@ -60,12 +60,11 @@ const generarFechas = (inicio) => {
     const hoy = new Date();
 
     while (actual <= hoy) {
-            fechas.push(
-                String(actual.getDate()).padStart(2, '0') +
-                String(actual.getMonth() + 1).padStart(2, '0') +
-                actual.getFullYear()
-            );
-        
+        fechas.push(
+            String(actual.getDate()).padStart(2, '0') +
+            String(actual.getMonth() + 1).padStart(2, '0') +
+            actual.getFullYear()
+        );
         actual.setDate(actual.getDate() + 1);
     }
     return fechas;
@@ -101,7 +100,7 @@ const guardarDetallesCSV = async (detalles, archivo) => {
 
     for (const d of detalles) {
         stream.write(`${d.codigo};${campoTextoCSV(d.nombre)};${campoTextoCSV(d.institucion_nombre)};${campoTextoCSV(d.institucion_rut)};${campoTextoCSV(d.institucion_unidad)};${campoTextoCSV(d.institucion_direccion)};${campoTextoCSV(d.institucion_comuna)};${campoTextoCSV(d.institucion_region)};${campoTextoCSV(d.tipo)};${campoTextoCSV(d.estado)};${campoTextoCSV(d.descripcion)};${d.fechaInicio};${d.fechaFinal};${d.fechaEstAdj};${d.monto_estimado};${campoTextoCSV(d.unidad_monetaria)};${d.proveedores_participantes};${d.adjudicados}\n`);
-        }
+    }
 
     stream.end();
 };
@@ -203,9 +202,9 @@ const obtenerDetallesLicitacionRobusto = async (codigo) => {
 const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigosProcesados) => {
     const url = `https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?fecha=${fecha}&estado=${estado}&ticket=${ticket}`;
     let intento = 0;
-    const MAX_INTENTOS = 1;
+    const MAX_INTENTOS = 3;
 
-    while (intento < MAX_INTENTOS) {
+    while (intento < MAX_INTENTOS) {                    
         const data = await fetchJSON(url, 1);
         intento++;
 
@@ -247,7 +246,10 @@ const procesarFechaEstado = async (fecha, estado, archivo, queueDetalles, codigo
 // ---------------- MAIN ----------------
 
 const main = async () => {
-    const fechas = generarFechas("2024-07-01");
+    const ayer = new Date();
+    ayer.setDate(ayer.getDate() - 1);
+    const fechaAyer = ayer.toISOString().split('T')[0]; // formato YYYY-MM-DD
+    const fechas = generarFechas(fechaAyer);
     const queueEstados = new PQueue({ concurrency: CONCURRENCIA_ESTADO });
 
     for (const [estado, archivo] of Object.entries(estados)) {
@@ -271,7 +273,7 @@ const main = async () => {
     logMensaje("📝 Log completo guardado en: " + logFileName, 'info');
 };
 
-main();
+export default main;
 
 
 /*

@@ -1,8 +1,14 @@
 import fs from 'fs/promises';
-import Papa from 'papaparse';
+import fsSync from 'fs';
 import path from 'path';
+import readline from 'readline';
+import ejecutarExtraccion from './processJSON.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-// Limpieza profunda
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 function limpiarTexto(valor) {
   if (!valor) return '';
   return valor
@@ -20,133 +26,97 @@ function limpiarTexto(valor) {
     .trim();
 }
 
-// 📄 Nueva función robusta para leer cualquier CSV
-async function leerCSV(ruta) {
-  const contenido = await fs.readFile(ruta, 'utf-8');
-  const lineas = contenido.split(/\r?\n/);
-  if (lineas.length === 0) return [];
+// 🧠 Carga códigos en un Set por archivo de referencia (una sola vez)
+async function cargarCodigosPorArchivo(ruta) {
+  const codigos = new Set();
+  const estado = path.basename(ruta, '.csv').toLowerCase();
 
-  const encabezadoCrudo = lineas[0].split(';').map(h => limpiarTexto(h));
-  const totalColumnas = encabezadoCrudo.length;
+  const stream = fsSync.createReadStream(ruta, 'utf-8');
+  const rl = readline.createInterface({ input: stream, crlfDelay: Infinity });
 
-  const datos = [];
-  let omitidas = 0;
+  let isFirstLine = true;
+  for await (const line of rl) {
+    if (isFirstLine) { isFirstLine = false; continue; }
+    if (!line.trim()) continue;
+    const columnas = line.split(';');
+    const codigo = limpiarTexto(columnas[0]);
+    if (codigo) codigos.add(codigo);
+  }
 
-  for (let i = 1; i < lineas.length; i++) {
-    const linea = lineas[i];
-    if (!linea.trim()) continue;
+  return { estado, codigos };
+}
 
-    let columnas = linea.split(';').map(col => limpiarTexto(col));
+// 🧼 Elimina duplicados comparando línea por línea con Sets precargados
+async function eliminarDuplicadosTiempoReal(publicadasPath, archivosReferencia, salidaPath) {
+  const referencias = [];
+  for (const ruta of archivosReferencia) {
+    const resultado = await cargarCodigosPorArchivo(ruta);
+    referencias.push(resultado);
+  }
 
-    if (columnas.length < totalColumnas) {
-      columnas = [...columnas, ...Array(totalColumnas - columnas.length).fill('')];
-    }
+  const streamPublicadas = fsSync.createReadStream(publicadasPath, 'utf-8');
+  const rl = readline.createInterface({ input: streamPublicadas, crlfDelay: Infinity });
 
-    if (columnas.length > totalColumnas) {
-      columnas = columnas.slice(0, totalColumnas);
+  const salidaStream = fsSync.createWriteStream(salidaPath, 'utf-8');
+  const duplicadosStream = fsSync.createWriteStream(salidaPath.replace('.csv', '_repetidos.csv'), 'utf-8');
+
+  let headers = [];
+  let total = 0;
+  let duplicados = 0;
+
+  for await (const line of rl) {
+    if (!line.trim()) continue;
+    const columnas = line.split(';');
+
+    if (headers.length === 0) {
+      headers = columnas.map(limpiarTexto);
+      salidaStream.write(line + '\n');
+      duplicadosStream.write(line + ';estado\n');
+      continue;
     }
 
     const fila = {};
-    for (let j = 0; j < totalColumnas; j++) {
-      fila[encabezadoCrudo[j]] = columnas[j];
+    headers.forEach((h, i) => fila[h] = limpiarTexto(columnas[i]));
+    const codigo = limpiarTexto(fila['codigo']);
+
+    let estadoDuplicado = null;
+    for (const ref of referencias) {
+      if (ref.codigos.has(codigo)) {
+        estadoDuplicado = ref.estado;
+        break;
+      }
     }
 
-    if (fila[encabezadoCrudo[0]]) {
-      datos.push(fila);
+    if (estadoDuplicado) {
+      duplicados++;
+      duplicadosStream.write(line + ';' + estadoDuplicado + '\n');
     } else {
-      omitidas++;
+      total++;
+      salidaStream.write(line + '\n');
     }
   }
 
-  console.log(`📄 ${ruta} => ${datos.length} filas procesadas, ${omitidas} omitidas`);
-  return datos;
+  salidaStream.end();
+  duplicadosStream.end();
+
+  console.log(`✅ Publicadas sin menciones: ${total}`);
+  console.log(`🗑️  Registros descartados por duplicados: ${duplicados}`);
 }
 
-async function guardarCSV(data, ruta) {
-  const csv = Papa.unparse(data, { delimiter: ';' });
-  await fs.writeFile(ruta, csv, 'utf-8');
-}
-
-async function unirArchivos(rutas) {
-  const todos = [];
-  for (const ruta of rutas) {
-    const nombre = path.basename(ruta, '.csv'); // ej: 'cerradas'
-    const datos = await leerCSV(ruta);
-    for (const item of datos) {
-      item.__estado_origen = nombre.toLowerCase();
-      todos.push(item);
-    }
-  }
-  return todos;
-}
-
-async function eliminarDuplicados(publicadasFile, archivosReferencia, salidaFile, campoUnico = 'codigo') {
-  try {
-    const publicadas = await leerCSV(publicadasFile);
-
-    const ordenPrioridadEstado = ['adjudicadas', 'revocadas', 'desiertas', 'suspendidas', 'cerradas'];
-
-    const mapaReferencias = new Map(); // codigo → estado más prioritario
-    for (const item of archivosReferencia) {
-      const codigo = limpiarTexto(item[campoUnico]);
-      const estado = limpiarTexto(item.__estado_origen || '').toLowerCase();
-
-      if (!codigo || !estado) continue;
-
-      const prioridadNueva = ordenPrioridadEstado.indexOf(estado);
-      if (prioridadNueva === -1) continue;
-
-      if (!mapaReferencias.has(codigo)) {
-        mapaReferencias.set(codigo, estado);
-      } else {
-        const estadoExistente = mapaReferencias.get(codigo);
-        const prioridadExistente = ordenPrioridadEstado.indexOf(estadoExistente);
-        if (prioridadNueva < prioridadExistente) {
-          mapaReferencias.set(codigo, estado);
-        }
-      }
-    }
-
-    const publicadasFiltradas = [];
-    const duplicados = [];
-
-    for (const item of publicadas) {
-      const codigoLimpio = limpiarTexto(item[campoUnico]);
-      if (!codigoLimpio) continue;
-
-      if (!mapaReferencias.has(codigoLimpio)) {
-        publicadasFiltradas.push(item);
-      } else {
-        const copia = { ...item };
-        copia['estado'] = mapaReferencias.get(codigoLimpio);
-        duplicados.push(copia);
-      }
-    }
-
-    console.log(`✅ Publicadas sin menciones: ${publicadasFiltradas.length}`);
-    console.log(`🗑️  Registros descartados por duplicados: ${duplicados.length}`);
-
-    await guardarCSV(publicadasFiltradas, salidaFile);
-    await guardarCSV(duplicados, salidaFile.replace('.csv', '_repetidos.csv'));
-  } catch (error) {
-    console.error("❌ Error al eliminar duplicados:", error);
-  }
-}
-
-// CONFIGURACIÓN
-const archivosACombinar = [
-  'csv/desiertas.csv',
-  'csv/revocadas.csv',
-  'csv/suspendidas.csv',
-  'csv/adjudicadas.csv',
-  'csv/cerradas.csv',
+// 🗂️ Configuración de rutas
+const archivosReferencia = [
+  path.join(__dirname, 'csv/desiertas.csv'),
+  path.join(__dirname, 'csv/revocadas.csv'),
+  path.join(__dirname, 'csv/suspendidas.csv'),
+  path.join(__dirname, 'csv/adjudicadas.csv'),
+  path.join(__dirname, 'csv/cerradas.csv'),
 ];
 
-const archivoPublicadas = 'csv/publicadas.csv';
-const archivoResultado = 'csv/publicadas_sin_duplicados.csv';
+const archivoPublicadas = path.join(__dirname, 'csv/publicadas.csv');
+const archivoResultado = path.join(__dirname, 'csv/publicadas_sin_duplicados.csv');
 
-// EJECUCIÓN
+// 🏁 Ejecución
 (async () => {
-  const combinados = await unirArchivos(archivosACombinar);
-  await eliminarDuplicados(archivoPublicadas, combinados, archivoResultado);
+  await ejecutarExtraccion(); // si no se requiere, comenta esta línea
+  await eliminarDuplicadosTiempoReal(archivoPublicadas, archivosReferencia, archivoResultado);
 })();

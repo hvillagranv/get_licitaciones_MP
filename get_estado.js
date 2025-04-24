@@ -8,8 +8,8 @@ import PQueue from 'p-queue';
 const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
 const archivoPublicadas = 'csv/publicadas_sin_duplicados.csv';
 
-const RANGO_INICIO = 3000;
-const RANGO_FIN = 3500;
+const RANGO_INICIO =0;
+const RANGO_FIN = 1000;
 
 const CONCURRENCIA_INICIAL = 3;
 const CONCURRENCIA_REINTENTOS = 2;
