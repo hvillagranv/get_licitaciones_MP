@@ -1,3 +1,5 @@
+console.log("🔄 Versión activa de script de licitaciones");
+
 let datos = [];
 let columnaOrdenada = 'fecha_inicio';
 let ordenAscendente = false;
@@ -5,32 +7,48 @@ let paginaActual = 1;
 const filasPorPagina = 10;
 let textoFiltro = '';
 let institucionesSeleccionadas = [];
-
-Papa.parse('csv/publicadas_sin_duplicados.csv', {
-download: true,
-header: true,
-delimiter: ';',
-complete: (results) => {
-    datos = results.data.filter(item => item.codigo);
-    renderizarCheckboxes();
-    ordenarDatos();
-    filtrarDatos();
-}
-});
-
 let aliasInstituciones = {};
 
-Papa.parse('csv/instituciones.csv', {
-  download: true,
-  header: true,
-  delimiter: ';',
-  complete: (results) => {
-    aliasInstituciones = Object.fromEntries(results.data.map(item => [item.id, item.alias]));
-    renderizarCheckboxes();
+// 🔄 Cargar datos desde la API PHP
+fetch('licitacionesPub.php')
+  .then(res => res.json())
+  .then(({ licitaciones, instituciones }) => {
+    datos = licitaciones.filter(item => item.codigo);
+
+    if (instituciones && instituciones.length > 0) {
+      aliasInstituciones = Object.fromEntries(instituciones.map(item => [item.id, item.alias]));
+      renderizarCheckboxes();
+    } else {
+      console.warn("⚠️ Instituciones no encontradas en la API, cargando respaldo CSV...");
+      cargarInstitucionesDesdeCSV();
+    }
+
     ordenarDatos();
     filtrarDatos();
-  }
-});
+  })
+  .catch(err => {
+    console.error('❌ Error al cargar datos desde la API:', err);
+    console.warn("🔁 Intentando cargar respaldo desde CSV...");
+    cargarInstitucionesDesdeCSV();
+  });
+
+// 🧾 Cargar instituciones desde respaldo CSV
+function cargarInstitucionesDesdeCSV() {
+  Papa.parse('/csv/instituciones.csv', {
+    download: true,
+    header: true,
+    delimiter: ';',
+    complete: (results) => {
+      aliasInstituciones = Object.fromEntries(results.data.map(item => [item.id, item.alias]));
+      renderizarCheckboxes();
+      ordenarDatos();
+      filtrarDatos();
+    },
+    error: (error) => {
+      console.error('❌ Error al cargar respaldo CSV de instituciones:', error);
+    }
+  });
+}
 
 function renderizarCheckboxes() {
   const contenedor = document.getElementById('filtrosInstituciones');
@@ -73,10 +91,10 @@ function mostrarDatos(datosFiltrados) {
   datosPaginados.forEach(item => {
     const alias = aliasInstituciones[item.institucion_nombre] || item.institucion_nombre;
     const montoFormateado = item.monto_estimado && !isNaN(item.monto_estimado) 
-  ? (item.unidad_monetaria && item.unidad_monetaria !== 'CLP' 
-      ? `${parseInt(item.monto_estimado).toLocaleString('es-CL')} ${item.unidad_monetaria}`
-      : `$${parseInt(item.monto_estimado).toLocaleString('es-CL')}`)
-  : (item.monto_estimado || 'No informado');
+      ? (item.unidad_monetaria && item.unidad_monetaria !== 'CLP' 
+          ? `${parseInt(item.monto_estimado).toLocaleString('es-CL')} ${item.unidad_monetaria}`
+          : `$${parseInt(item.monto_estimado).toLocaleString('es-CL')}`)
+      : (item.monto_estimado || 'No informado');
 
     const card = `
       <div class="card mb-4 p-3 shadow-sm">
@@ -86,31 +104,19 @@ function mostrarDatos(datosFiltrados) {
         <a href="https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idLicitacion=${item.codigo}" target="_blank"><h5 class="text-primary fw-bold mb-1">${item.nombre || '(Sin título)'}</h5></a>
         <p class="text-secondary">${item.descripcion || '(Sin descripción)'}</p>
         <div class="row mt-3">
-          <div class="col-md-3 mb-2">
-            <strong>Monto:</strong><br>${montoFormateado}
-          </div>
-          <div class="col-md-3 mb-2">
-            <strong>Fecha de publicación:</strong><br>${new Date(item.fecha_inicio).toLocaleDateString()}
-          </div>
-          <div class="col-md-3 mb-2">
-            <strong>Fecha de cierre:</strong><br>${new Date(item.fecha_final).toLocaleDateString()}
-          </div>
+          <div class="col-md-3 mb-2"><strong>Monto:</strong><br>${montoFormateado}</div>
+          <div class="col-md-3 mb-2"><strong>Fecha de publicación:</strong><br>${new Date(item.fecha_inicio).toLocaleDateString()}</div>
+          <div class="col-md-3 mb-2"><strong>Fecha de cierre:</strong><br>${new Date(item.fecha_final).toLocaleDateString()}</div>
         </div>
         <hr>
         <div class="row mt-2">
-          <div class="col-md-6">
-            <strong>Institución:</strong><br>${alias}
-          </div>
+          <div class="col-md-6"><strong>Institución:</strong><br>${alias}</div>
         </div>
       </div>`;
-
     contenedor.innerHTML += card;
   });
 
-  // Mostrar la cantidad de resultados
-  const cantidadResultados = document.getElementById('cantidadResultados');
-  cantidadResultados.innerHTML = `Total de resultados encontrados: ${datosFiltrados.length}`;
-
+  document.getElementById('cantidadResultados').innerHTML = `Total de resultados encontrados: ${datosFiltrados.length}`;
   renderizarPaginacion(datosFiltrados.length);
 }
 
@@ -119,36 +125,33 @@ function filtrarDatos(resetPagina = true) {
   if (resetPagina) paginaActual = 1;
 
   const datosFiltrados = datos.filter(item =>
-  (item.codigo.toLowerCase().includes(textoFiltro) ||
-   item.institucion_nombre.toLowerCase().includes(textoFiltro) || 
-   item.nombre.toLowerCase().includes(textoFiltro) || 
-   item.descripcion.toLowerCase().includes(textoFiltro)) &&
-  (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre))
-);
+    (item.codigo.toLowerCase().includes(textoFiltro) ||
+     item.institucion_nombre.toLowerCase().includes(textoFiltro) || 
+     item.nombre.toLowerCase().includes(textoFiltro) || 
+     item.descripcion.toLowerCase().includes(textoFiltro)) &&
+    (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre))
+  );
 
   mostrarDatos(datosFiltrados);
 }
 
 function ordenarTabla(columna) {
   if (columnaOrdenada === columna) {
-      ordenAscendente = !ordenAscendente;
+    ordenAscendente = !ordenAscendente;
   } else {
-      columnaOrdenada = columna;
-      ordenAscendente = true;
+    columnaOrdenada = columna;
+    ordenAscendente = true;
   }
   ordenarDatos();
   filtrarDatos(false);
 }
 
 function ordenarDatos() {
-datos.sort((a, b) => {
+  datos.sort((a, b) => {
     const valA = columnaOrdenada.includes('fecha') ? new Date(a[columnaOrdenada]) : (a[columnaOrdenada] || '').toLowerCase();
     const valB = columnaOrdenada.includes('fecha') ? new Date(b[columnaOrdenada]) : (b[columnaOrdenada] || '').toLowerCase();
-
-    if (valA < valB) return ordenAscendente ? -1 : 1;
-    if (valA > valB) return ordenAscendente ? 1 : -1;
-    return 0;
-});
+    return ordenAscendente ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
+  });
 }
 
 function renderizarPaginacion(totalDatos) {
@@ -158,22 +161,18 @@ function renderizarPaginacion(totalDatos) {
 
   let inicio = Math.max(paginaActual - 5, 1);
   let fin = Math.min(inicio + 9, totalPaginas);
-
-  if (fin - inicio < 9) {
-      inicio = Math.max(fin - 9, 1);
-  }
+  if (fin - inicio < 9) inicio = Math.max(fin - 9, 1);
 
   if (paginaActual > 1) {
-      pagination.innerHTML += `<li class="page-item"><button class="page-link" onclick="cambiarPagina(${paginaActual - 1})">Anterior</button></li>`;
+    pagination.innerHTML += `<li class="page-item"><button class="page-link" onclick="cambiarPagina(${paginaActual - 1})">Anterior</button></li>`;
   }
 
   for (let i = inicio; i <= fin; i++) {
-      const pagina = `<li class="page-item ${i === paginaActual ? 'active' : ''}"><button class="page-link" onclick="cambiarPagina(${i})">${i}</button></li>`;
-      pagination.innerHTML += pagina;
+    pagination.innerHTML += `<li class="page-item ${i === paginaActual ? 'active' : ''}"><button class="page-link" onclick="cambiarPagina(${i})">${i}</button></li>`;
   }
 
   if (paginaActual < totalPaginas) {
-      pagination.innerHTML += `<li class="page-item"><button class="page-link" onclick="cambiarPagina(${paginaActual + 1})">Siguiente</button></li>`;
+    pagination.innerHTML += `<li class="page-item"><button class="page-link" onclick="cambiarPagina(${paginaActual + 1})">Siguiente</button></li>`;
   }
 }
 
@@ -184,50 +183,9 @@ function cambiarPagina(pagina) {
 }
 
 function limpiarFiltros() {
-document.getElementById('filtroTexto').value = '';
-textoFiltro = '';
-institucionesSeleccionadas = [];
-renderizarCheckboxes();
-filtrarDatos();
-}
-
-function descargarLicitaciones() {
-  const textoFiltro = document.getElementById('filtroTexto').value.toLowerCase(); // Obtener el texto filtrado
-
-  const datosFiltrados = datos.filter(item =>
-    (item.institucion_nombre.toLowerCase().includes(textoFiltro) || item.codigo.toLowerCase().includes(textoFiltro) ||
-     item.nombre.toLowerCase().includes(textoFiltro) || item.descripcion.toLowerCase().includes(textoFiltro)) &&
-    (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre))
-  );
-
-  const csvContent = [
-    ["ID", "Nombre", "Descripción","Institución", "Monto", "Fecha Publicación", "Fecha Cierre"]
-  ];
-
-  datosFiltrados.forEach(item => {
-    const monto = item.monto_estimado && !isNaN(item.monto_estimado)
-      ? (item.unidad_monetaria && item.unidad_monetaria !== 'CLP'
-          ? `${parseInt(item.monto_estimado).toLocaleString('es-CL')} ${item.unidad_monetaria}`
-          : `$${parseInt(item.monto_estimado).toLocaleString('es-CL')}`)
-      : (item.monto_estimado || 'No informado');
-
-    csvContent.push([
-      item.codigo,
-      item.nombre || '(Sin título)',
-      item.descripcion || '(Sin descripción)',
-      item.institucion_nombre,
-      monto,
-      new Date(item.fecha_inicio).toLocaleDateString(),
-      new Date(item.fecha_final).toLocaleDateString(),
-    ]);
-  });
-
-  const csvBlob = new Blob(
-    ["\uFEFF", csvContent.map(row => row.join(";")).join("\n")], // Incluye BOM UTF-8
-    { type: 'text/csv; charset=utf-8' }
-  );
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(csvBlob);
-  link.download = "licitaciones.csv";
-  link.click();
+  document.getElementById('filtroTexto').value = '';
+  textoFiltro = '';
+  institucionesSeleccionadas = [];
+  renderizarCheckboxes();
+  filtrarDatos();
 }

@@ -4,3 +4,5 @@ package.json
 package-lock.json
 logs/*
 csv1/*
+MVP1/logs/*
+connectDB.js
