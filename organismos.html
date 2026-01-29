@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Organismos Compradores</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <style>
+    .container-fluid {
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    .kpi-card {
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+    }
+    .kpi-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    .kpi-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid mt-4">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2>Analítica de organismos compradores</h2>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <label class="form-label">Buscar organismo</label>
+      <input type="text" id="filtroOrganismo" class="form-control" placeholder="Escribe o selecciona un organismo" list="organismosList" oninput="filtrarDatos()">
+      <datalist id="organismosList"></datalist>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Año</label>
+      <select id="filtroAnio" class="form-select" onchange="filtrarDatos()"></select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Estado</label>
+      <select id="filtroEstado" class="form-select" onchange="filtrarDatos()"></select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Tipo de licitación</label>
+      <select id="filtroTipo" class="form-select" onchange="filtrarDatos()"></select>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4" id="kpiCards"></div>
+
+  <div class="row mb-2">
+    <div class="col-md-9">
+      <input type="text" id="filtroTexto" class="form-control" placeholder="Filtrar por ID, título o institución" oninput="filtrarDatos()">
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <button class="btn btn-secondary w-100" onclick="limpiarFiltros()">Limpiar filtros</button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <div id="cantidadResultados"></div>
+  </div>
+
+  <div id="contenedorCards"></div>
+
+  <nav>
+    <ul class="pagination justify-content-center" id="pagination"></ul>
+  </nav>
+</div>
+
+<script type="text/javascript" src="organismos.js"></script>
+</body>
+</html>

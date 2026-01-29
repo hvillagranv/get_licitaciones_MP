@@ -15,15 +15,7 @@ export const guardarDetallesEnBD = async (d) => {
     const yaExiste = rows.length > 0;
     const estadoExistente = yaExiste ? rows[0].estado : null;
 
-    if (yaExiste) {
-      if (estadoExistente === 'Publicada' && d.Estado === 'Publicada') {
-        await conn.rollback();
-        return;
-      }
-      if (estadoExistente !== d.Estado) {
-        logMensaje(`🔄 Cambio de estado para ${d.CodigoExterno}: '${estadoExistente}' → '${d.Estado}'`, 'info');
-      }
-    }
+    // 🔁 Eliminado: if (estadoExistente === 'Publicada' && d.Estado === 'Publicada') { return; }
 
     const f = d.Fechas || {};
 
