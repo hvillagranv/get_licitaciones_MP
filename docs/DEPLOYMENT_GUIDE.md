@@ -1,32 +1,39 @@
-# 🚀 GUÍA DE DESPLIEGUE - Servir Index desde Dominio Principal
+# 🚀 GUÍA DE DESPLIEGUE - Portal de Licitaciones
 
-## Problema
-El `index.html` estaba en la carpeta raíz. Ahora está en `frontend/` y necesitamos servirlo desde el dominio principal (www.hvillagranv.com).
+## Estructura Actual
+
+```
+Raíz del proyecto:
+├── *.html          ← Páginas web (index, organismos, palabras_clave, proveedores)
+├── frontend/       ← Assets (CSS, JS)
+├── api/            ← Endpoints PHP
+├── backend/        ← Servidor Express + scripts Node.js
+└── data/           ← CSV y logs
+```
 
 ---
 
 ## ✅ Solución Implementada
 
-### 1. Servidor Node.js (Express) - Recomendado
+### Servidor Node.js (Express)
 
-El archivo `backend/server.js` ha sido actualizado para:
-- ✅ Servir archivos estáticos desde `frontend/`
-- ✅ Responder a `GET /` con `index.html`
-- ✅ Servir CSS, JS, imágenes directamente
-- ✅ Proporcionar API endpoints en `/api/`
+El archivo `backend/server.js` está configurado para:
+- ✅ Servir HTML desde la raíz del proyecto
+- ✅ Servir assets (CSS/JS) desde `frontend/`
+- ✅ Proporcionar API endpoints en `/api/licitaciones`
 
 ### Cómo funciona
 
 ```javascript
-// Servir archivos estáticos
+// Servir assets estáticos desde frontend/
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Ruta raíz
+// Ruta raíz - HTML desde raíz del proyecto
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-// API endpoints siguen funcionando
+// API endpoints
 app.get('/api/licitaciones', async (req, res) => { ... });
 ```
 
@@ -35,18 +42,17 @@ app.get('/api/licitaciones', async (req, res) => { ... });
 ```
 Solicitud                   Respuesta
 ─────────────────          ───────────────────────
-GET /                    → frontend/index.html
-GET /styles.css          → frontend/styles.css
-GET /organismos.js       → frontend/organismos.js
+GET /                    → index.html (raíz)
+GET /frontend/styles.css → frontend/styles.css
+GET /frontend/*.js       → frontend/*.js
 GET /api/licitaciones    → JSON desde BD
-GET /palabras-clave      → frontend/index.html (SPA routing)
 ```
 
 ---
 
-## 🔧 Opciones de Despliegue
+## 🔧 Despliegue en Producción
 
-### Opción 1: Servidor Node.js Dedicado (RECOMENDADO)
+### Opción 1: Servidor Node.js con PM2 (RECOMENDADO)
 
 **Ventajas:**
 - ✅ Versiones recientes de Node.js

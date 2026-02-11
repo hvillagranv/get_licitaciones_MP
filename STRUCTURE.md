@@ -7,6 +7,7 @@
 │
 ├── 🔧 CONFIGURACIÓN
 │   ├── README.md                      # ← Documentación principal
+│   ├── STRUCTURE.md                   # ← Este archivo
 │   ├── .env                           # ← Credenciales (Git ignored)
 │   ├── .env.example                   # ← Plantilla
 │   ├── .gitignore                     # ← Configuración git
@@ -14,13 +15,14 @@
 │   ├── package-lock.json              # ← Lock file
 │   │
 │
-├── 🌐 frontend/                       # Aplicación web interactiva
-│   ├── 📄 HTML (Páginas)
-│   │   ├── index.html                 # Página principal
-│   │   ├── palabras_clave.html        # Búsqueda por palabras
-│   │   ├── organismos.html            # Análisis por organismo
-│   │   └── proveedores.html           # Análisis de proveedores
+├── 📄 HTML (Raíz del Proyecto)        # Páginas HTML accesibles directamente
+│   ├── index.html                     # Página principal
+│   ├── palabras_clave.html            # Búsqueda por palabras
+│   ├── organismos.html                # Análisis por organismo
+│   └── proveedores.html               # Análisis de proveedores
 │   │
+│
+├── 🌐 frontend/                       # Assets web (CSS/JS)
 │   ├── 🎨 Estilos
 │   │   └── styles.css                 # Bootstrap 5 + custom
 │   │
@@ -29,7 +31,7 @@
 │   │   ├── palabras_clave.js          # Lógica búsqueda palabras
 │   │   ├── organismos.js              # Lógica organismos
 │   │   ├── proveedores.js             # Lógica proveedores
-│   │   └── security.js                # Utilidades fron-end security
+│   │   └── security.js                # Utilidades front-end security
 │   │       ├── escaparHTML()
 │   │       ├── validarInput()
 │   │       ├── getCsrfToken()
@@ -109,53 +111,8 @@
 │       └── ... (Logs sanitizados)
 │   │
 │
-├── 📚 docs/                           # Documentación seguridad
-│   ├── SECURITY_AUDIT.md              # Análisis de vulnerabilidades
-│   │   ├── Credenciales hardcodeadas
-│   │   ├── CORS sin restricción
-│   │   ├── Exposición de errores
-│   │   ├── XSS en frontend
-│   │   └── Validación de entrada
-│   │
-│   ├── SECURITY_CHECKLIST.md          # Checklist de remedios
-│   │   ├── Fase 1: CRÍTICO (1-2 horas)
-│   │   ├── Fase 2: ALTO (2 semanas)
-│   │   └── Fase 3: MEDIO (próximo mes)
-│   │
-│   ├── SECURITY_EXECUTIVE_SUMMARY.md  # Para stakeholders
-│   │   ├── Hallazgos críticos
-│   │   ├── Costo de remediar
-│   │   ├── Plan de acción
-│   │   └── KPIs de seguridad
-│   │
-│   ├── SECURITY_README.md             # Guía para desarrolladores
-│   │   ├── Cómo usar .env
-│   │   ├── Mejores prácticas
-│   │   ├── Headers de seguridad
-│   │   └── Validación de entrada
-│   │
-│   ├── VULNERABILITIES_STATUS_REPORT.md # Estado actual
-│   │   ├── CRÍTICAS: 3/3 ✅ 100%
-│   │   ├── ALTAS: 1/5 ✅ 20%
-│   │   ├── MEDIAS: 3/3 ✅ 100%
-│   │   └── TOTAL: 7/11 ✅ 64%
-│   │
-│   ├── MEDIUM_VULNERABILITIES_FIXED.md # Detalles de medias
-│   │   ├── Headers de seguridad (Helmet)
-│   │   ├── Logs sanitizados
-│   │   └── CSRF Protection
-│   │
-│   ├── DB_CREDENTIALS_FIX.md          # Cambio de credenciales
-│   │   ├── Pasos para cambiar password
-│   │   └── Cómo actualizar .env
-│   │
-│   ├── QUICK_FIX_GUIDE.md             # Guía rápida
-│   │   ├── Acción inmediata (2 horas)
-│   │   └── Verificaciones adicionales
-│   │
-│   └── RISK_MATRIX.md                 # Matriz de riesgos
-│       ├── Severidad vs Impacto
-│       └── Priorización
+├── 📚 docs/                           # Documentación
+│   └── DEPLOYMENT_GUIDE.md            # Guía de despliegue
 │   │
 │
 ├── 🔄 MVP1/                           # Código legacy (v1 piloto)
@@ -182,16 +139,25 @@
 .env.example          ← Plantilla
 .gitignore            ← Ignorar .env en git
 package.json          ← Dependencias
-README.md             ← Este documento
+README.md             ← Documentación principal
+STRUCTURE.md          ← Este documento
 ```
 
-### Frontend (Estático + Interactivo)
+### HTML (Raíz)
+```
+*.html                 ← Páginas web accesibles directamente
+├── index.html         ← Página principal
+├── palabras_clave.html
+├── organismos.html
+└── proveedores.html
+```
+
+### Frontend (Assets Web)
 ```
 frontend/
-├── *.html             ← Contenido
-├── *.js               ← Lógica
+├── *.js               ← Lógica frontend
 ├── *.css              ← Estilos
-└── security.js        ← Seguridad
+└── security.js        ← Seguridad frontend
 ```
 
 ### Backend (Servidor + Lógica)
@@ -222,11 +188,7 @@ data/
 ### Documentación
 ```
 docs/
-├── SECURITY_*         ← Análisis seguridad
-├── VULNERABILITIES_*  ← Estado de fixes
-├── DB_CREDENTIALS_*   ← Credenciales
-├── QUICK_FIX_*        ← Guías rápidas
-└── RISK_MATRIX.md     ← Matriz riesgos
+└── DEPLOYMENT_GUIDE.md    ← Guía de despliegue
 ```
 
 ---
@@ -236,12 +198,13 @@ docs/
 | Aspecto | Estado | Detalle |
 |--------|--------|---------|
 | Carpetas lógicas | ✅ | frontend/, api/, backend/, data/, docs/, scripts/ |
+| HTML en raíz | ✅ | Archivos HTML directamente accesibles desde raíz |
+| Assets organizados | ✅ | CSS/JS en frontend/, separados de HTML |
 | Configuración centralizada | ✅ | .env en raíz (Git ignored) |
-| Documentación agrupada | ✅ | docs/ contiene todos los .md |
+| Documentación agrupada | ✅ | docs/ contiene documentación útil |
 | Datos separados | ✅ | data/csv y data/logs |
 | Backend modular | ✅ | scripts separados por función + utils/ |
-| Frontend organizado | ✅ | HTML, JS, CSS, security.js |
-| README principal | ✅ | README.md en raíz |
+| README principal | ✅ | README.md y STRUCTURE.md en raíz |
 | Estructura clara | ✅ | Carpetas nombradas descriptivamente |
 
 ---

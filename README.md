@@ -9,10 +9,17 @@ Sistema integrado para consultar, analizar y visualizar licitaciones del portal 
 ```
 proyecto/
 ├── README.md                    # Este archivo
+├── STRUCTURE.md                 # Estructura detallada del proyecto
 ├── package.json                 # Dependencias Node.js
 ├── .env                         # Variables de entorno (Git ignored)
 ├── .env.example                 # Plantilla de .env
 ├── .gitignore                   # Configuración de Git
+│
+├── 📄 HTML (Raíz del proyecto)
+│   ├── index.html               # Página principal
+│   ├── palabras_clave.html      # Búsqueda por palabras clave
+│   ├── organismos.html          # Análisis por organismo
+│   └── proveedores.html         # Análisis de proveedores
 │
 ├── 🔧 backend/                  # Aplicación Node.js y scripts
 │   ├── connectDB.js             # Conexión segura a BD con .env
@@ -25,11 +32,7 @@ proyecto/
 │   └── utils/
 │       └── logs.js              # Sistema de logs con sanitización
 │
-├── 🌐 frontend/                 # Aplicación web (HTML/JS)
-│   ├── index.html               # Página principal
-│   ├── palabras_clave.html      # Búsqueda por palabras clave
-│   ├── organismos.html          # Análisis por organismo
-│   ├── proveedores.html         # Análisis de proveedores
+├── 🌐 frontend/                 # Assets web (CSS/JS)
 │   ├── styles.css               # Estilos Bootstrap 5
 │   ├── visualization.js         # Visualizaciones generales
 │   ├── palabras_clave.js        # Lógica palabras clave
@@ -44,20 +47,14 @@ proyecto/
 │
 ├── 📊 data/                     # Datos y logs
 │   ├── csv/                     # Archivos CSV exportados
-│   │   └── *.csv
+│   │   ├── instituciones.csv
+│   │   ├── organismos.csv
+│   │   └── palabras_clave.csv
 │   └── logs/                    # Logs de aplicación
 │       └── log_*.txt
 │
 ├── 📚 docs/                     # Documentación
-│   ├── SECURITY_AUDIT.md        # Análisis de vulnerabilidades identificadas
-│   ├── SECURITY_EXECUTIVE_SUMMARY.md  # Resumen para stakeholders
-│   ├── SECURITY_CHECKLIST.md    # Checklist de remedios paso a paso
-│   ├── SECURITY_README.md       # Guía de seguridad para devs
-│   ├── VULNERABILITIES_STATUS_REPORT.md  # Estado actual de vulnerabilidades
-│   ├── MEDIUM_VULNERABILITIES_FIXED.md   # Detalles de correcciones medias
-│   ├── DB_CREDENTIALS_FIX.md    # Pasos para cambiar credenciales
-│   ├── QUICK_FIX_GUIDE.md       # Guía rápida de remedición
-│   └── RISK_MATRIX.md           # Matriz de riesgos
+│   └── DEPLOYMENT_GUIDE.md      # Guía de despliegue
 │
 ├── 🐍 scripts/                  # Scripts utilitarios
 │   └── parallel_lics.py         # Script Python para procesamiento
@@ -105,9 +102,9 @@ npx nodemon backend/server.js
 ```
 
 ### 3. Acceder a la Aplicación
-- Frontend: `http://localhost:3000` (si está configurado)
-- API: `http://localhost:5500/api/licitaciones`
-- Endpoints PHP: `http://domain.com/api/licitacionesPub.php`
+- Frontend: `http://localhost:5500/` (HTML en raíz, assets en frontend/)
+- API Express: `http://localhost:5500/api/licitaciones`
+- Endpoints PHP: `http://hvillagranv.com/api/licitacionesPub.php`
 
 ---
 
@@ -125,15 +122,8 @@ npx nodemon backend/server.js
 | **CSRF Protection** | ✅ | Tokens CSRF en endpoints PHP |
 | **Error Handling** | ✅ | Mensajes genéricos, logs privados |
 
-### 📖 Ver Documentación
-- **Análisis completo:** [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md)
-- **Checklist remedios:** [docs/SECURITY_CHECKLIST.md](docs/SECURITY_CHECKLIST.md)
-- **Estado actual:** [docs/VULNERABILITIES_STATUS_REPORT.md](docs/VULNERABILITIES_STATUS_REPORT.md)
-
-### ⚠️ Acciones Críticas Pendientes
-1. **Cambiar contraseña de `hansenri_admin`** en BD (la anterior está comprometida)
-2. Crear archivo `.env` actual con credenciales seguras
-3. Instalar `helmet` con `npm install helmet`
+### ⚠️ Acción Pendiente
+- **Cambiar contraseña de `hansenri_admin`** en BD (la anterior puede estar comprometida en historial de git)
 
 ---
 
@@ -186,50 +176,15 @@ npx nodemon backend/server.js
         ┌──────────┴──────────┐
         ↓                     ↓
   ┌──────────────┐     ┌──────────────┐
-  │ frontend/    │     │ api/         │
-  │ index.html   │     │ *.php        │
-  │ (Visualizar) │     │ (JSON)       │
+  │ *.html       │     │ api/         │
+  │ (Raíz)       │     │ *.php        │
+  │ Visualizar   │←────┤ (JSON)       │
   └──────────────┘     └──────────────┘
+        ↓
+  frontend/*.js
+  frontend/*.css
 ```
 
----
-
-## 📊 Variables de Entorno (.env)
-
-```dotenv
-# Base de Datos
-DB_HOST=localhost
-DB_USER=hansenri_admin
-DB_PASSWORD=contraseña_segura_aqui  # ⚠️ CAMBIAR INMEDIATAMENTE
-DB_NAME=hansenri_licitacionesMP
-DB_PORT=3306
-
-# Servidor
-NODE_ENV=production
-PORT=5500
-HOST=0.0.0.0
-
-# Seguridad
-SESSION_SECRET=contraseña_segura_32_caracteres_minimo
-JWT_SECRET=otra_contraseña_segura_32_caracteres
-
-# API Mercado Público
-TICKET=886F450C-C2FA-4C9B-99BE-E06B63BAB511
-TICKET_MVP1=0F702DFA-2D0B-4243-897A-84985C4FCA73
-
-# CORS
-CORS_ORIGIN=https://www.hvillagranv.com,https://hvillagranv.com,http://localhost:3000
-
-# Rate Limiting
-RATE_LIMIT_WINDOW=15
-RATE_LIMIT_MAX=100
-
-# Logs
-LOG_LEVEL=info
-LOG_FILE=/var/log/app.log
-```
-
----
 
 ## 🧪 Testing
 
@@ -264,22 +219,22 @@ curl -i http://localhost:5500/api/licitacionesPub.php | grep "X-CSRF"
 
 - **Repositorio:** [https://github.com/hvillagranv/get_licitaciones_MP](https://github.com/hvillagranv/get_licitaciones_MP)
 - **Owner:** @hvillagranv
-- **Email:** [Tu email aquí]
+- **Email:** hvillagranvidal@gmail.com
 
 ---
 
 ## 📝 Changelog
 
 ### Versión Actual (11/02/2026)
-- ✅ Credenciales BD moved a .env
-- ✅ Tickets API moved a .env
+- ✅ Estructura organizada: HTML en raíz, assets en frontend/
+- ✅ Credenciales externalizadas a .env
 - ✅ Headers de seguridad con Helmet
 - ✅ Sanitización de logs
 - ✅ CSRF Protection en PHP
 - ✅ Error handling seguro
-- ✅ Estructura de proyecto organizada
+- ✅ Rutas actualizadas (api/, data/csv/)
 
 ---
 
 **Última actualización:** 11 de Febrero 2026  
-**Estado:** 🟢 Seguro para producción con cambios críticos pendientes
+**Estado:** 🟢 En producción
