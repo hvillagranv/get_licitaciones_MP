@@ -8,9 +8,10 @@ const filasPorPagina = 10;
 let textoFiltro = '';
 let institucionesSeleccionadas = [];
 let aliasInstituciones = {};
+let excluirBajoValor = false;
 
 // 🔄 Cargar datos desde la API PHP
-fetch('licitacionesPub.php')
+fetch('api/licitacionesPub.php')
   .then(res => res.json())
   .then(({ licitaciones, instituciones }) => {
     datos = licitaciones.filter(item => item.codigo);
@@ -34,7 +35,7 @@ fetch('licitacionesPub.php')
 
 // 🧾 Cargar instituciones desde respaldo CSV
 function cargarInstitucionesDesdeCSV() {
-  Papa.parse('/csv/instituciones.csv', {
+  Papa.parse('data/csv/instituciones.csv', {
     download: true,
     header: true,
     delimiter: ';',
@@ -122,6 +123,7 @@ function mostrarDatos(datosFiltrados) {
 
 function filtrarDatos(resetPagina = true) {
   textoFiltro = document.getElementById('filtroTexto').value.toLowerCase();
+  excluirBajoValor = document.getElementById('excluirBajoValor')?.checked || false;
   if (resetPagina) paginaActual = 1;
 
   const datosFiltrados = datos.filter(item =>
@@ -129,7 +131,8 @@ function filtrarDatos(resetPagina = true) {
      item.institucion_nombre.toLowerCase().includes(textoFiltro) || 
      item.nombre.toLowerCase().includes(textoFiltro) || 
      item.descripcion.toLowerCase().includes(textoFiltro)) &&
-    (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre))
+    (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre)) &&
+    (!excluirBajoValor || (item.tipo !== 'L1' && item.tipo !== 'E2'))
   );
 
   mostrarDatos(datosFiltrados);
@@ -186,6 +189,79 @@ function limpiarFiltros() {
   document.getElementById('filtroTexto').value = '';
   textoFiltro = '';
   institucionesSeleccionadas = [];
+  const checkbox = document.getElementById('excluirBajoValor');
+  if (checkbox) checkbox.checked = false;
   renderizarCheckboxes();
   filtrarDatos();
+}
+
+function escaparCsv(valor) {
+  const texto = (valor ?? '').toString().replace(/\r?\n/g, ' ');
+  if (/[";\n]/.test(texto)) {
+    return `"${texto.replace(/"/g, '""')}"`;
+  }
+  return texto;
+}
+
+function formatearMontoCsv(item) {
+  if (item.monto_estimado && !isNaN(item.monto_estimado)) {
+    const monto = parseFloat(item.monto_estimado);
+    if (item.unidad_monetaria && item.unidad_monetaria !== 'CLP') {
+      return `${monto} ${item.unidad_monetaria}`;
+    }
+    return monto.toString();
+  }
+  return item.monto_estimado || '';
+}
+
+function descargarLicitaciones() {
+  const filtro = document.getElementById('filtroTexto').value.toLowerCase();
+  const excluirBajoValorDescarga = document.getElementById('excluirBajoValor')?.checked || false;
+
+  const datosFiltrados = datos.filter(item =>
+    (item.codigo.toLowerCase().includes(filtro) ||
+     item.institucion_nombre.toLowerCase().includes(filtro) ||
+     item.nombre.toLowerCase().includes(filtro) ||
+     item.descripcion.toLowerCase().includes(filtro)) &&
+    (institucionesSeleccionadas.length === 0 || institucionesSeleccionadas.includes(item.institucion_nombre)) &&
+    (!excluirBajoValorDescarga || (item.tipo !== 'L1' && item.tipo !== 'E2'))
+  );
+
+  if (datosFiltrados.length === 0) {
+    alert('No hay datos para exportar.');
+    return;
+  }
+
+  const headers = [
+    'ID',
+    'Nombre',
+    'Descripción',
+    'Institución',
+    'Monto',
+    'Fecha Publicación',
+    'Fecha Cierre',
+    'Estado',
+    'Tipo de licitación'
+  ];
+
+  const lines = datosFiltrados.map(item => {
+    return [
+      item.codigo || '',
+      item.nombre || '(Sin título)',
+      item.descripcion || '(Sin descripción)',
+      item.institucion_nombre || '',
+      formatearMontoCsv(item),
+      item.fecha_inicio || '',
+      item.fecha_final || '',
+      item.estado || '',
+      item.tipo || ''
+    ].map(escaparCsv).join(';');
+  });
+
+  const contenido = ['\uFEFF' + headers.map(escaparCsv).join(';'), ...lines].join('\n');
+  const csvBlob = new Blob([contenido], { type: 'text/csv; charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(csvBlob);
+  link.download = 'licitaciones.csv';
+  link.click();
 }

@@ -4,13 +4,20 @@ import PQueue from 'p-queue';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: path.join(dirname(fileURLToPath(import.meta.url)), '..', '.env') });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
+const ticket = process.env.TICKET_MVP1;
+if (!ticket) {
+  console.error('❌ ERROR: TICKET_MVP1 no está configurado en .env');
+  process.exit(1);
+}
 const estados = {
     publicada: path.join(__dirname, 'csv/publicadas.csv'),
     cerrada: path.join(__dirname, 'csv/cerradas.csv'),

@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Análisis de Instituciones Públicas - Portal de Licitaciones</title>
+  <title>Análisis de Proveedores - Portal de Licitaciones</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="frontend/styles.css">
   <style>
-    .organismo-dropdown-menu {
+    .proveedor-dropdown-menu {
       max-height: 220px;
       overflow-y: auto;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
       width: 100%;
     }
-    .organismo-dropdown-item {
+    .proveedor-dropdown-item {
       padding: 8px 12px;
       cursor: pointer;
     }
-    .organismo-dropdown-item:hover {
+    .proveedor-dropdown-item:hover {
       background: #f8f9fa;
     }
   </style>
@@ -47,12 +47,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="organismos.html">
+          <a class="nav-link" href="organismos.html">
             <i class="bi bi-buildings"></i> Instituciones Públicas
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="proveedores.html">
+          <a class="nav-link active" href="proveedores.html">
             <i class="bi bi-shop"></i> Proveedores
           </a>
         </li>
@@ -64,24 +64,24 @@
 <div class="container-fluid mt-4">
   <div class="row mb-4">
     <div class="col-12">
-      <h2>Análisis de organismos compradores</h2>
+      <h2>Análisis de Proveedores Adjudicados</h2>
     </div>
   </div>
 
   <div class="row g-3 mb-3">
     <div class="col-md-6">
-      <label class="form-label">Buscar organismo</label>
+      <label class="form-label">Buscar proveedor</label>
       <div class="dropdown w-100">
         <input
           type="text"
-          id="filtroOrganismo"
+          id="filtroProveedor"
           class="form-control"
-          placeholder="Escribe o selecciona un organismo"
+          placeholder="Escribe o selecciona un proveedor"
           autocomplete="off"
           aria-expanded="false"
           oninput="filtrarDatos()"
         >
-        <div id="organismosSugerencias" class="dropdown-menu organismo-dropdown-menu"></div>
+        <div id="proveedoresSugerencias" class="dropdown-menu proveedor-dropdown-menu"></div>
       </div>
     </div>
   </div>
@@ -90,10 +90,6 @@
     <div class="col-md-2">
       <label class="form-label">Año</label>
       <select id="filtroAnio" class="form-select" onchange="filtrarDatos()"></select>
-    </div>
-    <div class="col-md-3">
-      <label class="form-label">Estado</label>
-      <select id="filtroEstado" class="form-select" onchange="filtrarDatos()"></select>
     </div>
     <div class="col-md-3">
       <label class="form-label">Tipo de licitación</label>
@@ -134,7 +130,7 @@
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">📊 Licitaciones por mes</h5>
+          <h5 class="mb-0">📊 Licitaciones adjudicadas por mes</h5>
         </div>
         <div class="card-body">
           <canvas id="graficoLicitacionesPorMes"></canvas>
@@ -153,23 +149,23 @@
     </div>
   </div>
 
-  <!-- Top 10 Proveedores y Categorías -->
-  <div class="row mt-5 mb-4" id="filaProveedoresCategories" style="display: none;">
+  <!-- Organismos y Categorías -->
+  <div class="row mt-5 mb-4" id="filaOrganismosCategories" style="display: none;">
     <div class="col-md-6 mb-4">
       <div class="card h-100">
         <div class="card-header bg-warning text-dark">
-          <h5 class="mb-0">🏆 Top 20 Proveedores Adjudicados (2024 - Ene 2026)</h5>
+          <h5 class="mb-0">🏢 Top 15 Organismos Compradores</h5>
         </div>
         <div class="card-body" style="max-height: 500px; overflow-y: auto;">
-          <table class="table table-sm table-striped" id="tablaProveedores">
+          <table class="table table-sm table-striped" id="tablaOrganismos">
             <thead class="table-light">
               <tr>
-                <th>Proveedor</th>
+                <th>Organismo</th>
                 <th class="text-end">Licitaciones</th>
                 <th class="text-end">Monto (CLP)</th>
               </tr>
             </thead>
-            <tbody id="cuerpoTablaProveedores"></tbody>
+            <tbody id="cuerpoTablaOrganismos"></tbody>
           </table>
         </div>
       </div>
@@ -177,7 +173,7 @@
     <div class="col-md-6 mb-4">
       <div class="card h-100">
         <div class="card-header bg-info text-white">
-          <h5 class="mb-0">📈 Categorías de Licitaciones Adjudicadas (2024 - Ene 2026)</h5>
+          <h5 class="mb-0">📈 Categorías de Licitaciones Adjudicadas</h5>
         </div>
         <div class="card-body" style="max-height: 500px; display: flex; align-items: center; justify-content: center;">
           <canvas id="graficoCategorias" style="max-height: 400px;"></canvas>
@@ -194,7 +190,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-<script type="text/javascript" src="frontend/organismos.js"></script>
+<script type="text/javascript" src="frontend/proveedores.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // Marcar el enlace activo en el menú

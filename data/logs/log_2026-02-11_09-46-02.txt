@@ -1,0 +1,1519 @@
+[11-02-2026, 9:46:03 a. m.] [INFO] 📋 Verificando 1188 códigos en BD...
+[11-02-2026, 9:46:17 a. m.] [SUCCESS] ✅ 118 códigos ya en BD
+[11-02-2026, 9:46:17 a. m.] [INFO] 📝 1070 códigos únicos a reintentar
+[11-02-2026, 9:46:17 a. m.] [INFO] 📂 1070 códigos fallidos cargados
+[11-02-2026, 9:46:17 a. m.] [INFO] 📅 Fechas: 2023-10-20 hasta 2023-10-30
+[11-02-2026, 9:46:17 a. m.] [INFO] 📊 Total: 11 fechas
+[11-02-2026, 9:46:17 a. m.] [INFO] 📆 Primera: 20102023 | Última: 30102023
+[11-02-2026, 9:46:19 a. m.] [INFO] 📄 adjudicada - 20102023: Total=514, Nuevas=304, Vacíos=0
+[11-02-2026, 9:46:25 a. m.] [SUCCESS] 🟢 Recuperado 1434-43-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:25 a. m.] [SUCCESS] 🟢 Recuperado 3494-156-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:27 a. m.] [SUCCESS] 🟢 Recuperado 1057513-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:27 a. m.] [INFO] 📊 adjudicada - 20102023: 3/304 guardadas
+[11-02-2026, 9:46:29 a. m.] [SUCCESS] 🟢 Recuperado 1173933-15-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:30 a. m.] [INFO] 📊 adjudicada - 20102023: 4/304 guardadas
+[11-02-2026, 9:46:31 a. m.] [SUCCESS] 🟢 Recuperado 2422-458-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:36 a. m.] [INFO] 📊 adjudicada - 20102023: 5/304 guardadas
+[11-02-2026, 9:46:38 a. m.] [SUCCESS] 🟢 Recuperado 802021-1-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:42 a. m.] [INFO] 📊 adjudicada - 20102023: 6/304 guardadas
+[11-02-2026, 9:46:43 a. m.] [SUCCESS] 🟢 Recuperado 1058085-193-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:43 a. m.] [INFO] 📊 adjudicada - 20102023: 7/304 guardadas
+[11-02-2026, 9:46:45 a. m.] [SUCCESS] 🟢 Recuperado 1092-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:47 a. m.] [SUCCESS] 🟢 Recuperado 3447-154-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:47 a. m.] [SUCCESS] 🟢 Recuperado 2258-171-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:46:49 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:46:55 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:00 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:06 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:12 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:18 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:23 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:29 a. m.] [INFO] 📊 adjudicada - 20102023: 10/304 guardadas
+[11-02-2026, 9:47:38 a. m.] [SUCCESS] 🟢 Recuperado 5520-39-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:47:39 a. m.] [SUCCESS] 🟢 Recuperado 1905-10-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:47:43 a. m.] [SUCCESS] 🟢 Recuperado 1171142-53-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:47:46 a. m.] [SUCCESS] 🟢 Recuperado 5615-63-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:47:59 a. m.] [SUCCESS] 🟢 Recuperado 1173430-10-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:47:59 a. m.] [INFO] 📊 adjudicada - 20102023: 15/304 guardadas
+[11-02-2026, 9:48:26 a. m.] [SUCCESS] 🟢 Recuperado 3606-23-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:26 a. m.] [INFO] 📊 adjudicada - 20102023: 16/304 guardadas
+[11-02-2026, 9:48:28 a. m.] [SUCCESS] 🟢 Recuperado 2288-23-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:36 a. m.] [SUCCESS] 🟢 Recuperado 699360-10-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:40 a. m.] [SUCCESS] 🟢 Recuperado 4910-1-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:43 a. m.] [SUCCESS] 🟢 Recuperado 1211839-108-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:44 a. m.] [SUCCESS] 🟢 Recuperado 2763-112-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:46 a. m.] [SUCCESS] 🟢 Recuperado 2667-83-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:48 a. m.] [SUCCESS] 🟢 Recuperado 318-4-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:54 a. m.] [SUCCESS] 🟢 Recuperado 5586-480-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:55 a. m.] [SUCCESS] 🟢 Recuperado 3594-42-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:48:56 a. m.] [SUCCESS] 🟢 Recuperado 2294-330-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:38 a. m.] [SUCCESS] 🟢 Recuperado 741-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:40 a. m.] [SUCCESS] 🟢 Recuperado 1149-11-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:42 a. m.] [SUCCESS] 🟢 Recuperado 3614-45-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:44 a. m.] [SUCCESS] 🟢 Recuperado 2859-104-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:46 a. m.] [SUCCESS] 🟢 Recuperado 1208066-102-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:49 a. m.] [SUCCESS] 🟢 Recuperado 2428-127-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:49:55 a. m.] [SUCCESS] 🟢 Recuperado 2354-35-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:01 a. m.] [SUCCESS] 🟢 Recuperado 1380-199-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:40 a. m.] [SUCCESS] 🟢 Recuperado 3615-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:43 a. m.] [SUCCESS] 🟢 Recuperado 4127-75-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:44 a. m.] [SUCCESS] 🟢 Recuperado 4352-18-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:46 a. m.] [SUCCESS] 🟢 Recuperado 1462-27-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:49 a. m.] [SUCCESS] 🟢 Recuperado 1380-212-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:51 a. m.] [SUCCESS] 🟢 Recuperado 4511-24-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:52 a. m.] [SUCCESS] 🟢 Recuperado 2710-164-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:50:53 a. m.] [SUCCESS] 🟢 Recuperado 1398-67-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:36 a. m.] [SUCCESS] 🟢 Recuperado 1398-79-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:36 a. m.] [SUCCESS] 🟢 Recuperado 2436-298-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:38 a. m.] [SUCCESS] 🟢 Recuperado 3656-183-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:41 a. m.] [SUCCESS] 🟢 Recuperado 1005498-21-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:43 a. m.] [SUCCESS] 🟢 Recuperado 2377-386-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:46 a. m.] [SUCCESS] 🟢 Recuperado 642028-125-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:47 a. m.] [SUCCESS] 🟢 Recuperado 1057402-192-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:50 a. m.] [SUCCESS] 🟢 Recuperado 3710-252-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:51:51 a. m.] [SUCCESS] 🟢 Recuperado 3877-106-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:39 a. m.] [SUCCESS] 🟢 Recuperado 3995-93-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:42 a. m.] [SUCCESS] 🟢 Recuperado 3729-84-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:42 a. m.] [SUCCESS] 🟢 Recuperado 1523-62-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:44 a. m.] [SUCCESS] 🟢 Recuperado 634-124-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:46 a. m.] [SUCCESS] 🟢 Recuperado 3917-39-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:48 a. m.] [SUCCESS] 🟢 Recuperado 3945-66-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:50 a. m.] [SUCCESS] 🟢 Recuperado 439-79-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:52 a. m.] [SUCCESS] 🟢 Recuperado 3231-160-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:52:56 a. m.] [SUCCESS] 🟢 Recuperado 956-178-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:38 a. m.] [SUCCESS] 🟢 Recuperado 1058085-104-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:39 a. m.] [SUCCESS] 🟢 Recuperado 3146-7-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:44 a. m.] [SUCCESS] 🟢 Recuperado 3994-50-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:45 a. m.] [SUCCESS] 🟢 Recuperado 3000-109-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:47 a. m.] [SUCCESS] 🟢 Recuperado 1057544-325-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:48 a. m.] [SUCCESS] 🟢 Recuperado 2704-142-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:52 a. m.] [SUCCESS] 🟢 Recuperado 4768-42-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:53:55 a. m.] [SUCCESS] 🟢 Recuperado 2258-184-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:03 a. m.] [SUCCESS] 🟢 Recuperado 5740-22-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:38 a. m.] [SUCCESS] 🟢 Recuperado 3705-64-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:40 a. m.] [SUCCESS] 🟢 Recuperado 739-12-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:41 a. m.] [SUCCESS] 🟢 Recuperado 2885-55-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:43 a. m.] [SUCCESS] 🟢 Recuperado 1588-28-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:45 a. m.] [SUCCESS] 🟢 Recuperado 3917-38-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:47 a. m.] [SUCCESS] 🟢 Recuperado 2910-34-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:50 a. m.] [SUCCESS] 🟢 Recuperado 4190-124-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:54:53 a. m.] [SUCCESS] 🟢 Recuperado 2686-129-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:02 a. m.] [SUCCESS] 🟢 Recuperado 2825-92-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:02 a. m.] [SUCCESS] ✅ adjudicada - 20102023: 78/304 (226 faltantes)
+[11-02-2026, 9:55:04 a. m.] [INFO] 📄 adjudicada - 21102023: Total=18, Nuevas=9, Vacíos=0
+[11-02-2026, 9:55:08 a. m.] [SUCCESS] 🟢 Recuperado 1067526-10-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:11 a. m.] [SUCCESS] 🟢 Recuperado 2565-16-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:11 a. m.] [INFO] 📊 adjudicada - 21102023: 2/9 guardadas
+[11-02-2026, 9:55:14 a. m.] [SUCCESS] 🟢 Recuperado 4493-56-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:19 a. m.] [SUCCESS] 🟢 Recuperado 2284-277-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:26 a. m.] [SUCCESS] 🟢 Recuperado 4707-49-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:33 a. m.] [SUCCESS] 🟢 Recuperado 2555-13-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:40 a. m.] [SUCCESS] 🟢 Recuperado 3516-153-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:40 a. m.] [SUCCESS] ✅ adjudicada - 21102023: 7/9 (2 faltantes)
+[11-02-2026, 9:55:42 a. m.] [INFO] 📄 adjudicada - 22102023: Total=3, Nuevas=0, Vacíos=0
+[11-02-2026, 9:55:42 a. m.] [INFO] 🔇 adjudicada - 22102023: Sin nuevas licitaciones
+[11-02-2026, 9:55:45 a. m.] [INFO] 📄 adjudicada - 23102023: Total=515, Nuevas=365, Vacíos=0
+[11-02-2026, 9:55:48 a. m.] [SUCCESS] 🟢 Recuperado 2263-46-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:50 a. m.] [INFO] 📊 adjudicada - 23102023: 1/365 guardadas
+[11-02-2026, 9:55:52 a. m.] [SUCCESS] 🟢 Recuperado 1349-5-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:53 a. m.] [SUCCESS] 🟢 Recuperado 1407-61-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:54 a. m.] [SUCCESS] 🟢 Recuperado 3595-78-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:55:55 a. m.] [INFO] 📊 adjudicada - 23102023: 4/365 guardadas
+[11-02-2026, 9:55:56 a. m.] [SUCCESS] 🟢 Recuperado 1943-36-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:56:01 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:07 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:12 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:18 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:24 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:29 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:35 a. m.] [INFO] 📊 adjudicada - 23102023: 5/365 guardadas
+[11-02-2026, 9:56:36 a. m.] [SUCCESS] 🟢 Recuperado 4031-33-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:56:39 a. m.] [SUCCESS] 🟢 Recuperado 4308-28-E223 (Adjudicada) y guardado en BD
+[11-02-2026, 9:56:40 a. m.] [INFO] 📊 adjudicada - 23102023: 7/365 guardadas
+[11-02-2026, 9:56:40 a. m.] [SUCCESS] 🟢 Recuperado 1337-28-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:56:42 a. m.] [SUCCESS] 🟢 Recuperado 748891-8-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:56:45 a. m.] [SUCCESS] 🟢 Recuperado 662900-55-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:56:45 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:56:51 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:56:57 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:02 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:08 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:13 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:19 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:25 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:29 a. m.] [INFO] 📊 adjudicada - 23102023: 10/365 guardadas
+[11-02-2026, 9:57:38 a. m.] [SUCCESS] 🟢 Recuperado 1465-3-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:57:43 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 9:57:43 a. m.] [ERROR] ❌ Error en 2263-25-LP23: read ECONNRESET
+[11-02-2026, 9:57:46 a. m.] [SUCCESS] 🟢 Recuperado 2306-138-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:57:50 a. m.] [SUCCESS] 🟢 Recuperado 4492-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:57:50 a. m.] [SUCCESS] 🟢 Recuperado 2173-35-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:57:51 a. m.] [SUCCESS] 🟢 Recuperado 2280-214-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:57:56 a. m.] [SUCCESS] 🟢 Recuperado 3926-60-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:57:58 a. m.] [SUCCESS] 🟢 Recuperado 1079516-104-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:39 a. m.] [SUCCESS] 🟢 Recuperado 2098-203-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:41 a. m.] [SUCCESS] 🟢 Recuperado 2111-204-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:42 a. m.] [SUCCESS] 🟢 Recuperado 792907-2-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:47 a. m.] [SUCCESS] 🟢 Recuperado 5053-157-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:48 a. m.] [SUCCESS] 🟢 Recuperado 1240098-10-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:53 a. m.] [SUCCESS] 🟢 Recuperado 853-35-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:55 a. m.] [SUCCESS] 🟢 Recuperado 1057439-26-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:56 a. m.] [SUCCESS] 🟢 Recuperado 548861-10-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:58:59 a. m.] [SUCCESS] 🟢 Recuperado 813-67-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:37 a. m.] [SUCCESS] 🟢 Recuperado 4031-32-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:39 a. m.] [SUCCESS] 🟢 Recuperado 1172445-48-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:43 a. m.] [SUCCESS] 🟢 Recuperado 4063-39-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:44 a. m.] [SUCCESS] 🟢 Recuperado 993-96-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:47 a. m.] [SUCCESS] 🟢 Recuperado 4192-74-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:49 a. m.] [SUCCESS] 🟢 Recuperado 757-101-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:51 a. m.] [SUCCESS] 🟢 Recuperado 956-165-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:53 a. m.] [SUCCESS] 🟢 Recuperado 2885-86-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 9:59:59 a. m.] [SUCCESS] 🟢 Recuperado 2324-357-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:42 a. m.] [SUCCESS] 🟢 Recuperado 3436-141-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:42 a. m.] [SUCCESS] 🟢 Recuperado 3540-160-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:46 a. m.] [SUCCESS] 🟢 Recuperado 2467-228-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:47 a. m.] [SUCCESS] 🟢 Recuperado 2387-146-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:51 a. m.] [SUCCESS] 🟢 Recuperado 5110-33-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:57 a. m.] [SUCCESS] 🟢 Recuperado 2080-232-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:00:59 a. m.] [SUCCESS] 🟢 Recuperado 2686-102-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:01 a. m.] [SUCCESS] 🟢 Recuperado 608-167-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:40 a. m.] [SUCCESS] 🟢 Recuperado 1340-39-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:42 a. m.] [SUCCESS] 🟢 Recuperado 4372-57-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:45 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:01:45 a. m.] [ERROR] ❌ Error en 3138-34-L123: read ECONNRESET
+[11-02-2026, 10:01:46 a. m.] [SUCCESS] 🟢 Recuperado 3946-76-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:46 a. m.] [SUCCESS] 🟢 Recuperado 2294-320-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:49 a. m.] [SUCCESS] 🟢 Recuperado 2311-169-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:51 a. m.] [SUCCESS] 🟢 Recuperado 29-70-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:53 a. m.] [SUCCESS] 🟢 Recuperado 2273-177-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:01:54 a. m.] [SUCCESS] 🟢 Recuperado 4776-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:36 a. m.] [SUCCESS] 🟢 Recuperado 3151-51-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:39 a. m.] [SUCCESS] 🟢 Recuperado 3935-58-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:41 a. m.] [SUCCESS] 🟢 Recuperado 1048-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:43 a. m.] [SUCCESS] 🟢 Recuperado 2132-53-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:45 a. m.] [SUCCESS] 🟢 Recuperado 1057547-457-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:47 a. m.] [SUCCESS] 🟢 Recuperado 621-591-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:49 a. m.] [SUCCESS] 🟢 Recuperado 621-525-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:02:53 a. m.] [SUCCESS] 🟢 Recuperado 1641-185-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:40 a. m.] [SUCCESS] 🟢 Recuperado 3134-111-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:40 a. m.] [SUCCESS] 🟢 Recuperado 1079445-66-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:43 a. m.] [SUCCESS] 🟢 Recuperado 2080-236-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:44 a. m.] [SUCCESS] 🟢 Recuperado 3603-111-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:46 a. m.] [SUCCESS] 🟢 Recuperado 2387-159-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:48 a. m.] [SUCCESS] 🟢 Recuperado 2401-173-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:50 a. m.] [SUCCESS] 🟢 Recuperado 1126922-54-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:51 a. m.] [SUCCESS] 🟢 Recuperado 324-139-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:53 a. m.] [SUCCESS] 🟢 Recuperado 1746-78-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:03:55 a. m.] [SUCCESS] 🟢 Recuperado 3710-224-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:36 a. m.] [SUCCESS] 🟢 Recuperado 1171142-90-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:38 a. m.] [SUCCESS] 🟢 Recuperado 2157-145-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:41 a. m.] [SUCCESS] 🟢 Recuperado 4497-24-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:47 a. m.] [SUCCESS] 🟢 Recuperado 1242121-27-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:48 a. m.] [SUCCESS] 🟢 Recuperado 1171142-89-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:49 a. m.] [SUCCESS] 🟢 Recuperado 3568-86-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:52 a. m.] [SUCCESS] 🟢 Recuperado 2080-267-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:53 a. m.] [SUCCESS] 🟢 Recuperado 1002588-113-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:55 a. m.] [SUCCESS] 🟢 Recuperado 1080093-15-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:04:59 a. m.] [SUCCESS] 🟢 Recuperado 3349-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:05:21 a. m.] [SUCCESS] ✅ adjudicada - 23102023: 81/365 (284 faltantes)
+[11-02-2026, 10:05:23 a. m.] [ERROR] ❌ Respuesta inválida adjudicada - 24102023 (intento 1)
+[11-02-2026, 10:05:24 a. m.] [ERROR] ❌ Respuesta inválida adjudicada - 24102023 (intento 2)
+[11-02-2026, 10:05:26 a. m.] [ERROR] ❌ Respuesta inválida adjudicada - 24102023 (intento 3)
+[11-02-2026, 10:05:29 a. m.] [ERROR] ❌ Respuesta inválida adjudicada - 24102023 (intento 4)
+[11-02-2026, 10:05:33 a. m.] [ERROR] ❌ Respuesta inválida adjudicada - 24102023 (intento 5)
+[11-02-2026, 10:05:38 a. m.] [ERROR] ❌ adjudicada - 24102023 falló tras 5 intentos
+[11-02-2026, 10:05:38 a. m.] [WARNING] ⚠️ Error adjudicada - 24102023: Falló adjudicada - 24102023
+[11-02-2026, 10:05:41 a. m.] [INFO] 📄 adjudicada - 25102023: Total=536, Nuevas=0, Vacíos=0
+[11-02-2026, 10:05:41 a. m.] [INFO] 🔇 adjudicada - 25102023: Sin nuevas licitaciones
+[11-02-2026, 10:05:44 a. m.] [INFO] 📄 adjudicada - 26102023: Total=626, Nuevas=0, Vacíos=0
+[11-02-2026, 10:05:44 a. m.] [INFO] 🔇 adjudicada - 26102023: Sin nuevas licitaciones
+[11-02-2026, 10:05:47 a. m.] [INFO] 📄 adjudicada - 27102023: Total=10, Nuevas=0, Vacíos=0
+[11-02-2026, 10:05:47 a. m.] [INFO] 🔇 adjudicada - 27102023: Sin nuevas licitaciones
+[11-02-2026, 10:05:49 a. m.] [INFO] 📄 adjudicada - 28102023: Total=5, Nuevas=0, Vacíos=0
+[11-02-2026, 10:05:49 a. m.] [INFO] 🔇 adjudicada - 28102023: Sin nuevas licitaciones
+[11-02-2026, 10:05:51 a. m.] [INFO] 📄 adjudicada - 29102023: Total=0, Nuevas=0, Vacíos=0
+[11-02-2026, 10:05:51 a. m.] [INFO] 🔇 adjudicada - 29102023: Sin nuevas licitaciones
+[11-02-2026, 10:05:54 a. m.] [INFO] 📄 adjudicada - 30102023: Total=491, Nuevas=0, Vacíos=0
+[11-02-2026, 10:05:54 a. m.] [INFO] 🔇 adjudicada - 30102023: Sin nuevas licitaciones
+[11-02-2026, 10:05:55 a. m.] [INFO] 🏁 adjudicada: 11 fechas, 166 licitaciones
+[11-02-2026, 10:05:55 a. m.] [INFO] 🧹 Limpiando códigos recuperados...
+[11-02-2026, 10:05:55 a. m.] [INFO] 🔍 Verificando 1075 códigos...
+[11-02-2026, 10:06:08 a. m.] [SUCCESS] ✅ 162 códigos guardados en BD
+[11-02-2026, 10:06:08 a. m.] [INFO] 📝 Archivo actualizado: 913 códigos pendientes
+[11-02-2026, 10:06:08 a. m.] [WARNING] ⚠️ Ciclo 1: 1 fechas fallidas
+[11-02-2026, 10:06:08 a. m.] [INFO] 🔄 Reintentando 1 fechas fallidas...
+[11-02-2026, 10:06:10 a. m.] [INFO] 📄 adjudicada - 24102023: Total=535, Nuevas=402, Vacíos=0
+[11-02-2026, 10:06:13 a. m.] [SUCCESS] 🟢 Recuperado 5877-28-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:16 a. m.] [INFO] 📊 adjudicada - 24102023: 1/402 guardadas
+[11-02-2026, 10:06:16 a. m.] [SUCCESS] 🟢 Recuperado 1080157-12-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:19 a. m.] [SUCCESS] 🟢 Recuperado 1493-110-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:21 a. m.] [SUCCESS] 🟢 Recuperado 621-573-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:21 a. m.] [INFO] 📊 adjudicada - 24102023: 4/402 guardadas
+[11-02-2026, 10:06:27 a. m.] [INFO] 📊 adjudicada - 24102023: 4/402 guardadas
+[11-02-2026, 10:06:32 a. m.] [INFO] 📊 adjudicada - 24102023: 4/402 guardadas
+[11-02-2026, 10:06:36 a. m.] [SUCCESS] 🟢 Recuperado 1110404-201-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:38 a. m.] [INFO] 📊 adjudicada - 24102023: 5/402 guardadas
+[11-02-2026, 10:06:38 a. m.] [SUCCESS] 🟢 Recuperado 1079486-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:40 a. m.] [SUCCESS] 🟢 Recuperado 812261-71-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:43 a. m.] [SUCCESS] 🟢 Recuperado 2673-39-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:43 a. m.] [INFO] 📊 adjudicada - 24102023: 8/402 guardadas
+[11-02-2026, 10:06:45 a. m.] [SUCCESS] 🟢 Recuperado 1057439-66-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:47 a. m.] [SUCCESS] 🟢 Recuperado 1057547-430-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:06:48 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:06:54 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:00 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:05 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:11 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:17 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:23 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:28 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:34 a. m.] [INFO] 📊 adjudicada - 24102023: 10/402 guardadas
+[11-02-2026, 10:07:36 a. m.] [SUCCESS] 🟢 Recuperado 3935-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:07:39 a. m.] [SUCCESS] 🟢 Recuperado 1658-749-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:07:39 a. m.] [INFO] 📊 adjudicada - 24102023: 12/402 guardadas
+[11-02-2026, 10:07:43 a. m.] [SUCCESS] 🟢 Recuperado 3319-10-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:07:43 a. m.] [SUCCESS] 🟢 Recuperado 2705-127-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:07:44 a. m.] [INFO] 📊 adjudicada - 24102023: 14/402 guardadas
+[11-02-2026, 10:07:45 a. m.] [SUCCESS] 🟢 Recuperado 1658-741-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:07:47 a. m.] [SUCCESS] 🟢 Recuperado 4401-109-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:07:50 a. m.] [INFO] 📊 adjudicada - 24102023: 16/402 guardadas
+[11-02-2026, 10:07:55 a. m.] [INFO] 📊 adjudicada - 24102023: 16/402 guardadas
+[11-02-2026, 10:08:01 a. m.] [INFO] 📊 adjudicada - 24102023: 16/402 guardadas
+[11-02-2026, 10:08:01 a. m.] [INFO] 📊 adjudicada - 24102023: 16/402 guardadas
+[11-02-2026, 10:08:39 a. m.] [SUCCESS] 🟢 Recuperado 1214071-2-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:42 a. m.] [SUCCESS] 🟢 Recuperado 1657-38-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:44 a. m.] [SUCCESS] 🟢 Recuperado 885-58-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:47 a. m.] [SUCCESS] 🟢 Recuperado 3516-162-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:50 a. m.] [SUCCESS] 🟢 Recuperado 2107-158-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:53 a. m.] [SUCCESS] 🟢 Recuperado 3561-100-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:55 a. m.] [SUCCESS] 🟢 Recuperado 2107-153-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:08:58 a. m.] [SUCCESS] 🟢 Recuperado 2484-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:36 a. m.] [SUCCESS] 🟢 Recuperado 622-99-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:39 a. m.] [SUCCESS] 🟢 Recuperado 94-10-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:40 a. m.] [SUCCESS] 🟢 Recuperado 5394-113-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:42 a. m.] [SUCCESS] 🟢 Recuperado 3191-85-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:45 a. m.] [SUCCESS] 🟢 Recuperado 1075963-510-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:47 a. m.] [SUCCESS] 🟢 Recuperado 539119-52-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:49 a. m.] [SUCCESS] 🟢 Recuperado 1057962-20-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:51 a. m.] [SUCCESS] 🟢 Recuperado 1221019-13-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:09:54 a. m.] [SUCCESS] 🟢 Recuperado 1641-184-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:13 a. m.] [SUCCESS] 🟢 Recuperado 2366-117-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:36 a. m.] [SUCCESS] 🟢 Recuperado 4378-20-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:40 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:10:40 a. m.] [ERROR] ❌ Error en 1239966-9-L123: read ECONNRESET
+[11-02-2026, 10:10:42 a. m.] [SUCCESS] 🟢 Recuperado 1950-63-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:43 a. m.] [SUCCESS] 🟢 Recuperado 3220-65-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:45 a. m.] [SUCCESS] 🟢 Recuperado 2392-57-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:48 a. m.] [SUCCESS] 🟢 Recuperado 2736-123-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:49 a. m.] [SUCCESS] 🟢 Recuperado 3799-60-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:52 a. m.] [SUCCESS] 🟢 Recuperado 817-39-B223 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:55 a. m.] [SUCCESS] 🟢 Recuperado 2483-294-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:10:58 a. m.] [SUCCESS] 🟢 Recuperado 1469-404-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:36 a. m.] [SUCCESS] 🟢 Recuperado 3288-14-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:39 a. m.] [SUCCESS] 🟢 Recuperado 4308-32-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:40 a. m.] [SUCCESS] 🟢 Recuperado 607-180-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:43 a. m.] [SUCCESS] 🟢 Recuperado 688535-3-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:46 a. m.] [SUCCESS] 🟢 Recuperado 1180919-6-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:46 a. m.] [SUCCESS] 🟢 Recuperado 1075963-534-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:50 a. m.] [SUCCESS] 🟢 Recuperado 3656-140-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:52 a. m.] [SUCCESS] 🟢 Recuperado 3000-113-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:52 a. m.] [SUCCESS] 🟢 Recuperado 2409-701-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:11:56 a. m.] [SUCCESS] 🟢 Recuperado 1057049-217-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:36 a. m.] [SUCCESS] 🟢 Recuperado 2361-175-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:38 a. m.] [SUCCESS] 🟢 Recuperado 4179-103-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:40 a. m.] [SUCCESS] 🟢 Recuperado 1741-111-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:42 a. m.] [SUCCESS] 🟢 Recuperado 1057448-65-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:45 a. m.] [SUCCESS] 🟢 Recuperado 675836-6-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:48 a. m.] [SUCCESS] 🟢 Recuperado 5053-139-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:49 a. m.] [SUCCESS] 🟢 Recuperado 3730-140-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:51 a. m.] [SUCCESS] 🟢 Recuperado 867990-110-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:12:53 a. m.] [SUCCESS] 🟢 Recuperado 2408-419-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:36 a. m.] [SUCCESS] 🟢 Recuperado 2389-32-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:42 a. m.] [SUCCESS] 🟢 Recuperado 1621-22-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:43 a. m.] [SUCCESS] 🟢 Recuperado 2724-151-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:45 a. m.] [SUCCESS] 🟢 Recuperado 886954-266-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:47 a. m.] [SUCCESS] 🟢 Recuperado 3608-66-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:48 a. m.] [SUCCESS] 🟢 Recuperado 886954-135-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:49 a. m.] [SUCCESS] 🟢 Recuperado 1671-50-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:51 a. m.] [SUCCESS] 🟢 Recuperado 1384-58-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:13:55 a. m.] [SUCCESS] 🟢 Recuperado 1058133-5-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:36 a. m.] [SUCCESS] 🟢 Recuperado 2422-485-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:38 a. m.] [SUCCESS] 🟢 Recuperado 1083862-1-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:40 a. m.] [SUCCESS] 🟢 Recuperado 5416-61-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:43 a. m.] [SUCCESS] 🟢 Recuperado 2436-327-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:44 a. m.] [SUCCESS] 🟢 Recuperado 5472-15-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:47 a. m.] [SUCCESS] 🟢 Recuperado 4168-108-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:48 a. m.] [SUCCESS] 🟢 Recuperado 607-155-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:51 a. m.] [SUCCESS] 🟢 Recuperado 3506-80-CO23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:14:53 a. m.] [SUCCESS] 🟢 Recuperado 2294-315-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:36 a. m.] [SUCCESS] 🟢 Recuperado 886954-265-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:39 a. m.] [SUCCESS] 🟢 Recuperado 1970-7-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:41 a. m.] [SUCCESS] 🟢 Recuperado 2627-26-CO23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:42 a. m.] [SUCCESS] 🟢 Recuperado 1658-740-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:44 a. m.] [SUCCESS] 🟢 Recuperado 4072-20-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:47 a. m.] [SUCCESS] 🟢 Recuperado 1058134-99-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:49 a. m.] [SUCCESS] 🟢 Recuperado 1493-89-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:51 a. m.] [SUCCESS] 🟢 Recuperado 1091793-7-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:15:53 a. m.] [SUCCESS] 🟢 Recuperado 3567-58-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:36 a. m.] [SUCCESS] 🟢 Recuperado 1607-23-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:38 a. m.] [SUCCESS] 🟢 Recuperado 4072-19-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:38 a. m.] [SUCCESS] ✅ adjudicada - 24102023: 92/402 (310 faltantes)
+[11-02-2026, 10:16:38 a. m.] [INFO] ✅ adjudicada - 24102023: Recuperada
+[11-02-2026, 10:16:38 a. m.] [INFO] 📊 Ciclo 1: 1/1 recuperadas
+[11-02-2026, 10:16:38 a. m.] [SUCCESS] ✅ Todas las fechas recuperadas
+[11-02-2026, 10:16:38 a. m.] [INFO] 🔄 Ciclo 1: 840 códigos fallidos
+[11-02-2026, 10:16:38 a. m.] [INFO] 🔄 Reintentando 840 códigos...
+[11-02-2026, 10:16:40 a. m.] [SUCCESS] 🟢 Recuperado 5586-464-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:42 a. m.] [SUCCESS] 🟢 Recuperado 1057489-260-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:45 a. m.] [SUCCESS] 🟢 Recuperado 2583-425-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:48 a. m.] [SUCCESS] 🟢 Recuperado 1098-8-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:50 a. m.] [SUCCESS] 🟢 Recuperado 730566-37-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:53 a. m.] [SUCCESS] 🟢 Recuperado 4549-40-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:16:55 a. m.] [SUCCESS] 🟢 Recuperado 3444-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:01 a. m.] [SUCCESS] 🟢 Recuperado 3539-10-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:07 a. m.] [INFO] 🔄 Progreso: 8/20 de 840
+[11-02-2026, 10:17:36 a. m.] [SUCCESS] 🟢 Recuperado 2451-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:36 a. m.] [INFO] 🔄 Progreso: 9/40 de 840
+[11-02-2026, 10:17:38 a. m.] [SUCCESS] 🟢 Recuperado 2827-52-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:40 a. m.] [SUCCESS] 🟢 Recuperado 3477-220-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:42 a. m.] [SUCCESS] 🟢 Recuperado 1211839-74-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:45 a. m.] [SUCCESS] 🟢 Recuperado 2583-466-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:47 a. m.] [SUCCESS] 🟢 Recuperado 1171142-75-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:17:50 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:17:50 a. m.] [ERROR] ❌ Error en 1035-29-LE23: read ECONNRESET
+[11-02-2026, 10:17:50 a. m.] [SUCCESS] 🟢 Recuperado 4236-46-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:05 a. m.] [INFO] 🔄 Progreso: 16/60 de 840
+[11-02-2026, 10:18:34 a. m.] [INFO] 🔄 Progreso: 16/80 de 840
+[11-02-2026, 10:18:39 a. m.] [SUCCESS] 🟢 Recuperado 3537-78-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:40 a. m.] [SUCCESS] 🟢 Recuperado 3945-62-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:42 a. m.] [SUCCESS] 🟢 Recuperado 1002772-102-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:43 a. m.] [SUCCESS] 🟢 Recuperado 1233607-16-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:47 a. m.] [SUCCESS] 🟢 Recuperado 585-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:47 a. m.] [SUCCESS] 🟢 Recuperado 948356-140-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:50 a. m.] [SUCCESS] 🟢 Recuperado 4465-32-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:52 a. m.] [SUCCESS] 🟢 Recuperado 642028-118-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:52 a. m.] [INFO] 🔄 Progreso: 24/100 de 840
+[11-02-2026, 10:18:54 a. m.] [SUCCESS] 🟢 Recuperado 1035206-24-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:18:56 a. m.] [SUCCESS] 🟢 Recuperado 757-130-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:19 a. m.] [INFO] 🔄 Progreso: 26/120 de 840
+[11-02-2026, 10:19:36 a. m.] [SUCCESS] 🟢 Recuperado 1735-34-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:39 a. m.] [SUCCESS] 🟢 Recuperado 1641-203-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:40 a. m.] [SUCCESS] 🟢 Recuperado 4587-29-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:42 a. m.] [SUCCESS] 🟢 Recuperado 1395-85-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:42 a. m.] [INFO] 🔄 Progreso: 30/140 de 840
+[11-02-2026, 10:19:44 a. m.] [SUCCESS] 🟢 Recuperado 4491-35-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:47 a. m.] [SUCCESS] 🟢 Recuperado 2294-332-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:49 a. m.] [SUCCESS] 🟢 Recuperado 894863-41-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:51 a. m.] [SUCCESS] 🟢 Recuperado 1395-86-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:19:57 a. m.] [SUCCESS] 🟢 Recuperado 3459-62-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:03 a. m.] [SUCCESS] 🟢 Recuperado 3766-24-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:05 a. m.] [INFO] 🔄 Progreso: 36/160 de 840
+[11-02-2026, 10:20:34 a. m.] [INFO] 🔄 Progreso: 36/180 de 840
+[11-02-2026, 10:20:37 a. m.] [SUCCESS] 🟢 Recuperado 3477-215-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:39 a. m.] [SUCCESS] 🟢 Recuperado 2324-410-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:43 a. m.] [SUCCESS] 🟢 Recuperado 778989-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:45 a. m.] [SUCCESS] 🟢 Recuperado 2766-136-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:47 a. m.] [SUCCESS] 🟢 Recuperado 407-84-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:47 a. m.] [SUCCESS] 🟢 Recuperado 1058090-21-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:50 a. m.] [SUCCESS] 🟢 Recuperado 4858-98-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:52 a. m.] [SUCCESS] 🟢 Recuperado 891-4-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:54 a. m.] [SUCCESS] 🟢 Recuperado 2446-470-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:55 a. m.] [SUCCESS] 🟢 Recuperado 2416-49-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:57 a. m.] [SUCCESS] 🟢 Recuperado 2101-158-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:20:59 a. m.] [INFO] 🔄 Progreso: 47/200 de 840
+[11-02-2026, 10:21:28 a. m.] [INFO] 🔄 Progreso: 47/220 de 840
+[11-02-2026, 10:21:36 a. m.] [SUCCESS] 🟢 Recuperado 1641-250-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:38 a. m.] [SUCCESS] 🟢 Recuperado 4316-10-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:40 a. m.] [SUCCESS] 🟢 Recuperado 4086-89-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:45 a. m.] [SUCCESS] 🟢 Recuperado 418-85-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:47 a. m.] [SUCCESS] 🟢 Recuperado 743-18-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:48 a. m.] [SUCCESS] 🟢 Recuperado 2335-117-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:51 a. m.] [SUCCESS] 🟢 Recuperado 1233829-14-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:54 a. m.] [SUCCESS] 🟢 Recuperado 5350-63-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:54 a. m.] [INFO] 🔄 Progreso: 55/240 de 840
+[11-02-2026, 10:21:56 a. m.] [SUCCESS] 🟢 Recuperado 721-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:21:58 a. m.] [SUCCESS] 🟢 Recuperado 4856-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:23 a. m.] [INFO] 🔄 Progreso: 57/260 de 840
+[11-02-2026, 10:22:39 a. m.] [SUCCESS] 🟢 Recuperado 2595-116-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:40 a. m.] [SUCCESS] 🟢 Recuperado 2328-350-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:41 a. m.] [SUCCESS] 🟢 Recuperado 3436-142-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:44 a. m.] [SUCCESS] 🟢 Recuperado 1469-369-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:44 a. m.] [INFO] 🔄 Progreso: 61/280 de 840
+[11-02-2026, 10:22:45 a. m.] [SUCCESS] 🟢 Recuperado 1138297-11-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:49 a. m.] [SUCCESS] 🟢 Recuperado 514862-129-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:49 a. m.] [SUCCESS] 🟢 Recuperado 3587-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:51 a. m.] [SUCCESS] 🟢 Recuperado 759-19-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:53 a. m.] [SUCCESS] 🟢 Recuperado 699866-138-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:22:55 a. m.] [SUCCESS] 🟢 Recuperado 3508-56-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:06 a. m.] [INFO] 🔄 Progreso: 67/300 de 840
+[11-02-2026, 10:23:35 a. m.] [INFO] 🔄 Progreso: 67/320 de 840
+[11-02-2026, 10:23:36 a. m.] [SUCCESS] 🟢 Recuperado 2885-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:38 a. m.] [SUCCESS] 🟢 Recuperado 1080093-13-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:40 a. m.] [SUCCESS] 🟢 Recuperado 3710-243-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:42 a. m.] [SUCCESS] 🟢 Recuperado 411-58-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:45 a. m.] [SUCCESS] 🟢 Recuperado 2102-55-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:47 a. m.] [SUCCESS] 🟢 Recuperado 2669-282-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:49 a. m.] [SUCCESS] 🟢 Recuperado 1080095-26-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:51 a. m.] [SUCCESS] 🟢 Recuperado 5394-109-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:23:52 a. m.] [INFO] 🔄 Progreso: 75/340 de 840
+[11-02-2026, 10:23:53 a. m.] [SUCCESS] 🟢 Recuperado 561704-17-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:22 a. m.] [INFO] 🔄 Progreso: 76/360 de 840
+[11-02-2026, 10:24:37 a. m.] [SUCCESS] 🟢 Recuperado 956-226-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:39 a. m.] [SUCCESS] 🟢 Recuperado 2548-71-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:42 a. m.] [SUCCESS] 🟢 Recuperado 1057491-166-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:43 a. m.] [SUCCESS] 🟢 Recuperado 2677-11-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:45 a. m.] [SUCCESS] 🟢 Recuperado 1110404-195-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:47 a. m.] [SUCCESS] 🟢 Recuperado 3874-28-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:49 a. m.] [SUCCESS] 🟢 Recuperado 5502-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:49 a. m.] [INFO] 🔄 Progreso: 83/380 de 840
+[11-02-2026, 10:24:51 a. m.] [SUCCESS] 🟢 Recuperado 621-575-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:24:53 a. m.] [SUCCESS] 🟢 Recuperado 2713-213-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:18 a. m.] [INFO] 🔄 Progreso: 85/400 de 840
+[11-02-2026, 10:25:36 a. m.] [SUCCESS] 🟢 Recuperado 48-66-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:39 a. m.] [SUCCESS] 🟢 Recuperado 2189-59-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:41 a. m.] [SUCCESS] 🟢 Recuperado 1658-764-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:43 a. m.] [INFO] 🔄 Progreso: 88/420 de 840
+[11-02-2026, 10:25:43 a. m.] [SUCCESS] 🟢 Recuperado 2377-361-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:45 a. m.] [SUCCESS] 🟢 Recuperado 3888-68-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:47 a. m.] [SUCCESS] 🟢 Recuperado 2548-70-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:49 a. m.] [SUCCESS] 🟢 Recuperado 799512-41-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:51 a. m.] [SUCCESS] 🟢 Recuperado 2708-203-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:25:53 a. m.] [SUCCESS] 🟢 Recuperado 4939-15-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:08 a. m.] [INFO] 🔄 Progreso: 94/440 de 840
+[11-02-2026, 10:26:36 a. m.] [SUCCESS] 🟢 Recuperado 3501-7-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:37 a. m.] [INFO] 🔄 Progreso: 95/460 de 840
+[11-02-2026, 10:26:39 a. m.] [SUCCESS] 🟢 Recuperado 2296-163-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:40 a. m.] [SUCCESS] 🟢 Recuperado 1079639-120-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:43 a. m.] [SUCCESS] 🟢 Recuperado 1075963-468-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:45 a. m.] [SUCCESS] 🟢 Recuperado 2451-44-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:48 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:26:48 a. m.] [ERROR] ❌ Error en 1057491-157-LP23: read ECONNRESET
+[11-02-2026, 10:26:49 a. m.] [SUCCESS] 🟢 Recuperado 4358-41-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:26:52 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:26:52 a. m.] [ERROR] ❌ Error en 2324-397-L123: read ECONNRESET
+[11-02-2026, 10:26:54 a. m.] [SUCCESS] 🟢 Recuperado 1057503-41-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:03 a. m.] [INFO] 🔄 Progreso: 103/480 de 840
+[11-02-2026, 10:27:32 a. m.] [INFO] 🔄 Progreso: 103/500 de 840
+[11-02-2026, 10:27:37 a. m.] [SUCCESS] 🟢 Recuperado 359-67-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:39 a. m.] [SUCCESS] 🟢 Recuperado 2577-16-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:41 a. m.] [SUCCESS] 🟢 Recuperado 2759-70-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:42 a. m.] [SUCCESS] 🟢 Recuperado 655348-17-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:45 a. m.] [SUCCESS] 🟢 Recuperado 1067476-37-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:47 a. m.] [SUCCESS] 🟢 Recuperado 1213005-9-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:47 a. m.] [INFO] 🔄 Progreso: 109/520 de 840
+[11-02-2026, 10:27:50 a. m.] [SUCCESS] 🟢 Recuperado 2394-97-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:52 a. m.] [SUCCESS] 🟢 Recuperado 1393-60-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:27:53 a. m.] [SUCCESS] 🟢 Recuperado 3516-158-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:16 a. m.] [INFO] 🔄 Progreso: 112/540 de 840
+[11-02-2026, 10:28:37 a. m.] [SUCCESS] 🟢 Recuperado 1211839-115-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:39 a. m.] [SUCCESS] 🟢 Recuperado 2786-6-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:42 a. m.] [SUCCESS] 🟢 Recuperado 1211839-93-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:42 a. m.] [SUCCESS] 🟢 Recuperado 586-40-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:43 a. m.] [INFO] 🔄 Progreso: 116/560 de 840
+[11-02-2026, 10:28:47 a. m.] [SUCCESS] 🟢 Recuperado 2308-147-I223 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:51 a. m.] [SUCCESS] 🟢 Recuperado 3880-115-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:52 a. m.] [SUCCESS] 🟢 Recuperado 2366-88-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:52 a. m.] [SUCCESS] 🟢 Recuperado 1380-182-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:28:59 a. m.] [SUCCESS] 🟢 Recuperado 1079694-42-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:11 a. m.] [INFO] 🔄 Progreso: 121/580 de 840
+[11-02-2026, 10:29:36 a. m.] [SUCCESS] 🟢 Recuperado 2583-404-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:38 a. m.] [SUCCESS] 🟢 Recuperado 3296-14-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:40 a. m.] [INFO] 🔄 Progreso: 123/600 de 840
+[11-02-2026, 10:29:41 a. m.] [SUCCESS] 🟢 Recuperado 1069417-127-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:47 a. m.] [SUCCESS] 🟢 Recuperado 3206-91-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:49 a. m.] [SUCCESS] 🟢 Recuperado 3206-90-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:50 a. m.] [SUCCESS] 🟢 Recuperado 3558-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:52 a. m.] [SUCCESS] 🟢 Recuperado 2673-39-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:52 a. m.] [SUCCESS] 🟢 Recuperado 4127-94-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:29:58 a. m.] [SUCCESS] 🟢 Recuperado 1116007-39-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:00 a. m.] [SUCCESS] 🟢 Recuperado 1057439-66-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:02 a. m.] [INFO] 🔄 Progreso: 131/620 de 840
+[11-02-2026, 10:30:31 a. m.] [INFO] 🔄 Progreso: 131/640 de 840
+[11-02-2026, 10:30:41 a. m.] [SUCCESS] 🟢 Recuperado 1171142-95-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:41 a. m.] [SUCCESS] 🟢 Recuperado 438-65-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:45 a. m.] [SUCCESS] 🟢 Recuperado 1048-85-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:47 a. m.] [SUCCESS] 🟢 Recuperado 3996-68-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:48 a. m.] [SUCCESS] 🟢 Recuperado 4237-40-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:50 a. m.] [SUCCESS] 🟢 Recuperado 2831-48-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:52 a. m.] [SUCCESS] 🟢 Recuperado 517873-7-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:56 a. m.] [SUCCESS] 🟢 Recuperado 4107-5-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:58 a. m.] [SUCCESS] 🟢 Recuperado 2335-119-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:30:58 a. m.] [SUCCESS] 🟢 Recuperado 2282-100-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:00 a. m.] [INFO] 🔄 Progreso: 141/660 de 840
+[11-02-2026, 10:31:00 a. m.] [SUCCESS] 🟢 Recuperado 5215-203-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:29 a. m.] [INFO] 🔄 Progreso: 142/680 de 840
+[11-02-2026, 10:31:36 a. m.] [SUCCESS] 🟢 Recuperado 3158-13-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:39 a. m.] [SUCCESS] 🟢 Recuperado 2483-326-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:43 a. m.] [SUCCESS] 🟢 Recuperado 1035-32-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:47 a. m.] [SUCCESS] 🟢 Recuperado 2656-172-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:48 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:31:48 a. m.] [ERROR] ❌ Error en 307-3-LE23: read ECONNRESET
+[11-02-2026, 10:31:48 a. m.] [SUCCESS] 🟢 Recuperado 734-79-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:48 a. m.] [SUCCESS] 🟢 Recuperado 2366-80-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:49 a. m.] [INFO] 🔄 Progreso: 149/700 de 840
+[11-02-2026, 10:31:51 a. m.] [SUCCESS] 🟢 Recuperado 4174-45-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:53 a. m.] [SUCCESS] 🟢 Recuperado 2743-46-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:31:55 a. m.] [SUCCESS] 🟢 Recuperado 2281-281-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:17 a. m.] [INFO] 🔄 Progreso: 152/720 de 840
+[11-02-2026, 10:32:38 a. m.] [SUCCESS] 🟢 Recuperado 3499-19-CO23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:40 a. m.] [SUCCESS] 🟢 Recuperado 3935-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:41 a. m.] [SUCCESS] 🟢 Recuperado 4858-101-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:42 a. m.] [INFO] 🔄 Progreso: 155/740 de 840
+[11-02-2026, 10:32:43 a. m.] [SUCCESS] 🟢 Recuperado 2591-193-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:44 a. m.] [SUCCESS] 🟢 Recuperado 3520-26-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:48 a. m.] [SUCCESS] 🟢 Recuperado 2343-174-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:49 a. m.] [SUCCESS] 🟢 Recuperado 4168-113-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:51 a. m.] [SUCCESS] 🟢 Recuperado 4115-9-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:53 a. m.] [SUCCESS] 🟢 Recuperado 1658-749-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:54 a. m.] [SUCCESS] 🟢 Recuperado 607-169-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:32:55 a. m.] [SUCCESS] 🟢 Recuperado 3436-143-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:03 a. m.] [INFO] 🔄 Progreso: 163/760 de 840
+[11-02-2026, 10:33:33 a. m.] [INFO] 🔄 Progreso: 163/780 de 840
+[11-02-2026, 10:33:37 a. m.] [SUCCESS] 🟢 Recuperado 2452-146-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:39 a. m.] [SUCCESS] 🟢 Recuperado 3567-59-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:41 a. m.] [SUCCESS] 🟢 Recuperado 2859-106-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:43 a. m.] [SUCCESS] 🟢 Recuperado 523059-7-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:48 a. m.] [SUCCESS] 🟢 Recuperado 2663-121-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:48 a. m.] [SUCCESS] 🟢 Recuperado 1048-90-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:49 a. m.] [SUCCESS] 🟢 Recuperado 3588-72-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:51 a. m.] [SUCCESS] 🟢 Recuperado 2467-402-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:54 a. m.] [SUCCESS] 🟢 Recuperado 1393-59-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:33:54 a. m.] [INFO] 🔄 Progreso: 172/800 de 840
+[11-02-2026, 10:34:23 a. m.] [INFO] 🔄 Progreso: 172/820 de 840
+[11-02-2026, 10:34:36 a. m.] [SUCCESS] 🟢 Recuperado 2750-23-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:34:41 a. m.] [SUCCESS] 🟢 Recuperado 2859-88-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:34:43 a. m.] [SUCCESS] 🟢 Recuperado 2366-106-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:34:46 a. m.] [SUCCESS] 🟢 Recuperado 1098710-37-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:09 a. m.] [SUCCESS] 🟢 Recuperado 3017-163-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:09 a. m.] [INFO] 🔄 Progreso: 177/840 de 840
+[11-02-2026, 10:35:09 a. m.] [INFO] 📝 Archivo actualizado: 663 códigos pendientes
+[11-02-2026, 10:35:09 a. m.] [INFO] 📊 Ciclo 1: 177 recuperados
+[11-02-2026, 10:35:09 a. m.] [INFO] ⏳ 663 códigos pendientes
+[11-02-2026, 10:35:19 a. m.] [INFO] 🔄 Ciclo 2: 663 códigos fallidos
+[11-02-2026, 10:35:19 a. m.] [INFO] 🔄 Reintentando 663 códigos...
+[11-02-2026, 10:35:21 a. m.] [SUCCESS] 🟢 Recuperado 2345-348-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:23 a. m.] [SUCCESS] 🟢 Recuperado 4085-20-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:25 a. m.] [SUCCESS] 🟢 Recuperado 1719-25-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:27 a. m.] [SUCCESS] 🟢 Recuperado 2294-327-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:31 a. m.] [SUCCESS] 🟢 Recuperado 537934-106-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:33 a. m.] [SUCCESS] 🟢 Recuperado 1202333-49-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:40 a. m.] [SUCCESS] 🟢 Recuperado 1210-32-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:42 a. m.] [SUCCESS] 🟢 Recuperado 633-63-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:44 a. m.] [SUCCESS] 🟢 Recuperado 750998-103-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:46 a. m.] [SUCCESS] 🟢 Recuperado 5194-59-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:47 a. m.] [INFO] 🔄 Progreso: 10/20 de 663
+[11-02-2026, 10:35:48 a. m.] [SUCCESS] 🟢 Recuperado 2599-57-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:50 a. m.] [SUCCESS] 🟢 Recuperado 1057438-33-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:52 a. m.] [SUCCESS] 🟢 Recuperado 2287-89-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:35:54 a. m.] [SUCCESS] 🟢 Recuperado 966131-68-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:16 a. m.] [INFO] 🔄 Progreso: 14/40 de 663
+[11-02-2026, 10:36:37 a. m.] [SUCCESS] 🟢 Recuperado 2215-43-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:39 a. m.] [SUCCESS] 🟢 Recuperado 930-36-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:41 a. m.] [SUCCESS] 🟢 Recuperado 620304-11-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:44 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:36:44 a. m.] [ERROR] ❌ Error en 1555-23-LQ23: read ECONNRESET
+[11-02-2026, 10:36:45 a. m.] [INFO] 🔄 Progreso: 18/60 de 663
+[11-02-2026, 10:36:48 a. m.] [SUCCESS] 🟢 Recuperado 2294-115-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:52 a. m.] [SUCCESS] 🟢 Recuperado 1523-64-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:53 a. m.] [SUCCESS] 🟢 Recuperado 5338-86-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:36:59 a. m.] [SUCCESS] 🟢 Recuperado 761391-163-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:14 a. m.] [INFO] 🔄 Progreso: 22/80 de 663
+[11-02-2026, 10:37:36 a. m.] [SUCCESS] 🟢 Recuperado 3577-14-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:38 a. m.] [SUCCESS] 🟢 Recuperado 1057544-313-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:40 a. m.] [SUCCESS] 🟢 Recuperado 1057387-43-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:40 a. m.] [INFO] 🔄 Progreso: 25/100 de 663
+[11-02-2026, 10:37:43 a. m.] [SUCCESS] 🟢 Recuperado 3502-49-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:46 a. m.] [SUCCESS] 🟢 Recuperado 1274-6-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:47 a. m.] [SUCCESS] 🟢 Recuperado 1079576-33-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:49 a. m.] [SUCCESS] 🟢 Recuperado 2320-31-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:37:50 a. m.] [INFO] 🔄 Progreso: 29/120 de 663
+[11-02-2026, 10:37:57 a. m.] [SUCCESS] 🟢 Recuperado 655348-16-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:19 a. m.] [INFO] 🔄 Progreso: 30/140 de 663
+[11-02-2026, 10:38:39 a. m.] [SUCCESS] 🟢 Recuperado 2378-78-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:41 a. m.] [SUCCESS] 🟢 Recuperado 1057545-119-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:44 a. m.] [SUCCESS] 🟢 Recuperado 1715-14-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:46 a. m.] [SUCCESS] 🟢 Recuperado 1657-36-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:46 a. m.] [INFO] 🔄 Progreso: 34/160 de 663
+[11-02-2026, 10:38:49 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:38:49 a. m.] [ERROR] ❌ Error en 3530-18-L123: read ECONNRESET
+[11-02-2026, 10:38:51 a. m.] [SUCCESS] 🟢 Recuperado 702988-41-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:52 a. m.] [SUCCESS] 🟢 Recuperado 1685-46-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:38:54 a. m.] [SUCCESS] 🟢 Recuperado 3847-53-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:01 a. m.] [SUCCESS] 🟢 Recuperado 1250669-3-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:09 a. m.] [INFO] 🔄 Progreso: 39/180 de 663
+[11-02-2026, 10:39:37 a. m.] [SUCCESS] 🟢 Recuperado 3391-45-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:38 a. m.] [INFO] 🔄 Progreso: 40/200 de 663
+[11-02-2026, 10:39:39 a. m.] [SUCCESS] 🟢 Recuperado 2249-19-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:41 a. m.] [SUCCESS] 🟢 Recuperado 3442-22-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:46 a. m.] [SUCCESS] 🟢 Recuperado 975-50-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:48 a. m.] [SUCCESS] 🟢 Recuperado 4494-59-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:51 a. m.] [SUCCESS] 🟢 Recuperado 5040-34-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:52 a. m.] [SUCCESS] 🟢 Recuperado 557974-102-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:39:53 a. m.] [SUCCESS] 🟢 Recuperado 2280-272-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:07 a. m.] [INFO] 🔄 Progreso: 47/220 de 663
+[11-02-2026, 10:40:36 a. m.] [INFO] 🔄 Progreso: 47/240 de 663
+[11-02-2026, 10:40:37 a. m.] [SUCCESS] 🟢 Recuperado 4521-8-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:40 a. m.] [SUCCESS] 🟢 Recuperado 4389-29-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:41 a. m.] [SUCCESS] 🟢 Recuperado 1057509-320-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:44 a. m.] [SUCCESS] 🟢 Recuperado 3268-92-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:46 a. m.] [SUCCESS] 🟢 Recuperado 5056-67-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:47 a. m.] [SUCCESS] 🟢 Recuperado 3134-113-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:49 a. m.] [SUCCESS] 🟢 Recuperado 1591-37-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:40:52 a. m.] [SUCCESS] 🟢 Recuperado 2686-124-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:05 a. m.] [INFO] 🔄 Progreso: 55/260 de 663
+[11-02-2026, 10:41:34 a. m.] [INFO] 🔄 Progreso: 55/280 de 663
+[11-02-2026, 10:41:36 a. m.] [SUCCESS] 🟢 Recuperado 4474-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:38 a. m.] [SUCCESS] 🟢 Recuperado 3138-34-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:41 a. m.] [SUCCESS] 🟢 Recuperado 1596-82-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:43 a. m.] [SUCCESS] 🟢 Recuperado 2311-180-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:45 a. m.] [SUCCESS] 🟢 Recuperado 2277-70-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:47 a. m.] [SUCCESS] 🟢 Recuperado 2129-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:49 a. m.] [SUCCESS] 🟢 Recuperado 621-635-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:49 a. m.] [INFO] 🔄 Progreso: 62/300 de 663
+[11-02-2026, 10:41:51 a. m.] [SUCCESS] 🟢 Recuperado 2294-356-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:53 a. m.] [SUCCESS] 🟢 Recuperado 5586-455-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:41:55 a. m.] [SUCCESS] 🟢 Recuperado 2311-199-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:18 a. m.] [INFO] 🔄 Progreso: 65/320 de 663
+[11-02-2026, 10:42:37 a. m.] [SUCCESS] 🟢 Recuperado 1037-26-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:39 a. m.] [SUCCESS] 🟢 Recuperado 359-58-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:42 a. m.] [SUCCESS] 🟢 Recuperado 3482-27-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:42 a. m.] [INFO] 🔄 Progreso: 68/340 de 663
+[11-02-2026, 10:42:43 a. m.] [SUCCESS] 🟢 Recuperado 5413-105-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:45 a. m.] [SUCCESS] 🟢 Recuperado 2374-62-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:47 a. m.] [SUCCESS] 🟢 Recuperado 2736-128-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:49 a. m.] [SUCCESS] 🟢 Recuperado 4406-55-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:51 a. m.] [SUCCESS] 🟢 Recuperado 2294-264-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:55 a. m.] [SUCCESS] 🟢 Recuperado 2788-234-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:42:55 a. m.] [SUCCESS] 🟢 Recuperado 2548-74-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:10 a. m.] [INFO] 🔄 Progreso: 75/360 de 663
+[11-02-2026, 10:43:36 a. m.] [SUCCESS] 🟢 Recuperado 3232-121-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:39 a. m.] [INFO] 🔄 Progreso: 76/380 de 663
+[11-02-2026, 10:43:40 a. m.] [SUCCESS] 🟢 Recuperado 4465-53-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:41 a. m.] [SUCCESS] 🟢 Recuperado 938-32-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:43 a. m.] [SUCCESS] 🟢 Recuperado 1469-366-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:45 a. m.] [SUCCESS] 🟢 Recuperado 1778-99-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:47 a. m.] [SUCCESS] 🟢 Recuperado 1557-31-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:49 a. m.] [SUCCESS] 🟢 Recuperado 1469-262-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:51 a. m.] [SUCCESS] 🟢 Recuperado 3326-157-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:53 a. m.] [SUCCESS] 🟢 Recuperado 5284-9-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:55 a. m.] [SUCCESS] 🟢 Recuperado 2817-164-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:43:59 a. m.] [INFO] 🔄 Progreso: 85/400 de 663
+[11-02-2026, 10:44:28 a. m.] [INFO] 🔄 Progreso: 85/420 de 663
+[11-02-2026, 10:44:37 a. m.] [SUCCESS] 🟢 Recuperado 2249-20-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:39 a. m.] [SUCCESS] 🟢 Recuperado 4454-82-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:41 a. m.] [SUCCESS] 🟢 Recuperado 1358-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:44 a. m.] [SUCCESS] 🟢 Recuperado 2702-50-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:47 a. m.] [SUCCESS] 🟢 Recuperado 702988-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:48 a. m.] [SUCCESS] 🟢 Recuperado 1211839-100-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:48 a. m.] [SUCCESS] 🟢 Recuperado 1057513-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:50 a. m.] [INFO] 🔄 Progreso: 92/440 de 663
+[11-02-2026, 10:44:51 a. m.] [SUCCESS] 🟢 Recuperado 3494-167-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:44:52 a. m.] [SUCCESS] 🟢 Recuperado 621-577-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:20 a. m.] [INFO] 🔄 Progreso: 94/460 de 663
+[11-02-2026, 10:45:37 a. m.] [SUCCESS] 🟢 Recuperado 1255-1-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:39 a. m.] [SUCCESS] 🟢 Recuperado 2328-343-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:41 a. m.] [SUCCESS] 🟢 Recuperado 621-610-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:45 a. m.] [SUCCESS] 🟢 Recuperado 1075963-340-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:47 a. m.] [SUCCESS] 🟢 Recuperado 2583-524-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:47 a. m.] [INFO] 🔄 Progreso: 99/480 de 663
+[11-02-2026, 10:45:48 a. m.] [SUCCESS] 🟢 Recuperado 2403-175-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:50 a. m.] [SUCCESS] 🟢 Recuperado 1094080-55-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:51 a. m.] [SUCCESS] 🟢 Recuperado 2583-447-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:54 a. m.] [SUCCESS] 🟢 Recuperado 1214069-29-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:45:55 a. m.] [SUCCESS] 🟢 Recuperado 3558-32-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:16 a. m.] [INFO] 🔄 Progreso: 104/500 de 663
+[11-02-2026, 10:46:36 a. m.] [SUCCESS] 🟢 Recuperado 3708-85-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:41 a. m.] [SUCCESS] 🟢 Recuperado 3328-114-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:41 a. m.] [INFO] 🔄 Progreso: 106/520 de 663
+[11-02-2026, 10:46:41 a. m.] [SUCCESS] 🟢 Recuperado 1953-49-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:43 a. m.] [SUCCESS] 🟢 Recuperado 2483-295-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:45 a. m.] [SUCCESS] 🟢 Recuperado 5215-204-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:47 a. m.] [SUCCESS] 🟢 Recuperado 2080-215-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:49 a. m.] [SUCCESS] 🟢 Recuperado 3755-5-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:51 a. m.] [SUCCESS] 🟢 Recuperado 1180919-4-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:53 a. m.] [SUCCESS] 🟢 Recuperado 450-79-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:46:55 a. m.] [SUCCESS] 🟢 Recuperado 4829-96-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:05 a. m.] [INFO] 🔄 Progreso: 114/540 de 663
+[11-02-2026, 10:47:35 a. m.] [INFO] 🔄 Progreso: 114/560 de 663
+[11-02-2026, 10:47:38 a. m.] [SUCCESS] 🟢 Recuperado 1057430-81-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:40 a. m.] [SUCCESS] 🟢 Recuperado 5087-6-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:43 a. m.] [SUCCESS] 🟢 Recuperado 886954-274-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:44 a. m.] [SUCCESS] 🟢 Recuperado 1057432-42-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:45 a. m.] [SUCCESS] 🟢 Recuperado 411-59-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:50 a. m.] [SUCCESS] 🟢 Recuperado 2583-500-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:51 a. m.] [SUCCESS] 🟢 Recuperado 1075963-566-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:53 a. m.] [SUCCESS] 🟢 Recuperado 1671-48-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:47:53 a. m.] [INFO] 🔄 Progreso: 122/580 de 663
+[11-02-2026, 10:47:53 a. m.] [SUCCESS] 🟢 Recuperado 2743-67-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:22 a. m.] [INFO] 🔄 Progreso: 123/600 de 663
+[11-02-2026, 10:48:38 a. m.] [SUCCESS] 🟢 Recuperado 1057536-84-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:39 a. m.] [SUCCESS] 🟢 Recuperado 967384-3-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:40 a. m.] [SUCCESS] 🟢 Recuperado 2452-136-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:42 a. m.] [SUCCESS] 🟢 Recuperado 3710-231-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:44 a. m.] [SUCCESS] 🟢 Recuperado 893-4-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:45 a. m.] [INFO] 🔄 Progreso: 128/620 de 663
+[11-02-2026, 10:48:46 a. m.] [SUCCESS] 🟢 Recuperado 3515-119-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:49 a. m.] [SUCCESS] 🟢 Recuperado 1540-146-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:50 a. m.] [SUCCESS] 🟢 Recuperado 1747-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:48:53 a. m.] [SUCCESS] 🟢 Recuperado 434-160-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:49:12 a. m.] [INFO] 🔄 Progreso: 132/640 de 663
+[11-02-2026, 10:49:39 a. m.] [SUCCESS] 🟢 Recuperado 949-12-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:49:40 a. m.] [SUCCESS] 🟢 Recuperado 2294-317-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:49:41 a. m.] [SUCCESS] 🟢 Recuperado 2735-315-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:49:41 a. m.] [INFO] 🔄 Progreso: 135/660 de 663
+[11-02-2026, 10:49:43 a. m.] [SUCCESS] 🟢 Recuperado 4358-33-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:49:47 a. m.] [SUCCESS] 🟢 Recuperado 2294-302-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:49:47 a. m.] [INFO] 🔄 Progreso: 137/663 de 663
+[11-02-2026, 10:49:47 a. m.] [INFO] 📝 Archivo actualizado: 526 códigos pendientes
+[11-02-2026, 10:49:47 a. m.] [INFO] 📊 Ciclo 2: 137 recuperados
+[11-02-2026, 10:49:47 a. m.] [INFO] ⏳ 526 códigos pendientes
+[11-02-2026, 10:49:57 a. m.] [INFO] 🔄 Ciclo 3: 526 códigos fallidos
+[11-02-2026, 10:49:57 a. m.] [INFO] 🔄 Reintentando 526 códigos...
+[11-02-2026, 10:49:59 a. m.] [SUCCESS] 🟢 Recuperado 2294-365-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:01 a. m.] [SUCCESS] 🟢 Recuperado 621451-23-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:06 a. m.] [SUCCESS] 🟢 Recuperado 3469-71-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:08 a. m.] [SUCCESS] 🟢 Recuperado 5209-36-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:09 a. m.] [SUCCESS] 🟢 Recuperado 1110404-194-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:11 a. m.] [SUCCESS] 🟢 Recuperado 691944-23-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:12 a. m.] [SUCCESS] 🟢 Recuperado 1398-75-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:25 a. m.] [INFO] 🔄 Progreso: 7/20 de 526
+[11-02-2026, 10:50:41 a. m.] [SUCCESS] 🟢 Recuperado 4170-121-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:43 a. m.] [SUCCESS] 🟢 Recuperado 691944-25-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:45 a. m.] [SUCCESS] 🟢 Recuperado 1111089-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:47 a. m.] [SUCCESS] 🟢 Recuperado 2485-197-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:50 a. m.] [SUCCESS] 🟢 Recuperado 1079580-24-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:54 a. m.] [SUCCESS] 🟢 Recuperado 5003-14-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:50:54 a. m.] [INFO] 🔄 Progreso: 13/40 de 526
+[11-02-2026, 10:50:56 a. m.] [SUCCESS] 🟢 Recuperado 2069-28-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:03 a. m.] [SUCCESS] 🟢 Recuperado 1523-87-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:23 a. m.] [INFO] 🔄 Progreso: 15/60 de 526
+[11-02-2026, 10:51:37 a. m.] [SUCCESS] 🟢 Recuperado 1138295-4-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:39 a. m.] [SUCCESS] 🟢 Recuperado 4881-31-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:41 a. m.] [SUCCESS] 🟢 Recuperado 2332-161-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:43 a. m.] [SUCCESS] 🟢 Recuperado 3469-59-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:45 a. m.] [SUCCESS] 🟢 Recuperado 2464-90-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:48 a. m.] [SUCCESS] 🟢 Recuperado 2387-152-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:49 a. m.] [SUCCESS] 🟢 Recuperado 4114-30-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:51 a. m.] [SUCCESS] 🟢 Recuperado 704093-69-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:51:52 a. m.] [INFO] 🔄 Progreso: 23/80 de 526
+[11-02-2026, 10:51:53 a. m.] [SUCCESS] 🟢 Recuperado 3477-203-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:52:21 a. m.] [INFO] 🔄 Progreso: 24/100 de 526
+[11-02-2026, 10:52:36 a. m.] [SUCCESS] 🟢 Recuperado 1019-67-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:52:38 a. m.] [SUCCESS] 🟢 Recuperado 4375-238-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:52:41 a. m.] [SUCCESS] 🟢 Recuperado 4375-149-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:52:43 a. m.] [SUCCESS] 🟢 Recuperado 536337-82-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:52:43 a. m.] [INFO] 🔄 Progreso: 28/120 de 526
+[11-02-2026, 10:52:46 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:52:46 a. m.] [ERROR] ❌ Error en 2981-126-LQ23: read ECONNRESET
+[11-02-2026, 10:52:48 a. m.] [SUCCESS] 🟢 Recuperado 2366-143-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:52:50 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:52:50 a. m.] [ERROR] ❌ Error en 3705-96-L123: read ECONNRESET
+[11-02-2026, 10:52:50 a. m.] [SUCCESS] 🟢 Recuperado 5514-8-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:10 a. m.] [INFO] 🔄 Progreso: 32/140 de 526
+[11-02-2026, 10:53:40 a. m.] [SUCCESS] 🟢 Recuperado 3785-62-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:40 a. m.] [INFO] 🔄 Progreso: 33/160 de 526
+[11-02-2026, 10:53:40 a. m.] [SUCCESS] 🟢 Recuperado 1421-7-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:41 a. m.] [SUCCESS] 🟢 Recuperado 2735-250-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:43 a. m.] [SUCCESS] 🟢 Recuperado 2455-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:45 a. m.] [SUCCESS] 🟢 Recuperado 514862-144-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:48 a. m.] [SUCCESS] 🟢 Recuperado 1002772-125-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:51 a. m.] [SUCCESS] 🟢 Recuperado 2069-53-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:51 a. m.] [INFO] 🔄 Progreso: 39/180 de 526
+[11-02-2026, 10:53:52 a. m.] [SUCCESS] 🟢 Recuperado 3191-107-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:53 a. m.] [SUCCESS] 🟢 Recuperado 4190-120-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:53:56 a. m.] [SUCCESS] 🟢 Recuperado 2961-213-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:20 a. m.] [INFO] 🔄 Progreso: 42/200 de 526
+[11-02-2026, 10:54:40 a. m.] [SUCCESS] 🟢 Recuperado 1057384-92-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:40 a. m.] [SUCCESS] 🟢 Recuperado 1042-24-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:41 a. m.] [SUCCESS] 🟢 Recuperado 4238-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:43 a. m.] [SUCCESS] 🟢 Recuperado 2080-227-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:45 a. m.] [SUCCESS] 🟢 Recuperado 1058130-9-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:46 a. m.] [INFO] 🔄 Progreso: 47/220 de 526
+[11-02-2026, 10:54:47 a. m.] [SUCCESS] 🟢 Recuperado 2281-275-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:49 a. m.] [SUCCESS] 🟢 Recuperado 539778-21-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:52 a. m.] [SUCCESS] 🟢 Recuperado 1658-495-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:54:57 a. m.] [SUCCESS] 🟢 Recuperado 2080-241-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:16 a. m.] [INFO] 🔄 Progreso: 51/240 de 526
+[11-02-2026, 10:55:36 a. m.] [SUCCESS] 🟢 Recuperado 2460-185-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:38 a. m.] [SUCCESS] 🟢 Recuperado 2387-158-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:40 a. m.] [SUCCESS] 🟢 Recuperado 1076403-9-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:43 a. m.] [SUCCESS] 🟢 Recuperado 525800-33-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:44 a. m.] [INFO] 🔄 Progreso: 55/260 de 526
+[11-02-2026, 10:55:44 a. m.] [SUCCESS] 🟢 Recuperado 3693-202-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:49 a. m.] [SUCCESS] 🟢 Recuperado 1057503-48-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:51 a. m.] [SUCCESS] 🟢 Recuperado 3723-23-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:55:52 a. m.] [SUCCESS] 🟢 Recuperado 1057503-49-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:11 a. m.] [INFO] 🔄 Progreso: 59/280 de 526
+[11-02-2026, 10:56:16 a. m.] [SUCCESS] 🟢 Recuperado 3017-159-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:36 a. m.] [SUCCESS] 🟢 Recuperado 2451-51-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:37 a. m.] [INFO] 🔄 Progreso: 61/300 de 526
+[11-02-2026, 10:56:38 a. m.] [SUCCESS] 🟢 Recuperado 3799-67-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:40 a. m.] [SUCCESS] 🟢 Recuperado 1197-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:43 a. m.] [SUCCESS] 🟢 Recuperado 1658-798-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:44 a. m.] [SUCCESS] 🟢 Recuperado 2667-87-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:46 a. m.] [SUCCESS] 🟢 Recuperado 514862-138-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:49 a. m.] [SUCCESS] 🟢 Recuperado 3149-61-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:51 a. m.] [SUCCESS] 🟢 Recuperado 4594-46-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:56:54 a. m.] [SUCCESS] 🟢 Recuperado 941739-10-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:04 a. m.] [INFO] 🔄 Progreso: 69/320 de 526
+[11-02-2026, 10:57:33 a. m.] [INFO] 🔄 Progreso: 69/340 de 526
+[11-02-2026, 10:57:36 a. m.] [SUCCESS] 🟢 Recuperado 894778-9-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:39 a. m.] [SUCCESS] 🟢 Recuperado 2961-210-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:40 a. m.] [SUCCESS] 🟢 Recuperado 4179-106-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:44 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 10:57:44 a. m.] [ERROR] ❌ Error en 3588-83-LE23: read ECONNRESET
+[11-02-2026, 10:57:45 a. m.] [SUCCESS] 🟢 Recuperado 2403-200-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:49 a. m.] [INFO] 🔄 Progreso: 74/360 de 526
+[11-02-2026, 10:57:50 a. m.] [SUCCESS] 🟢 Recuperado 730736-43-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:53 a. m.] [SUCCESS] 🟢 Recuperado 3447-147-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:54 a. m.] [SUCCESS] 🟢 Recuperado 857-36-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:55 a. m.] [SUCCESS] 🟢 Recuperado 1110404-201-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:57:56 a. m.] [SUCCESS] 🟢 Recuperado 621-597-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:16 a. m.] [INFO] 🔄 Progreso: 79/380 de 526
+[11-02-2026, 10:58:36 a. m.] [SUCCESS] 🟢 Recuperado 1493-106-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:38 a. m.] [SUCCESS] 🟢 Recuperado 1725-200-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:41 a. m.] [SUCCESS] 🟢 Recuperado 1469-389-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:41 a. m.] [INFO] 🔄 Progreso: 82/400 de 526
+[11-02-2026, 10:58:42 a. m.] [SUCCESS] 🟢 Recuperado 2409-703-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:47 a. m.] [SUCCESS] 🟢 Recuperado 699866-192-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:48 a. m.] [SUCCESS] 🟢 Recuperado 2996-105-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:50 a. m.] [SUCCESS] 🟢 Recuperado 3000-111-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:51 a. m.] [SUCCESS] 🟢 Recuperado 1057379-21-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:58:53 a. m.] [SUCCESS] 🟢 Recuperado 4107-3-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:10 a. m.] [INFO] 🔄 Progreso: 88/420 de 526
+[11-02-2026, 10:59:37 a. m.] [SUCCESS] 🟢 Recuperado 568963-18-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:39 a. m.] [INFO] 🔄 Progreso: 89/440 de 526
+[11-02-2026, 10:59:40 a. m.] [SUCCESS] 🟢 Recuperado 2548-72-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:41 a. m.] [SUCCESS] 🟢 Recuperado 897097-3-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:43 a. m.] [SUCCESS] 🟢 Recuperado 2585-270-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:45 a. m.] [SUCCESS] 🟢 Recuperado 1057385-54-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:48 a. m.] [SUCCESS] 🟢 Recuperado 1671-49-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:50 a. m.] [SUCCESS] 🟢 Recuperado 3516-163-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 10:59:51 a. m.] [SUCCESS] 🟢 Recuperado 2687-23-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:03 a. m.] [INFO] 🔄 Progreso: 96/460 de 526
+[11-02-2026, 11:00:33 a. m.] [INFO] 🔄 Progreso: 96/480 de 526
+[11-02-2026, 11:00:39 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:00:39 a. m.] [ERROR] ❌ Error en 2771-76-L123: read ECONNRESET
+[11-02-2026, 11:00:40 a. m.] [SUCCESS] 🟢 Recuperado 4732-60-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:43 a. m.] [SUCCESS] 🟢 Recuperado 2583-493-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:44 a. m.] [SUCCESS] 🟢 Recuperado 2402-77-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:47 a. m.] [SUCCESS] 🟢 Recuperado 2713-206-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:49 a. m.] [SUCCESS] 🟢 Recuperado 2275-14-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:53 a. m.] [SUCCESS] 🟢 Recuperado 2202-49-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:53 a. m.] [INFO] 🔄 Progreso: 103/500 de 526
+[11-02-2026, 11:00:54 a. m.] [SUCCESS] 🟢 Recuperado 1071775-8-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:00:56 a. m.] [SUCCESS] 🟢 Recuperado 2927-45-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:00 a. m.] [SUCCESS] 🟢 Recuperado 2215-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:18 a. m.] [INFO] 🔄 Progreso: 106/520 de 526
+[11-02-2026, 11:01:31 a. m.] [INFO] 🔄 Progreso: 106/526 de 526
+[11-02-2026, 11:01:31 a. m.] [INFO] 📝 Archivo actualizado: 420 códigos pendientes
+[11-02-2026, 11:01:31 a. m.] [INFO] 📊 Ciclo 3: 106 recuperados
+[11-02-2026, 11:01:31 a. m.] [INFO] ⏳ 420 códigos pendientes
+[11-02-2026, 11:01:41 a. m.] [INFO] 🔄 Ciclo 4: 420 códigos fallidos
+[11-02-2026, 11:01:41 a. m.] [INFO] 🔄 Reintentando 420 códigos...
+[11-02-2026, 11:01:43 a. m.] [SUCCESS] 🟢 Recuperado 699360-9-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:46 a. m.] [SUCCESS] 🟢 Recuperado 3561-110-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:47 a. m.] [SUCCESS] 🟢 Recuperado 2583-526-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:56 a. m.] [SUCCESS] 🟢 Recuperado 1036569-24-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:57 a. m.] [SUCCESS] 🟢 Recuperado 5184-232-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:01:59 a. m.] [SUCCESS] 🟢 Recuperado 407-98-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:00 a. m.] [SUCCESS] 🟢 Recuperado 3469-70-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:02 a. m.] [SUCCESS] 🟢 Recuperado 3833-84-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:10 a. m.] [INFO] 🔄 Progreso: 8/20 de 420
+[11-02-2026, 11:02:39 a. m.] [INFO] 🔄 Progreso: 8/40 de 420
+[11-02-2026, 11:02:39 a. m.] [SUCCESS] 🟢 Recuperado 855-19-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:40 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:02:40 a. m.] [ERROR] ❌ Error en 1057402-132-LQ23: read ECONNRESET
+[11-02-2026, 11:02:40 a. m.] [SUCCESS] 🟢 Recuperado 956-184-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:46 a. m.] [SUCCESS] 🟢 Recuperado 2663-122-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:47 a. m.] [SUCCESS] 🟢 Recuperado 761391-183-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:49 a. m.] [SUCCESS] 🟢 Recuperado 630424-31-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:53 a. m.] [SUCCESS] 🟢 Recuperado 2710-188-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:02:54 a. m.] [SUCCESS] 🟢 Recuperado 743-15-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:07 a. m.] [INFO] 🔄 Progreso: 16/60 de 420
+[11-02-2026, 11:03:29 a. m.] [SUCCESS] 🟢 Recuperado 2258-127-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:36 a. m.] [INFO] 🔄 Progreso: 17/80 de 420
+[11-02-2026, 11:03:38 a. m.] [SUCCESS] 🟢 Recuperado 1019-55-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:41 a. m.] [SUCCESS] 🟢 Recuperado 610-27-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:42 a. m.] [SUCCESS] 🟢 Recuperado 2366-84-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:43 a. m.] [SUCCESS] 🟢 Recuperado 4540-37-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:44 a. m.] [SUCCESS] 🟢 Recuperado 578834-16-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:46 a. m.] [SUCCESS] 🟢 Recuperado 5586-438-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:49 a. m.] [SUCCESS] 🟢 Recuperado 2263-51-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:03:51 a. m.] [SUCCESS] 🟢 Recuperado 2042-37-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:05 a. m.] [INFO] 🔄 Progreso: 25/100 de 420
+[11-02-2026, 11:04:34 a. m.] [INFO] 🔄 Progreso: 25/120 de 420
+[11-02-2026, 11:04:38 a. m.] [SUCCESS] 🟢 Recuperado 1172953-4-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:41 a. m.] [SUCCESS] 🟢 Recuperado 1950-62-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:42 a. m.] [SUCCESS] 🟢 Recuperado 2111-237-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:42 a. m.] [SUCCESS] 🟢 Recuperado 3573-59-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:45 a. m.] [SUCCESS] 🟢 Recuperado 2258-197-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:47 a. m.] [INFO] 🔄 Progreso: 30/140 de 420
+[11-02-2026, 11:04:48 a. m.] [SUCCESS] 🟢 Recuperado 2454-11-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:49 a. m.] [SUCCESS] 🟢 Recuperado 1274285-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:51 a. m.] [SUCCESS] 🟢 Recuperado 4829-97-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:53 a. m.] [SUCCESS] 🟢 Recuperado 2669-283-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:04:55 a. m.] [SUCCESS] 🟢 Recuperado 848-42-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:10 a. m.] [INFO] 🔄 Progreso: 35/160 de 420
+[11-02-2026, 11:05:39 a. m.] [SUCCESS] 🟢 Recuperado 1057501-260-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:39 a. m.] [INFO] 🔄 Progreso: 36/180 de 420
+[11-02-2026, 11:05:39 a. m.] [SUCCESS] 🟢 Recuperado 1443-2-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:41 a. m.] [SUCCESS] 🟢 Recuperado 1596-81-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:44 a. m.] [SUCCESS] 🟢 Recuperado 1993-18-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:46 a. m.] [SUCCESS] 🟢 Recuperado 621-588-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:50 a. m.] [SUCCESS] 🟢 Recuperado 2069-54-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:52 a. m.] [SUCCESS] 🟢 Recuperado 5586-430-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:53 a. m.] [SUCCESS] 🟢 Recuperado 3921-80-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:05:54 a. m.] [SUCCESS] 🟢 Recuperado 5251-123-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:02 a. m.] [INFO] 🔄 Progreso: 44/200 de 420
+[11-02-2026, 11:06:31 a. m.] [INFO] 🔄 Progreso: 44/220 de 420
+[11-02-2026, 11:06:37 a. m.] [SUCCESS] 🟢 Recuperado 4031-10-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:38 a. m.] [SUCCESS] 🟢 Recuperado 1602-36-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:42 a. m.] [SUCCESS] 🟢 Recuperado 3759-115-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:44 a. m.] [SUCCESS] 🟢 Recuperado 1549-106-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:46 a. m.] [SUCCESS] 🟢 Recuperado 1075963-417-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:47 a. m.] [SUCCESS] 🟢 Recuperado 545774-49-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:49 a. m.] [SUCCESS] 🟢 Recuperado 3076-41-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:52 a. m.] [SUCCESS] 🟢 Recuperado 1110404-187-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:59 a. m.] [SUCCESS] 🟢 Recuperado 1113159-32-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:06:59 a. m.] [INFO] 🔄 Progreso: 53/240 de 420
+[11-02-2026, 11:07:28 a. m.] [INFO] 🔄 Progreso: 53/260 de 420
+[11-02-2026, 11:07:37 a. m.] [SUCCESS] 🟢 Recuperado 627786-13-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:39 a. m.] [SUCCESS] 🟢 Recuperado 2920-72-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:41 a. m.] [SUCCESS] 🟢 Recuperado 702988-47-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:43 a. m.] [SUCCESS] 🟢 Recuperado 621-595-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:45 a. m.] [SUCCESS] 🟢 Recuperado 4079-70-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:47 a. m.] [SUCCESS] 🟢 Recuperado 702988-48-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:48 a. m.] [INFO] 🔄 Progreso: 59/280 de 420
+[11-02-2026, 11:07:49 a. m.] [SUCCESS] 🟢 Recuperado 1057474-23-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:53 a. m.] [SUCCESS] 🟢 Recuperado 2453-76-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:53 a. m.] [SUCCESS] 🟢 Recuperado 3665-13-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:07:59 a. m.] [SUCCESS] 🟢 Recuperado 1057547-430-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:13 a. m.] [INFO] 🔄 Progreso: 63/300 de 420
+[11-02-2026, 11:08:36 a. m.] [SUCCESS] 🟢 Recuperado 1437-20-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:40 a. m.] [SUCCESS] 🟢 Recuperado 3953-64-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:40 a. m.] [INFO] 🔄 Progreso: 65/320 de 420
+[11-02-2026, 11:08:43 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:08:43 a. m.] [ERROR] ❌ Error en 2409-389-R123: read ECONNRESET
+[11-02-2026, 11:08:44 a. m.] [SUCCESS] 🟢 Recuperado 1094080-57-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:48 a. m.] [SUCCESS] 🟢 Recuperado 3492-13-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:49 a. m.] [SUCCESS] 🟢 Recuperado 2726-48-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:50 a. m.] [SUCCESS] 🟢 Recuperado 2585-179-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:53 a. m.] [SUCCESS] 🟢 Recuperado 188-86-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:08:55 a. m.] [SUCCESS] 🟢 Recuperado 3712-62-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:05 a. m.] [SUCCESS] 🟢 Recuperado 2996-109-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:08 a. m.] [INFO] 🔄 Progreso: 73/340 de 420
+[11-02-2026, 11:09:37 a. m.] [SUCCESS] 🟢 Recuperado 4168-92-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:37 a. m.] [INFO] 🔄 Progreso: 74/360 de 420
+[11-02-2026, 11:09:39 a. m.] [SUCCESS] 🟢 Recuperado 4412-29-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:41 a. m.] [SUCCESS] 🟢 Recuperado 1671-45-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:44 a. m.] [SUCCESS] 🟢 Recuperado 1057539-188-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:46 a. m.] [SUCCESS] 🟢 Recuperado 1605-96-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:49 a. m.] [SUCCESS] 🟢 Recuperado 3933-41-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:55 a. m.] [SUCCESS] 🟢 Recuperado 3319-10-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:55 a. m.] [SUCCESS] 🟢 Recuperado 5472-24-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:55 a. m.] [SUCCESS] 🟢 Recuperado 2734-16-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:09:55 a. m.] [INFO] 🔄 Progreso: 82/380 de 420
+[11-02-2026, 11:09:55 a. m.] [SUCCESS] 🟢 Recuperado 5472-25-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:24 a. m.] [INFO] 🔄 Progreso: 83/400 de 420
+[11-02-2026, 11:10:36 a. m.] [SUCCESS] 🟢 Recuperado 2483-364-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:38 a. m.] [SUCCESS] 🟢 Recuperado 4050-87-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:41 a. m.] [SUCCESS] 🟢 Recuperado 3920-15-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:43 a. m.] [SUCCESS] 🟢 Recuperado 2306-110-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:45 a. m.] [SUCCESS] 🟢 Recuperado 2294-381-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:47 a. m.] [SUCCESS] 🟢 Recuperado 1057539-202-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:51 a. m.] [SUCCESS] 🟢 Recuperado 2275-13-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:53 a. m.] [SUCCESS] 🟢 Recuperado 2384-50-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:10:53 a. m.] [INFO] 🔄 Progreso: 91/420 de 420
+[11-02-2026, 11:10:53 a. m.] [INFO] 📝 Archivo actualizado: 329 códigos pendientes
+[11-02-2026, 11:10:53 a. m.] [INFO] 📊 Ciclo 4: 91 recuperados
+[11-02-2026, 11:10:53 a. m.] [INFO] ⏳ 329 códigos pendientes
+[11-02-2026, 11:11:03 a. m.] [INFO] 🔄 Ciclo 5: 329 códigos fallidos
+[11-02-2026, 11:11:03 a. m.] [INFO] 🔄 Reintentando 329 códigos...
+[11-02-2026, 11:11:07 a. m.] [SUCCESS] 🟢 Recuperado 2446-537-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:11 a. m.] [SUCCESS] 🟢 Recuperado 2345-364-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:12 a. m.] [SUCCESS] 🟢 Recuperado 1380-151-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:16 a. m.] [SUCCESS] 🟢 Recuperado 1020-80-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:17 a. m.] [SUCCESS] 🟢 Recuperado 691944-27-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:17 a. m.] [SUCCESS] 🟢 Recuperado 387-29-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:32 a. m.] [INFO] 🔄 Progreso: 6/20 de 329
+[11-02-2026, 11:11:39 a. m.] [SUCCESS] 🟢 Recuperado 557974-113-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:41 a. m.] [SUCCESS] 🟢 Recuperado 898-198-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:44 a. m.] [SUCCESS] 🟢 Recuperado 1208541-6-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:46 a. m.] [SUCCESS] 🟢 Recuperado 1057480-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:48 a. m.] [SUCCESS] 🟢 Recuperado 1057385-53-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:51 a. m.] [SUCCESS] 🟢 Recuperado 2460-180-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:53 a. m.] [SUCCESS] 🟢 Recuperado 886954-235-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:56 a. m.] [SUCCESS] 🟢 Recuperado 1057402-195-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:11:58 a. m.] [SUCCESS] 🟢 Recuperado 2736-117-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:01 a. m.] [INFO] 🔄 Progreso: 15/40 de 329
+[11-02-2026, 11:12:30 a. m.] [INFO] 🔄 Progreso: 15/60 de 329
+[11-02-2026, 11:12:36 a. m.] [SUCCESS] 🟢 Recuperado 1116775-2-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:38 a. m.] [SUCCESS] 🟢 Recuperado 1260-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:41 a. m.] [SUCCESS] 🟢 Recuperado 2393-191-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:43 a. m.] [SUCCESS] 🟢 Recuperado 966131-65-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:45 a. m.] [SUCCESS] 🟢 Recuperado 2483-331-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:48 a. m.] [SUCCESS] 🟢 Recuperado 842082-6-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:50 a. m.] [SUCCESS] 🟢 Recuperado 4559-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:53 a. m.] [SUCCESS] 🟢 Recuperado 2026-123-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:54 a. m.] [SUCCESS] 🟢 Recuperado 587-62-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:12:58 a. m.] [INFO] 🔄 Progreso: 24/80 de 329
+[11-02-2026, 11:13:06 a. m.] [SUCCESS] 🟢 Recuperado 5350-62-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:28 a. m.] [INFO] 🔄 Progreso: 25/100 de 329
+[11-02-2026, 11:13:36 a. m.] [SUCCESS] 🟢 Recuperado 4829-101-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:39 a. m.] [SUCCESS] 🟢 Recuperado 3436-147-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:42 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:13:42 a. m.] [ERROR] ❌ Error en 2111-244-LE23: read ECONNRESET
+[11-02-2026, 11:13:44 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:13:44 a. m.] [ERROR] ❌ Error en 2422-526-L123: read ECONNRESET
+[11-02-2026, 11:13:44 a. m.] [SUCCESS] 🟢 Recuperado 2992-134-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:44 a. m.] [INFO] 🔄 Progreso: 30/120 de 329
+[11-02-2026, 11:13:47 a. m.] [SUCCESS] 🟢 Recuperado 4284-205-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:50 a. m.] [SUCCESS] 🟢 Recuperado 3656-186-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:52 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:13:52 a. m.] [ERROR] ❌ Error en 2360-120-L123: read ECONNRESET
+[11-02-2026, 11:13:53 a. m.] [SUCCESS] 🟢 Recuperado 2307-83-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:13:56 a. m.] [SUCCESS] 🟢 Recuperado 48-68-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:08 a. m.] [INFO] 🔄 Progreso: 35/140 de 329
+[11-02-2026, 11:14:37 a. m.] [INFO] 🔄 Progreso: 35/160 de 329
+[11-02-2026, 11:14:38 a. m.] [SUCCESS] 🟢 Recuperado 2992-128-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:39 a. m.] [SUCCESS] 🟢 Recuperado 3615-43-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:41 a. m.] [SUCCESS] 🟢 Recuperado 2294-266-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:43 a. m.] [SUCCESS] 🟢 Recuperado 2294-338-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:45 a. m.] [SUCCESS] 🟢 Recuperado 2294-301-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:47 a. m.] [SUCCESS] 🟢 Recuperado 621-651-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:49 a. m.] [SUCCESS] 🟢 Recuperado 3593-58-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:51 a. m.] [SUCCESS] 🟢 Recuperado 2374-66-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:54 a. m.] [SUCCESS] 🟢 Recuperado 2770-142-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:14:55 a. m.] [INFO] 🔄 Progreso: 44/180 de 329
+[11-02-2026, 11:14:57 a. m.] [SUCCESS] 🟢 Recuperado 1947-4-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:24 a. m.] [INFO] 🔄 Progreso: 45/200 de 329
+[11-02-2026, 11:15:36 a. m.] [SUCCESS] 🟢 Recuperado 3665-14-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:38 a. m.] [SUCCESS] 🟢 Recuperado 1090-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:43 a. m.] [SUCCESS] 🟢 Recuperado 2791-73-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:44 a. m.] [SUCCESS] 🟢 Recuperado 1080157-12-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:45 a. m.] [SUCCESS] 🟢 Recuperado 1268-16-O123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:47 a. m.] [SUCCESS] 🟢 Recuperado 3443-46-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:51 a. m.] [SUCCESS] 🟢 Recuperado 4844-6-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:51 a. m.] [SUCCESS] 🟢 Recuperado 2950-73-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:15:52 a. m.] [INFO] 🔄 Progreso: 53/220 de 329
+[11-02-2026, 11:15:53 a. m.] [SUCCESS] 🟢 Recuperado 2345-367-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:22 a. m.] [INFO] 🔄 Progreso: 54/240 de 329
+[11-02-2026, 11:16:36 a. m.] [SUCCESS] 🟢 Recuperado 2078-58-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:39 a. m.] [SUCCESS] 🟢 Recuperado 3921-73-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:41 a. m.] [SUCCESS] 🟢 Recuperado 3436-144-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:43 a. m.] [SUCCESS] 🟢 Recuperado 4429-81-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:46 a. m.] [SUCCESS] 🟢 Recuperado 997-128-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:49 a. m.] [INFO] 🔄 Progreso: 59/260 de 329
+[11-02-2026, 11:16:50 a. m.] [SUCCESS] 🟢 Recuperado 1057780-40-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:50 a. m.] [SUCCESS] 🟢 Recuperado 4196-8-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:16:52 a. m.] [SUCCESS] 🟢 Recuperado 4377-87-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:14 a. m.] [INFO] 🔄 Progreso: 62/280 de 329
+[11-02-2026, 11:17:36 a. m.] [SUCCESS] 🟢 Recuperado 1995-13-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:38 a. m.] [SUCCESS] 🟢 Recuperado 2294-313-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:40 a. m.] [SUCCESS] 🟢 Recuperado 2494-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:40 a. m.] [INFO] 🔄 Progreso: 65/300 de 329
+[11-02-2026, 11:17:44 a. m.] [SUCCESS] 🟢 Recuperado 3483-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:46 a. m.] [SUCCESS] 🟢 Recuperado 1658-741-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:46 a. m.] [SUCCESS] 🟢 Recuperado 4301-116-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:49 a. m.] [SUCCESS] 🟢 Recuperado 5482-75-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:51 a. m.] [SUCCESS] 🟢 Recuperado 2258-190-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:55 a. m.] [SUCCESS] 🟢 Recuperado 4401-109-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:56 a. m.] [SUCCESS] 🟢 Recuperado 1237467-37-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:17:57 a. m.] [SUCCESS] 🟢 Recuperado 2086-39-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:09 a. m.] [INFO] 🔄 Progreso: 73/320 de 329
+[11-02-2026, 11:18:17 a. m.] [INFO] 🔄 Progreso: 73/329 de 329
+[11-02-2026, 11:18:17 a. m.] [INFO] 📝 Archivo actualizado: 256 códigos pendientes
+[11-02-2026, 11:18:17 a. m.] [INFO] 📊 Ciclo 5: 73 recuperados
+[11-02-2026, 11:18:17 a. m.] [INFO] ⏳ 256 códigos pendientes
+[11-02-2026, 11:18:27 a. m.] [INFO] 🔄 Ciclo 6: 256 códigos fallidos
+[11-02-2026, 11:18:27 a. m.] [INFO] 🔄 Reintentando 256 códigos...
+[11-02-2026, 11:18:37 a. m.] [SUCCESS] 🟢 Recuperado 5702-41-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:40 a. m.] [SUCCESS] 🟢 Recuperado 4858-100-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:43 a. m.] [SUCCESS] 🟢 Recuperado 2583-479-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:45 a. m.] [SUCCESS] 🟢 Recuperado 619133-93-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:47 a. m.] [SUCCESS] 🟢 Recuperado 1059082-22-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:49 a. m.] [SUCCESS] 🟢 Recuperado 618641-39-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:51 a. m.] [SUCCESS] 🟢 Recuperado 377-59-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:53 a. m.] [SUCCESS] 🟢 Recuperado 2292-95-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:56 a. m.] [SUCCESS] 🟢 Recuperado 1057432-92-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:18:56 a. m.] [INFO] 🔄 Progreso: 9/20 de 256
+[11-02-2026, 11:19:25 a. m.] [INFO] 🔄 Progreso: 9/40 de 256
+[11-02-2026, 11:19:39 a. m.] [SUCCESS] 🟢 Recuperado 1057544-304-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:40 a. m.] [SUCCESS] 🟢 Recuperado 4375-217-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:42 a. m.] [SUCCESS] 🟢 Recuperado 4127-58-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:45 a. m.] [SUCCESS] 🟢 Recuperado 2263-25-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:48 a. m.] [SUCCESS] 🟢 Recuperado 1195104-46-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:49 a. m.] [SUCCESS] 🟢 Recuperado 5622-1-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:51 a. m.] [SUCCESS] 🟢 Recuperado 3637-36-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:53 a. m.] [SUCCESS] 🟢 Recuperado 1230878-20-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:53 a. m.] [INFO] 🔄 Progreso: 17/60 de 256
+[11-02-2026, 11:19:54 a. m.] [SUCCESS] 🟢 Recuperado 3663-45-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:19:55 a. m.] [SUCCESS] 🟢 Recuperado 3951-51-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:23 a. m.] [INFO] 🔄 Progreso: 19/80 de 256
+[11-02-2026, 11:20:37 a. m.] [SUCCESS] 🟢 Recuperado 2992-132-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:40 a. m.] [SUCCESS] 🟢 Recuperado 2281-284-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:41 a. m.] [SUCCESS] 🟢 Recuperado 2686-108-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:44 a. m.] [SUCCESS] 🟢 Recuperado 4391-1-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:45 a. m.] [SUCCESS] 🟢 Recuperado 587-56-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:47 a. m.] [SUCCESS] 🟢 Recuperado 3428-41-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:49 a. m.] [SUCCESS] 🟢 Recuperado 1741-121-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:51 a. m.] [INFO] 🔄 Progreso: 26/100 de 256
+[11-02-2026, 11:20:51 a. m.] [SUCCESS] 🟢 Recuperado 2885-83-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:20:54 a. m.] [SUCCESS] 🟢 Recuperado 1593-30-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:03 a. m.] [SUCCESS] 🟢 Recuperado 3017-162-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:20 a. m.] [INFO] 🔄 Progreso: 29/120 de 256
+[11-02-2026, 11:21:36 a. m.] [SUCCESS] 🟢 Recuperado 4988-46-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:38 a. m.] [SUCCESS] 🟢 Recuperado 621-594-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:43 a. m.] [SUCCESS] 🟢 Recuperado 3950-52-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:45 a. m.] [SUCCESS] 🟢 Recuperado 1057536-93-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:45 a. m.] [INFO] 🔄 Progreso: 33/140 de 256
+[11-02-2026, 11:21:46 a. m.] [SUCCESS] 🟢 Recuperado 622-106-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:49 a. m.] [SUCCESS] 🟢 Recuperado 619-10-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:49 a. m.] [SUCCESS] 🟢 Recuperado 514862-148-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:53 a. m.] [SUCCESS] 🟢 Recuperado 1057898-28-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:21:53 a. m.] [SUCCESS] 🟢 Recuperado 2577-12-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:12 a. m.] [INFO] 🔄 Progreso: 38/160 de 256
+[11-02-2026, 11:22:38 a. m.] [SUCCESS] 🟢 Recuperado 1075963-511-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:39 a. m.] [SUCCESS] 🟢 Recuperado 229-159-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:41 a. m.] [INFO] 🔄 Progreso: 40/180 de 256
+[11-02-2026, 11:22:43 a. m.] [SUCCESS] 🟢 Recuperado 3447-183-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:44 a. m.] [SUCCESS] 🟢 Recuperado 1079486-44-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:45 a. m.] [SUCCESS] 🟢 Recuperado 630-34-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:47 a. m.] [SUCCESS] 🟢 Recuperado 948354-165-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:49 a. m.] [SUCCESS] 🟢 Recuperado 2408-423-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:51 a. m.] [SUCCESS] 🟢 Recuperado 1057937-51-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:22:51 a. m.] [INFO] 🔄 Progreso: 46/200 de 256
+[11-02-2026, 11:22:53 a. m.] [SUCCESS] 🟢 Recuperado 2980-30-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:20 a. m.] [INFO] 🔄 Progreso: 47/220 de 256
+[11-02-2026, 11:23:36 a. m.] [SUCCESS] 🟢 Recuperado 586-55-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:41 a. m.] [SUCCESS] 🟢 Recuperado 885-63-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:42 a. m.] [SUCCESS] 🟢 Recuperado 812030-35-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:43 a. m.] [SUCCESS] 🟢 Recuperado 2446-425-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:45 a. m.] [SUCCESS] 🟢 Recuperado 3743-61-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:47 a. m.] [SUCCESS] 🟢 Recuperado 2343-181-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:47 a. m.] [INFO] 🔄 Progreso: 53/240 de 256
+[11-02-2026, 11:23:49 a. m.] [SUCCESS] 🟢 Recuperado 2111-242-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:51 a. m.] [SUCCESS] 🟢 Recuperado 3181-98-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:53 a. m.] [SUCCESS] 🟢 Recuperado 4168-106-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:23:55 a. m.] [SUCCESS] 🟢 Recuperado 3269-34-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:01 a. m.] [SUCCESS] 🟢 Recuperado 2705-127-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:14 a. m.] [INFO] 🔄 Progreso: 58/256 de 256
+[11-02-2026, 11:24:14 a. m.] [INFO] 📝 Archivo actualizado: 198 códigos pendientes
+[11-02-2026, 11:24:14 a. m.] [INFO] 📊 Ciclo 6: 58 recuperados
+[11-02-2026, 11:24:14 a. m.] [INFO] ⏳ 198 códigos pendientes
+[11-02-2026, 11:24:24 a. m.] [INFO] 🔄 Ciclo 7: 198 códigos fallidos
+[11-02-2026, 11:24:24 a. m.] [INFO] 🔄 Reintentando 198 códigos...
+[11-02-2026, 11:24:39 a. m.] [SUCCESS] 🟢 Recuperado 2273-255-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:39 a. m.] [SUCCESS] 🟢 Recuperado 599-56-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:41 a. m.] [SUCCESS] 🟢 Recuperado 3291-8-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:44 a. m.] [SUCCESS] 🟢 Recuperado 1469-235-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:46 a. m.] [SUCCESS] 🟢 Recuperado 2422-529-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:47 a. m.] [SUCCESS] 🟢 Recuperado 1292-31-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:49 a. m.] [SUCCESS] 🟢 Recuperado 1057428-41-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:50 a. m.] [SUCCESS] 🟢 Recuperado 1202333-48-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:24:52 a. m.] [INFO] 🔄 Progreso: 8/20 de 198
+[11-02-2026, 11:24:53 a. m.] [SUCCESS] 🟢 Recuperado 5048-29-O123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:22 a. m.] [INFO] 🔄 Progreso: 9/40 de 198
+[11-02-2026, 11:25:36 a. m.] [SUCCESS] 🟢 Recuperado 14-59-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:38 a. m.] [SUCCESS] 🟢 Recuperado 1155493-3-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:42 a. m.] [SUCCESS] 🟢 Recuperado 2098-200-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:45 a. m.] [SUCCESS] 🟢 Recuperado 3926-56-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:46 a. m.] [SUCCESS] 🟢 Recuperado 3527-31-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:48 a. m.] [SUCCESS] 🟢 Recuperado 1057417-227-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:50 a. m.] [SUCCESS] 🟢 Recuperado 1057536-83-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:25:50 a. m.] [INFO] 🔄 Progreso: 16/60 de 198
+[11-02-2026, 11:26:19 a. m.] [INFO] 🔄 Progreso: 16/80 de 198
+[11-02-2026, 11:26:36 a. m.] [SUCCESS] 🟢 Recuperado 4014-47-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:38 a. m.] [SUCCESS] 🟢 Recuperado 2282-108-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:44 a. m.] [SUCCESS] 🟢 Recuperado 2080-218-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:44 a. m.] [SUCCESS] 🟢 Recuperado 2360-115-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:45 a. m.] [SUCCESS] 🟢 Recuperado 2377-373-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:47 a. m.] [SUCCESS] 🟢 Recuperado 1079639-127-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:48 a. m.] [INFO] 🔄 Progreso: 22/100 de 198
+[11-02-2026, 11:26:49 a. m.] [SUCCESS] 🟢 Recuperado 2387-145-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:26:52 a. m.] [SUCCESS] 🟢 Recuperado 2577-15-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:17 a. m.] [INFO] 🔄 Progreso: 24/120 de 198
+[11-02-2026, 11:27:36 a. m.] [SUCCESS] 🟢 Recuperado 3017-186-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:39 a. m.] [SUCCESS] 🟢 Recuperado 3143-87-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:42 a. m.] [SUCCESS] 🟢 Recuperado 2680-35-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:43 a. m.] [SUCCESS] 🟢 Recuperado 1384-60-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:44 a. m.] [INFO] 🔄 Progreso: 28/140 de 198
+[11-02-2026, 11:27:45 a. m.] [SUCCESS] 🟢 Recuperado 509876-8-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:47 a. m.] [SUCCESS] 🟢 Recuperado 1075963-462-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:49 a. m.] [SUCCESS] 🟢 Recuperado 2408-394-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:51 a. m.] [SUCCESS] 🟢 Recuperado 4051-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:27:53 a. m.] [SUCCESS] 🟢 Recuperado 2173-28-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:09 a. m.] [INFO] 🔄 Progreso: 33/160 de 198
+[11-02-2026, 11:28:36 a. m.] [SUCCESS] 🟢 Recuperado 2918-12-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:38 a. m.] [INFO] 🔄 Progreso: 34/180 de 198
+[11-02-2026, 11:28:39 a. m.] [SUCCESS] 🟢 Recuperado 2914-58-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:41 a. m.] [SUCCESS] 🟢 Recuperado 4127-83-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:43 a. m.] [SUCCESS] 🟢 Recuperado 1058134-101-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:45 a. m.] [SUCCESS] 🟢 Recuperado 1079659-68-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:47 a. m.] [SUCCESS] 🟢 Recuperado 757-118-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:49 a. m.] [SUCCESS] 🟢 Recuperado 642028-112-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:28:49 a. m.] [INFO] 🔄 Progreso: 40/198 de 198
+[11-02-2026, 11:28:49 a. m.] [INFO] 📝 Archivo actualizado: 158 códigos pendientes
+[11-02-2026, 11:28:49 a. m.] [INFO] 📊 Ciclo 7: 40 recuperados
+[11-02-2026, 11:28:49 a. m.] [INFO] ⏳ 158 códigos pendientes
+[11-02-2026, 11:28:59 a. m.] [INFO] 🔄 Ciclo 8: 158 códigos fallidos
+[11-02-2026, 11:28:59 a. m.] [INFO] 🔄 Reintentando 158 códigos...
+[11-02-2026, 11:29:01 a. m.] [SUCCESS] 🟢 Recuperado 1020-73-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:04 a. m.] [SUCCESS] 🟢 Recuperado 2395-54-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:06 a. m.] [SUCCESS] 🟢 Recuperado 993-108-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:08 a. m.] [SUCCESS] 🟢 Recuperado 1260-20-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:29 a. m.] [INFO] 🔄 Progreso: 4/20 de 158
+[11-02-2026, 11:29:36 a. m.] [SUCCESS] 🟢 Recuperado 3474-112-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:38 a. m.] [SUCCESS] 🟢 Recuperado 2483-322-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:41 a. m.] [SUCCESS] 🟢 Recuperado 1562-88-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:44 a. m.] [SUCCESS] 🟢 Recuperado 5067-252-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:45 a. m.] [SUCCESS] 🟢 Recuperado 1943-35-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:48 a. m.] [SUCCESS] 🟢 Recuperado 1051425-51-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:50 a. m.] [SUCCESS] 🟢 Recuperado 4594-51-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:52 a. m.] [SUCCESS] 🟢 Recuperado 2320-32-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:55 a. m.] [SUCCESS] 🟢 Recuperado 1997-19-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:29:57 a. m.] [INFO] 🔄 Progreso: 13/40 de 158
+[11-02-2026, 11:30:26 a. m.] [INFO] 🔄 Progreso: 13/60 de 158
+[11-02-2026, 11:30:38 a. m.] [SUCCESS] 🟢 Recuperado 1057374-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:41 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:30:41 a. m.] [ERROR] ❌ Error en 1057503-46-LE23: read ECONNRESET
+[11-02-2026, 11:30:43 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:30:43 a. m.] [ERROR] ❌ Error en 1593-31-LE23: read ECONNRESET
+[11-02-2026, 11:30:46 a. m.] [SUCCESS] 🟢 Recuperado 2410-97-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:48 a. m.] [SUCCESS] 🟢 Recuperado 2157-158-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:50 a. m.] [SUCCESS] 🟢 Recuperado 733913-17-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:55 a. m.] [SUCCESS] 🟢 Recuperado 2422-511-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:56 a. m.] [SUCCESS] 🟢 Recuperado 2757-45-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:56 a. m.] [INFO] 🔄 Progreso: 21/80 de 158
+[11-02-2026, 11:30:57 a. m.] [SUCCESS] 🟢 Recuperado 2306-141-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:30:57 a. m.] [SUCCESS] 🟢 Recuperado 4283-22-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:25 a. m.] [INFO] 🔄 Progreso: 23/100 de 158
+[11-02-2026, 11:31:37 a. m.] [SUCCESS] 🟢 Recuperado 3948-93-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:39 a. m.] [SUCCESS] 🟢 Recuperado 2775-43-H223 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:41 a. m.] [SUCCESS] 🟢 Recuperado 4160-41-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:44 a. m.] [SUCCESS] 🟢 Recuperado 2366-53-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:44 a. m.] [INFO] 🔄 Progreso: 27/120 de 158
+[11-02-2026, 11:31:45 a. m.] [SUCCESS] 🟢 Recuperado 3612-24-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:49 a. m.] [SUCCESS] 🟢 Recuperado 2750-25-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:50 a. m.] [SUCCESS] 🟢 Recuperado 2996-107-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:52 a. m.] [SUCCESS] 🟢 Recuperado 2696-9-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:54 a. m.] [SUCCESS] 🟢 Recuperado 2316-65-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:31:54 a. m.] [INFO] 🔄 Progreso: 32/140 de 158
+[11-02-2026, 11:32:23 a. m.] [INFO] 🔄 Progreso: 32/158 de 158
+[11-02-2026, 11:32:23 a. m.] [INFO] 📝 Archivo actualizado: 126 códigos pendientes
+[11-02-2026, 11:32:23 a. m.] [INFO] 📊 Ciclo 8: 32 recuperados
+[11-02-2026, 11:32:23 a. m.] [INFO] ⏳ 126 códigos pendientes
+[11-02-2026, 11:32:33 a. m.] [INFO] 🔄 Ciclo 9: 126 códigos fallidos
+[11-02-2026, 11:32:33 a. m.] [INFO] 🔄 Reintentando 126 códigos...
+[11-02-2026, 11:32:38 a. m.] [SUCCESS] 🟢 Recuperado 5740-26-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:40 a. m.] [SUCCESS] 🟢 Recuperado 2422-535-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:42 a. m.] [SUCCESS] 🟢 Recuperado 2923-50-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:44 a. m.] [SUCCESS] 🟢 Recuperado 2078-60-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:46 a. m.] [SUCCESS] 🟢 Recuperado 848-52-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:48 a. m.] [SUCCESS] 🟢 Recuperado 813-72-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:50 a. m.] [SUCCESS] 🟢 Recuperado 2467-377-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:54 a. m.] [SUCCESS] 🟢 Recuperado 2656-164-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:55 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:32:55 a. m.] [ERROR] ❌ Error en 2585-284-L123: read ECONNRESET
+[11-02-2026, 11:32:56 a. m.] [SUCCESS] 🟢 Recuperado 2710-184-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:32:56 a. m.] [SUCCESS] 🟢 Recuperado 5955-9-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:02 a. m.] [INFO] 🔄 Progreso: 11/20 de 126
+[11-02-2026, 11:33:31 a. m.] [INFO] 🔄 Progreso: 11/40 de 126
+[11-02-2026, 11:33:38 a. m.] [SUCCESS] 🟢 Recuperado 3906-82-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:41 a. m.] [SUCCESS] 🟢 Recuperado 3232-114-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:43 a. m.] [SUCCESS] 🟢 Recuperado 727865-27-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:45 a. m.] [SUCCESS] 🟢 Recuperado 4159-15-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:50 a. m.] [SUCCESS] 🟢 Recuperado 2780-145-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:50 a. m.] [SUCCESS] 🟢 Recuperado 3742-45-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:52 a. m.] [SUCCESS] 🟢 Recuperado 2926-10-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:54 a. m.] [SUCCESS] 🟢 Recuperado 2182-13-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:56 a. m.] [SUCCESS] 🟢 Recuperado 2693-71-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:33:59 a. m.] [INFO] 🔄 Progreso: 20/60 de 126
+[11-02-2026, 11:34:29 a. m.] [INFO] 🔄 Progreso: 20/80 de 126
+[11-02-2026, 11:34:33 a. m.] [SUCCESS] 🟢 Recuperado 622844-5-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:38 a. m.] [SUCCESS] 🟢 Recuperado 3558-31-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:40 a. m.] [SUCCESS] 🟢 Recuperado 621-682-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:45 a. m.] [SUCCESS] 🟢 Recuperado 3951-50-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:46 a. m.] [SUCCESS] 🟢 Recuperado 2699-54-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:49 a. m.] [SUCCESS] 🟢 Recuperado 1864-3-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:52 a. m.] [SUCCESS] 🟢 Recuperado 4452-28-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:52 a. m.] [INFO] 🔄 Progreso: 27/100 de 126
+[11-02-2026, 11:34:53 a. m.] [SUCCESS] 🟢 Recuperado 1459-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:55 a. m.] [SUCCESS] 🟢 Recuperado 2467-376-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:34:58 a. m.] [SUCCESS] 🟢 Recuperado 2280-275-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:11 a. m.] [SUCCESS] 🟢 Recuperado 1113146-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:17 a. m.] [INFO] 🔄 Progreso: 31/120 de 126
+[11-02-2026, 11:35:27 a. m.] [INFO] 🔄 Progreso: 31/126 de 126
+[11-02-2026, 11:35:27 a. m.] [INFO] 📝 Archivo actualizado: 95 códigos pendientes
+[11-02-2026, 11:35:27 a. m.] [INFO] 📊 Ciclo 9: 31 recuperados
+[11-02-2026, 11:35:27 a. m.] [INFO] ⏳ 95 códigos pendientes
+[11-02-2026, 11:35:37 a. m.] [INFO] 🔄 Ciclo 10: 95 códigos fallidos
+[11-02-2026, 11:35:37 a. m.] [INFO] 🔄 Reintentando 95 códigos...
+[11-02-2026, 11:35:43 a. m.] [SUCCESS] 🟢 Recuperado 3539-9-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:44 a. m.] [SUCCESS] 🟢 Recuperado 1515-21-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:47 a. m.] [SUCCESS] 🟢 Recuperado 4375-191-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:49 a. m.] [SUCCESS] 🟢 Recuperado 4375-148-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:51 a. m.] [SUCCESS] 🟢 Recuperado 1297-10-O122 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:53 a. m.] [SUCCESS] 🟢 Recuperado 1098710-34-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:55 a. m.] [SUCCESS] 🟢 Recuperado 782278-11-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:35:57 a. m.] [SUCCESS] 🟢 Recuperado 1057432-88-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:05 a. m.] [INFO] 🔄 Progreso: 8/20 de 95
+[11-02-2026, 11:36:35 a. m.] [INFO] 🔄 Progreso: 8/40 de 95
+[11-02-2026, 11:36:37 a. m.] [SUCCESS] 🟢 Recuperado 3017-158-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:39 a. m.] [SUCCESS] 🟢 Recuperado 3516-157-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:45 a. m.] [SUCCESS] 🟢 Recuperado 1057422-23-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:45 a. m.] [SUCCESS] 🟢 Recuperado 4308-37-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:47 a. m.] [SUCCESS] 🟢 Recuperado 4179-127-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:50 a. m.] [SUCCESS] 🟢 Recuperado 1091-15-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:51 a. m.] [SUCCESS] 🟢 Recuperado 4031-45-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:55 a. m.] [SUCCESS] 🟢 Recuperado 3567-53-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:57 a. m.] [SUCCESS] 🟢 Recuperado 812261-71-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:36:58 a. m.] [SUCCESS] 🟢 Recuperado 3894-94-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:37:03 a. m.] [INFO] 🔄 Progreso: 18/60 de 95
+[11-02-2026, 11:37:32 a. m.] [INFO] 🔄 Progreso: 18/80 de 95
+[11-02-2026, 11:37:37 a. m.] [SUCCESS] 🟢 Recuperado 4115-11-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:37:42 a. m.] [SUCCESS] 🟢 Recuperado 4368-11-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:37:44 a. m.] [SUCCESS] 🟢 Recuperado 1058134-76-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:37:52 a. m.] [SUCCESS] 🟢 Recuperado 1057472-113-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:37:52 a. m.] [INFO] 🔄 Progreso: 22/95 de 95
+[11-02-2026, 11:37:52 a. m.] [INFO] 📝 Archivo actualizado: 73 códigos pendientes
+[11-02-2026, 11:37:52 a. m.] [INFO] 📊 Ciclo 10: 22 recuperados
+[11-02-2026, 11:37:52 a. m.] [INFO] ⏳ 73 códigos pendientes
+[11-02-2026, 11:38:02 a. m.] [INFO] 🔄 Ciclo 11: 73 códigos fallidos
+[11-02-2026, 11:38:02 a. m.] [INFO] 🔄 Reintentando 73 códigos...
+[11-02-2026, 11:38:05 a. m.] [SUCCESS] 🟢 Recuperado 4457-83-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:07 a. m.] [SUCCESS] 🟢 Recuperado 4066-11-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:09 a. m.] [SUCCESS] 🟢 Recuperado 956-194-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:11 a. m.] [SUCCESS] 🟢 Recuperado 2408-377-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:13 a. m.] [SUCCESS] 🟢 Recuperado 3447-148-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:15 a. m.] [SUCCESS] 🟢 Recuperado 5083-6-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:17 a. m.] [SUCCESS] 🟢 Recuperado 739-14-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:19 a. m.] [SUCCESS] 🟢 Recuperado 845-20-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:21 a. m.] [SUCCESS] 🟢 Recuperado 2686-126-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:23 a. m.] [SUCCESS] 🟢 Recuperado 1469-381-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:31 a. m.] [INFO] 🔄 Progreso: 10/20 de 73
+[11-02-2026, 11:38:38 a. m.] [SUCCESS] 🟢 Recuperado 2440-161-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:40 a. m.] [SUCCESS] 🟢 Recuperado 3516-156-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:42 a. m.] [SUCCESS] 🟢 Recuperado 3516-154-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:44 a. m.] [SUCCESS] 🟢 Recuperado 4168-107-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:47 a. m.] [SUCCESS] 🟢 Recuperado 2686-112-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:49 a. m.] [SUCCESS] 🟢 Recuperado 1335-3-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:38:51 a. m.] [SUCCESS] 🟢 Recuperado 3678-43-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:00 a. m.] [INFO] 🔄 Progreso: 17/40 de 73
+[11-02-2026, 11:39:03 a. m.] [SUCCESS] 🟢 Recuperado 434-157-R123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:04 a. m.] [SUCCESS] 🟢 Recuperado 621-573-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:29 a. m.] [INFO] 🔄 Progreso: 19/60 de 73
+[11-02-2026, 11:39:29 a. m.] [INFO] 🔄 Progreso: 19/73 de 73
+[11-02-2026, 11:39:29 a. m.] [INFO] 📝 Archivo actualizado: 54 códigos pendientes
+[11-02-2026, 11:39:29 a. m.] [INFO] 📊 Ciclo 11: 19 recuperados
+[11-02-2026, 11:39:29 a. m.] [INFO] ⏳ 54 códigos pendientes
+[11-02-2026, 11:39:39 a. m.] [INFO] 🔄 Ciclo 12: 54 códigos fallidos
+[11-02-2026, 11:39:39 a. m.] [INFO] 🔄 Reintentando 54 códigos...
+[11-02-2026, 11:39:42 a. m.] [SUCCESS] 🟢 Recuperado 630-29-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:43 a. m.] [SUCCESS] 🟢 Recuperado 1469-383-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:49 a. m.] [SUCCESS] 🟢 Recuperado 558257-26-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:50 a. m.] [SUCCESS] 🟢 Recuperado 1058087-5-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:51 a. m.] [SUCCESS] 🟢 Recuperado 1288419-2-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:53 a. m.] [SUCCESS] 🟢 Recuperado 3751-34-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:55 a. m.] [SUCCESS] 🟢 Recuperado 3280-20-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:39:58 a. m.] [SUCCESS] 🟢 Recuperado 621-590-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:01 a. m.] [SUCCESS] 🟢 Recuperado 2759-63-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:08 a. m.] [INFO] 🔄 Progreso: 9/20 de 54
+[11-02-2026, 11:40:37 a. m.] [INFO] 🔄 Progreso: 9/40 de 54
+[11-02-2026, 11:40:37 a. m.] [SUCCESS] 🟢 Recuperado 3656-182-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:39 a. m.] [SUCCESS] 🟢 Recuperado 2280-268-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:43 a. m.] [SUCCESS] 🟢 Recuperado 2422-409-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:46 a. m.] [SUCCESS] 🟢 Recuperado 2792-80-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:52 a. m.] [SUCCESS] 🟢 Recuperado 1078177-85-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:40:58 a. m.] [SUCCESS] 🟢 Recuperado 3710-210-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:09 a. m.] [SUCCESS] 🟢 Recuperado 3191-93-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:09 a. m.] [INFO] 🔄 Progreso: 16/54 de 54
+[11-02-2026, 11:41:09 a. m.] [INFO] 📝 Archivo actualizado: 38 códigos pendientes
+[11-02-2026, 11:41:09 a. m.] [INFO] 📊 Ciclo 12: 16 recuperados
+[11-02-2026, 11:41:09 a. m.] [INFO] ⏳ 38 códigos pendientes
+[11-02-2026, 11:41:19 a. m.] [INFO] 🔄 Ciclo 13: 38 códigos fallidos
+[11-02-2026, 11:41:19 a. m.] [INFO] 🔄 Reintentando 38 códigos...
+[11-02-2026, 11:41:21 a. m.] [SUCCESS] 🟢 Recuperado 2436-322-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:26 a. m.] [SUCCESS] 🟢 Recuperado 525800-35-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:28 a. m.] [SUCCESS] 🟢 Recuperado 1049242-16-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:38 a. m.] [SUCCESS] 🟢 Recuperado 1016-15-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:45 a. m.] [SUCCESS] 🟢 Recuperado 5877-28-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:47 a. m.] [SUCCESS] 🟢 Recuperado 757-124-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:48 a. m.] [INFO] 🔄 Progreso: 6/20 de 38
+[11-02-2026, 11:41:48 a. m.] [SUCCESS] 🟢 Recuperado 2451-48-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:51 a. m.] [SUCCESS] 🟢 Recuperado 3269-29-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:41:55 a. m.] [SUCCESS] 🟢 Recuperado 1175-142-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:00 a. m.] [WARNING] ⚠️ Error al hacer rollback: Can't add new command when connection is in closed state
+[11-02-2026, 11:42:00 a. m.] [ERROR] ❌ Error en 1493-110-LE23: read ECONNRESET
+[11-02-2026, 11:42:00 a. m.] [SUCCESS] 🟢 Recuperado 2450-132-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:17 a. m.] [INFO] 🔄 Progreso: 11/38 de 38
+[11-02-2026, 11:42:17 a. m.] [INFO] 📝 Archivo actualizado: 27 códigos pendientes
+[11-02-2026, 11:42:17 a. m.] [INFO] 📊 Ciclo 13: 11 recuperados
+[11-02-2026, 11:42:17 a. m.] [INFO] ⏳ 27 códigos pendientes
+[11-02-2026, 11:42:27 a. m.] [INFO] 🔄 Ciclo 14: 27 códigos fallidos
+[11-02-2026, 11:42:27 a. m.] [INFO] 🔄 Reintentando 27 códigos...
+[11-02-2026, 11:42:37 a. m.] [SUCCESS] 🟢 Recuperado 2736-122-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:39 a. m.] [SUCCESS] 🟢 Recuperado 4085-18-LP23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:41 a. m.] [SUCCESS] 🟢 Recuperado 2239-12-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:44 a. m.] [SUCCESS] 🟢 Recuperado 4776-40-LR23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:46 a. m.] [SUCCESS] 🟢 Recuperado 4858-102-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:48 a. m.] [SUCCESS] 🟢 Recuperado 712307-34-O123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:50 a. m.] [SUCCESS] 🟢 Recuperado 4055-55-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:53 a. m.] [SUCCESS] 🟢 Recuperado 608-176-LR22 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:55 a. m.] [INFO] 🔄 Progreso: 8/20 de 27
+[11-02-2026, 11:42:55 a. m.] [SUCCESS] 🟢 Recuperado 4322-80-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:42:55 a. m.] [INFO] 🔄 Progreso: 9/27 de 27
+[11-02-2026, 11:42:55 a. m.] [INFO] 📝 Archivo actualizado: 18 códigos pendientes
+[11-02-2026, 11:42:55 a. m.] [INFO] 📊 Ciclo 14: 9 recuperados
+[11-02-2026, 11:42:55 a. m.] [INFO] ⏳ 18 códigos pendientes
+[11-02-2026, 11:43:05 a. m.] [INFO] 🔄 Ciclo 15: 18 códigos fallidos
+[11-02-2026, 11:43:05 a. m.] [INFO] 🔄 Reintentando 18 códigos...
+[11-02-2026, 11:43:37 a. m.] [SUCCESS] 🟢 Recuperado 1019-72-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:43:37 a. m.] [INFO] 🔄 Progreso: 1/18 de 18
+[11-02-2026, 11:43:37 a. m.] [INFO] 📝 Archivo actualizado: 17 códigos pendientes
+[11-02-2026, 11:43:37 a. m.] [INFO] 📊 Ciclo 15: 1 recuperados
+[11-02-2026, 11:43:37 a. m.] [INFO] ⏳ 17 códigos pendientes
+[11-02-2026, 11:43:47 a. m.] [INFO] 🔄 Ciclo 16: 17 códigos fallidos
+[11-02-2026, 11:43:47 a. m.] [INFO] 🔄 Reintentando 17 códigos...
+[11-02-2026, 11:43:50 a. m.] [SUCCESS] 🟢 Recuperado 2710-172-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:43:56 a. m.] [SUCCESS] 🟢 Recuperado 2324-407-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:44:02 a. m.] [SUCCESS] 🟢 Recuperado 1057402-215-LQ23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:44:08 a. m.] [SUCCESS] 🟢 Recuperado 4051-49-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:44:15 a. m.] [SUCCESS] 🟢 Recuperado 4375-147-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:44:15 a. m.] [INFO] 🔄 Progreso: 5/17 de 17
+[11-02-2026, 11:44:15 a. m.] [INFO] 📝 Archivo actualizado: 12 códigos pendientes
+[11-02-2026, 11:44:15 a. m.] [INFO] 📊 Ciclo 16: 5 recuperados
+[11-02-2026, 11:44:15 a. m.] [INFO] ⏳ 12 códigos pendientes
+[11-02-2026, 11:44:25 a. m.] [INFO] 🔄 Ciclo 17: 12 códigos fallidos
+[11-02-2026, 11:44:25 a. m.] [INFO] 🔄 Reintentando 12 códigos...
+[11-02-2026, 11:44:47 a. m.] [SUCCESS] 🟢 Recuperado 4473-63-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:44:54 a. m.] [SUCCESS] 🟢 Recuperado 3595-76-L123 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:00 a. m.] [SUCCESS] 🟢 Recuperado 4766-12-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:00 a. m.] [INFO] 🔄 Progreso: 3/12 de 12
+[11-02-2026, 11:45:00 a. m.] [INFO] 📝 Archivo actualizado: 9 códigos pendientes
+[11-02-2026, 11:45:00 a. m.] [INFO] 📊 Ciclo 17: 3 recuperados
+[11-02-2026, 11:45:00 a. m.] [INFO] ⏳ 9 códigos pendientes
+[11-02-2026, 11:45:10 a. m.] [INFO] 🔄 Ciclo 18: 9 códigos fallidos
+[11-02-2026, 11:45:10 a. m.] [INFO] 🔄 Reintentando 9 códigos...
+[11-02-2026, 11:45:14 a. m.] [SUCCESS] 🟢 Recuperado 1171142-73-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:19 a. m.] [SUCCESS] 🟢 Recuperado 2101-167-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:27 a. m.] [SUCCESS] 🟢 Recuperado 4050-99-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:31 a. m.] [SUCCESS] 🟢 Recuperado 741-50-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:38 a. m.] [SUCCESS] 🟢 Recuperado 1348-8-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:38 a. m.] [INFO] 🔄 Progreso: 5/9 de 9
+[11-02-2026, 11:45:38 a. m.] [INFO] 📝 Archivo actualizado: 4 códigos pendientes
+[11-02-2026, 11:45:38 a. m.] [INFO] 📊 Ciclo 18: 5 recuperados
+[11-02-2026, 11:45:38 a. m.] [INFO] ⏳ 4 códigos pendientes
+[11-02-2026, 11:45:48 a. m.] [INFO] 🔄 Ciclo 19: 4 códigos fallidos
+[11-02-2026, 11:45:48 a. m.] [INFO] 🔄 Reintentando 4 códigos...
+[11-02-2026, 11:45:50 a. m.] [SUCCESS] 🟢 Recuperado 1057384-90-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:45:58 a. m.] [SUCCESS] 🟢 Recuperado 1116007-33-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:46:03 a. m.] [SUCCESS] 🟢 Recuperado 1191688-148-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:46:10 a. m.] [SUCCESS] 🟢 Recuperado 2086-45-LE23 (Adjudicada) y guardado en BD
+[11-02-2026, 11:46:10 a. m.] [INFO] 🔄 Progreso: 4/4 de 4
+[11-02-2026, 11:46:10 a. m.] [INFO] 🗑️ Archivo eliminado (sin fallidos pendientes)
+[11-02-2026, 11:46:10 a. m.] [INFO] 📊 Ciclo 19: 4 recuperados
+[11-02-2026, 11:46:10 a. m.] [SUCCESS] 🎉 Todos los códigos recuperados en 19 ciclo(s)
+[11-02-2026, 11:46:10 a. m.] [SUCCESS] ✅ Proceso completado: Todos los códigos recuperados
+[11-02-2026, 11:46:10 a. m.] [INFO] 🛑 Ejecución finalizada correctamente

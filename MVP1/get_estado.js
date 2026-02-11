@@ -4,8 +4,15 @@ import path from 'path';
 import fetch from 'node-fetch';
 import Papa from 'papaparse';
 import PQueue from 'p-queue';
+import dotenv from 'dotenv';
 
-const ticket = "0F702DFA-2D0B-4243-897A-84985C4FCA73";
+dotenv.config({ path: path.join(process.cwd(), '.env') });
+
+const ticket = process.env.TICKET_MVP1;
+if (!ticket) {
+  console.error('❌ ERROR: TICKET_MVP1 no está configurado en .env');
+  process.exit(1);
+}
 const archivoPublicadas = 'csv/publicadas_sin_duplicados.csv';
 
 const RANGO_INICIO =0;

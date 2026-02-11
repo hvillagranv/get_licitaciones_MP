@@ -1,10 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import PQueue from 'p-queue';
+import dotenv from 'dotenv';
 import { guardarDetallesEnBD } from './guardarBD.js';
-import { logMensaje } from './utils/logs.js';
+import { logMensaje, iniciarMonitorInactividad, detenerMonitorInactividad } from './utils/logs.js';
 import { fileURLToPath } from 'url';
 import { pool } from './connectDB.js';
+
+dotenv.config();
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -13,14 +16,14 @@ const __dirname = path.dirname(__filename);
 
 // === CONFIGURACIÓN ===
 const CONFIG = {
-  ticket: '886F450C-C2FA-4C9B-99BE-E06B63BAB511',
+  ticket: process.env.TICKET,
   concurrenciaEstado: 1,
   concurrenciaDetalles: 20,
   tiempoEsperaFechas: 1500,
   maxIntentosAPI: 5,
   maxIntentosDetalle: 5,
   timeoutAPI: 10000,
-  estados: ['desierta'],
+  estados: ['adjudicada'],
   nombreEstado: {
     publicada: 'Publicada',
     cerrada: 'Cerrada',
@@ -30,6 +33,12 @@ const CONFIG = {
     adjudicada: 'Adjudicada'
   }
 };
+
+// Validar que TICKET está configurado
+if (!CONFIG.ticket) {
+  console.error('❌ ERROR: TICKET no está configurado en .env');
+  process.exit(1);
+}
 
 //desierta = 2006 - 2009, 2022 - 2025
 //adjudicada = 2024 - 2025
@@ -544,8 +553,8 @@ const main = async () => {
   }
   
   // Configurar fechas
-  const fechaInicio = '2021-12-01';
-  const fechaTermino = '2022-01-01';
+  const fechaInicio = '2023-10-15';
+  const fechaTermino = '2023-10-25';
   const fechas = generarFechas(fechaInicio, fechaTermino);
 
   logMensaje(`📅 Fechas: ${fechaInicio} hasta ${fechaTermino}`, 'info');
@@ -608,12 +617,16 @@ const main = async () => {
 };
 
 // === EJECUCIÓN ===
+iniciarMonitorInactividad();
+
 main()
   .then(() => {
+    detenerMonitorInactividad();
     logMensaje('🛑 Ejecución finalizada correctamente', 'info');
     process.exit(0);
   })
   .catch(err => {
+    detenerMonitorInactividad();
     logMensaje(`❌ Error no manejado: ${err.message}`, 'error');
     console.error(err);
     process.exit(1);

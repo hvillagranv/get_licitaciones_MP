@@ -1,10 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import PQueue from 'p-queue';
+import dotenv from 'dotenv';
 import { guardarDetallesEnBD } from './guardarBD.js';
 import { logMensaje } from './utils/logs.js';
 import { fileURLToPath } from 'url';
 import { pool } from './connectDB.js';
+
+dotenv.config();
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -12,7 +15,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // === CONFIGURACIÓN GENERAL ===
-const ticket = '886F450C-C2FA-4C9B-99BE-E06B63BAB511';
+const ticket = process.env.TICKET;
+if (!ticket) {
+  console.error('❌ ERROR: TICKET no está configurado en .env');
+  process.exit(1);
+}
 const CONCURRENCIA_ESTADO = 1;
 const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 2000;

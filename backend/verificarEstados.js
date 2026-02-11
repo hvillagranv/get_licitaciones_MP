@@ -1,10 +1,17 @@
+import dotenv from 'dotenv';
 import { pool } from './connectDB.js';
 import { guardarDetallesEnBD } from './guardarBD.js';
 import { logMensaje } from './utils/logs.js';
 import fs from 'fs';
 
+dotenv.config();
+
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const ticket = '886F450C-C2FA-4C9B-99BE-E06B63BAB511';
+const ticket = process.env.TICKET;
+if (!ticket) {
+  console.error('❌ ERROR: TICKET no está configurado en .env');
+  process.exit(1);
+}
 const esperar = (ms) => new Promise(res => setTimeout(res, ms));
 const NO_ENCONTRADOS_PATH = './no_encontrados.txt';
 

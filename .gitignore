@@ -6,3 +6,4 @@ logs/*
 csv1/*
 MVP1/logs/*
 connectDB.js
+.env

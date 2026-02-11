@@ -26,11 +26,110 @@ const parts = Object.fromEntries(formatParts.map(p => [p.type, p.value]));
 const nombreArchivo = `log_${parts.year}-${parts.month}-${parts.day}_${parts.hour}-${parts.minute}-${parts.second}.txt`;
 const logPath = path.join(logsDir, nombreArchivo);
 
-// Función de log
+// Control de inactividad
+let ultimaActividad = Date.now();
+let timeoutInterval = null;
+const TIMEOUT_INACTIVIDAD = 3 * 60 * 1000; // 3 minutos
+
+// Función para sanitizar datos sensibles
+const sanitizarDatos = (msg) => {
+  let sanitizado = String(msg);
+  
+  // Mascarar passwords
+  sanitizado = sanitizado.replace(
+    /password["\s:=]+["']?([^"'\s,}]+)/gi,
+    'password: ***REDACTED***'
+  );
+  
+  // Mascarar tokens
+  sanitizado = sanitizado.replace(
+    /token["\s:=]+["']?([^"'\s,}]+)/gi,
+    'token: ***REDACTED***'
+  );
+  
+  // Mascarar credenciales
+  sanitizado = sanitizado.replace(
+    /credential["\s:=]+["']?([^"'\s,}]+)/gi,
+    'credential: ***REDACTED***'
+  );
+  
+  // Mascarar JWT
+  sanitizado = sanitizado.replace(
+    /bearer\s+[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+/gi,
+    'Bearer ***JWT_REDACTED***'
+  );
+  
+  // Mascarar API keys
+  sanitizado = sanitizado.replace(
+    /[Aa]pi[_-]?key["\s:=]+["']?([^"'\s,}]+)/gi,
+    'api_key: ***REDACTED***'
+  );
+  
+  // Mascarar emails (parcialmente) - solo si tiene @ y dominio válido
+  sanitizado = sanitizado.replace(
+    /\b([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/g,
+    '***@$2'
+  );
+  
+  // Mascarar números de tarjeta (16 dígitos seguidos, no fechas)
+  // Excluir si tiene formato de fecha (YYYY-MM-DD o DD-MM-YYYY)
+  sanitizado = sanitizado.replace(
+    /\b(?!(?:19|20)\d{2}[-/])\d{4}[\s-]\d{4}[\s-]\d{4}[\s-]\d{4}\b/g,
+    '****-****-****-****'
+  );
+  
+  // Mascarar números de teléfono chilenos (+56 9 XXXX XXXX)
+  // Excluir si son fechas u horas
+  sanitizado = sanitizado.replace(
+    /\+?56[\s-]?9[\s-]?\d{4}[\s-]?\d{4}\b/g,
+    '+56 9 ***-****'
+  );
+  
+  return sanitizado;
+};
+
+// Función de log mejorada
 export const logMensaje = (msg, tipo = 'info') => {
+  ultimaActividad = Date.now();
   const timestamp = new Date().toLocaleString('es-CL', {
     timeZone: 'America/Santiago'
   });
-  const linea = `[${timestamp}] [${tipo.toUpperCase()}] ${msg}\n`;
-  fs.appendFileSync(logPath, linea);
+  
+  // Sanitizar el mensaje antes de loguearlo
+  const msgSanitizado = sanitizarDatos(msg);
+  const linea = `[${timestamp}] [${tipo.toUpperCase()}] ${msgSanitizado}\n`;
+  
+  try {
+    fs.appendFileSync(logPath, linea);
+  } catch (err) {
+    console.error('Error escribiendo log:', err.message);
+  }
+};
+
+// Iniciar monitor de inactividad
+export const iniciarMonitorInactividad = () => {
+  if (timeoutInterval) return; // Ya está iniciado
+  
+  logMensaje('⏱️ Monitor de inactividad iniciado (timeout: 3 minutos)', 'info');
+  
+  timeoutInterval = setInterval(() => {
+    const tiempoInactivo = Date.now() - ultimaActividad;
+    
+    if (tiempoInactivo >= TIMEOUT_INACTIVIDAD) {
+      logMensaje('⏱️ Sin actividad por 3 minutos. Cerrando programa...', 'warning');
+      clearInterval(timeoutInterval);
+      setTimeout(() => {
+        process.exit(0);
+      }, 1000);
+    }
+  }, 30000); // Verificar cada 30 segundos
+};
+
+// Detener monitor de inactividad
+export const detenerMonitorInactividad = () => {
+  if (timeoutInterval) {
+    clearInterval(timeoutInterval);
+    timeoutInterval = null;
+    logMensaje('⏱️ Monitor de inactividad detenido', 'info');
+  }
 };
