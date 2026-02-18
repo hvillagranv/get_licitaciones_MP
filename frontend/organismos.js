@@ -158,9 +158,15 @@ function mostrarDatos(datosFiltrados) {
     const montoAdjudicado = formatearMoneda(item.monto_adjudicado_total, { zeroAsNoInfo: true });
     const esAdjudicada = normalizarTexto(item.estado) === 'adjudicada';
     const proveedoresAdjudicados = (item.proveedores_adjudicados || '').trim();
+    const fechaAdjudicacion = formatearFecha(item.fecha_adjudicacion);
     const bloqueProveedor = esAdjudicada
       ? `<div class="row mt-2">
           <div class="col-md-12"><strong>Proveedor adjudicado:</strong><br>${proveedoresAdjudicados || 'No informado'}</div>
+        </div>`
+      : '';
+    const bloqueFechaAdjudicacion = esAdjudicada
+      ? `<div class="row mt-2">
+          <div class="col-md-6"><strong>Fecha de adjudicación:</strong><br>${fechaAdjudicacion}</div>
         </div>`
       : '';
 
@@ -185,6 +191,7 @@ function mostrarDatos(datosFiltrados) {
         <div class="row mt-2">
           <div class="col-md-6"><strong>Monto adjudicado:</strong><br>${montoAdjudicado}</div>
         </div>
+        ${bloqueFechaAdjudicacion}
         ${bloqueProveedor}
       </div>`;
     contenedor.innerHTML += card;

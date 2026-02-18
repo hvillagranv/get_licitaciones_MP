@@ -553,8 +553,8 @@ const main = async () => {
   }
   
   // Configurar fechas
-  const fechaInicio = '2023-10-15';
-  const fechaTermino = '2023-10-25';
+  const fechaInicio = '2023-09-25';
+  const fechaTermino = '2023-10-05';
   const fechas = generarFechas(fechaInicio, fechaTermino);
 
   logMensaje(`📅 Fechas: ${fechaInicio} hasta ${fechaTermino}`, 'info');

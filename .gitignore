@@ -7,3 +7,6 @@ csv1/*
 MVP1/logs/*
 connectDB.js
 .env
+.env.example
+site_old/*
+MVP1/*

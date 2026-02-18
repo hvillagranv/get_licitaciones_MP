@@ -14,23 +14,38 @@ let datosFiltradosActuales = [];
 const aniosDisponibles = [2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004];
 const tiposDisponibles = ["B2","CO","DC","E2","H2","I2","L1","LE","LP","LQ","LR","LS","O1","O2","SE"];
 
-// Proveedores cargados desde BD
+// Proveedores cargados desde CSV
 let proveedoresDisponibles = [];
 
-// Cargar proveedores desde la BD
+// Cargar proveedores desde CSV
 async function cargarProveedoresDisponibles() {
-  try {
-    const res = await fetch('api/proveedoresPub.php?action=lista');
-    const contentType = res.headers.get('content-type') || '';
-    if (!res.ok || !contentType.includes('application/json')) {
-      throw new Error(`HTTP ${res.status}`);
+  return new Promise((resolve) => {
+    if (typeof Papa === 'undefined') {
+      console.error('❌ PapaParse no está disponible para cargar proveedores desde CSV.');
+      resolve();
+      return;
     }
-    const data = await res.json();
-    proveedoresDisponibles = (data.proveedores || []).sort((a, b) => a.localeCompare(b, 'es'));
-    console.log(`✅ ${proveedoresDisponibles.length} proveedores cargados desde BD`);
-  } catch (err) {
-    console.error('❌ Error al cargar proveedores:', err);
-  }
+
+    Papa.parse('data/csv/proveedores.csv', {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const filas = Array.isArray(results.data) ? results.data : [];
+        const proveedores = filas
+          .map(row => (row.nombre_proveedor || '').toString().trim())
+          .filter(Boolean);
+        proveedoresDisponibles = Array.from(new Set(proveedores))
+          .sort((a, b) => a.localeCompare(b, 'es'));
+        console.log(`✅ ${proveedoresDisponibles.length} proveedores cargados desde CSV`);
+        resolve();
+      },
+      error: (error) => {
+        console.error('❌ Error al cargar proveedores desde CSV:', error);
+        resolve();
+      }
+    });
+  });
 }
 
 // Inicializar la interfaz
@@ -137,9 +152,15 @@ function mostrarDatos(datosFiltrados) {
     const montoAdjudicado = formatearMoneda(item.monto_adjudicado_total, { zeroAsNoInfo: true });
     const esAdjudicada = normalizarTexto(item.estado) === 'adjudicada';
     const proveedoresAdjudicados = (item.proveedores_adjudicados || '').trim();
+    const fechaAdjudicacion = formatearFecha(item.fecha_adjudicacion);
     const bloqueProveedor = esAdjudicada
       ? `<div class="row mt-2">
           <div class="col-md-12"><strong>Proveedor adjudicado:</strong><br>${proveedoresAdjudicados || 'No informado'}</div>
+        </div>`
+      : '';
+    const bloqueFechaAdjudicacion = esAdjudicada
+      ? `<div class="row mt-2">
+          <div class="col-md-6"><strong>Fecha de adjudicación:</strong><br>${fechaAdjudicacion}</div>
         </div>`
       : '';
 
@@ -164,6 +185,7 @@ function mostrarDatos(datosFiltrados) {
         <div class="row mt-2">
           <div class="col-md-6"><strong>Monto adjudicado:</strong><br>${montoAdjudicado}</div>
         </div>
+        ${bloqueFechaAdjudicacion}
         ${bloqueProveedor}
       </div>`;
     contenedor.innerHTML += card;

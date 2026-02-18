@@ -7,12 +7,12 @@ import { logMensaje } from './utils/logs.js';
 import { fileURLToPath } from 'url';
 import { pool } from './connectDB.js';
 
-dotenv.config();
-
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 // === CONFIGURACIÓN GENERAL ===
 const ticket = process.env.TICKET;

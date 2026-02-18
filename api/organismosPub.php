@@ -5,6 +5,23 @@ ini_set('display_errors', 0);  // ✅ No mostrar errores en producción
 ini_set('log_errors', 1);
 ini_set('error_log', '/var/log/php_errors.log');
 
+// Cargar .env manualmente (cPanel no lo carga por defecto)
+$envPath = __DIR__ . '/../.env';
+if (file_exists($envPath)) {
+    foreach (file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || strpos($line, '#') === 0 || strpos($line, '=') === false) {
+            continue;
+        }
+        [$key, $value] = array_map('trim', explode('=', $line, 2));
+        $value = trim($value, "\"'");
+        if (!isset($_ENV[$key])) {
+            $_ENV[$key] = $value;
+            putenv("$key=$value");
+        }
+    }
+}
+
 // CSRF PROTECTION
 session_start();
 // Generar token CSRF si no existe

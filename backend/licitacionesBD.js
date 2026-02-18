@@ -7,12 +7,12 @@ import { logMensaje } from './utils/logs.js';
 import { fileURLToPath } from 'url';
 import { pool } from './connectDB.js';
 
-dotenv.config();
-
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 // === CONFIGURACIÓN GENERAL ===
 const ticket = process.env.TICKET;
@@ -24,7 +24,7 @@ if (!ticket) {
 const CONCURRENCIA_ESTADO = 1;
 const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 1500;
-const estados = ['desierta'];
+const estados = ['publicada', 'cerrada', 'desierta', 'revocada', 'suspendida', 'adjudicada', 'todos'];
 //desierta = 2006 - 2009, 2023 - 2025
 //adjudicada = 2024 - 2025
 

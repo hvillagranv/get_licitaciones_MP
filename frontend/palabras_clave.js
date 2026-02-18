@@ -305,6 +305,8 @@ function descargarCsv() {
 
   const encabezados = [
     'codigo',
+    'estado',
+    'tipo',
     'nombre',
     'descripcion',
     'institucion_nombre',
@@ -319,7 +321,8 @@ function descargarCsv() {
   });
 
   const contenido = [encabezados.join(';'), ...filas].join('\n');
-  const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8;' });
+  const bytesLatin1 = codificarLatin1(contenido);
+  const blob = new Blob([bytesLatin1], { type: 'text/csv;charset=iso-8859-1;' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -351,4 +354,13 @@ function escaparCsv(valor) {
     return `"${texto.replace(/"/g, '""')}"`;
   }
   return texto;
+}
+
+function codificarLatin1(texto) {
+  const bytes = new Uint8Array(texto.length);
+  for (let i = 0; i < texto.length; i++) {
+    const code = texto.charCodeAt(i);
+    bytes[i] = code <= 255 ? code : 63;
+  }
+  return bytes;
 }

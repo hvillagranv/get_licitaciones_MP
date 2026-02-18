@@ -1,10 +1,14 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Crear carpeta de logs si no existe
-const logsDir = path.join(process.cwd(), 'logs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Crear carpeta de logs si no existe (en la raíz del proyecto)
+const logsDir = path.join(__dirname, '..', '..', 'logs');
 if (!fs.existsSync(logsDir)) {
-  fs.mkdirSync(logsDir);
+  fs.mkdirSync(logsDir, { recursive: true });
 }
 
 // Obtener fecha y hora de Santiago
