@@ -24,7 +24,7 @@ if (!ticket) {
 const CONCURRENCIA_ESTADO = 1;
 const CONCURRENCIA_DETALLES = 20;
 const TIEMPO_ESPERA_FECHAS = 1500;
-const estados = ['publicada', 'cerrada', 'desierta', 'revocada', 'suspendida', 'adjudicada', 'todos'];
+const estados = ['adjudicada'];
 //desierta = 2006 - 2009, 2023 - 2025
 //adjudicada = 2024 - 2025
 
@@ -114,14 +114,14 @@ const fetchJSON = async (url, maxIntentos = 5) => {
   while (intento < maxIntentos) {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos timeout
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
       
       const res = await fetch(url, { signal: controller.signal });
       clearTimeout(timeoutId);
       
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
-    } catch (err) {
+    } catch {
       intento++;
       if (intento < maxIntentos) await esperar(500 * intento);
     }
@@ -533,8 +533,8 @@ const main = async () => {
   
   const ayer = new Date();
   ayer.setDate(ayer.getDate() - 1);
-  const fechaInicio = '2022-03-01';
-  const fechaTermino = '2022-04-01';
+  const fechaInicio = '2023-08-01';
+  const fechaTermino = '2023-08-10';
   //ayer.toISOString().split('T')[0];
   //const fechas = generarFechas(fechaInicio);
   const fechas = generarFechas(fechaInicio, fechaTermino);

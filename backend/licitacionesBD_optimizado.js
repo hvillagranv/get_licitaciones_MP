@@ -18,11 +18,11 @@ const __dirname = path.dirname(__filename);
 const CONFIG = {
   ticket: process.env.TICKET,
   concurrenciaEstado: 1,
-  concurrenciaDetalles: 20,
+  concurrenciaDetalles: 5,
   tiempoEsperaFechas: 1500,
   maxIntentosAPI: 5,
   maxIntentosDetalle: 5,
-  timeoutAPI: 10000,
+  timeoutAPI: 60000,
   estados: ['adjudicada'],
   nombreEstado: {
     publicada: 'Publicada',
@@ -72,7 +72,7 @@ const fetchJSON = async (url, maxIntentos = CONFIG.maxIntentosAPI) => {
       
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
-    } catch (err) {
+    } catch {
       if (intento < maxIntentos - 1) {
         await esperar(500 * (intento + 1));
       }
@@ -553,8 +553,8 @@ const main = async () => {
   }
   
   // Configurar fechas
-  const fechaInicio = '2023-09-25';
-  const fechaTermino = '2023-10-05';
+  const fechaInicio = '2023-07-19';
+  const fechaTermino = '2023-07-25';
   const fechas = generarFechas(fechaInicio, fechaTermino);
 
   logMensaje(`📅 Fechas: ${fechaInicio} hasta ${fechaTermino}`, 'info');

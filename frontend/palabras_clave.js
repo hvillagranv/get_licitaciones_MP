@@ -106,7 +106,7 @@ function renderizarCheckboxes() {
 function actualizarPalabrasSeleccionadas() {
   palabrasSeleccionadas = [...document.querySelectorAll('#filtrosPalabras input:checked')].map(el => el.value);
   actualizarResumenPalabras();
-  filtrarDatos(false);
+  filtrarDatos();
 }
 
 function actualizarResumenPalabras() {
@@ -188,14 +188,17 @@ function obtenerCoincidencias(item) {
   if (palabrasSeleccionadas.length === 0) return [];
 
   const textoBase = normalizarTexto(
-    `${item.codigo || ''} ${item.institucion_nombre || ''} ${item.nombre || ''} ${item.descripcion || ''}`
+    `${item.codigo || ''} ${item.nombre || ''} ${item.descripcion || ''}`
   );
 
   const coincidencias = [];
   palabrasSeleccionadas.forEach(base => {
     const entry = palabrasMap.get(base);
     if (!entry) return;
-    const coincide = entry.variantesNormalizadas.some(variacion => textoBase.includes(variacion));
+    const coincide = entry.variantesNormalizadas.some(variacion => {
+      const regex = new RegExp(`\\b${escaparRegex(variacion)}\\b`, 'i');
+      return regex.test(textoBase);
+    });
     if (coincide) coincidencias.push(base);
   });
 
@@ -212,7 +215,7 @@ function filtrarDatos(resetPagina = true) {
 
   const datosFiltrados = datos.filter(item => {
     const textoBase = normalizarTexto(
-      `${item.codigo || ''} ${item.institucion_nombre || ''} ${item.nombre || ''} ${item.descripcion || ''}`
+      `${item.codigo || ''} ${item.nombre || ''} ${item.descripcion || ''}`
     );
 
     const coincideTexto = !textoFiltro || textoBase.includes(normalizarTexto(textoFiltro));
@@ -221,7 +224,10 @@ function filtrarDatos(resetPagina = true) {
 
     if (variantesSeleccionadas.length === 0) return true;
 
-    return variantesSeleccionadas.some(variacion => textoBase.includes(variacion));
+    return variantesSeleccionadas.some(variacion => {
+      const regex = new RegExp(`\\b${escaparRegex(variacion)}\\b`, 'i');
+      return regex.test(textoBase);
+    });
   });
 
   datosFiltradosActuales = datosFiltrados;
@@ -363,4 +369,8 @@ function codificarLatin1(texto) {
     bytes[i] = code <= 255 ? code : 63;
   }
   return bytes;
+}
+
+function escaparRegex(texto) {
+  return texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

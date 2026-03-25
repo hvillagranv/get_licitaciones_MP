@@ -407,7 +407,8 @@ function procesarDatosPorMes() {
   const datosPoMes = {};
   const datosMontosPorMes = {};
   const fechaMin = new Date('2025-01-01');
-  const fechaMax = new Date('2026-01-31');
+  const hoy = new Date();
+  const fechaMax = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0, 23, 59, 59, 999);
   
   // Generar todos los meses del rango e inicializar en 0
   for (let d = new Date(fechaMin); d <= fechaMax; d.setMonth(d.getMonth() + 1)) {
@@ -421,7 +422,7 @@ function procesarDatosPorMes() {
   datos.forEach(item => {
     const fecha = new Date(item.fecha_inicio);
     
-    // Filtrar solo datos entre enero 2025 y enero 2026
+    // Filtrar solo datos entre enero 2025 y el mes actual
     if (fecha < fechaMin || fecha > fechaMax) return;
     
     const mesAnio = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;

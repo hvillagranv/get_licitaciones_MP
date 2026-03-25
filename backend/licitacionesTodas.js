@@ -210,7 +210,7 @@ const procesarFechaEstado = async (fecha, estado, queueDetalles) => {
 };
 
 const main = async () => {
-  const fechaInicio = '2024-01-01';
+  const fechaInicio = '2023-09-01';
   // Ajusta según tus necesidades
   const fechas = generarFechas(fechaInicio);
 
