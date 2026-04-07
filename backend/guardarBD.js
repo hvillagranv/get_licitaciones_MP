@@ -1,11 +1,29 @@
 import { pool } from './connectDB.js';
 import { logMensaje } from './utils/logs.js';
 
+const TRANSIENT_DB_ERRORS = new Set([
+  'ECONNRESET',
+  'ETIMEDOUT',
+  'PROTOCOL_CONNECTION_LOST',
+  'EPIPE'
+]);
+
+const esErrorTransitorioBD = (err) => {
+  const code = err?.code || '';
+  const message = (err?.message || '').toUpperCase();
+  return TRANSIENT_DB_ERRORS.has(code) || message.includes('ECONNRESET') || message.includes('ETIMEDOUT');
+};
+
+const esperar = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 export const guardarDetallesEnBD = async (d) => {
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    await conn.beginTransaction();
+  const maxIntentosDb = 3;
+
+  for (let intento = 1; intento <= maxIntentosDb; intento++) {
+    let conn;
+    try {
+      conn = await pool.getConnection();
+      await conn.beginTransaction();
 
     const [rows] = await conn.query(
       'SELECT estado FROM licitaciones WHERE codigo_externo = ?',
@@ -210,18 +228,34 @@ export const guardarDetallesEnBD = async (d) => {
       estadoInfo = `(${d.Estado} ← ${estadoExistente})`;
     }
 
-    await conn.commit();
-    logMensaje(`🟢 Recuperado ${d.CodigoExterno} ${estadoInfo} y guardado en BD`, 'success');
-  } catch (err) {
-    if (conn && conn.rollback) {
-      try {
-        await conn.rollback();
-      } catch (rollbackErr) {
-        logMensaje(`⚠️ Error al hacer rollback: ${rollbackErr.message}`, 'warning');
+      await conn.commit();
+      logMensaje(`🟢 Recuperado ${d.CodigoExterno} ${estadoInfo} y guardado en BD`, 'success');
+      return true;
+    } catch (err) {
+      if (conn && conn.rollback) {
+        try {
+          await conn.rollback();
+        } catch (rollbackErr) {
+          logMensaje(`⚠️ Error al hacer rollback: ${rollbackErr.message}`, 'warning');
+        }
       }
+
+      const esTransitorio = esErrorTransitorioBD(err);
+      const quedanIntentos = intento < maxIntentosDb;
+
+      if (esTransitorio && quedanIntentos) {
+        const backoff = 1000 * intento;
+        logMensaje(`⚠️ Error transitorio BD en ${d.CodigoExterno}: ${err.message}. Reintentando (${intento}/${maxIntentosDb})...`, 'warning');
+        await esperar(backoff);
+        continue;
+      }
+
+      logMensaje(`❌ Error en ${d.CodigoExterno}: ${err.message}`, 'error');
+      return false;
+    } finally {
+      if (conn) conn.release();
     }
-    logMensaje(`❌ Error en ${d.CodigoExterno}: ${err.message}`, 'error');
-  } finally {
-    if (conn) conn.release();
   }
+
+  return false;
 };

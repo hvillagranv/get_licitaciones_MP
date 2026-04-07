@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración de Usuarios - Portal de Licitaciones</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="frontend/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <i class="bi bi-file-earmark-text"></i> Licitaciones MP
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-fill"></i> Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="palabras_clave.html"><i class="bi bi-search"></i> Palabras Clave</a></li>
+        <li class="nav-item"><a class="nav-link" href="organismos.html"><i class="bi bi-buildings"></i> Instituciones Públicas</a></li>
+        <li class="nav-item"><a class="nav-link" href="proveedores.html"><i class="bi bi-shop"></i> Proveedores</a></li>
+        <li class="nav-item d-none" id="navGuardadasItem"><a class="nav-link" href="guardadas.html"><i class="bi bi-bookmark-check"></i> Guardadas</a></li>
+        <li class="nav-item d-none" id="navAdminItem"><a class="nav-link active" href="admin_usuarios.html"><i class="bi bi-people-fill"></i> Admin Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link" id="navAuthLink" href="ingresar.html"><i class="bi bi-box-arrow-in-right"></i> Ingresar</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-4">
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Crear usuario</h5>
+          <form id="crearUsuarioForm" class="row g-2">
+            <div class="col-12">
+              <input id="nuevoNombre" class="form-control" placeholder="Nombre" required>
+            </div>
+            <div class="col-12">
+              <input id="nuevoEmail" type="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="col-12">
+              <input id="nuevoPassword" type="password" minlength="10" maxlength="72" class="form-control" placeholder="Contraseña" required>
+            </div>
+            <div class="col-12">
+              <select id="nuevoRol" class="form-select">
+                <option value="usuario">Usuario</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-success w-100">Crear usuario</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4 class="mb-0">Usuarios</h4>
+        <button class="btn btn-outline-primary btn-sm" onclick="cargarUsuarios()">Actualizar</button>
+      </div>
+      <div id="adminMsg"></div>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Activo</th>
+              <th>Último login</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="usuariosBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Auditoría reciente de administración</h5>
+        <button class="btn btn-outline-secondary btn-sm" onclick="cargarAuditoria()">Actualizar auditoría</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered align-middle">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Admin</th>
+              <th>Acción</th>
+              <th>Usuario objetivo</th>
+              <th>IP</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody id="auditoriaBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="frontend/auth.js"></script>
+<script src="frontend/admin_usuarios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

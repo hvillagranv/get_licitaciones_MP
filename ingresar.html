@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingresar - Portal de Licitaciones</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="frontend/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <i class="bi bi-file-earmark-text"></i> Licitaciones MP
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-fill"></i> Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="palabras_clave.html"><i class="bi bi-search"></i> Palabras Clave</a></li>
+        <li class="nav-item"><a class="nav-link" href="organismos.html"><i class="bi bi-buildings"></i> Instituciones Públicas</a></li>
+        <li class="nav-item"><a class="nav-link" href="proveedores.html"><i class="bi bi-shop"></i> Proveedores</a></li>
+        <li class="nav-item d-none" id="navGuardadasItem"><a class="nav-link" href="guardadas.html"><i class="bi bi-bookmark-check"></i> Guardadas</a></li>
+        <li class="nav-item d-none" id="navAdminItem"><a class="nav-link" href="admin_usuarios.html"><i class="bi bi-people-fill"></i> Admin Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link active" id="navAuthLink" href="ingresar.html"><i class="bi bi-box-arrow-in-right"></i> Ingresar</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-5" style="max-width: 760px;">
+  <h2 class="mb-4">Acceso de usuarios</h2>
+
+  <ul class="nav nav-tabs" id="authTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="tab-login" data-bs-toggle="tab" data-bs-target="#panel-login" type="button" role="tab">Ingresar</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tab-register" data-bs-toggle="tab" data-bs-target="#panel-register" type="button" role="tab">Crear cuenta</button>
+    </li>
+  </ul>
+
+  <div class="tab-content border border-top-0 p-4 bg-white" id="authTabsContent">
+    <div class="tab-pane fade show active" id="panel-login" role="tabpanel">
+      <form id="loginForm" class="row g-3">
+        <div class="col-12">
+          <label class="form-label">Email</label>
+          <input class="form-control" type="email" id="loginEmail" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Contraseña</label>
+          <input class="form-control" type="password" id="loginPassword" required>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Ingresar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="tab-pane fade" id="panel-register" role="tabpanel">
+      <form id="registerForm" class="row g-3">
+        <div class="col-12">
+          <label class="form-label">Nombre</label>
+          <input class="form-control" type="text" id="registerNombre" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Email</label>
+          <input class="form-control" type="email" id="registerEmail" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Contraseña (10 a 72 caracteres, con letras y números)</label>
+          <input class="form-control" type="password" id="registerPassword" minlength="10" maxlength="72" required>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-success" type="submit">Crear cuenta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="authMsg" class="mt-3"></div>
+</div>
+
+<script src="frontend/auth.js"></script>
+<script src="frontend/ingresar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPage) {
+        link.classList.add('active');
+      } else if (link.id !== 'navAuthLink') {
+        link.classList.remove('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>

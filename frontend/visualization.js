@@ -9,6 +9,16 @@ let textoFiltro = '';
 let institucionesSeleccionadas = [];
 let aliasInstituciones = {};
 let excluirBajoValor = false;
+let codigosGuardados = new Set();
+
+document.addEventListener('auth:changed', (event) => {
+  if (event.detail.loggedIn) {
+    cargarCodigosGuardados();
+  } else {
+    codigosGuardados = new Set();
+    filtrarDatos(false);
+  }
+});
 
 // 🔄 Cargar datos desde la API PHP
 fetch('api/licitacionesPub.php')
@@ -91,6 +101,7 @@ function mostrarDatos(datosFiltrados) {
 
   datosPaginados.forEach(item => {
     const alias = aliasInstituciones[item.institucion_nombre] || item.institucion_nombre;
+    const guardada = codigosGuardados.has(item.codigo);
     const montoFormateado = item.monto_estimado && !isNaN(item.monto_estimado) 
       ? (item.unidad_monetaria && item.unidad_monetaria !== 'CLP' 
           ? `${parseInt(item.monto_estimado).toLocaleString('es-CL')} ${item.unidad_monetaria}`
@@ -102,7 +113,12 @@ function mostrarDatos(datosFiltrados) {
         <div class="mb-2 text-muted">
           <strong>ID Licitación:</strong> ${item.codigo}
         </div>
-        <a href="https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idLicitacion=${item.codigo}" target="_blank"><h5 class="text-primary fw-bold mb-1">${item.nombre || '(Sin título)'}</h5></a>
+        <div class="d-flex justify-content-between align-items-start gap-2">
+          <a href="https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idLicitacion=${item.codigo}" target="_blank"><h5 class="text-primary fw-bold mb-1">${item.nombre || '(Sin título)'}</h5></a>
+          <button class="btn ${guardada ? 'btn-warning' : 'btn-outline-warning'} btn-sm" onclick="toggleGuardada('${item.codigo}')">
+            ${guardada ? 'Guardada' : 'Guardar'}
+          </button>
+        </div>
         <p class="text-secondary">${item.descripcion || '(Sin descripción)'}</p>
         <div class="row mt-3">
           <div class="col-md-3 mb-2"><strong>Monto:</strong><br>${montoFormateado}</div>
@@ -264,4 +280,62 @@ function descargarLicitaciones() {
   link.href = URL.createObjectURL(csvBlob);
   link.download = 'licitaciones.csv';
   link.click();
+}
+
+async function cargarCodigosGuardados() {
+  try {
+    const response = await fetch('api/guardadas.php?action=list', {
+      method: 'GET',
+      credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      codigosGuardados = new Set();
+      filtrarDatos(false);
+      return;
+    }
+
+    codigosGuardados = new Set((data.guardadas || []).map(item => item.codigo));
+    filtrarDatos(false);
+  } catch (error) {
+    console.error('No se pudieron cargar las licitaciones guardadas:', error);
+  }
+}
+
+async function toggleGuardada(codigo) {
+  if (!window.AuthState || !window.AuthState.loggedIn) {
+    alert('Debes ingresar para guardar licitaciones.');
+    window.location.href = 'ingresar.html';
+    return;
+  }
+
+  const action = codigosGuardados.has(codigo) ? 'remove' : 'add';
+
+  try {
+    const response = await fetch(`api/guardadas.php?action=${action}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': window.AuthState.csrfToken || ''
+      },
+      body: JSON.stringify({ codigo })
+    });
+
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      throw new Error(data.error || 'No se pudo actualizar guardadas');
+    }
+
+    if (action === 'add') {
+      codigosGuardados.add(codigo);
+    } else {
+      codigosGuardados.delete(codigo);
+    }
+
+    filtrarDatos(false);
+  } catch (error) {
+    alert(error.message || 'Error al actualizar guardadas');
+  }
 }

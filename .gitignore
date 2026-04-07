@@ -10,3 +10,4 @@ connectDB.js
 .env.example
 site_old/*
 MVP1/*
+backend/sql/*

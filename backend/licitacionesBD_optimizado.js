@@ -22,7 +22,7 @@ const CONFIG = {
   tiempoEsperaFechas: 1500,
   maxIntentosAPI: 5,
   maxIntentosDetalle: 5,
-  timeoutAPI: 60000,
+  timeoutAPI: 90000,
   estados: ['adjudicada'],
   nombreEstado: {
     publicada: 'Publicada',
@@ -60,6 +60,39 @@ const estado = {
 
 // === UTILIDADES ===
 const esperar = (ms) => new Promise(res => setTimeout(res, ms));
+
+const TRANSIENT_DB_ERRORS = new Set([
+  'ECONNRESET',
+  'ETIMEDOUT',
+  'PROTOCOL_CONNECTION_LOST',
+  'EPIPE'
+]);
+
+const esErrorTransitorioBD = (err) => {
+  const code = err?.code || '';
+  const message = (err?.message || '').toUpperCase();
+  return TRANSIENT_DB_ERRORS.has(code) || message.includes('ECONNRESET') || message.includes('ETIMEDOUT');
+};
+
+const queryConReintentos = async (query, params = [], maxIntentos = 3) => {
+  for (let intento = 1; intento <= maxIntentos; intento++) {
+    try {
+      return await pool.query(query, params);
+    } catch (err) {
+      const esTransitorio = esErrorTransitorioBD(err);
+      const quedanIntentos = intento < maxIntentos;
+
+      if (esTransitorio && quedanIntentos) {
+        await esperar(400 * intento);
+        continue;
+      }
+
+      throw err;
+    }
+  }
+
+  return [[], []];
+};
 
 const fetchJSON = async (url, maxIntentos = CONFIG.maxIntentosAPI) => {
   for (let intento = 0; intento < maxIntentos; intento++) {
@@ -127,7 +160,7 @@ const consultasDB = {
     
     try {
       const placeholders = codigos.map(() => '?').join(',');
-      const [rows] = await pool.query(
+      const [rows] = await queryConReintentos(
         `SELECT codigo_externo FROM licitaciones WHERE codigo_externo IN (${placeholders})`,
         codigos
       );
@@ -148,7 +181,7 @@ const consultasDB = {
         : `SELECT codigo_externo FROM licitaciones WHERE codigo_externo IN (${placeholders}) AND estado = ?`;
       
       const params = nombreEstado === 'todos' ? codigos : [...codigos, nombreEstado];
-      const [rows] = await pool.query(query, params);
+      const [rows] = await queryConReintentos(query, params);
       
       return rows.map(r => r.codigo_externo);
     } catch (err) {
@@ -209,9 +242,11 @@ const obtenerDetalles = {
       }
       
       if (detalle) {
-        await guardarDetallesEnBD(detalle);
-        estado.codigosFallidos.delete(codigo);
-        return true;
+        const guardado = await guardarDetallesEnBD(detalle);
+        if (guardado) {
+          estado.codigosFallidos.delete(codigo);
+          return true;
+        }
       }
       
       if (intento < CONFIG.maxIntentosDetalle) {
@@ -462,8 +497,10 @@ const procesamiento = {
           procesadas++;
           
           if (detalle && detalle !== '__LISTADO_VACIO__') {
-            await guardarDetallesEnBD(detalle);
-            completadas++;
+            const guardado = await guardarDetallesEnBD(detalle);
+            if (guardado) {
+              completadas++;
+            }
           }
           
           if (procesadas % 20 === 0 || procesadas === nuevas.length) {
@@ -553,8 +590,8 @@ const main = async () => {
   }
   
   // Configurar fechas
-  const fechaInicio = '2023-07-19';
-  const fechaTermino = '2023-07-25';
+  const fechaInicio = '2023-05-25';
+  const fechaTermino = '2023-06-03';
   const fechas = generarFechas(fechaInicio, fechaTermino);
 
   logMensaje(`📅 Fechas: ${fechaInicio} hasta ${fechaTermino}`, 'info');
