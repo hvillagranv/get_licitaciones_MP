@@ -23,6 +23,7 @@
         <li class="nav-item"><a class="nav-link" href="palabras_clave.html"><i class="bi bi-search"></i> Palabras Clave</a></li>
         <li class="nav-item"><a class="nav-link" href="organismos.html"><i class="bi bi-buildings"></i> Instituciones Públicas</a></li>
         <li class="nav-item"><a class="nav-link" href="proveedores.html"><i class="bi bi-shop"></i> Proveedores</a></li>
+        <li class="nav-item d-none" id="navSugerenciasItem"><a class="nav-link" href="sugerencias.html"><i class="bi bi-lightbulb"></i> Sugerencias</a></li>
         <li class="nav-item d-none" id="navGuardadasItem"><a class="nav-link" href="guardadas.html"><i class="bi bi-bookmark-check"></i> Guardadas</a></li>
         <li class="nav-item d-none" id="navAdminItem"><a class="nav-link active" href="admin_usuarios.html"><i class="bi bi-people-fill"></i> Admin Usuarios</a></li>
         <li class="nav-item"><a class="nav-link" id="navAuthLink" href="ingresar.html"><i class="bi bi-box-arrow-in-right"></i> Ingresar</a></li>
@@ -54,9 +55,16 @@
               </select>
             </div>
             <div class="col-12">
+              <input id="nuevoProveedor" class="form-control" list="proveedoresDatalist" placeholder="Proveedor existente o nuevo">
+            </div>
+            <div class="col-12">
+              <input id="nuevoProveedorRut" class="form-control" placeholder="RUT proveedor (opcional)">
+            </div>
+            <div class="col-12">
               <button type="submit" class="btn btn-success w-100">Crear usuario</button>
             </div>
           </form>
+          <datalist id="proveedoresDatalist"></datalist>
         </div>
       </div>
     </div>
@@ -74,6 +82,7 @@
               <th>ID</th>
               <th>Nombre</th>
               <th>Email</th>
+              <th>Proveedor</th>
               <th>Rol</th>
               <th>Activo</th>
               <th>Último login</th>

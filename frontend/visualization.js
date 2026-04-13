@@ -10,6 +10,7 @@ let institucionesSeleccionadas = [];
 let aliasInstituciones = {};
 let excluirBajoValor = false;
 let codigosGuardados = new Set();
+let cargandoListado = false;
 
 document.addEventListener('auth:changed', (event) => {
   if (event.detail.loggedIn) {
@@ -20,11 +21,22 @@ document.addEventListener('auth:changed', (event) => {
   }
 });
 
-// 🔄 Cargar datos desde la API PHP
-fetch('api/licitacionesPub.php')
-  .then(res => res.json())
-  .then(({ licitaciones, instituciones }) => {
-    datos = licitaciones.filter(item => item.codigo);
+actualizarListadoLicitaciones({ resetPagina: true });
+
+async function actualizarListadoLicitaciones({ resetPagina = false, mostrarEstado = true } = {}) {
+  if (cargandoListado) return;
+  cargandoListado = true;
+  setEstadoActualizacion('Actualizando listado...');
+  setBotonActualizacionEstado(true);
+
+  try {
+    const res = await fetch('api/licitacionesPub.php', { cache: 'no-store' });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const { licitaciones, instituciones } = await res.json();
+    datos = (licitaciones || []).filter(item => item.codigo);
 
     if (instituciones && instituciones.length > 0) {
       aliasInstituciones = Object.fromEntries(instituciones.map(item => [item.id, item.alias]));
@@ -35,13 +47,38 @@ fetch('api/licitacionesPub.php')
     }
 
     ordenarDatos();
-    filtrarDatos();
-  })
-  .catch(err => {
+    filtrarDatos(resetPagina);
+
+    if (mostrarEstado) {
+      setEstadoActualizacion(`Listado actualizado: ${new Date().toLocaleString('es-CL')}`);
+    }
+  } catch (err) {
     console.error('❌ Error al cargar datos desde la API:', err);
-    console.warn("🔁 Intentando cargar respaldo desde CSV...");
-    cargarInstitucionesDesdeCSV();
-  });
+    setEstadoActualizacion('No se pudo actualizar el listado. Intenta nuevamente.');
+  } finally {
+    cargandoListado = false;
+    setBotonActualizacionEstado(false);
+  }
+}
+
+function actualizarListadoManual() {
+  actualizarListadoLicitaciones({ resetPagina: false, mostrarEstado: true });
+}
+
+function setBotonActualizacionEstado(cargando) {
+  const boton = document.getElementById('btnActualizarListado');
+  if (!boton) return;
+  boton.disabled = cargando;
+  boton.innerHTML = cargando
+    ? '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Actualizando...'
+    : '<i class="bi bi-arrow-clockwise"></i> Actualizar listado';
+}
+
+function setEstadoActualizacion(mensaje) {
+  const estado = document.getElementById('estadoActualizacion');
+  if (!estado) return;
+  estado.textContent = mensaje || '';
+}
 
 // 🧾 Cargar instituciones desde respaldo CSV
 function cargarInstitucionesDesdeCSV() {

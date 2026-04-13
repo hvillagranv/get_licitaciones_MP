@@ -98,6 +98,8 @@ function cargarLicitacionesPorProveedor(proveedor) {
         // Mostrar gráficos
         const filaGraficos = document.getElementById('filaGraficos');
         if (filaGraficos) filaGraficos.style.display = 'flex';
+        const filaGraficosAnuales = document.getElementById('filaGraficosAnuales');
+        if (filaGraficosAnuales) filaGraficosAnuales.style.display = 'flex';
         
         // Generar gráficos
         generarGraficos();
@@ -224,6 +226,7 @@ function filtrarDatos(resetPagina = true) {
   if (botonCsv) botonCsv.disabled = datosFiltrados.length === 0;
 
   actualizarKpis(datosFiltrados);
+  generarGraficos(datosFiltrados);
   mostrarDatos(datosFiltrados);
 }
 
@@ -337,57 +340,112 @@ function actualizarIconosOrdenamiento() {
 // Gráficos
 let graficoLicitacionesChart = null;
 let graficoMontosChart = null;
+let graficoLicitacionesAnioChart = null;
+let graficoMontosAnioChart = null;
 
 function procesarDatosPorMes() {
-  const datosPoMes = {};
-  const datosMontosPorMes = {};
-  const fechaMin = new Date('2025-01-01');
-  const hoy = new Date();
-  const fechaMax = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0, 23, 59, 59, 999);
-  
-  // Generar todos los meses del rango e inicializar en 0
-  for (let d = new Date(fechaMin); d <= fechaMax; d.setMonth(d.getMonth() + 1)) {
-    const mesAnio = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-    if (!datosPoMes[mesAnio]) {
-      datosPoMes[mesAnio] = 0;
-      datosMontosPorMes[mesAnio] = 0;
-    }
-  }
-  
-  datos.forEach(item => {
-    const fecha = new Date(item.fecha_inicio);
-    
-    // Filtrar solo datos entre enero 2025 y el mes actual
-    if (fecha < fechaMin || fecha > fechaMax) return;
-    
-    const mesAnio = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
-    
-    // Contar licitaciones por mes (solo adjudicadas)
-    if (normalizarTexto(item.estado) === 'adjudicada') {
-      datosPoMes[mesAnio]++;
-      datosMontosPorMes[mesAnio] += parseFloat(item.monto_adjudicado_total) || 0;
-    }
-  });
-  
-  return { datosPoMes, datosMontosPorMes };
+  return procesarDatosUltimos12Meses(datos);
 }
 
-function generarGraficos() {
-  const { datosPoMes, datosMontosPorMes } = procesarDatosPorMes();
-  const meses = Object.keys(datosPoMes).sort();
+function procesarDatosUltimos12Meses(lista = datos) {
+  const datosPorMes = {};
+  const montosPorMes = {};
+
+  const hoy = new Date();
+  const inicio = new Date(hoy.getFullYear(), hoy.getMonth() - 11, 1);
+
+  for (let i = 0; i < 12; i++) {
+    const d = new Date(inicio.getFullYear(), inicio.getMonth() + i, 1);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    datosPorMes[key] = 0;
+    montosPorMes[key] = 0;
+  }
+
+  (Array.isArray(lista) ? lista : []).forEach(item => {
+    const fecha = new Date(item.fecha_inicio || item.fecha_publicacion || item.fecha_final);
+    if (isNaN(fecha.getTime())) return;
+    const key = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
+    if (!(key in datosPorMes)) return;
+
+    datosPorMes[key] += 1;
+    if (normalizarTexto(item.estado) === 'adjudicada') {
+      montosPorMes[key] += Number(item.monto_adjudicado_total) || 0;
+    }
+  });
+
+  return { datosPorMes, montosPorMes };
+}
+
+function procesarDatosPorAnio(lista = datos) {
+  const datosPorAnio = {};
+  const montosPorAnio = {};
+
+  (Array.isArray(lista) ? lista : []).forEach(item => {
+    const anio = obtenerAnio(item);
+    if (!anio) return;
+
+    if (!datosPorAnio[anio]) {
+      datosPorAnio[anio] = 0;
+      montosPorAnio[anio] = 0;
+    }
+
+    datosPorAnio[anio] += 1;
+
+    if (normalizarTexto(item.estado) === 'adjudicada') {
+      montosPorAnio[anio] += Number(item.monto_adjudicado_total) || 0;
+    }
+  });
+
+  return { datosPorAnio, montosPorAnio };
+}
+
+function generarGraficos(lista = datos) {
+  const { datosPorMes, montosPorMes } = procesarDatosUltimos12Meses(lista);
+  const meses = Object.keys(datosPorMes).sort();
+
+  const { datosPorAnio, montosPorAnio } = procesarDatosPorAnio(lista);
+  const anios = Object.keys(datosPorAnio)
+    .map(Number)
+    .filter(Number.isFinite)
+    .sort((a, b) => a - b);
   
-  if (meses.length === 0) return;
-  
-  const cantidades = meses.map(mes => datosPoMes[mes]);
-  const montos = meses.map(mes => datosMontosPorMes[mes] || 0);
+  const ctxLicitaciones = document.getElementById('graficoLicitacionesPorMes');
+  const ctxMontos = document.getElementById('graficoMontosAdjudicados');
+  const ctxLicitacionesAnio = document.getElementById('graficoLicitacionesPorAnio');
+  const ctxMontosAnio = document.getElementById('graficoMontosPorAnio');
+
+  if (meses.length === 0 && anios.length === 0) {
+    if (graficoLicitacionesChart) {
+      graficoLicitacionesChart.destroy();
+      graficoLicitacionesChart = null;
+    }
+    if (graficoMontosChart) {
+      graficoMontosChart.destroy();
+      graficoMontosChart = null;
+    }
+    if (graficoLicitacionesAnioChart) {
+      graficoLicitacionesAnioChart.destroy();
+      graficoLicitacionesAnioChart = null;
+    }
+    if (graficoMontosAnioChart) {
+      graficoMontosAnioChart.destroy();
+      graficoMontosAnioChart = null;
+    }
+    return;
+  }
+
   const etiquetasMeses = meses.map(mes => {
-    const [anio, mes_num] = mes.split('-');
-    const fecha = new Date(anio, mes_num - 1);
+    const [anio, mesNum] = mes.split('-');
+    const fecha = new Date(Number(anio), Number(mesNum) - 1, 1);
     return fecha.toLocaleDateString('es-CL', { month: 'short', year: 'numeric' });
   });
+  const cantidadesMes = meses.map(mes => datosPorMes[mes] || 0);
+  const montosMes = meses.map(mes => montosPorMes[mes] || 0);
+
+  const etiquetasAnios = anios.map(String);
+  const cantidadesAnio = anios.map(anio => datosPorAnio[anio] || 0);
+  const montosAnio = anios.map(anio => montosPorAnio[anio] || 0);
   
-  // Gráfico de licitaciones por mes
-  const ctxLicitaciones = document.getElementById('graficoLicitacionesPorMes');
   if (ctxLicitaciones) {
     if (graficoLicitacionesChart) graficoLicitacionesChart.destroy();
     graficoLicitacionesChart = new Chart(ctxLicitaciones, {
@@ -395,8 +453,8 @@ function generarGraficos() {
       data: {
         labels: etiquetasMeses,
         datasets: [{
-          label: 'Cantidad de licitaciones adjudicadas',
-          data: cantidades,
+          label: 'Cantidad de licitaciones',
+          data: cantidadesMes,
           backgroundColor: 'rgba(54, 162, 235, 0.7)',
           borderColor: 'rgb(54, 162, 235)',
           borderWidth: 1
@@ -405,13 +463,11 @@ function generarGraficos() {
       options: {
         responsive: true,
         plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
       }
     });
   }
   
-  // Gráfico de montos adjudicados por mes
-  const ctxMontos = document.getElementById('graficoMontosAdjudicados');
   if (ctxMontos) {
     if (graficoMontosChart) graficoMontosChart.destroy();
     graficoMontosChart = new Chart(ctxMontos, {
@@ -420,7 +476,51 @@ function generarGraficos() {
         labels: etiquetasMeses,
         datasets: [{
           label: 'Monto adjudicado (CLP)',
-          data: montos,
+          data: montosMes,
+          backgroundColor: 'rgba(75, 192, 75, 0.7)',
+          borderColor: 'rgb(75, 192, 75)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { callback: (value) => '$' + value.toLocaleString('es-CL') } } }
+      }
+    });
+  }
+
+  if (ctxLicitacionesAnio) {
+    if (graficoLicitacionesAnioChart) graficoLicitacionesAnioChart.destroy();
+    graficoLicitacionesAnioChart = new Chart(ctxLicitacionesAnio, {
+      type: 'bar',
+      data: {
+        labels: etiquetasAnios,
+        datasets: [{
+          label: 'Cantidad de licitaciones',
+          data: cantidadesAnio,
+          backgroundColor: 'rgba(54, 162, 235, 0.7)',
+          borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+      }
+    });
+  }
+
+  if (ctxMontosAnio) {
+    if (graficoMontosAnioChart) graficoMontosAnioChart.destroy();
+    graficoMontosAnioChart = new Chart(ctxMontosAnio, {
+      type: 'bar',
+      data: {
+        labels: etiquetasAnios,
+        datasets: [{
+          label: 'Monto adjudicado (CLP)',
+          data: montosAnio,
           backgroundColor: 'rgba(75, 192, 75, 0.7)',
           borderColor: 'rgb(75, 192, 75)',
           borderWidth: 1

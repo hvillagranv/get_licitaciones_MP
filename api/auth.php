@@ -84,6 +84,155 @@ function sanitize_text($value) {
   return trim((string)$value);
 }
 
+function provider_feature_available($mysqli) {
+  static $available = null;
+  if ($available !== null) {
+    return $available;
+  }
+
+  $tableResult = $mysqli->query("SELECT COUNT(*) AS total FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = 'proveedores'");
+  $columnResult = $mysqli->query("SELECT COUNT(*) AS total FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = 'usuarios' AND column_name = 'proveedor_id'");
+
+  $tableExists = (int)(($tableResult ? $tableResult->fetch_assoc()['total'] : 0) ?? 0) === 1;
+  $columnExists = (int)(($columnResult ? $columnResult->fetch_assoc()['total'] : 0) ?? 0) === 1;
+  $available = $tableExists && $columnExists;
+
+  return $available;
+}
+
+function build_user_payload($row) {
+  if (!$row) {
+    return null;
+  }
+
+  return [
+    'id' => (int)$row['id'],
+    'nombre' => $row['nombre'],
+    'email' => $row['email'],
+    'rol' => $row['rol'] ?? 'usuario',
+    'proveedor' => !empty($row['proveedor_id']) ? [
+      'id' => (int)$row['proveedor_id'],
+      'nombre' => $row['proveedor_nombre'],
+      'rut' => $row['proveedor_rut'] ?: null
+    ] : null
+  ];
+}
+
+function normalize_provider_name($value) {
+  $value = preg_replace('/\s+/u', ' ', trim((string)$value));
+  if ($value === '') {
+    return '';
+  }
+
+  return function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
+}
+
+function normalize_provider_rut($value) {
+  $value = strtoupper(trim((string)$value));
+  $value = str_replace(['.', '-', ' '], '', $value);
+  return $value !== '' ? $value : null;
+}
+
+function get_provider_payload($row) {
+  if (!$row || empty($row['id'])) {
+    return null;
+  }
+
+  return [
+    'id' => (int)$row['id'],
+    'nombre' => $row['nombre'],
+    'rut' => $row['rut'] ?: null
+  ];
+}
+
+function find_provider_by_id($mysqli, $providerId) {
+  $stmt = $mysqli->prepare('SELECT id, nombre, rut FROM proveedores WHERE id = ? LIMIT 1');
+  $stmt->bind_param('i', $providerId);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  return $result ? $result->fetch_assoc() : null;
+}
+
+function resolve_provider($mysqli, $providerIdRaw, $providerNameRaw, $providerRutRaw) {
+  $providerId = (int)$providerIdRaw;
+  $providerName = preg_replace('/\s+/u', ' ', sanitize_text($providerNameRaw));
+  $providerRut = sanitize_text($providerRutRaw);
+  $providerRut = $providerRut !== '' ? $providerRut : null;
+
+  if (!provider_feature_available($mysqli)) {
+    if ($providerId > 0 || $providerName !== '' || $providerRut !== null) {
+      json_response(['ok' => false, 'error' => 'La asociación de proveedores requiere ejecutar la migración 005_usuarios_proveedores.sql'], 500);
+    }
+
+    return null;
+  }
+
+  if ($providerId > 0) {
+    $provider = find_provider_by_id($mysqli, $providerId);
+    if (!$provider) {
+      json_response(['ok' => false, 'error' => 'Proveedor no encontrado'], 404);
+    }
+
+    return get_provider_payload($provider);
+  }
+
+  if ($providerName === '') {
+    return null;
+  }
+
+  $normalizedName = normalize_provider_name($providerName);
+  $normalizedRut = normalize_provider_rut($providerRut);
+
+  if ($normalizedRut !== null) {
+    $stmtRut = $mysqli->prepare('SELECT id, nombre, rut FROM proveedores WHERE rut_normalizado = ? LIMIT 1');
+    $stmtRut->bind_param('s', $normalizedRut);
+    $stmtRut->execute();
+    $resultRut = $stmtRut->get_result();
+    $providerByRut = $resultRut ? $resultRut->fetch_assoc() : null;
+    if ($providerByRut) {
+      if ((empty($providerByRut['rut']) || $providerByRut['rut'] === '') && $providerRut !== null) {
+        $stmtUpdateRut = $mysqli->prepare('UPDATE proveedores SET rut = ?, rut_normalizado = ? WHERE id = ?');
+        $providerIdToUpdate = (int)$providerByRut['id'];
+        $stmtUpdateRut->bind_param('ssi', $providerRut, $normalizedRut, $providerIdToUpdate);
+        $stmtUpdateRut->execute();
+        $providerByRut['rut'] = $providerRut;
+      }
+
+      return get_provider_payload($providerByRut);
+    }
+  }
+
+  $stmtName = $mysqli->prepare('SELECT id, nombre, rut FROM proveedores WHERE nombre_normalizado = ? LIMIT 1');
+  $stmtName->bind_param('s', $normalizedName);
+  $stmtName->execute();
+  $resultName = $stmtName->get_result();
+  $providerByName = $resultName ? $resultName->fetch_assoc() : null;
+  if ($providerByName) {
+    if ((empty($providerByName['rut']) || $providerByName['rut'] === '') && $providerRut !== null) {
+      $stmtUpdateRut = $mysqli->prepare('UPDATE proveedores SET rut = ?, rut_normalizado = ? WHERE id = ?');
+      $providerIdToUpdate = (int)$providerByName['id'];
+      $stmtUpdateRut->bind_param('ssi', $providerRut, $normalizedRut, $providerIdToUpdate);
+      $stmtUpdateRut->execute();
+      $providerByName['rut'] = $providerRut;
+    }
+
+    return get_provider_payload($providerByName);
+  }
+
+  $stmtInsert = $mysqli->prepare('INSERT INTO proveedores (nombre, nombre_normalizado, rut, rut_normalizado, origen) VALUES (?, ?, ?, ?, \'manual\')');
+  $stmtInsert->bind_param('ssss', $providerName, $normalizedName, $providerRut, $normalizedRut);
+
+  if (!$stmtInsert->execute()) {
+    json_response(['ok' => false, 'error' => 'No se pudo crear el proveedor asociado'], 500);
+  }
+
+  return [
+    'id' => (int)$stmtInsert->insert_id,
+    'nombre' => $providerName,
+    'rut' => $providerRut
+  ];
+}
+
 function get_client_ip() {
   $ip = $_SERVER['REMOTE_ADDR'] ?? '';
   return substr(trim((string)$ip), 0, 45);
@@ -205,12 +354,41 @@ $body = get_json_input();
 if ($action === 'status' && $method === 'GET') {
   $userData = null;
   if (!empty($_SESSION['user_id'])) {
-    $userData = [
-      'id' => (int)$_SESSION['user_id'],
-      'nombre' => $_SESSION['user_nombre'] ?? '',
-      'email' => $_SESSION['user_email'] ?? '',
-      'rol' => $_SESSION['user_rol'] ?? 'usuario'
-    ];
+    if (provider_feature_available($mysqli)) {
+      $stmtStatus = $mysqli->prepare('
+        SELECT
+          u.id,
+          u.nombre,
+          u.email,
+          u.rol,
+          u.proveedor_id,
+          p.nombre AS proveedor_nombre,
+          p.rut AS proveedor_rut
+        FROM usuarios u
+        LEFT JOIN proveedores p ON p.id = u.proveedor_id
+        WHERE u.id = ?
+        LIMIT 1
+      ');
+    } else {
+      $stmtStatus = $mysqli->prepare('
+        SELECT
+          u.id,
+          u.nombre,
+          u.email,
+          u.rol,
+          NULL AS proveedor_id,
+          NULL AS proveedor_nombre,
+          NULL AS proveedor_rut
+        FROM usuarios u
+        WHERE u.id = ?
+        LIMIT 1
+      ');
+    }
+
+    $statusUserId = (int)$_SESSION['user_id'];
+    $stmtStatus->bind_param('i', $statusUserId);
+    $stmtStatus->execute();
+    $userData = build_user_payload($stmtStatus->get_result()->fetch_assoc());
   }
 
   json_response([
@@ -218,6 +396,48 @@ if ($action === 'status' && $method === 'GET') {
     'logged_in' => !empty($_SESSION['user_id']),
     'user' => $userData,
     'csrf_token' => $_SESSION['csrf_token']
+  ]);
+}
+
+if ($action === 'providers' && $method === 'GET') {
+  if (!provider_feature_available($mysqli)) {
+    json_response([
+      'ok' => true,
+      'feature_available' => false,
+      'message' => 'La asociación de proveedores requiere ejecutar la migración 005_usuarios_proveedores.sql',
+      'proveedores' => [],
+      'total' => 0
+    ]);
+  }
+
+  $query = sanitize_text($_GET['q'] ?? '');
+  $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 100;
+  if ($limit <= 0) $limit = 100;
+  if ($limit > 500) $limit = 500;
+
+  if ($query !== '') {
+    $like = '%' . $query . '%';
+    $stmt = $mysqli->prepare('SELECT id, nombre, rut FROM proveedores WHERE nombre LIKE ? OR rut LIKE ? ORDER BY nombre ASC LIMIT ?');
+    $stmt->bind_param('ssi', $like, $like, $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+  } else {
+    $stmt = $mysqli->prepare('SELECT id, nombre, rut FROM proveedores ORDER BY nombre ASC LIMIT ?');
+    $stmt->bind_param('i', $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+  }
+
+  $providers = [];
+  while ($row = $result->fetch_assoc()) {
+    $providers[] = get_provider_payload($row);
+  }
+
+  json_response([
+    'ok' => true,
+    'feature_available' => true,
+    'proveedores' => $providers,
+    'total' => count($providers)
   ]);
 }
 
@@ -229,6 +449,13 @@ if ($action === 'register' && $method === 'POST') {
   $nombre = sanitize_text($body['nombre'] ?? $_POST['nombre'] ?? '');
   $email = strtolower(sanitize_text($body['email'] ?? $_POST['email'] ?? ''));
   $password = (string)($body['password'] ?? $_POST['password'] ?? '');
+  $provider = resolve_provider(
+    $mysqli,
+    $body['proveedor_id'] ?? $_POST['proveedor_id'] ?? 0,
+    $body['proveedor_nombre'] ?? $_POST['proveedor_nombre'] ?? '',
+    $body['proveedor_rut'] ?? $_POST['proveedor_rut'] ?? ''
+  );
+  $providerId = $provider['id'] ?? null;
   $scopeKeys = [
     rate_limit_scope_key('ip', get_client_ip()),
     rate_limit_scope_key('email', $email)
@@ -263,8 +490,13 @@ if ($action === 'register' && $method === 'POST') {
   }
 
   $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-  $stmtInsert = $mysqli->prepare('INSERT INTO usuarios (nombre, email, password_hash) VALUES (?, ?, ?)');
-  $stmtInsert->bind_param('sss', $nombre, $email, $passwordHash);
+  if (provider_feature_available($mysqli)) {
+    $stmtInsert = $mysqli->prepare('INSERT INTO usuarios (nombre, email, password_hash, proveedor_id) VALUES (?, ?, ?, ?)');
+    $stmtInsert->bind_param('sssi', $nombre, $email, $passwordHash, $providerId);
+  } else {
+    $stmtInsert = $mysqli->prepare('INSERT INTO usuarios (nombre, email, password_hash) VALUES (?, ?, ?)');
+    $stmtInsert->bind_param('sss', $nombre, $email, $passwordHash);
+  }
 
   if (!$stmtInsert->execute()) {
     record_rate_limited_failure($mysqli, 'register', $scopeKeys, $rateLimits['register']);
@@ -287,7 +519,8 @@ if ($action === 'register' && $method === 'POST') {
       'id' => $userId,
       'nombre' => $nombre,
       'email' => $email,
-      'rol' => 'usuario'
+      'rol' => 'usuario',
+      'proveedor' => $provider
     ]
   ], 201);
 }
@@ -310,7 +543,40 @@ if ($action === 'login' && $method === 'POST') {
     json_response(['ok' => false, 'error' => 'Email y password son obligatorios'], 400);
   }
 
-  $stmt = $mysqli->prepare('SELECT id, nombre, email, rol, password_hash, activo FROM usuarios WHERE email = ? LIMIT 1');
+  if (provider_feature_available($mysqli)) {
+    $stmt = $mysqli->prepare('
+      SELECT
+        u.id,
+        u.nombre,
+        u.email,
+        u.rol,
+        u.password_hash,
+        u.activo,
+        u.proveedor_id,
+        p.nombre AS proveedor_nombre,
+        p.rut AS proveedor_rut
+      FROM usuarios u
+      LEFT JOIN proveedores p ON p.id = u.proveedor_id
+      WHERE u.email = ?
+      LIMIT 1
+    ');
+  } else {
+    $stmt = $mysqli->prepare('
+      SELECT
+        u.id,
+        u.nombre,
+        u.email,
+        u.rol,
+        u.password_hash,
+        u.activo,
+        NULL AS proveedor_id,
+        NULL AS proveedor_nombre,
+        NULL AS proveedor_rut
+      FROM usuarios u
+      WHERE u.email = ?
+      LIMIT 1
+    ');
+  }
   $stmt->bind_param('s', $email);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -337,12 +603,7 @@ if ($action === 'login' && $method === 'POST') {
   json_response([
     'ok' => true,
     'message' => 'Sesión iniciada',
-    'user' => [
-      'id' => (int)$userRow['id'],
-      'nombre' => $userRow['nombre'],
-      'email' => $userRow['email'],
-      'rol' => $userRow['rol'] ?? 'usuario'
-    ]
+    'user' => build_user_payload($userRow)
   ]);
 }
 

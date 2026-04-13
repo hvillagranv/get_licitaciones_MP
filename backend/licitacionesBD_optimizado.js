@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 
 // === CONFIGURACIÓN ===
 const CONFIG = {
-  ticket: process.env.TICKET,
+  ticket: process.env.TICKET_MVP1,
   concurrenciaEstado: 1,
   concurrenciaDetalles: 5,
   tiempoEsperaFechas: 1500,
@@ -41,7 +41,7 @@ if (!CONFIG.ticket) {
 }
 
 //desierta = 2006 - 2009, 2022 - 2025
-//adjudicada = 2024 - 2025
+//adjudicada = 2023 - 2026
 
 
 // === RUTAS DE ARCHIVOS ===
@@ -590,8 +590,8 @@ const main = async () => {
   }
   
   // Configurar fechas
-  const fechaInicio = '2023-05-25';
-  const fechaTermino = '2023-06-03';
+  const fechaInicio = '2022-11-21';
+  const fechaTermino = '2022-12-10';
   const fechas = generarFechas(fechaInicio, fechaTermino);
 
   logMensaje(`📅 Fechas: ${fechaInicio} hasta ${fechaTermino}`, 'info');

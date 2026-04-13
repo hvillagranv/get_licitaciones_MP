@@ -34,6 +34,7 @@ function actualizarMenuAuth() {
   const navAuthLink = document.getElementById('navAuthLink');
   const navGuardadasItem = document.getElementById('navGuardadasItem');
   const navAdminItem = document.getElementById('navAdminItem');
+  const navSugerenciasItem = document.getElementById('navSugerenciasItem');
 
   if (navGuardadasItem) {
     if (window.AuthState.loggedIn) {
@@ -48,6 +49,14 @@ function actualizarMenuAuth() {
       navAdminItem.classList.remove('d-none');
     } else {
       navAdminItem.classList.add('d-none');
+    }
+  }
+
+  if (navSugerenciasItem) {
+    if (window.AuthState.loggedIn && window.AuthState.user?.proveedor?.id) {
+      navSugerenciasItem.classList.remove('d-none');
+    } else {
+      navSugerenciasItem.classList.add('d-none');
     }
   }
 
@@ -86,7 +95,11 @@ async function logout() {
 
     await fetchAuthStatus();
 
-    if (window.location.pathname.endsWith('guardadas.html')) {
+    if (
+      window.location.pathname.endsWith('guardadas.html') ||
+      window.location.pathname.endsWith('sugerencias.html') ||
+      window.location.pathname.endsWith('admin_usuarios.html')
+    ) {
       window.location.href = 'index.html';
     }
   } catch (error) {

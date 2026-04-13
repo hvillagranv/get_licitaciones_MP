@@ -56,6 +56,11 @@
             <i class="bi bi-shop"></i> Proveedores
           </a>
         </li>
+        <li class="nav-item d-none" id="navSugerenciasItem">
+          <a class="nav-link" href="sugerencias.html">
+            <i class="bi bi-lightbulb"></i> Sugerencias
+          </a>
+        </li>
         <li class="nav-item d-none" id="navGuardadasItem">
           <a class="nav-link" href="guardadas.html">
             <i class="bi bi-bookmark-check"></i> Guardadas
@@ -149,7 +154,7 @@
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">📊 Licitaciones por mes</h5>
+          <h5 class="mb-0">📊 Cantidad de licitaciones (últimos 12 meses)</h5>
         </div>
         <div class="card-body">
           <canvas id="graficoLicitacionesPorMes"></canvas>
@@ -159,10 +164,33 @@
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-header bg-success text-white">
-          <h5 class="mb-0">💰 Montos adjudicados por mes</h5>
+          <h5 class="mb-0">💰 Montos adjudicados (últimos 12 meses)</h5>
         </div>
         <div class="card-body">
           <canvas id="graficoMontosAdjudicados"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4" id="filaGraficosAnuales" style="display: none;">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">📊 Cantidad de licitaciones (todos los años)</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="graficoLicitacionesPorAnio"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">💰 Montos adjudicados (todos los años)</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="graficoMontosPorAnio"></canvas>
         </div>
       </div>
     </div>
@@ -173,7 +201,7 @@
     <div class="col-md-6 mb-4">
       <div class="card h-100">
         <div class="card-header bg-warning text-dark">
-          <h5 class="mb-0">🏆 Top 20 Proveedores Adjudicados (2024 - Ene 2026)</h5>
+          <h5 class="mb-0">🏆 Top 20 Proveedores Adjudicados</h5>
         </div>
         <div class="card-body" style="max-height: 500px; overflow-y: auto;">
           <table class="table table-sm table-striped" id="tablaProveedores">
@@ -192,7 +220,7 @@
     <div class="col-md-6 mb-4">
       <div class="card h-100">
         <div class="card-header bg-info text-white">
-          <h5 class="mb-0">📈 Categorías de Licitaciones Adjudicadas (2024 - Ene 2026)</h5>
+          <h5 class="mb-0">📈 Categorías de Licitaciones Adjudicadas</h5>
         </div>
         <div class="card-body" style="max-height: 500px; display: flex; align-items: center; justify-content: center;">
           <canvas id="graficoCategorias" style="max-height: 400px;"></canvas>

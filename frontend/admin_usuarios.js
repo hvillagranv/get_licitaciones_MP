@@ -1,5 +1,89 @@
 let usuarios = [];
 let auditoria = [];
+let proveedoresCatalogo = [];
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function normalizarTexto(value) {
+  return String(value ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function normalizarRut(value) {
+  return String(value ?? '').trim().toUpperCase().replace(/[.\-\s]/g, '');
+}
+
+function buscarProveedor(nombre = '', rut = '') {
+  const nombreNormalizado = normalizarTexto(nombre);
+  const rutNormalizado = normalizarRut(rut);
+
+  if (rutNormalizado) {
+    const matchByRut = proveedoresCatalogo.find((proveedor) => normalizarRut(proveedor.rut) === rutNormalizado);
+    if (matchByRut) {
+      return matchByRut;
+    }
+  }
+
+  if (!nombreNormalizado) {
+    return null;
+  }
+
+  return proveedoresCatalogo.find((proveedor) => normalizarTexto(proveedor.nombre) === nombreNormalizado) || null;
+}
+
+function renderProveedoresDatalist() {
+  const datalist = document.getElementById('proveedoresDatalist');
+  if (!datalist) return;
+
+  datalist.innerHTML = proveedoresCatalogo.map((proveedor) => {
+    const rut = proveedor.rut ? `RUT: ${proveedor.rut}` : 'Proveedor manual';
+    return `<option value="${escapeHtml(proveedor.nombre)}" label="${escapeHtml(rut)}"></option>`;
+  }).join('');
+}
+
+async function cargarProveedoresCatalogo(query = '') {
+  if (!window.AuthState.loggedIn || !window.AuthState.isAdmin) {
+    return;
+  }
+
+  try {
+    const suffix = query ? `&q=${encodeURIComponent(query)}` : '';
+    const data = await adminRequest(`providers&limit=500${suffix}`, {}, 'GET');
+    const proveedores = data.proveedores || [];
+    if (query) {
+      const merged = new Map(proveedoresCatalogo.map((proveedor) => [proveedor.id, proveedor]));
+      proveedores.forEach((proveedor) => merged.set(proveedor.id, proveedor));
+      proveedoresCatalogo = Array.from(merged.values()).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    } else {
+      proveedoresCatalogo = proveedores;
+    }
+    renderProveedoresDatalist();
+  } catch (error) {
+    setAdminMsg(error.message, 'danger');
+  }
+}
+
+function sincronizarProveedorInput(nombreInput, rutInput) {
+  if (!nombreInput) return null;
+
+  const match = buscarProveedor(nombreInput.value, rutInput?.value || '');
+  if (match) {
+    nombreInput.dataset.providerId = String(match.id);
+    if (rutInput && !rutInput.value.trim() && match.rut) {
+      rutInput.value = match.rut;
+    }
+    return match;
+  }
+
+  nombreInput.dataset.providerId = '';
+  return null;
+}
 
 function setAdminMsg(message, type = 'info') {
   const box = document.getElementById('adminMsg');
@@ -38,8 +122,24 @@ function renderUsuarios() {
   body.innerHTML = usuarios.map((u) => `
     <tr>
       <td>${u.id}</td>
-      <td><input class="form-control form-control-sm" id="nombre_${u.id}" value="${u.nombre || ''}"></td>
-      <td><input class="form-control form-control-sm" id="email_${u.id}" value="${u.email || ''}"></td>
+      <td><input class="form-control form-control-sm" id="nombre_${u.id}" value="${escapeHtml(u.nombre || '')}"></td>
+      <td><input class="form-control form-control-sm" id="email_${u.id}" value="${escapeHtml(u.email || '')}"></td>
+      <td>
+        <input
+          class="form-control form-control-sm proveedor-input"
+          id="proveedor_${u.id}"
+          list="proveedoresDatalist"
+          value="${escapeHtml(u.proveedor_nombre || '')}"
+          data-provider-id="${u.proveedor_id || ''}"
+          placeholder="Proveedor existente o nuevo"
+        >
+        <input
+          class="form-control form-control-sm mt-1 proveedor-rut-input"
+          id="proveedor_rut_${u.id}"
+          value="${escapeHtml(u.proveedor_rut || '')}"
+          placeholder="RUT proveedor (opcional)"
+        >
+      </td>
       <td>
         <select class="form-select form-select-sm" id="rol_${u.id}">
           <option value="usuario" ${u.rol === 'usuario' ? 'selected' : ''}>usuario</option>
@@ -126,12 +226,26 @@ async function cargarUsuarios() {
 async function guardarUsuario(id) {
   const nombre = document.getElementById(`nombre_${id}`)?.value?.trim() || '';
   const email = document.getElementById(`email_${id}`)?.value?.trim() || '';
+  const proveedorInput = document.getElementById(`proveedor_${id}`);
+  const proveedorRutInput = document.getElementById(`proveedor_rut_${id}`);
   const rol = document.getElementById(`rol_${id}`)?.value || 'usuario';
   const activo = Number(document.getElementById(`activo_${id}`)?.value || 1);
 
+  sincronizarProveedorInput(proveedorInput, proveedorRutInput);
+
   try {
-    await adminRequest('update', { id, nombre, email, rol, activo });
+    await adminRequest('update', {
+      id,
+      nombre,
+      email,
+      rol,
+      activo,
+      proveedor_id: Number(proveedorInput?.dataset?.providerId || 0),
+      proveedor_nombre: proveedorInput?.value?.trim() || '',
+      proveedor_rut: proveedorRutInput?.value?.trim() || ''
+    });
     setAdminMsg('Usuario actualizado', 'success');
+    await cargarProveedoresCatalogo();
     await cargarUsuarios();
   } catch (error) {
     setAdminMsg(error.message, 'danger');
@@ -173,11 +287,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('nuevoEmail')?.value?.trim() || '';
       const password = document.getElementById('nuevoPassword')?.value || '';
       const rol = document.getElementById('nuevoRol')?.value || 'usuario';
+      const proveedorInput = document.getElementById('nuevoProveedor');
+      const proveedorRutInput = document.getElementById('nuevoProveedorRut');
+
+      sincronizarProveedorInput(proveedorInput, proveedorRutInput);
 
       try {
-        await adminRequest('create', { nombre, email, password, rol });
+        await adminRequest('create', {
+          nombre,
+          email,
+          password,
+          rol,
+          proveedor_id: Number(proveedorInput?.dataset?.providerId || 0),
+          proveedor_nombre: proveedorInput?.value?.trim() || '',
+          proveedor_rut: proveedorRutInput?.value?.trim() || ''
+        });
         form.reset();
+        if (proveedorInput) proveedorInput.dataset.providerId = '';
         setAdminMsg('Usuario creado correctamente', 'success');
+        await cargarProveedoresCatalogo();
         await cargarUsuarios();
       } catch (error) {
         setAdminMsg(error.message, 'danger');
@@ -186,8 +314,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('auth:changed', () => {
+    cargarProveedoresCatalogo();
     cargarUsuarios();
   });
+
+  document.addEventListener('input', (event) => {
+    const nombreInput = event.target.closest('.proveedor-input');
+    if (nombreInput) {
+      const rutInput = document.getElementById(nombreInput.id.replace('proveedor_', 'proveedor_rut_'));
+      sincronizarProveedorInput(nombreInput, rutInput);
+
+      const query = nombreInput.value.trim();
+      if (query.length >= 2) {
+        cargarProveedoresCatalogo(query);
+      }
+      return;
+    }
+
+    if (event.target.id === 'nuevoProveedor') {
+      const rutInput = document.getElementById('nuevoProveedorRut');
+      sincronizarProveedorInput(event.target, rutInput);
+
+      const query = event.target.value.trim();
+      if (query.length >= 2) {
+        cargarProveedoresCatalogo(query);
+      }
+    }
+  });
+
+  document.addEventListener('blur', (event) => {
+    const nombreInput = event.target.closest('.proveedor-input');
+    if (nombreInput) {
+      const rutInput = document.getElementById(nombreInput.id.replace('proveedor_', 'proveedor_rut_'));
+      sincronizarProveedorInput(nombreInput, rutInput);
+      return;
+    }
+
+    if (event.target.id === 'nuevoProveedor') {
+      sincronizarProveedorInput(event.target, document.getElementById('nuevoProveedorRut'));
+    }
+  }, true);
 });
 
 window.cargarUsuarios = cargarUsuarios;

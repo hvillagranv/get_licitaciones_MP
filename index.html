@@ -42,6 +42,11 @@
             <i class="bi bi-shop"></i> Proveedores
           </a>
         </li>
+        <li class="nav-item d-none" id="navSugerenciasItem">
+          <a class="nav-link" href="sugerencias.html">
+            <i class="bi bi-lightbulb"></i> Sugerencias
+          </a>
+        </li>
         <li class="nav-item d-none" id="navGuardadasItem">
           <a class="nav-link" href="guardadas.html">
             <i class="bi bi-bookmark-check"></i> Guardadas
@@ -86,8 +91,14 @@
       <input type="text" id="filtroTexto" class="form-control my-3" placeholder="Filtrar por ID o Institución" oninput="filtrarDatos()">
       <div class="d-flex justify-content-between">
         <div id="cantidadResultados" class="my-3"></div>
-        <button class="btn btn-success btn-sm mb-2" onclick="descargarLicitaciones()">Descargar Licitaciones</button>
+        <div class="d-flex gap-2 align-items-center">
+          <button id="btnActualizarListado" class="btn btn-outline-primary btn-sm mb-2" onclick="actualizarListadoManual()">
+            <i class="bi bi-arrow-clockwise"></i> Actualizar listado
+          </button>
+          <button class="btn btn-success btn-sm mb-2" onclick="descargarLicitaciones()">Descargar Licitaciones</button>
+        </div>
       </div>
+      <div id="estadoActualizacion" class="small text-muted mb-2"></div>
       <div id="contenedorCards"></div>
 
     <nav>

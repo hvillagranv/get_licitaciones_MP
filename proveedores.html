@@ -3,11 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Análisis de Proveedores - Portal de Licitaciones</title>
+  <title>Panel de Proveedores</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="frontend/styles.css">
   <style>
+    .container-fluid {
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    .kpi-card {
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+    }
+    .kpi-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    .kpi-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
     .proveedor-dropdown-menu {
       max-height: 220px;
       overflow-y: auto;
@@ -54,6 +72,11 @@
         <li class="nav-item">
           <a class="nav-link active" href="proveedores.html">
             <i class="bi bi-shop"></i> Proveedores
+          </a>
+        </li>
+        <li class="nav-item d-none" id="navSugerenciasItem">
+          <a class="nav-link" href="sugerencias.html">
+            <i class="bi bi-lightbulb"></i> Sugerencias
           </a>
         </li>
         <li class="nav-item d-none" id="navGuardadasItem">
@@ -125,17 +148,12 @@
 
   <div class="d-flex justify-content-between align-items-center my-3">
     <div id="cantidadResultados"></div>
-    <div class="d-flex align-items-center gap-2">
-      <div id="botonesOrdenamiento" class="btn-group" role="group" aria-label="Ordenamiento" style="display: none;">
-        <button type="button" class="btn btn-sm btn-outline-primary" onclick="ordenarTabla('fecha_inicio')" title="Ordenar por fecha de publicación">
-          📅 Fecha <span id="iconoFecha"></span>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-primary" onclick="ordenarTabla('monto')" title="Ordenar por monto">
-          💰 Monto <span id="iconoMonto"></span>
-        </button>
-      </div>
-      <button id="btnDescargarCsv" class="btn btn-sm btn-outline-success" onclick="descargarCsv()" disabled>
-        ⬇️ Descargar CSV
+    <div id="botonesOrdenamiento" class="btn-group" role="group" aria-label="Ordenamiento" style="display: none;">
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="ordenarTabla('fecha_inicio')" title="Ordenar por fecha de publicación">
+        📅 Fecha <span id="iconoFecha"></span>
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="ordenarTabla('monto')" title="Ordenar por monto">
+        💰 Monto <span id="iconoMonto"></span>
       </button>
     </div>
   </div>
@@ -145,7 +163,7 @@
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">📊 Licitaciones adjudicadas por mes</h5>
+          <h5 class="mb-0">📊 Cantidad de licitaciones (últimos 12 meses)</h5>
         </div>
         <div class="card-body">
           <canvas id="graficoLicitacionesPorMes"></canvas>
@@ -155,10 +173,33 @@
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-header bg-success text-white">
-          <h5 class="mb-0">💰 Montos adjudicados por mes</h5>
+          <h5 class="mb-0">💰 Montos adjudicados (últimos 12 meses)</h5>
         </div>
         <div class="card-body">
           <canvas id="graficoMontosAdjudicados"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4" id="filaGraficosAnuales" style="display: none;">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">📊 Cantidad de licitaciones (todos los años)</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="graficoLicitacionesPorAnio"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">💰 Montos adjudicados (todos los años)</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="graficoMontosPorAnio"></canvas>
         </div>
       </div>
     </div>

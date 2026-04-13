@@ -23,6 +23,7 @@
         <li class="nav-item"><a class="nav-link" href="palabras_clave.html"><i class="bi bi-search"></i> Palabras Clave</a></li>
         <li class="nav-item"><a class="nav-link" href="organismos.html"><i class="bi bi-buildings"></i> Instituciones Públicas</a></li>
         <li class="nav-item"><a class="nav-link" href="proveedores.html"><i class="bi bi-shop"></i> Proveedores</a></li>
+        <li class="nav-item d-none" id="navSugerenciasItem"><a class="nav-link" href="sugerencias.html"><i class="bi bi-lightbulb"></i> Sugerencias</a></li>
         <li class="nav-item d-none" id="navGuardadasItem"><a class="nav-link" href="guardadas.html"><i class="bi bi-bookmark-check"></i> Guardadas</a></li>
         <li class="nav-item d-none" id="navAdminItem"><a class="nav-link" href="admin_usuarios.html"><i class="bi bi-people-fill"></i> Admin Usuarios</a></li>
         <li class="nav-item"><a class="nav-link active" id="navAuthLink" href="ingresar.html"><i class="bi bi-box-arrow-in-right"></i> Ingresar</a></li>
@@ -75,6 +76,19 @@
           <input class="form-control" type="password" id="registerPassword" minlength="10" maxlength="72" required>
         </div>
         <div class="col-12">
+          <label class="form-label">Proveedor</label>
+          <div class="position-relative">
+            <input class="form-control" type="text" id="registerProveedor" list="registerProveedoresDatalist" placeholder="Selecciona uno existente o crea uno nuevo" autocomplete="off">
+            <div id="registerProveedorSugerencias" class="dropdown-menu-custom auth-provider-dropdown d-none"></div>
+          </div>
+          <datalist id="registerProveedoresDatalist"></datalist>
+          <div id="registerProveedorHelp" class="form-text">Escribe al menos 2 caracteres para buscar o deja un nombre nuevo.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">RUT proveedor (opcional)</label>
+          <input class="form-control" type="text" id="registerProveedorRut" placeholder="Ej: 76.123.456-7">
+        </div>
+        <div class="col-12">
           <button class="btn btn-success" type="submit">Crear cuenta</button>
         </div>
       </form>
@@ -90,7 +104,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('.navbar .nav-link').forEach(link => {
       const href = link.getAttribute('href');
       if (href === currentPage) {
         link.classList.add('active');

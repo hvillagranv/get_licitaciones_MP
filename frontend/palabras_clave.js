@@ -11,10 +11,29 @@ let palabrasDisponibles = [];
 let palabrasMap = new Map();
 let datosFiltradosActuales = [];
 let aliasInstituciones = {};
+let cargandoListado = false;
 
-fetch('api/licitacionesPub.php')
-  .then(res => res.json())
-  .then(({ licitaciones, instituciones }) => {
+actualizarListadoLicitaciones({ resetPagina: true });
+
+cargarPalabrasClave();
+
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarResumenPalabras();
+});
+
+async function actualizarListadoLicitaciones({ resetPagina = false, mostrarEstado = true } = {}) {
+  if (cargandoListado) return;
+  cargandoListado = true;
+  setEstadoActualizacion('Actualizando listado...');
+  setBotonActualizacionEstado(true);
+
+  try {
+    const res = await fetch('api/licitacionesPub.php', { cache: 'no-store' });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const { licitaciones, instituciones } = await res.json();
     datos = (licitaciones || []).filter(item => item.codigo);
 
     if (instituciones && instituciones.length > 0) {
@@ -24,18 +43,38 @@ fetch('api/licitacionesPub.php')
     }
 
     ordenarDatos();
-    filtrarDatos();
-  })
-  .catch(err => {
+    filtrarDatos(resetPagina);
+
+    if (mostrarEstado) {
+      setEstadoActualizacion(`Listado actualizado: ${new Date().toLocaleString('es-CL')}`);
+    }
+  } catch (err) {
     console.error('Error al cargar licitaciones:', err);
-    cargarInstitucionesDesdeCSV();
-  });
+    setEstadoActualizacion('No se pudo actualizar el listado. Intenta nuevamente.');
+  } finally {
+    cargandoListado = false;
+    setBotonActualizacionEstado(false);
+  }
+}
 
-cargarPalabrasClave();
+function actualizarListadoManual() {
+  actualizarListadoLicitaciones({ resetPagina: false, mostrarEstado: true });
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-  actualizarResumenPalabras();
-});
+function setBotonActualizacionEstado(cargando) {
+  const boton = document.getElementById('btnActualizarListado');
+  if (!boton) return;
+  boton.disabled = cargando;
+  boton.innerHTML = cargando
+    ? '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Actualizando...'
+    : '<i class="bi bi-arrow-clockwise"></i> Actualizar listado';
+}
+
+function setEstadoActualizacion(mensaje) {
+  const estado = document.getElementById('estadoActualizacion');
+  if (!estado) return;
+  estado.textContent = mensaje || '';
+}
 
 function cargarPalabrasClave() {
   Papa.parse('data/csv/palabras_clave.csv', {
