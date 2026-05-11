@@ -3,7 +3,12 @@ import path from 'path';
 import PQueue from 'p-queue';
 import dotenv from 'dotenv';
 import { guardarDetallesEnBD } from './guardarBD.js';
-import { logMensaje, iniciarMonitorInactividad, detenerMonitorInactividad } from './utils/logs.js';
+import {
+  logMensaje,
+  iniciarMonitorInactividad,
+  detenerMonitorInactividad,
+  registrarCallbackInactividad
+} from './utils/logs.js';
 import { fileURLToPath } from 'url';
 import { pool } from './connectDB.js';
 
@@ -16,14 +21,19 @@ const __dirname = path.dirname(__filename);
 
 // === CONFIGURACIÓN ===
 const CONFIG = {
-  ticket: process.env.TICKET_MVP1,
+  ticket: process.env.TICKET,
   concurrenciaEstado: 1,
-  concurrenciaDetalles: 5,
+  concurrenciaDetalles: Number(
+    process.env.CONCURRENCIA_DETALLES ||
+      Math.max(1, Math.min(3, Number(process.env.DB_CONNECTION_LIMIT || 4) - 1))
+  ),
   tiempoEsperaFechas: 1500,
   maxIntentosAPI: 5,
   maxIntentosDetalle: 5,
-  timeoutAPI: 90000,
-  estados: ['adjudicada'],
+  maxFallasConsecutivasPatron: Number(process.env.MAX_FALLAS_CONSECUTIVAS_PATRON || 3),
+  timeoutAPI: Number(process.env.TIMEOUT_API_MS || 25000),
+  timeoutJobCola: Number(process.env.TIMEOUT_JOB_COLA_MS || 60000),
+  estados: ['todos'],
   nombreEstado: {
     publicada: 'Publicada',
     cerrada: 'Cerrada',
@@ -40,8 +50,8 @@ if (!CONFIG.ticket) {
   process.exit(1);
 }
 
-//desierta = 2006 - 2009, 2022 - 2025
-//adjudicada = 2023 - 2026
+//desierta = 2006 - 2009, 2020 - 2025
+//adjudicada = 2019 - 2026
 
 
 // === RUTAS DE ARCHIVOS ===
@@ -55,7 +65,37 @@ const estado = {
   codigosVacios: new Set(),
   codigosFallidos: new Set(),
   fallidosPendientes: new Set(),
-  fechasFallidas: new Map()
+  fechasFallidas: new Map(),
+  ejecucionCancelada: false,
+  motivoCancelacion: ''
+};
+
+const metricas = {
+  totalFechasObjetivo: 0,
+  fechasDescargadas: new Set(),
+  licitacionesDescargadas: 0
+};
+
+let resumenFinalEmitido = false;
+
+const emitirResumenFinal = (motivo = 'fin de ejecución', tipo = 'info') => {
+  if (resumenFinalEmitido) return;
+  resumenFinalEmitido = true;
+
+  const fechasDescargadas = metricas.fechasDescargadas.size;
+  const fechasFaltantes = Math.max(metricas.totalFechasObjetivo - fechasDescargadas, 0);
+  const licitacionesDescargadas = metricas.licitacionesDescargadas;
+  const licitacionesFaltantes = estado.codigosFallidos.size + estado.fallidosPendientes.size;
+
+  logMensaje(`📌 Resumen final (${motivo})`, tipo);
+  logMensaje(
+    `📅 Fechas descargadas: ${fechasDescargadas}/${metricas.totalFechasObjetivo} | Faltantes: ${fechasFaltantes}`,
+    tipo
+  );
+  logMensaje(
+    `📦 Licitaciones descargadas: ${licitacionesDescargadas} | Faltantes: ${licitacionesFaltantes}`,
+    tipo
+  );
 };
 
 // === UTILIDADES ===
@@ -65,13 +105,23 @@ const TRANSIENT_DB_ERRORS = new Set([
   'ECONNRESET',
   'ETIMEDOUT',
   'PROTOCOL_CONNECTION_LOST',
-  'EPIPE'
+  'EPIPE',
+  'ER_USER_LIMIT_REACHED',
+  'ER_LOCK_WAIT_TIMEOUT',
+  'ER_LOCK_DEADLOCK'
 ]);
 
 const esErrorTransitorioBD = (err) => {
   const code = err?.code || '';
   const message = (err?.message || '').toUpperCase();
-  return TRANSIENT_DB_ERRORS.has(code) || message.includes('ECONNRESET') || message.includes('ETIMEDOUT');
+  return (
+    TRANSIENT_DB_ERRORS.has(code) ||
+    message.includes('ECONNRESET') ||
+    message.includes('ETIMEDOUT') ||
+    message.includes('MAX_USER_CONNECTIONS') ||
+    message.includes('LOCK WAIT TIMEOUT') ||
+    message.includes('DEADLOCK')
+  );
 };
 
 const queryConReintentos = async (query, params = [], maxIntentos = 3) => {
@@ -83,7 +133,8 @@ const queryConReintentos = async (query, params = [], maxIntentos = 3) => {
       const quedanIntentos = intento < maxIntentos;
 
       if (esTransitorio && quedanIntentos) {
-        await esperar(400 * intento);
+        const backoffBase = err?.code === 'ER_USER_LIMIT_REACHED' ? 1200 : 400;
+        await esperar(backoffBase * intento);
         continue;
       }
 
@@ -271,9 +322,14 @@ const reintentos = {
     const queue = new PQueue({ concurrency: CONFIG.concurrenciaDetalles });
     let exitosos = 0;
     let procesados = 0;
+    let errorFatalBD = null;
     
     for (const codigo of codigosFallidos) {
       queue.add(async () => {
+        if (errorFatalBD || estado.ejecucionCancelada) {
+          return;
+        }
+
         const resultado = await obtenerDetalles.hastaExito(codigo);
         procesados++;
         
@@ -287,10 +343,25 @@ const reintentos = {
         } else if (procesados % 20 === 0 || procesados === codigosFallidos.length) {
           logMensaje(`🔄 Progreso: ${exitosos}/${procesados} de ${codigosFallidos.length}`, 'info');
         }
+      }).catch((err) => {
+        if (err?.code === 'DB_TIMEOUT_STORM') {
+          errorFatalBD = err;
+          estado.ejecucionCancelada = true;
+          estado.motivoCancelacion = err.message;
+          logMensaje(`🚨 ${err.message}`, 'error');
+          return;
+        }
+
+        procesados++;
+        logMensaje(`❌ Error en reintento ${codigo}: ${err?.message || 'Error desconocido'}`, 'error');
       });
     }
     
     await queue.onIdle();
+
+    if (errorFatalBD) {
+      throw errorFatalBD;
+    }
     
     if (!esPorFecha) {
       gestionArchivos.actualizarArchivoFallidos();
@@ -461,9 +532,13 @@ const procesamiento = {
 
       let existentes = [];
       if (codigos.length > 0) {
+        const estadoConsulta = estadoNombre === 'todos'
+          ? 'todos'
+          : CONFIG.nombreEstado[estadoNombre];
+
         existentes = await consultasDB.verificarCodigosExistentesPorEstado(
           codigos,
-          CONFIG.nombreEstado[estadoNombre]
+          estadoConsulta
         );
       }
 
@@ -490,9 +565,14 @@ const procesamiento = {
       const queue = new PQueue({ concurrency: CONFIG.concurrenciaDetalles });
       let completadas = 0;
       let procesadas = 0;
+      let errorFatalBD = null;
       
       for (const lic of nuevas) {
         queue.add(async () => {
+          if (errorFatalBD || estado.ejecucionCancelada) {
+            return;
+          }
+
           const detalle = await obtenerDetalles.robusto(lic.CodigoExterno);
           procesadas++;
           
@@ -509,10 +589,34 @@ const procesamiento = {
               'info'
             );
           }
+        }, { timeout: CONFIG.timeoutJobCola, throwOnTimeout: false }).catch(err => {
+          if (err?.code === 'DB_TIMEOUT_STORM') {
+            errorFatalBD = err;
+            estado.ejecucionCancelada = true;
+            estado.motivoCancelacion = err.message;
+            logMensaje(`🚨 ${err.message}`, 'error');
+            return;
+          }
+
+          procesadas++;
+          if (err?.name === 'TimeoutError') {
+            logMensaje(`⏱️ Job timeout: ${lic.CodigoExterno} (>${CONFIG.timeoutJobCola / 1000}s)`, 'warning');
+            return;
+          }
+
+          logMensaje(`❌ Error en job ${lic.CodigoExterno}: ${err?.message || 'Error desconocido'}`, 'error');
         });
       }
 
       await queue.onIdle();
+
+      if (errorFatalBD) {
+        throw errorFatalBD;
+      }
+
+      if (estado.ejecucionCancelada) {
+        throw new Error(estado.motivoCancelacion || 'Ejecución cancelada por falla crítica de BD');
+      }
       
       const fallidosEnFecha = Array.from(estado.fallidosPendientes);
       if (fallidosEnFecha.length > 0) {
@@ -526,6 +630,11 @@ const procesamiento = {
         : `✅ ${estadoNombre} - ${fecha}: ${completadas}/${nuevas.length} (${faltantes} faltantes)`;
       
       logMensaje(mensaje, 'success');
+
+      const claveFecha = `${estadoNombre}-${fecha}`;
+      metricas.fechasDescargadas.add(claveFecha);
+      metricas.licitacionesDescargadas += completadas;
+
       return completadas;
     }
 
@@ -536,7 +645,9 @@ const procesamiento = {
       estado.fechasFallidas.set(claveFecha, { estadoNombre, fecha });
     }
     
-    throw new Error(`Falló ${estadoNombre} - ${fecha}`);
+    const error = new Error(`Falló ${estadoNombre} - ${fecha}`);
+    error.code = 'RESPUESTA_INVALIDA_FECHA';
+    throw error;
   },
 
   async procesarEstados(fechas) {
@@ -546,14 +657,38 @@ const procesamiento = {
       queue.add(async () => {
         let fechasProcesadas = 0;
         let totalLicitaciones = 0;
+        let fallasConsecutivasPorPatron = 0;
 
         for (const fecha of fechas) {
           fechasProcesadas++;
           try {
             const licitaciones = await this.procesarFechaEstado(fecha, estadoNombre);
             totalLicitaciones += licitaciones;
+            fallasConsecutivasPorPatron = 0;
           } catch (err) {
             logMensaje(`⚠️ Error ${estadoNombre} - ${fecha}: ${err.message}`, 'warning');
+
+            if (err?.code === 'RESPUESTA_INVALIDA_FECHA') {
+              fallasConsecutivasPorPatron++;
+
+              if (fallasConsecutivasPorPatron >= CONFIG.maxFallasConsecutivasPatron) {
+                estado.ejecucionCancelada = true;
+                estado.motivoCancelacion =
+                  `Patrón repetido de respuestas inválidas (${fallasConsecutivasPorPatron} consecutivas) en estado ${estadoNombre}`;
+
+                logMensaje(
+                  `🛑 ${estado.motivoCancelacion}. Se cancela ejecución para no esperar toda la corrida.`,
+                  'warning'
+                );
+                break;
+              }
+            } else {
+              fallasConsecutivasPorPatron = 0;
+            }
+          }
+
+          if (estado.ejecucionCancelada) {
+            break;
           }
           
           await esperar(CONFIG.tiempoEsperaFechas);
@@ -564,6 +699,10 @@ const procesamiento = {
               'info'
             );
           }
+        }
+
+        if (estado.ejecucionCancelada) {
+          return;
         }
 
         logMensaje(
@@ -590,16 +729,25 @@ const main = async () => {
   }
   
   // Configurar fechas
-  const fechaInicio = '2022-11-21';
-  const fechaTermino = '2022-12-10';
+  const fechaInicio = '2020-01-01';
+  const fechaTermino = '2024-01-01';
   const fechas = generarFechas(fechaInicio, fechaTermino);
+  metricas.totalFechasObjetivo = fechas.length * CONFIG.estados.length;
 
   logMensaje(`📅 Fechas: ${fechaInicio} hasta ${fechaTermino}`, 'info');
   logMensaje(`📊 Total: ${fechas.length} fechas`, 'info');
   logMensaje(`📆 Primera: ${fechas[0]} | Última: ${fechas[fechas.length - 1]}`, 'info');
+  logMensaje(
+    `⚙️ Concurrencia: estado=${CONFIG.concurrenciaEstado}, detalles=${CONFIG.concurrenciaDetalles}, pool=${Number(process.env.DB_CONNECTION_LIMIT || 4)}`,
+    'info'
+  );
 
   // Procesar estados
   await procesamiento.procesarEstados(fechas);
+
+  if (estado.ejecucionCancelada) {
+    throw new Error(estado.motivoCancelacion || 'Ejecución cancelada por patrón repetido');
+  }
   
   // Limpiar códigos recuperados
   logMensaje('🧹 Limpiando códigos recuperados...', 'info');
@@ -653,16 +801,22 @@ const main = async () => {
   logMensaje(mensajeFinal, estado.codigosFallidos.size === 0 ? 'success' : 'warning');
 };
 
+registrarCallbackInactividad(() => {
+  emitirResumenFinal('cierre de inactividad', 'warning');
+});
+
 // === EJECUCIÓN ===
 iniciarMonitorInactividad();
 
 main()
   .then(() => {
+    emitirResumenFinal('cierre normal', 'info');
     detenerMonitorInactividad();
     logMensaje('🛑 Ejecución finalizada correctamente', 'info');
     process.exit(0);
   })
   .catch(err => {
+    emitirResumenFinal('cierre por error', 'warning');
     detenerMonitorInactividad();
     logMensaje(`❌ Error no manejado: ${err.message}`, 'error');
     console.error(err);

@@ -119,6 +119,7 @@ if ($action === 'list' && $method === 'GET') {
       l.moneda AS unidad_monetaria,
       l.fecha_publicacion AS fecha_inicio,
       l.fecha_cierre AS fecha_final,
+      l.fecha_adjudicacion,
       l.estado,
       l.tipo,
       ulg.created_at AS fecha_guardado

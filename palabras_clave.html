@@ -27,7 +27,7 @@
             <i class="bi bi-house-fill"></i> Inicio
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none" id="navPalabrasClaveItem">
           <a class="nav-link active" href="palabras_clave.html">
             <i class="bi bi-search"></i> Palabras Clave
           </a>
@@ -52,10 +52,14 @@
             <i class="bi bi-bookmark-check"></i> Guardadas
           </a>
         </li>
-        <li class="nav-item d-none" id="navAdminItem">
-          <a class="nav-link" href="admin_usuarios.html">
-            <i class="bi bi-people-fill"></i> Admin Usuarios
+        <li class="nav-item dropdown d-none" id="navAdminDropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-shield-lock-fill"></i> Administración
           </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="admin_usuarios.html"><i class="bi bi-people-fill me-1"></i> Usuarios</a></li>
+            <li><a class="dropdown-item" href="admin_catalogos.html"><i class="bi bi-tags-fill me-1"></i> Catálogos</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="navAuthLink" href="ingresar.html">
@@ -71,7 +75,7 @@
   <div class="row mb-4">
     <div class="col-md-3 ps-0">
       <h5>Palabras clave</h5>
-      <div id="filtrosPalabras" class="form-check"></div>
+      <div id="filtrosPalabras" class="suggestion-filter-chip-list filtro-lista-vertical"></div>
       <div class="d-flex gap-2 justify-content-start mt-3">
         <button class="btn btn-primary btn-sm" onclick="seleccionarTodasYFiltrar()">Seleccionar todo</button>
         <button class="btn btn-secondary btn-sm" onclick="limpiarFiltros()">Limpiar</button>
@@ -81,8 +85,20 @@
     <div class="col-md-9">
       <h2>Licitaciones publicadas por palabras clave</h2>
       <div class="row g-2 my-2">
-        <div class="col-md-8">
-          <input type="text" id="filtroTexto" class="form-control" placeholder="Filtrar por ID, titulo, institucion o descripcion" oninput="filtrarDatos()">
+        <div class="col-md-5">
+          <input type="text" id="filtroTexto" class="form-control" placeholder="Filtrar por ID, titulo, institucion o descripcion" onkeydown="buscarTextoEnEnter(event)">
+        </div>
+        <div class="col-md-3">
+          <select id="filtroPeriodo" class="form-select" onchange="filtrarDatos()">
+            <option value="">Periodo: Todos</option>
+            <option value="3m">Últimos 3 meses</option>
+            <option value="6m">Últimos 6 meses</option>
+            <option value="1y">Último año</option>
+            <option value="2y">Últimos 2 años</option>
+            <option value="3y">Últimos 3 años</option>
+            <option value="5y">Últimos 5 años</option>
+            <option value="gt5y">Mayor a 5 años</option>
+          </select>
         </div>
         <div class="col-md-4 d-flex align-items-center">
           <div id="resumenPalabras" class="text-muted small"></div>
@@ -108,9 +124,9 @@
   </div>
 </div>
 
-<script type="text/javascript" src="frontend/palabras_clave.js"></script>
-<script src="frontend/auth.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="frontend/palabras_clave.js?v=20260413"></script>
+<script src="frontend/auth.js"></script>
 <script>
   // Marcar el enlace activo en el menú
   document.addEventListener('DOMContentLoaded', function() {

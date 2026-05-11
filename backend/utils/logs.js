@@ -33,7 +33,8 @@ const logPath = path.join(logsDir, nombreArchivo);
 // Control de inactividad
 let ultimaActividad = Date.now();
 let timeoutInterval = null;
-const TIMEOUT_INACTIVIDAD = 3 * 60 * 1000; // 3 minutos
+let callbackInactividad = null;
+const TIMEOUT_INACTIVIDAD = 45 * 1000; // 45 segundos
 
 // Función para sanitizar datos sensibles
 const sanitizarDatos = (msg) => {
@@ -114,19 +115,27 @@ export const logMensaje = (msg, tipo = 'info') => {
 export const iniciarMonitorInactividad = () => {
   if (timeoutInterval) return; // Ya está iniciado
   
-  logMensaje('⏱️ Monitor de inactividad iniciado (timeout: 3 minutos)', 'info');
+  logMensaje('⏱️ Monitor de inactividad iniciado (timeout: 45 segundos)', 'info');
   
   timeoutInterval = setInterval(() => {
     const tiempoInactivo = Date.now() - ultimaActividad;
     
     if (tiempoInactivo >= TIMEOUT_INACTIVIDAD) {
-      logMensaje('⏱️ Sin actividad por 3 minutos. Cerrando programa...', 'warning');
+      if (typeof callbackInactividad === 'function') {
+        try {
+          callbackInactividad();
+        } catch (err) {
+          logMensaje(`⚠️ Error en callback de inactividad: ${err.message}`, 'warning');
+        }
+      }
+
+      logMensaje('⏱️ Sin actividad por 45 segundos. Cerrando programa...', 'warning');
       clearInterval(timeoutInterval);
       setTimeout(() => {
         process.exit(0);
       }, 1000);
     }
-  }, 30000); // Verificar cada 30 segundos
+  }, 10000); // Verificar cada 10 segundos
 };
 
 // Detener monitor de inactividad
@@ -136,4 +145,8 @@ export const detenerMonitorInactividad = () => {
     timeoutInterval = null;
     logMensaje('⏱️ Monitor de inactividad detenido', 'info');
   }
+};
+
+export const registrarCallbackInactividad = (callback) => {
+  callbackInactividad = callback;
 };

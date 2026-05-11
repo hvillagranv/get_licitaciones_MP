@@ -234,7 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.detail.loggedIn) {
       setAuthMsg(`Sesión activa como ${event.detail.user?.nombre || event.detail.user?.email || 'usuario'}.`, 'success');
       setTimeout(() => {
-        window.location.href = 'index.html';
+        const params = new URLSearchParams(window.location.search);
+        const redir = params.get('redir');
+        window.location.href = (redir && /^[a-zA-Z0-9_-]+\.html$/.test(redir)) ? redir : 'index.html';
       }, 600);
     }
   });

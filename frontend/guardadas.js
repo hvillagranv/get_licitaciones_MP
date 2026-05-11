@@ -1,5 +1,22 @@
 let guardadas = [];
 
+function formatearFecha(valor) {
+  if (!valor) return 'No informada';
+  const fecha = new Date(valor);
+  if (Number.isNaN(fecha.getTime())) return valor;
+  return fecha.toLocaleDateString('es-CL');
+}
+
+function obtenerClaseEstado(estado) {
+  const valor = (estado || '').toString().trim().toLowerCase();
+  if (valor === 'adjudicada') return 'bg-success';
+  if (valor === 'publicada') return 'bg-primary';
+  if (valor === 'cerrada') return 'bg-secondary';
+  if (valor.startsWith('desierta')) return 'bg-warning text-dark';
+  if (valor === 'revocada' || valor === 'suspendida') return 'bg-danger';
+  return 'bg-dark';
+}
+
 function formatearMonto(item) {
   if (item.monto_estimado && !isNaN(item.monto_estimado)) {
     const monto = parseInt(item.monto_estimado, 10).toLocaleString('es-CL');
@@ -54,9 +71,14 @@ async function cargarGuardadas() {
               <h5 class="text-primary fw-bold mb-1">${item.nombre || '(Sin título)'}</h5>
             </a>
             <p class="text-secondary mb-2">${item.descripcion || '(Sin descripción)'}</p>
+            <div class="mb-2">
+              <span class="badge ${obtenerClaseEstado(item.estado)}">${item.estado || 'Sin estado'}</span>
+            </div>
             <div><strong>Institución:</strong> ${item.institucion_nombre || 'No informada'}</div>
             <div><strong>Monto:</strong> ${formatearMonto(item)}</div>
-            <div><strong>Fecha guardado:</strong> ${item.fecha_guardado || ''}</div>
+            <div><strong>Fecha de cierre:</strong> ${formatearFecha(item.fecha_final)}</div>
+            <div><strong>Fecha de adjudicación:</strong> ${formatearFecha(item.fecha_adjudicacion)}</div>
+            <div><strong>Fecha guardado:</strong> ${formatearFecha(item.fecha_guardado)}</div>
           </div>
           <button class="btn btn-outline-danger btn-sm" onclick="quitarGuardada('${item.codigo}')">Quitar</button>
         </div>

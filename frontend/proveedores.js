@@ -201,8 +201,19 @@ function filtrarDatos(resetPagina = true) {
   textoFiltro = document.getElementById('filtroTexto').value.toLowerCase();
   const textoProveedor = (document.getElementById('filtroProveedor')?.value || '').toLowerCase().trim();
   filtroAnio = document.getElementById('filtroAnio')?.value || 'todos';
+  const filtroPeriodo = document.getElementById('filtroPeriodo')?.value || '';
   filtroTipo = document.getElementById('filtroTipo')?.value || 'todos';
   if (resetPagina) paginaActual = 1;
+
+  const ahora = new Date();
+  const limite = new Date(ahora);
+  const tienePeriodo = filtroPeriodo !== '';
+  if (filtroPeriodo === '3m') limite.setMonth(limite.getMonth() - 3);
+  if (filtroPeriodo === '6m') limite.setMonth(limite.getMonth() - 6);
+  if (filtroPeriodo === '1y') limite.setFullYear(limite.getFullYear() - 1);
+  if (filtroPeriodo === '2y') limite.setFullYear(limite.getFullYear() - 2);
+  if (filtroPeriodo === '3y') limite.setFullYear(limite.getFullYear() - 3);
+  if (filtroPeriodo === '5y') limite.setFullYear(limite.getFullYear() - 5);
 
   actualizarSugerencias(textoProveedor);
 
@@ -212,13 +223,23 @@ function filtrarDatos(resetPagina = true) {
     ).toLowerCase();
 
     const coincideTexto = !textoFiltro || textoBase.includes(textoFiltro);
+    const proveedoresTexto = (item.proveedores_adjudicados || '').toLowerCase();
+    const coincideProveedor = !textoProveedor || proveedoresTexto.includes(textoProveedor);
 
     const anioItem = obtenerAnio(item);
     const coincideAnio = filtroAnio === 'todos' || String(anioItem) === String(filtroAnio);
 
     const coincideTipo = filtroTipo === 'todos' || (item.tipo || '') === filtroTipo;
 
-    return coincideTexto && coincideAnio && coincideTipo;
+    const coincidePeriodo = (() => {
+      if (!tienePeriodo) return true;
+      const fechaPub = parsearFechaFiltro(item.fecha_inicio || item.fecha_publicacion || item.fecha_final);
+      if (!fechaPub) return false;
+      if (filtroPeriodo === 'gt5y') return fechaPub < limite;
+      return fechaPub >= limite;
+    })();
+
+    return coincideTexto && coincideProveedor && coincideAnio && coincideTipo && coincidePeriodo;
   });
 
   datosFiltradosActuales = datosFiltrados;
@@ -228,6 +249,13 @@ function filtrarDatos(resetPagina = true) {
   actualizarKpis(datosFiltrados);
   generarGraficos(datosFiltrados);
   mostrarDatos(datosFiltrados);
+}
+
+function buscarTextoEnEnter(event) {
+  if (event.key !== 'Enter') return;
+
+  event.preventDefault();
+  filtrarDatos(true);
 }
 
 function actualizarSugerencias(textoProveedor) {
@@ -714,11 +742,20 @@ function normalizarTexto(valor) {
     .trim();
 }
 
+function parsearFechaFiltro(valor) {
+  if (!valor) return null;
+  const raw = String(valor).trim();
+  if (!raw) return null;
+
+  const normalizada = raw.includes('T') ? raw : raw.replace(' ', 'T');
+  const fecha = new Date(normalizada);
+  if (Number.isNaN(fecha.getTime())) return null;
+  return fecha;
+}
+
 function obtenerAnio(item) {
-  const fecha = item.fecha_inicio || item.fecha_publicacion || item.fecha_inicio;
-  if (!fecha) return null;
-  const date = new Date(fecha);
-  if (isNaN(date.getTime())) return null;
+  const date = parsearFechaFiltro(item.fecha_inicio || item.fecha_publicacion || item.fecha_final);
+  if (!date) return null;
   return date.getFullYear();
 }
 
@@ -730,9 +767,8 @@ function formatearMoneda(valor, opciones = {}) {
 }
 
 function formatearFecha(valor) {
-  if (!valor) return 'Sin fecha';
-  const date = new Date(valor);
-  if (isNaN(date.getTime())) return 'Sin fecha';
+  const date = parsearFechaFiltro(valor);
+  if (!date) return 'Sin fecha';
   return date.toLocaleDateString();
 }
 
@@ -845,6 +881,7 @@ function limpiarFiltros() {
   const filtroProveedor = document.getElementById('filtroProveedor');
   if (filtroProveedor) filtroProveedor.value = '';
   if (document.getElementById('filtroAnio')) document.getElementById('filtroAnio').value = 'todos';
+  if (document.getElementById('filtroPeriodo')) document.getElementById('filtroPeriodo').value = '';
   if (document.getElementById('filtroTipo')) document.getElementById('filtroTipo').value = 'todos';
   textoFiltro = '';
   const contenedor = document.getElementById('proveedoresSugerencias');

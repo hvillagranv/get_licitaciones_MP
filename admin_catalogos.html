@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogos - Portal de Licitaciones</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="frontend/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <i class="bi bi-file-earmark-text"></i> Licitaciones MP
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-fill"></i> Inicio</a></li>
+        <li class="nav-item d-none" id="navPalabrasClaveItem"><a class="nav-link" href="palabras_clave.html"><i class="bi bi-search"></i> Palabras Clave</a></li>
+        <li class="nav-item"><a class="nav-link" href="organismos.html"><i class="bi bi-buildings"></i> Instituciones Públicas</a></li>
+        <li class="nav-item"><a class="nav-link" href="proveedores.html"><i class="bi bi-shop"></i> Proveedores</a></li>
+        <li class="nav-item d-none" id="navSugerenciasItem"><a class="nav-link" href="sugerencias.html"><i class="bi bi-lightbulb"></i> Sugerencias</a></li>
+        <li class="nav-item d-none" id="navGuardadasItem"><a class="nav-link" href="guardadas.html"><i class="bi bi-bookmark-check"></i> Guardadas</a></li>
+        <li class="nav-item dropdown d-none" id="navAdminDropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-shield-lock-fill"></i> Administración
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="admin_usuarios.html"><i class="bi bi-people-fill me-1"></i> Usuarios</a></li>
+            <li><a class="dropdown-item active" href="admin_catalogos.html"><i class="bi bi-tags-fill me-1"></i> Catálogos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="navAuthLink" href="ingresar.html">
+            <i class="bi bi-box-arrow-in-right"></i> Ingresar
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-4">
+
+  <!-- Mensaje sin sesión -->
+  <div id="sinSesion" class="d-none">
+    <div class="alert alert-warning">
+      <i class="bi bi-lock-fill"></i> Esta sección requiere sesión de administrador.
+      <a href="ingresar.html?redir=admin_catalogos.html" class="alert-link ms-2">Ingresar</a>
+    </div>
+  </div>
+
+  <div id="contenidoCatalogos" class="d-none">
+    <h4 class="mb-3"><i class="bi bi-tags-fill"></i> Gestión de Catálogos</h4>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-3" id="tabsCatalogos" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="tab-pc-btn" data-bs-toggle="tab" data-bs-target="#tab-pc"
+          type="button" role="tab">
+          <i class="bi bi-search"></i> Palabras Clave
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-inst-btn" data-bs-toggle="tab" data-bs-target="#tab-inst"
+          type="button" role="tab">
+          <i class="bi bi-buildings"></i> Instituciones
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- TAB: Palabras Clave -->
+      <div class="tab-pane fade show active" id="tab-pc" role="tabpanel">
+        <div class="row g-3 mb-3">
+          <div class="col-md-5">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <h6 class="card-title" id="tituloFormPC">Agregar palabra clave</h6>
+                <form id="formPC" class="row g-2">
+                  <input type="hidden" id="pcId" value="">
+                  <div class="col-12">
+                    <label class="form-label small">Palabra base</label>
+                    <input id="pcPalabra" class="form-control form-control-sm" placeholder="Ej: consultoría" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small">Variantes <span class="text-muted">(una por línea)</span></label>
+                    <textarea id="pcVariantes" class="form-control form-control-sm" rows="4"
+                      placeholder="consultoria&#10;consultora&#10;consultor"></textarea>
+                  </div>
+                  <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary btn-sm" id="btnGuardarPC">
+                      <i class="bi bi-plus-circle"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm d-none" id="btnCancelarPC">
+                      Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="card-title mb-0">Listado</h6>
+                  <div class="d-flex gap-2">
+                    <label class="btn btn-outline-success btn-sm mb-0"
+                      title="CSV con cabecera: Palabra;Variación 1;Variación 2;… (separador ; o ,)">
+                      <i class="bi bi-upload"></i> Importar CSV
+                      <input type="file" id="importPC" accept=".csv,.txt" class="d-none">
+                    </label>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="exportPC"
+                      title="Descargar CSV">
+                      <i class="bi bi-download"></i> Exportar
+                    </button>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <input id="buscarPC" class="form-control form-control-sm" placeholder="Filtrar...">
+                </div>
+                <div id="alertaPC"></div>
+                <div class="table-responsive" style="max-height:340px;overflow-y:auto">
+                  <table class="table table-sm table-hover mb-0">
+                    <thead class="table-light sticky-top">
+                      <tr>
+                        <th>Palabra</th>
+                        <th>Variantes</th>
+                        <th>Activo</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="tablaPC"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: Instituciones -->
+      <div class="tab-pane fade" id="tab-inst" role="tabpanel">
+        <div class="row g-3 mb-3">
+          <div class="col-md-5">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <h6 class="card-title" id="tituloFormInst">Agregar institución</h6>
+                <form id="formInst" class="row g-2">
+                  <input type="hidden" id="instId" value="">
+                  <div class="col-12">
+                    <label class="form-label small">Nombre completo <span class="text-muted">(Mercado Público)</span></label>
+                    <input id="instNombre" class="form-control form-control-sm"
+                      placeholder="CORPORACION DE FOMENTO DE LA PRODUCCION" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small">Alias (mostrado en interfaz)</label>
+                    <input id="instAlias" class="form-control form-control-sm" placeholder="Corfo" required>
+                  </div>
+                  <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary btn-sm" id="btnGuardarInst">
+                      <i class="bi bi-plus-circle"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm d-none" id="btnCancelarInst">
+                      Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h6 class="card-title mb-0">Listado</h6>
+                  <div class="d-flex gap-2">
+                    <label class="btn btn-outline-success btn-sm mb-0"
+                      title="CSV con cabecera: nombre_completo;alias (separador ; o ,) — igual que data/csv/instituciones.csv">
+                      <i class="bi bi-upload"></i> Importar CSV
+                      <input type="file" id="importInst" accept=".csv,.txt" class="d-none">
+                    </label>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="exportInst"
+                      title="Descargar CSV">
+                      <i class="bi bi-download"></i> Exportar
+                    </button>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <input id="buscarInst" class="form-control form-control-sm" placeholder="Filtrar...">
+                </div>
+                <div id="alertaInst"></div>
+                <div class="table-responsive" style="max-height:340px;overflow-y:auto">
+                  <table class="table table-sm table-hover mb-0">
+                    <thead class="table-light sticky-top">
+                      <tr>
+                        <th>Alias</th>
+                        <th>Nombre completo</th>
+                        <th>Activo</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="tablaInst"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-content -->
+  </div><!-- /contenidoCatalogos -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="frontend/auth.js"></script>
+<script src="frontend/admin_catalogos.js"></script>
+<script>fetchAuthStatus();</script>
+</body>
+</html>

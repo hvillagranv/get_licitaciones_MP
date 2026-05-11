@@ -27,7 +27,7 @@
             <i class="bi bi-house-fill"></i> Inicio
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none" id="navPalabrasClaveItem">
           <a class="nav-link" href="palabras_clave.html">
             <i class="bi bi-search"></i> Palabras Clave
           </a>
@@ -52,10 +52,14 @@
             <i class="bi bi-bookmark-check"></i> Guardadas
           </a>
         </li>
-        <li class="nav-item d-none" id="navAdminItem">
-          <a class="nav-link" href="admin_usuarios.html">
-            <i class="bi bi-people-fill"></i> Admin Usuarios
+        <li class="nav-item dropdown d-none" id="navAdminDropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-shield-lock-fill"></i> Administración
           </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="admin_usuarios.html"><i class="bi bi-people-fill me-1"></i> Usuarios</a></li>
+            <li><a class="dropdown-item" href="admin_catalogos.html"><i class="bi bi-tags-fill me-1"></i> Catálogos</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="navAuthLink" href="ingresar.html">
@@ -70,32 +74,116 @@
 <div class="container-fluid mt-4">
   <div class="row mb-4">
     <div class="col-md-3 ps-0">
-      <h5>Filtros por instituciones frecuentes</h5>
-      <div id="filtrosInstituciones" class="form-check"></div>
-      <div class="d-flex gap-3 justify-content-start mt-3">
-        <button class="btn btn-primary" onclick="seleccionarTodasYFiltrar()">Seleccionar todo</button>
-        <button class="btn btn-secondary" onclick="limpiarFiltros()">Limpiar filtros</button>
+      <div id="seccionInstituciones" class="d-none">
+        <h5>Filtros por instituciones frecuentes</h5>
+        <div id="filtrosInstituciones" class="suggestion-filter-chip-list filtro-lista-vertical"></div>
+        <div class="mt-3">
+          <button class="btn btn-primary btn-sm" onclick="seleccionarTodasYFiltrar()">Seleccionar todo</button>
+        </div>
+        <hr class="my-3">
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-secondary btn-sm" onclick="limpiarFiltros()">Limpiar filtros</button>
+      </div>
+      <h6>Tipo de licitación</h6>
+      <select class="form-select form-select-sm mb-2" id="filtroTipo" onchange="filtrarDatos()">
+        <option value="">Todos los tipos</option>
+        <optgroup label="Licitación Pública">
+          <option value="L1">L1 &mdash; Menor a 100 UTM</option>
+          <option value="LE">LE &mdash; Entre 100 y 1.000 UTM</option>
+          <option value="LP">LP &mdash; Mayor a 1.000 UTM</option>
+          <option value="LS">LS &mdash; Servicios personales especializados</option>
+        </optgroup>
+        <optgroup label="Licitación Privada">
+          <option value="A1">A1 &mdash; Por LP anterior sin oferentes</option>
+          <option value="B1">B1 &mdash; Por otras causales</option>
+          <option value="J1">J1 &mdash; Servicios de naturaleza confidencial</option>
+          <option value="F1">F1 &mdash; Convenios con personas jurídicas extranjeras</option>
+          <option value="E1">E1 &mdash; Por remanente de contrato anterior</option>
+          <option value="E2">E2 &mdash; Menor a 100 UTM</option>
+          <option value="CO">CO &mdash; Entre 100 y 1.000 UTM</option>
+          <option value="B2">B2 &mdash; Mayor a 1.000 UTM</option>
+        </optgroup>
+        <optgroup label="Trato Directo">
+          <option value="A2">A2 &mdash; Por LP anterior sin oferentes o desierta</option>
+          <option value="D1">D1 &mdash; Proveedor único</option>
+          <option value="C2">C2 &mdash; Cotización</option>
+          <option value="F2">F2 &mdash; Cotización</option>
+          <option value="G2">G2 &mdash; Cotización directa</option>
+        </optgroup>
+        <optgroup label="Compra Directa">
+          <option value="C1">C1 &mdash; Orden de compra</option>
+          <option value="F3">F3 &mdash; Orden de compra</option>
+          <option value="G1">G1 &mdash; Orden de compra</option>
+          <option value="R1">R1 &mdash; Orden de compra menor a 3 UTM</option>
+          <option value="CA">CA &mdash; Orden de compra sin resolución</option>
+          <option value="SE">SE &mdash; Orden de compra sin emisión automática</option>
+        </optgroup>
+      </select>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="excluirBajoValor" onchange="filtrarDatos()" style="cursor: pointer;">
+        <label class="form-check-label" for="excluirBajoValor" style="cursor: pointer;">Excluir menores (L1/E2)</label>
       </div>
       <hr class="my-3">
-      <h6>Filtros por tipo de licitación</h6>
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="excluirBajoValor" onchange="filtrarDatos()" style="cursor: pointer;">
-        <label class="form-check-label" for="excluirBajoValor" style="cursor: pointer;">
-          Excluir L1 y E2 (bajo valor)
-        </label>
+      <h6>Estado de publicación</h6>
+      <select class="form-select form-select-sm mb-3" id="filtroEstado" onchange="cambiarEstado()">
+        <option value="">Todas</option>
+        <option value="Publicada" selected>Publicada</option>
+        <option value="Adjudicada">Adjudicada</option>
+        <option value="Desierta (o art. 3 ó 9 Ley 19.886)">Desierta</option>
+        <option value="Cerrada">Cerrada</option>
+        <option value="Revocada">Revocada</option>
+        <option value="Suspendida">Suspendida</option>
+      </select>
+      <h6>Periodo de publicación</h6>
+      <select class="form-select form-select-sm mb-3" id="filtroPeriodo" onchange="filtrarDatos()">
+        <option value="">Todos</option>
+        <option value="1m">Último mes</option>
+        <option value="3m">Últimos 3 meses</option>
+        <option value="6m">Últimos 6 meses</option>
+        <option value="1y">Último año</option>
+        <option value="2y">Últimos 2 años</option>
+        <option value="3y">Últimos 3 años</option>
+        <option value="5y">Últimos 5 años</option>
+        <option value="gt5y">Mayor a 5 años</option>
+      </select>
+      <hr class="my-3">
+      <h6>Fecha de cierre</h6>
+      <div class="mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cierre1semana" onchange="filtrarDatos()">
+          <label class="form-check-label" for="cierre1semana">En 1 semana</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cierre2semanas" onchange="filtrarDatos()">
+          <label class="form-check-label" for="cierre2semanas">En 2 semanas</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cierre1mes" onchange="filtrarDatos()">
+          <label class="form-check-label" for="cierre1mes">En 1 mes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cierreMas1mes" onchange="filtrarDatos()">
+          <label class="form-check-label" for="cierreMas1mes">Más de 1 mes</label>
+        </div>
       </div>
+      <hr class="my-3">
+      <h6>Comprador</h6>
+      <input type="text" id="filtroComprador" class="form-control form-control-sm mb-1"
+        placeholder="Buscar comprador..." oninput="filtrarDatos()" list="listaCompradores" autocomplete="off">
+      <datalist id="listaCompradores"></datalist>
     </div>
 
     <div class="col-md-9">
-      <h2>Licitaciones publicadas</h2>
-      <input type="text" id="filtroTexto" class="form-control my-3" placeholder="Filtrar por ID o Institución" oninput="filtrarDatos()">
+      <h2>Licitaciones <span id="estadoTitulo">publicadas</span></h2>
+      <input type="text" id="filtroTexto" class="form-control my-3" placeholder="Filtrar por ID o Institución" onkeydown="buscarTextoEnEnter(event)">
       <div class="d-flex justify-content-between">
         <div id="cantidadResultados" class="my-3"></div>
         <div class="d-flex gap-2 align-items-center">
           <button id="btnActualizarListado" class="btn btn-outline-primary btn-sm mb-2" onclick="actualizarListadoManual()">
             <i class="bi bi-arrow-clockwise"></i> Actualizar listado
           </button>
-          <button class="btn btn-success btn-sm mb-2" onclick="descargarLicitaciones()">Descargar Licitaciones</button>
+          <button id="btnDescargarLicitaciones" class="btn btn-success btn-sm mb-2" onclick="descargarLicitaciones()">Descargar Licitaciones</button>
         </div>
       </div>
       <div id="estadoActualizacion" class="small text-muted mb-2"></div>
@@ -109,9 +197,9 @@
 </div>
 
 
-<script type="text/javascript" src="frontend/visualization.js"></script>
-<script src="frontend/auth.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="frontend/visualization.js?v=20260511b"></script>
+<script src="frontend/auth.js"></script>
 <script>
   // Marcar el enlace activo en el menú
   document.addEventListener('DOMContentLoaded', function() {

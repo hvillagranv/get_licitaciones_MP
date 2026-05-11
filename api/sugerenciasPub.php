@@ -248,9 +248,9 @@ if (empty($_SESSION['user_id'])) {
   json_response(['ok' => false, 'error' => 'No autenticado'], 401);
 }
 
-$enfoque = strtolower(trim((string)($_GET['enfoque'] ?? 'sugeridas')));
+$enfoque = strtolower(trim((string)($_GET['enfoque'] ?? 'listado')));
 if (!in_array($enfoque, ['sugeridas', 'listado'], true)) {
-  $enfoque = 'sugeridas';
+  $enfoque = 'listado';
 }
 
 $host = getenv('DB_HOST');
@@ -557,6 +557,10 @@ foreach ($suggestionsMap as $entry) {
 }
 
 usort($suggestions, function ($a, $b) {
+  if (($a['score'] ?? 0) !== ($b['score'] ?? 0)) {
+    return ($b['score'] ?? 0) <=> ($a['score'] ?? 0);
+  }
+
   if (($a['priority_keyword'] ?? 0) !== ($b['priority_keyword'] ?? 0)) {
     return ($b['priority_keyword'] ?? 0) <=> ($a['priority_keyword'] ?? 0);
   }
@@ -567,10 +571,6 @@ usort($suggestions, function ($a, $b) {
 
   if (($a['priority_categoria'] ?? 0) !== ($b['priority_categoria'] ?? 0)) {
     return ($b['priority_categoria'] ?? 0) <=> ($a['priority_categoria'] ?? 0);
-  }
-
-  if (($a['score'] ?? 0) !== ($b['score'] ?? 0)) {
-    return ($b['score'] ?? 0) <=> ($a['score'] ?? 0);
   }
 
   return strcmp((string)($b['fecha_inicio'] ?? ''), (string)($a['fecha_inicio'] ?? ''));

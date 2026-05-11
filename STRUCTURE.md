@@ -1,212 +1,211 @@
-# 📐 ESTRUCTURA DEL PROYECTO - VISTA ÁRBOL
+﻿# STRUCTURE.md
 
-## Referencia Visual Completa
+Vista actual de la estructura y responsabilidades del proyecto.
 
-```
-📦 get_licitaciones_MP/
-│
-├── 🔧 CONFIGURACIÓN
-│   ├── README.md                      # ← Documentación principal
-│   ├── STRUCTURE.md                   # ← Este archivo
-│   ├── .env                           # ← Credenciales (Git ignored)
-│   ├── .env.example                   # ← Plantilla
-│   ├── .gitignore                     # ← Configuración git
-│   ├── package.json                   # ← Dependencias Node.js
-│   ├── package-lock.json              # ← Lock file
-│   │
-│
-├── 📄 HTML (Raíz del Proyecto)        # Páginas HTML accesibles directamente
-│   ├── index.html                     # Página principal
-│   ├── palabras_clave.html            # Búsqueda por palabras
-│   ├── organismos.html                # Análisis por organismo
-│   └── proveedores.html               # Análisis de proveedores
-│   │
-│
-├── 🌐 frontend/                       # Assets web (CSS/JS)
-│   ├── 🎨 Estilos
-│   │   └── styles.css                 # Bootstrap 5 + custom
-│   │
-│   ├── ⚙️ Scripts JavaScript
-│   │   ├── visualization.js           # Visualizaciones comunes
-│   │   ├── palabras_clave.js          # Lógica búsqueda palabras
-│   │   ├── organismos.js              # Lógica organismos
-│   │   ├── proveedores.js             # Lógica proveedores
-│   │   └── security.js                # Utilidades front-end security
-│   │       ├── escaparHTML()
-│   │       ├── validarInput()
-│   │       ├── getCsrfToken()
-│   │       └── sanitizarDatos()
-│   │
-│
-├── 🔌 api/                            # Endpoints PHP públicos
-│   ├── licitacionesPub.php            # GET /api/licitaciones
-│   │   ├── CORS: www.hvillagranv.com
-│   │   ├── Sanitización: sanitizar_input()
-│   │   ├── CSRF: Token validation
-│   │   └── Headers: Seguridad + CSRF
-│   │
-│   ├── organismosPub.php              # GET /api/organismos
-│   │   └── (Misma estructura que licitacionesPub.php)
-│   │
-│   └── proveedoresPub.php             # GET /api/proveedores
-│       └── (Misma estructura que licitacionesPub.php)
-│   │
-│
-├── 🔧 backend/                        # Node.js / Express
-│   ├── 🔌 Conexión BD
-│   │   └── connectDB.js
-│   │       ├── .env validation
-│   │       ├── Pool configuration
-│   │       ├── Connection test
-│   │       └── Process.exit(1) si fail
-│   │
-│   ├── 🚀 Servidor web
-│   │   └── server.js
-│   │       ├── Helmet() - Headers seguridad
-│   │       ├── CORS restrictivo - desde .env
-│   │       ├── JSON limit - 10kb
-│   │       ├── Error handler global
-│   │       ├── 404 handler
-│   │       └── Process signals (SIGTERM/SIGINT)
-│   │
-│   ├── 📡 Recolección de datos
-│   │   ├── licitacionesBD.js          # Desde API
-│   │   ├── licitacionesBD_optimizado.js
-│   │   ├── licitacionesTodas.js       # Todos los estados
-│   │   ├── verificarEstados.js        # Verificar estados
-│   │   ├── guardarBD.js               # Insert/Update en BD
-│   │   └── revisarcodigos.js          # Revisar códigos fallidos
-│   │       └── Headers: .env validation
-│   │           TICKET: process.env.TICKET con exit(1)
-│   │
-│   ├── 📝 Utilidades
-│   │   └── utils/
-│   │       └── logs.js
-│   │           ├── logMensaje() - Sanitizado
-│   │           ├── sanitizarDatos() - Maskea:
-│   │           │   ├── Passwords → ***REDACTED***
-│   │           │   ├── Tokens → ***JWT_REDACTED***
-│   │           │   ├── API Keys → ***REDACTED***
-│   │           │   ├── Emails → ***@domain.com
-│   │           │   ├── Tarjetas → ****-****-****-****
-│   │           │   └── Teléfonos → ***-****
-│   │           ├── iniciarMonitorInactividad()
-│   │           └── detenerMonitorInactividad()
-│   │
-│
-├── 🐍 scripts/                        # Utilidades Python/CLI
-│   └── parallel_lics.py               # Procesamiento paralelo
-│
-│
-├── 📊 data/                           # Datos y logs
-│   ├── csv/                           # Exportaciones
-│   │   ├── instituciones.csv
-│   │   ├── organismos.csv
-│   │   ├── palabras_clave.csv
-│   │   └── ...
-│   │
-│   └── logs/                          # Logs de aplicación
-│       ├── log_2026-02-11_09-30-19.txt
-│       ├── log_2026-02-11_09-46-02.txt
-│       └── ... (Logs sanitizados)
-│   │
-│
-├── 📚 docs/                           # Documentación
-│   └── DEPLOYMENT_GUIDE.md            # Guía de despliegue
-│   │
-│
-├── 🔄 MVP1/                           # Código legacy (v1 piloto)
-│   ├── processJSON.js
-│   ├── get_estado.js
-│   ├── eliminar_duplicados.js
-│   ├── visualization.js
-│   ├── csv/                           # Datos MVP1
-│   └── logs/                          # Logs MVP1
-│
-│
-└── 🔌 .git/                           # Control de versiones
-    └── (Histórico de commits)
+## Modelo de acceso
 
-```
+| Página / Funcionalidad          | Anónimo | Autenticado | Admin |
+|---------------------------------|:-------:|:-----------:|:-----:|
+| index.html (listado general)    | ✓       | ✓           | ✓     |
+| index.html filtro instituciones |         | ✓           | ✓     |
+| organismos.html                 | ✓       | ✓           | ✓     |
+| proveedores.html                | ✓       | ✓           | ✓     |
+| palabras_clave.html             |         | ✓           | ✓     |
+| guardadas.html                  |         | ✓           | ✓     |
+| sugerencias.html                |         | ✓ (con proveedor) | ✓ |
+| admin_usuarios.html             |         |             | ✓     |
+| admin_catalogos.html            |         |             | ✓     |
 
----
+## Catálogos (palabras clave e instituciones)
 
-## 🎯 Categorización de Archivos
+- Almacenados en BD: tablas `palabras_clave` e `instituciones` (migración 006).
+- Lectura pública de instituciones: `api/catalogosPub.php?catalogo=instituciones`
+- Lectura de palabras clave (auth): `api/catalogosPub.php?catalogo=palabras_clave`
+- CRUD admin + import/export CSV: `api/catalogosAdmin.php?catalogo=...`
+- Interfaz de gestión: `admin_catalogos.html` / `frontend/admin_catalogos.js`
+- Los CSV en `data/csv/` siguen funcionando como fallback si la tabla no existe.
 
-### Configuración (Raíz)
-```
-.env                  ← Variables de entorno
-.env.example          ← Plantilla
-.gitignore            ← Ignorar .env en git
-package.json          ← Dependencias
-README.md             ← Documentación principal
-STRUCTURE.md          ← Este documento
-```
 
-### HTML (Raíz)
-```
-*.html                 ← Páginas web accesibles directamente
-├── index.html         ← Página principal
-├── palabras_clave.html
-├── organismos.html
-└── proveedores.html
-```
 
-### Frontend (Assets Web)
-```
-frontend/
-├── *.js               ← Lógica frontend
-├── *.css              ← Estilos
-└── security.js        ← Seguridad frontend
-```
+get_licitaciones_MP/
+- README.md
+- STRUCTURE.md
+- package.json
+- package-lock.json
+- .env (local, no versionar)
+- .env.example
+- .gitignore
 
-### Backend (Servidor + Lógica)
-```
-backend/
-├── server.js          ← Express + Helmet
-├── connectDB.js       ← Conexión segura
-├── licitaciones*.js   ← Recolección
-├── guardarBD.js       ← Persistencia
-└── utils/logs.js      ← Logging seguro
-```
+Páginas HTML (raíz)
+- index.html
+- palabras_clave.html
+- organismos.html
+- proveedores.html
+- sugerencias.html
+- guardadas.html
+- ingresar.html
+- admin_usuarios.html
+- admin_catalogos.html      ← gestión de catálogos (admin)
 
-### API (Endpoints PHP Públicos)
-```
 api/
-├── licitacionesPub.php
-├── organismosPub.php
-└── proveedoresPub.php
-```
+- auth.php
+- licitacionesPub.php
+- organismosPub.php
+- proveedoresPub.php
+- sugerenciasPub.php
+- guardadas.php
+- adminUsuarios.php
+- catalogosPub.php          ← GET instituciones (público) / GET palabras_clave (auth)
+- catalogosAdmin.php        ← CRUD + import/export CSV (admin)
 
-### Datos
-```
+frontend/
+- styles.css
+- auth.js                   ← actualizado: muestra navCatalogosItem para admins
+- visualization.js
+- palabras_clave.js         ← actualizado: requiere auth; datos desde API
+- organismos.js
+- proveedores.js
+- sugerencias.js
+- guardadas.js
+- ingresar.js
+- admin_usuarios.js
+- admin_catalogos.js        ← CRUD + import/export CSV
+- security.js
+
+backend/
+- server.js
+- connectDB.js
+- licitacionesBD.js
+- licitacionesBD_optimizado.js
+- licitacionesTodas.js
+- guardarBD.js
+- verificarEstados.js
+- generarProveedoresCSV.js
+- revisarcodigos.js
+- utils/
+  - logs.js
+- sql/
+  - 001_usuarios_y_guardadas.sql
+  - 002_auth_rate_limits.sql
+  - 003_roles_admin.sql
+  - 004_admin_auditoria.sql
+  - 005_usuarios_proveedores.sql
+  - 006_palabras_clave_instituciones.sql  ← nuevas tablas
+  - hansenri_licitacionesMP.sql
+
 data/
-├── csv/               ← Exportaciones
-└── logs/              ← Aplicación
-```
+- csv/
+  - instituciones.csv       ← fallback si tabla BD no existe
+  - organismos.csv
+  - palabras_clave.csv      ← referencia; import vía admin_catalogos.html
+  - proveedores.csv
 
-### Documentación
-```
+logs/
+- log_YYYY-MM-DD_hh-mm-ss.txt
+
 docs/
-└── DEPLOYMENT_GUIDE.md    ← Guía de despliegue
-```
+- DEPLOYMENT_GUIDE.md
 
----
+scripts/
+- parallel_lics.py
 
-## ✅ Checklist de Organización
+MVP1/
+- Código histórico y archivos de apoyo (legacy)
 
-| Aspecto | Estado | Detalle |
-|--------|--------|---------|
-| Carpetas lógicas | ✅ | frontend/, api/, backend/, data/, docs/, scripts/ |
-| HTML en raíz | ✅ | Archivos HTML directamente accesibles desde raíz |
-| Assets organizados | ✅ | CSS/JS en frontend/, separados de HTML |
-| Configuración centralizada | ✅ | .env en raíz (Git ignored) |
-| Documentación agrupada | ✅ | docs/ contiene documentación útil |
-| Datos separados | ✅ | data/csv y data/logs |
-| Backend modular | ✅ | scripts separados por función + utils/ |
-| README principal | ✅ | README.md y STRUCTURE.md en raíz |
-| Estructura clara | ✅ | Carpetas nombradas descriptivamente |
+## Responsabilidades por capa
 
----
+### Frontend (HTML + JS)
 
-**Estructura finalizada:** 11 de Febrero 2026
+- index.html + visualization.js
+  - Listado general, filtros, chips de instituciones, actualización manual sin recarga de página.
+- palabras_clave.html + palabras_clave.js
+  - Búsqueda por palabras clave con variantes CSV y chips de selección.
+- organismos.html + organismos.js
+  - KPIs, tablas y gráficos (últimos 12 meses + todos los años).
+- proveedores.html + proveedores.js
+  - KPIs, tablas y gráficos (últimos 12 meses + todos los años).
+- sugerencias.html + sugerencias.js
+  - Afinidad por proveedor, enfoque listado/sugeridas, guardado desde tarjeta.
+- guardadas.html + guardadas.js
+  - Lista de guardadas con estado, cierre, adjudicación y fecha guardada.
+- ingresar.html + ingresar.js
+  - Registro/login y asociación de proveedor.
+- admin_usuarios.html + admin_usuarios.js
+  - Administración de usuarios por rol.
+
+### API PHP
+
+- auth.php
+  - Login/logout/session, CSRF, rate limiting, asociación usuario-proveedor.
+- licitacionesPub.php / organismosPub.php / proveedoresPub.php
+  - Exposición de datos de licitaciones y agregados para vistas.
+- sugerenciasPub.php
+  - Cálculo de afinidad, enfoque por listado CSV o sugeridas por historial.
+- guardadas.php
+  - List/add/remove de guardadas por usuario autenticado.
+- adminUsuarios.php
+  - Operaciones de administración de cuentas.
+
+### Backend Node
+
+- server.js
+  - Servidor Express, headers de seguridad con Helmet, CORS restringido y rutas.
+- scripts de backend/
+  - Ingesta, verificación, actualización y persistencia de datos de licitaciones.
+
+## Seguridad vigente
+
+### Control de sesión y cookies
+
+- Sesiones PHP activas con cookies HttpOnly, SameSite=Lax y secure cuando aplica HTTPS.
+
+### Protección CSRF
+
+- Token CSRF emitido por sesión y validado en operaciones sensibles (POST).
+
+### CORS y headers
+
+- Orígenes permitidos explícitos en API PHP y backend Express.
+- Headers de endurecimiento: HSTS, X-Frame-Options, X-Content-Type-Options, X-XSS-Protection.
+
+### Endurecimiento de backend
+
+- Helmet habilitado en Express.
+- Límite de tamaño en payload JSON/urlencoded.
+- Manejo de errores con respuestas controladas.
+
+### Protección de autenticación
+
+- Rate limiting para login y acciones críticas en auth.php.
+
+### Base de datos
+
+- Uso de sentencias preparadas en endpoints PHP.
+- Variables sensibles obtenidas desde .env.
+
+### Operación segura
+
+- No versionar .env ni secretos.
+- Revisar logs antes de compartirlos externamente.
+- Validar CORS_ORIGIN y dominios permitidos en cada despliegue.
+
+## Cambios funcionales relevantes recientes
+
+- Sugerencias:
+  - enfoque predeterminado listado.
+  - orden principal por afinidad y desempates por señales.
+- Inicio y palabras clave:
+  - botón de actualización manual del listado.
+  - filtros en formato chips verticales.
+- Organismos y proveedores:
+  - gráficos separados para últimos 12 meses y todos los años.
+- Guardadas:
+  - muestra estado, fecha de cierre y fecha de adjudicación.
+
+## Convenciones
+
+- HTML en raíz para navegación directa.
+- JS/CSS en frontend/.
+- Endpoints en api/.
+- Lógica de ingesta/procesamiento en backend/.
+- Documentación de despliegue en docs/.

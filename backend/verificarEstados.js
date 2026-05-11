@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const ticket = process.env.TICKET;
+const ticket = process.env.TICKET_MVP1;
 if (!ticket) {
   console.error('❌ ERROR: TICKET no está configurado en .env');
   process.exit(1);

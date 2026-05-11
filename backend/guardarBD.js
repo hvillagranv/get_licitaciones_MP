@@ -5,16 +5,81 @@ const TRANSIENT_DB_ERRORS = new Set([
   'ECONNRESET',
   'ETIMEDOUT',
   'PROTOCOL_CONNECTION_LOST',
-  'EPIPE'
+  'EPIPE',
+  'ER_USER_LIMIT_REACHED',
+  'ER_LOCK_WAIT_TIMEOUT',
+  'ER_LOCK_DEADLOCK'
 ]);
 
 const esErrorTransitorioBD = (err) => {
   const code = err?.code || '';
   const message = (err?.message || '').toUpperCase();
-  return TRANSIENT_DB_ERRORS.has(code) || message.includes('ECONNRESET') || message.includes('ETIMEDOUT');
+  return (
+    TRANSIENT_DB_ERRORS.has(code) ||
+    message.includes('ECONNRESET') ||
+    message.includes('ETIMEDOUT') ||
+    message.includes('MAX_USER_CONNECTIONS') ||
+    message.includes('LOCK WAIT TIMEOUT') ||
+    message.includes('DEADLOCK')
+  );
+};
+
+const conexionCerrada = (err) => {
+  const message = (err?.message || '').toUpperCase();
+  return (
+    message.includes('CLOSED STATE') ||
+    message.includes('CONNECTION IS CLOSED') ||
+    message.includes('PROTOCOL_CONNECTION_LOST') ||
+    message.includes('ECONNRESET')
+  );
 };
 
 const esperar = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const ACQUIRE_TIMEOUT_MS = Number(process.env.DB_ACQUIRE_TIMEOUT_MS || 15000);
+const DB_TIMEOUT_STORM_WINDOW_MS = Number(process.env.DB_TIMEOUT_STORM_WINDOW_MS || 120000);
+const DB_TIMEOUT_STORM_THRESHOLD = Number(process.env.DB_TIMEOUT_STORM_THRESHOLD || 15);
+
+const timeoutFailures = [];
+
+const esTimeoutConexionBD = (err) => {
+  const code = err?.code || '';
+  const message = (err?.message || '').toUpperCase();
+  return (
+    code === 'ETIMEDOUT' ||
+    message.includes('TIMEOUT ESPERANDO CONEXION BD') ||
+    message.includes('TIMEOUT ESPERANDO CONEXIÓN BD') ||
+    message.includes('ETIMEDOUT')
+  );
+};
+
+const registrarTimeoutYVerificarCorte = (codigoExterno) => {
+  const ahora = Date.now();
+  timeoutFailures.push(ahora);
+
+  while (timeoutFailures.length > 0 && ahora - timeoutFailures[0] > DB_TIMEOUT_STORM_WINDOW_MS) {
+    timeoutFailures.shift();
+  }
+
+  if (timeoutFailures.length < DB_TIMEOUT_STORM_THRESHOLD) {
+    return;
+  }
+
+  const ventanaSegundos = Math.round(DB_TIMEOUT_STORM_WINDOW_MS / 1000);
+  const errFatal = new Error(
+    `Deteniendo ejecución: ${timeoutFailures.length} timeouts de conexión BD en ${ventanaSegundos}s (último código ${codigoExterno}).`
+  );
+  errFatal.code = 'DB_TIMEOUT_STORM';
+  throw errFatal;
+};
+
+const getConnectionConTimeout = () =>
+  Promise.race([
+    pool.getConnection(),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(Object.assign(new Error('Timeout esperando conexión BD'), { code: 'ETIMEDOUT' })), ACQUIRE_TIMEOUT_MS)
+    )
+  ]);
 
 export const guardarDetallesEnBD = async (d) => {
   const maxIntentosDb = 3;
@@ -22,7 +87,7 @@ export const guardarDetallesEnBD = async (d) => {
   for (let intento = 1; intento <= maxIntentosDb; intento++) {
     let conn;
     try {
-      conn = await pool.getConnection();
+      conn = await getConnectionConTimeout();
       await conn.beginTransaction();
 
     const [rows] = await conn.query(
@@ -146,7 +211,9 @@ export const guardarDetallesEnBD = async (d) => {
       await conn.query('DELETE FROM adjudicaciones_item WHERE item_id IN (SELECT id FROM items WHERE codigo_externo = ?)', [d.CodigoExterno]);
       await conn.query('DELETE FROM items WHERE codigo_externo = ?', [d.CodigoExterno]);
       await conn.query('DELETE FROM adjudicaciones WHERE codigo_externo = ?', [d.CodigoExterno]);
-      await conn.query('DELETE FROM compradores WHERE codigo_externo = ?', [d.CodigoExterno]);
+      if (d.Comprador) {
+        await conn.query('DELETE FROM compradores WHERE codigo_externo = ?', [d.CodigoExterno]);
+      }
     }
 
     if (d.Comprador) {
@@ -232,7 +299,7 @@ export const guardarDetallesEnBD = async (d) => {
       logMensaje(`🟢 Recuperado ${d.CodigoExterno} ${estadoInfo} y guardado en BD`, 'success');
       return true;
     } catch (err) {
-      if (conn && conn.rollback) {
+      if (conn && conn.rollback && !conexionCerrada(err)) {
         try {
           await conn.rollback();
         } catch (rollbackErr) {
@@ -244,10 +311,15 @@ export const guardarDetallesEnBD = async (d) => {
       const quedanIntentos = intento < maxIntentosDb;
 
       if (esTransitorio && quedanIntentos) {
-        const backoff = 1000 * intento;
+        const backoffBase = err?.code === 'ER_USER_LIMIT_REACHED' ? 2000 : 1000;
+        const backoff = backoffBase * intento;
         logMensaje(`⚠️ Error transitorio BD en ${d.CodigoExterno}: ${err.message}. Reintentando (${intento}/${maxIntentosDb})...`, 'warning');
         await esperar(backoff);
         continue;
+      }
+
+      if (esTimeoutConexionBD(err)) {
+        registrarTimeoutYVerificarCorte(d.CodigoExterno);
       }
 
       logMensaje(`❌ Error en ${d.CodigoExterno}: ${err.message}`, 'error');

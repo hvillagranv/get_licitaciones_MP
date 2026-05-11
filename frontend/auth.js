@@ -5,6 +5,25 @@ window.AuthState = {
   isAdmin: false
 };
 
+// Aplicar estado cacheado inmediatamente para evitar parpadeo del menú
+(function aplicarCacheAuth() {
+  try {
+    const cached = localStorage.getItem('authState');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      window.AuthState.loggedIn = !!parsed.loggedIn;
+      window.AuthState.user = parsed.user || null;
+      window.AuthState.isAdmin = !!parsed.isAdmin;
+      // Aplicar menú antes de que el DOM esté listo, o en cuanto lo esté
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', actualizarMenuAuth, { once: true });
+      } else {
+        actualizarMenuAuth();
+      }
+    }
+  } catch (_) {}
+})();
+
 async function fetchAuthStatus() {
   try {
     const response = await fetch('api/auth.php?action=status', {
@@ -18,6 +37,15 @@ async function fetchAuthStatus() {
     window.AuthState.isAdmin = !!(data.user && data.user.rol === 'admin');
     window.AuthState.csrfToken = data.csrf_token || response.headers.get('X-CSRF-Token') || '';
 
+    // Guardar en caché para la próxima carga de página
+    try {
+      localStorage.setItem('authState', JSON.stringify({
+        loggedIn: window.AuthState.loggedIn,
+        user: window.AuthState.user,
+        isAdmin: window.AuthState.isAdmin
+      }));
+    } catch (_) {}
+
     actualizarMenuAuth();
     document.dispatchEvent(new CustomEvent('auth:changed', { detail: window.AuthState }));
   } catch (error) {
@@ -25,6 +53,7 @@ async function fetchAuthStatus() {
     window.AuthState.loggedIn = false;
     window.AuthState.user = null;
     window.AuthState.isAdmin = false;
+    try { localStorage.removeItem('authState'); } catch (_) {}
     actualizarMenuAuth();
     document.dispatchEvent(new CustomEvent('auth:changed', { detail: window.AuthState }));
   }
@@ -32,9 +61,18 @@ async function fetchAuthStatus() {
 
 function actualizarMenuAuth() {
   const navAuthLink = document.getElementById('navAuthLink');
+  const navPalabrasClaveItem = document.getElementById('navPalabrasClaveItem');
   const navGuardadasItem = document.getElementById('navGuardadasItem');
-  const navAdminItem = document.getElementById('navAdminItem');
+  const navAdminDropdown = document.getElementById('navAdminDropdown');
   const navSugerenciasItem = document.getElementById('navSugerenciasItem');
+
+  if (navPalabrasClaveItem) {
+    if (window.AuthState.loggedIn) {
+      navPalabrasClaveItem.classList.remove('d-none');
+    } else {
+      navPalabrasClaveItem.classList.add('d-none');
+    }
+  }
 
   if (navGuardadasItem) {
     if (window.AuthState.loggedIn) {
@@ -44,11 +82,11 @@ function actualizarMenuAuth() {
     }
   }
 
-  if (navAdminItem) {
+  if (navAdminDropdown) {
     if (window.AuthState.loggedIn && window.AuthState.isAdmin) {
-      navAdminItem.classList.remove('d-none');
+      navAdminDropdown.classList.remove('d-none');
     } else {
-      navAdminItem.classList.add('d-none');
+      navAdminDropdown.classList.add('d-none');
     }
   }
 
@@ -92,6 +130,9 @@ async function logout() {
     if (!response.ok || !data.ok) {
       throw new Error(data.error || 'No se pudo cerrar sesión');
     }
+
+    // Limpiar caché de auth al cerrar sesión
+    try { localStorage.removeItem('authState'); } catch (_) {}
 
     await fetchAuthStatus();
 

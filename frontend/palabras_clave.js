@@ -1,64 +1,204 @@
-console.log("Palabras clave: script activo");
+﻿console.log("Palabras clave: script activo");
 
 let datos = [];
 let columnaOrdenada = 'fecha_inicio';
 let ordenAscendente = false;
-let paginaActual = 1;
-const filasPorPagina = 10;
+let paginaServidor = 1;
+let totalPaginasServidor = 1;
+let totalServidor = 0;
+let cursorActualServidor = null;
+let siguienteCursorServidor = null;
+let historialCursoresServidor = [];
+let hayMasResultadosServidor = false;
 let textoFiltro = '';
 let palabrasSeleccionadas = [];
 let palabrasDisponibles = [];
 let palabrasMap = new Map();
-let datosFiltradosActuales = [];
 let aliasInstituciones = {};
 let cargandoListado = false;
+let forzarActualizacion = false;
+let _fetchController = null; // AbortController para cancelar fetches en curso
 
-actualizarListadoLicitaciones({ resetPagina: true });
+const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutos
 
-cargarPalabrasClave();
+function guardarCache(clave, valor) {
+  try { localStorage.setItem(clave, JSON.stringify({ ts: Date.now(), datos: valor })); } catch (_) {}
+}
+
+function leerCache(clave) {
+  try {
+    const raw = localStorage.getItem(clave);
+    if (!raw) return null;
+    const { ts, datos } = JSON.parse(raw);
+    if (Date.now() - ts > CACHE_TTL_MS) { localStorage.removeItem(clave); return null; }
+    return datos;
+  } catch (_) { return null; }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Requiere autenticación
+  document.addEventListener('auth:changed', (e) => {
+    if (!e.detail.loggedIn) {
+      window.location.href = 'ingresar.html?redir=palabras_clave.html';
+    }
+  }, { once: true });
+
+  const botonActualizar = document.getElementById('btnActualizarListado');
+  if (botonActualizar) {
+    botonActualizar.onclick = null;
+    botonActualizar.removeAttribute('onclick');
+    botonActualizar.addEventListener('click', actualizarListadoManual);
+  }
   actualizarResumenPalabras();
 });
 
-async function actualizarListadoLicitaciones({ resetPagina = false, mostrarEstado = true } = {}) {
-  if (cargandoListado) return;
+window.actualizarListadoManual = actualizarListadoManual;
+
+actualizarListadoLicitaciones({ resetPagina: true });
+cargarPalabrasClave();
+
+function construirParams(pagina) {
+  const params = new URLSearchParams();
+  params.set('estado', 'Publicada');
+  const modoLegacyPagina = Number.isFinite(Number(pagina));
+
+  if (modoLegacyPagina) {
+    params.set('pagina', String(pagina));
+  } else {
+    params.set('cursor_mode', '1');
+    params.set('limit', '10');
+    params.set('include_total', '1');
+    if (cursorActualServidor) {
+      params.set('cursor', cursorActualServidor);
+    }
+  }
+  const texto = (document.getElementById('filtroTexto')?.value || '').trim();
+  if (texto) params.set('texto', texto);
+  const periodo = (document.getElementById('filtroPeriodo')?.value || '').trim();
+  if (periodo) params.set('periodo', periodo);
+  if (palabrasSeleccionadas.length > 0) {
+    const variantes = obtenerVariantesOriginales();
+    if (variantes.length > 0) params.set('palabras', variantes.join('|'));
+  }
+  return params;
+}
+
+function obtenerVariantesOriginales() {
+  const variantes = new Set();
+  palabrasSeleccionadas.forEach(base => {
+    const entry = palabrasMap.get(base);
+    if (entry) entry.variantesOriginales.forEach(v => variantes.add(v));
+  });
+  return Array.from(variantes);
+}
+
+async function actualizarListadoLicitaciones({
+  resetPagina = false,
+  mostrarEstado = true,
+  mostrarSkeleton = true,
+  mensajeCarga = 'Cargando resultados...'
+} = {}) {
+  // Cancelar fetch anterior si sigue en curso
+  if (_fetchController) {
+    _fetchController.abort();
+    _fetchController = null;
+    cargandoListado = false;
+  }
+
   cargandoListado = true;
-  setEstadoActualizacion('Actualizando listado...');
+  if (mostrarSkeleton) {
+    setCargaResultadosActiva(true, mensajeCarga);
+  }
+  if (mostrarEstado) setEstadoActualizacion('Actualizando listado...');
   setBotonActualizacionEstado(true);
 
+  const controller = new AbortController();
+  _fetchController = controller;
+
   try {
-    const res = await fetch('api/licitacionesPub.php', { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
+    if (resetPagina) {
+      paginaServidor = 1;
+      cursorActualServidor = null;
+      siguienteCursorServidor = null;
+      historialCursoresServidor = [];
+      hayMasResultadosServidor = false;
     }
 
-    const { licitaciones, instituciones } = await res.json();
-    datos = (licitaciones || []).filter(item => item.codigo);
+    const params = construirParams(null);
+    const cacheKey = `lics_pk_${params.toString()}`;
 
-    if (instituciones && instituciones.length > 0) {
-      aliasInstituciones = Object.fromEntries(instituciones.map(item => [item.id, item.alias]));
-    } else {
+    let json;
+    if (!forzarActualizacion) {
+      json = leerCache(cacheKey);
+    }
+    if (!json) {
+      const res = await fetch(`api/licitacionesPub.php?${params.toString()}`, {
+        cache: 'no-store',
+        signal: controller.signal
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      json = await res.json();
+      guardarCache(cacheKey, json);
+    }
+    forzarActualizacion = false;
+
+    datos = (json.licitaciones || []).filter(item => item.codigo);
+    totalServidor = (json.total === null || json.total === undefined || json.total === '')
+      ? null
+      : (Number.isFinite(Number(json.total)) ? Number(json.total) : null);
+    totalPaginasServidor = (json.paginas === null || json.paginas === undefined || json.paginas === '')
+      ? null
+      : (Number.isFinite(Number(json.paginas)) ? Number(json.paginas) : null);
+    siguienteCursorServidor = json.next_cursor || null;
+    hayMasResultadosServidor = Boolean(json.has_more) || (
+      Number.isFinite(totalPaginasServidor) && paginaServidor < totalPaginasServidor
+    );
+    paginaServidor = historialCursoresServidor.length + 1;
+
+    // Prefetch de la siguiente página para acelerar navegación paginada.
+    if (siguienteCursorServidor && hayMasResultadosServidor) {
+      const prevCursor = cursorActualServidor;
+      cursorActualServidor = siguienteCursorServidor;
+      const paramsSiguiente = construirParams(null);
+      cursorActualServidor = prevCursor;
+      const cacheKeySiguiente = `lics_pk_${paramsSiguiente.toString()}`;
+
+      if (!leerCache(cacheKeySiguiente)) {
+        fetch(`api/licitacionesPub.php?${paramsSiguiente.toString()}`, { cache: 'no-store' })
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data) => {
+            if (data) guardarCache(cacheKeySiguiente, data);
+          })
+          .catch(() => {});
+      }
+    }
+
+    if (json.instituciones && json.instituciones.length > 0) {
+      aliasInstituciones = Object.fromEntries(json.instituciones.map(item => [item.id, item.alias]));
+    } else if (Object.keys(aliasInstituciones).length === 0) {
       cargarInstitucionesDesdeCSV();
     }
 
     ordenarDatos();
-    filtrarDatos(resetPagina);
+    mostrarDatos(datos);
 
     if (mostrarEstado) {
       setEstadoActualizacion(`Listado actualizado: ${new Date().toLocaleString('es-CL')}`);
     }
   } catch (err) {
+    if (err.name === 'AbortError') return;
     console.error('Error al cargar licitaciones:', err);
     setEstadoActualizacion('No se pudo actualizar el listado. Intenta nuevamente.');
   } finally {
+    if (_fetchController === controller) _fetchController = null;
     cargandoListado = false;
     setBotonActualizacionEstado(false);
   }
 }
 
 function actualizarListadoManual() {
-  actualizarListadoLicitaciones({ resetPagina: false, mostrarEstado: true });
+  forzarActualizacion = true;
+  actualizarListadoLicitaciones({ resetPagina: true, mostrarEstado: true });
 }
 
 function setBotonActualizacionEstado(cargando) {
@@ -76,52 +216,70 @@ function setEstadoActualizacion(mensaje) {
   estado.textContent = mensaje || '';
 }
 
-function cargarPalabrasClave() {
-  Papa.parse('data/csv/palabras_clave.csv', {
-    download: true,
-    header: true,
-    delimiter: ';',
-    complete: (results) => {
-      const filas = Array.isArray(results.data) ? results.data : [];
-      palabrasDisponibles = filas
-        .map(row => {
-          const valores = Object.values(row)
-            .map(valor => (valor || '').toString().trim())
-            .filter(valor => valor.length > 0);
-          if (valores.length === 0) return null;
-          const base = valores[0];
-          const variantesOriginales = Array.from(new Set(valores));
-          const variantesNormalizadas = Array.from(new Set(valores.map(normalizarTexto)));
-          return { base, variantesOriginales, variantesNormalizadas };
-        })
-        .filter(Boolean)
-        .sort((a, b) => a.base.localeCompare(b.base, 'es'));
+function setCargaResultadosActiva(cargando, mensaje = 'Cargando resultados...') {
+  const contenedor = document.getElementById('contenedorCards');
+  const cantidad = document.getElementById('cantidadResultados');
+  const paginacion = document.getElementById('pagination');
+  if (!contenedor || !cargando) return;
 
-      palabrasMap = new Map(palabrasDisponibles.map(item => [item.base, item]));
-      renderizarCheckboxes();
-      actualizarResumenPalabras();
-      filtrarDatos();
-    },
-    error: (error) => {
-      console.error('Error al cargar palabras clave:', error);
-    }
-  });
+  if (cantidad) {
+    cantidad.innerHTML = '<span class="text-muted">Cargando resultados...</span>';
+  }
+  if (paginacion) {
+    paginacion.innerHTML = '';
+  }
+
+  contenedor.innerHTML = `
+    <div class="card mb-4 p-4 shadow-sm">
+      <div class="d-flex align-items-center gap-3">
+        <span class="spinner-border text-primary" role="status" aria-hidden="true"></span>
+        <div>
+          <div class="fw-semibold">${mensaje}</div>
+          <div class="small text-muted">Estamos consultando los resultados con tus filtros.</div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-function cargarInstitucionesDesdeCSV() {
-  Papa.parse('data/csv/instituciones.csv', {
-    download: true,
-    header: true,
-    delimiter: ';',
-    complete: (results) => {
-      aliasInstituciones = Object.fromEntries((results.data || []).map(item => [item.id, item.alias]));
-      ordenarDatos();
-      filtrarDatos();
-    },
-    error: (error) => {
-      console.error('Error al cargar instituciones desde CSV:', error);
+async function cargarPalabrasClave() {
+  try {
+    const res = await fetch('api/catalogosPub.php?catalogo=palabras_clave', { credentials: 'include' });
+    if (res.status === 401) {
+      window.location.href = 'ingresar.html?redir=palabras_clave.html';
+      return;
     }
-  });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { palabras_clave } = await res.json();
+    const filas = Array.isArray(palabras_clave) ? palabras_clave : [];
+    palabrasDisponibles = filas.map(row => {
+      const todos = [row.palabra, ...(row.variantes || [])].map(v => v.trim()).filter(Boolean);
+      const base = row.palabra.trim();
+      const variantesOriginales = Array.from(new Set(todos));
+      const variantesNormalizadas = Array.from(new Set(todos.map(normalizarTexto)));
+      return { base, variantesOriginales, variantesNormalizadas };
+    }).sort((a, b) => a.base.localeCompare(b.base, 'es'));
+    palabrasMap = new Map(palabrasDisponibles.map(item => [item.base, item]));
+    renderizarCheckboxes();
+    actualizarResumenPalabras();
+    // No re-fetch: sin palabras seleccionadas la query no cambia
+  } catch (err) {
+    console.error('Error al cargar palabras clave:', err);
+  }
+}
+
+async function cargarInstitucionesDesdeCSV() {
+  try {
+    const res = await fetch('api/catalogosPub.php?catalogo=instituciones', { credentials: 'include' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { instituciones } = await res.json();
+    aliasInstituciones = Object.fromEntries((instituciones || []).map(item => [item.nombre, item.alias]));
+  } catch (err) {
+    console.error('Error al cargar instituciones:', err);
+  }
+  // Solo re-renderizar con los datos ya cargados, sin nueva petición al servidor
+  ordenarDatos();
+  mostrarDatos(datos);
 }
 
 function renderizarCheckboxes() {
@@ -131,19 +289,41 @@ function renderizarCheckboxes() {
   contenedor.innerHTML = '';
 
   palabrasDisponibles.forEach(item => {
-    const id = `chk_${btoa(item.base).replace(/[^a-zA-Z0-9]/g, '')}`;
-    const checked = palabrasSeleccionadas.includes(item.base) ? 'checked' : '';
-    const checkbox = `
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="${item.base}" id="${id}" ${checked} onchange="actualizarPalabrasSeleccionadas()">
-        <label class="form-check-label" for="${id}">${item.base}</label>
-      </div>`;
-    contenedor.innerHTML += checkbox;
+    const seleccionada = palabrasSeleccionadas.includes(item.base);
+    const variacionesTexto = item.variantesOriginales?.join(', ') || item.base;
+    const chip = `
+      <button
+        type="button"
+        class="suggestion-chip suggestion-chip-button ${seleccionada ? 'is-selected' : 'is-unselected'}"
+        data-palabra="${encodeURIComponent(item.base)}"
+      >
+        <span>${item.base} (${variacionesTexto})</span>
+      </button>`;
+    contenedor.innerHTML += chip;
+  });
+
+  contenedor.querySelectorAll('[data-palabra]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const base = decodeURIComponent(button.dataset.palabra || '');
+      togglePalabra(base);
+    });
   });
 }
 
 function actualizarPalabrasSeleccionadas() {
-  palabrasSeleccionadas = [...document.querySelectorAll('#filtrosPalabras input:checked')].map(el => el.value);
+  renderizarCheckboxes();
+  actualizarResumenPalabras();
+  filtrarDatos();
+}
+
+function togglePalabra(base) {
+  if (!base) return;
+  if (palabrasSeleccionadas.includes(base)) {
+    palabrasSeleccionadas = palabrasSeleccionadas.filter(item => item !== base);
+  } else {
+    palabrasSeleccionadas.push(base);
+  }
+  renderizarCheckboxes();
   actualizarResumenPalabras();
   filtrarDatos();
 }
@@ -166,25 +346,17 @@ function actualizarResumenPalabras() {
 }
 
 function seleccionarTodasYFiltrar() {
-  const checkboxes = document.querySelectorAll('#filtrosPalabras input[type=checkbox]');
-  palabrasSeleccionadas = [];
-  checkboxes.forEach(chk => {
-    chk.checked = true;
-    palabrasSeleccionadas.push(chk.value);
-  });
+  palabrasSeleccionadas = palabrasDisponibles.map(item => item.base);
+  renderizarCheckboxes();
   actualizarResumenPalabras();
   filtrarDatos();
 }
 
-function mostrarDatos(datosFiltrados) {
-  const inicio = (paginaActual - 1) * filasPorPagina;
-  const fin = inicio + filasPorPagina;
-  const datosPaginados = datosFiltrados.slice(inicio, fin);
-
+function mostrarDatos(datosActuales) {
   const contenedor = document.getElementById('contenedorCards');
   contenedor.innerHTML = '';
 
-  datosPaginados.forEach(item => {
+  datosActuales.forEach(item => {
     const alias = aliasInstituciones[item.institucion_nombre] || item.institucion_nombre;
     const montoFormateado = item.monto_estimado && !isNaN(item.monto_estimado)
       ? (item.unidad_monetaria && item.unidad_monetaria !== 'CLP'
@@ -217,10 +389,12 @@ function mostrarDatos(datosFiltrados) {
     contenedor.innerHTML += card;
   });
 
-  const total = datosFiltrados.length;
-  document.getElementById('cantidadResultados').innerHTML = `Total de resultados encontrados: ${total}`;
-  document.getElementById('btnDescargarCsv').disabled = total === 0;
-  renderizarPaginacion(total);
+  const totalTexto = Number.isFinite(totalServidor)
+    ? `Total de resultados encontrados: ${totalServidor}`
+    : `Resultados mostrados: ${datosActuales.length} (total en calculo)`;
+  document.getElementById('cantidadResultados').innerHTML = totalTexto;
+  document.getElementById('btnDescargarCsv').disabled = datosActuales.length === 0;
+  renderizarPaginacion();
 }
 
 function obtenerCoincidencias(item) {
@@ -245,46 +419,19 @@ function obtenerCoincidencias(item) {
 }
 
 function filtrarDatos(resetPagina = true) {
-  if (!datos.length) return;
+  actualizarListadoLicitaciones({ resetPagina, mostrarEstado: false });
+}
 
-  textoFiltro = document.getElementById('filtroTexto').value.toLowerCase();
-  if (resetPagina) paginaActual = 1;
+function buscarTextoEnEnter(event) {
+  if (event.key !== 'Enter') return;
 
-  const variantesSeleccionadas = obtenerVariantesSeleccionadas();
-
-  const datosFiltrados = datos.filter(item => {
-    const textoBase = normalizarTexto(
-      `${item.codigo || ''} ${item.nombre || ''} ${item.descripcion || ''}`
-    );
-
-    const coincideTexto = !textoFiltro || textoBase.includes(normalizarTexto(textoFiltro));
-
-    if (!coincideTexto) return false;
-
-    if (variantesSeleccionadas.length === 0) return true;
-
-    return variantesSeleccionadas.some(variacion => {
-      const regex = new RegExp(`\\b${escaparRegex(variacion)}\\b`, 'i');
-      return regex.test(textoBase);
-    });
-  });
-
-  datosFiltradosActuales = datosFiltrados;
-  mostrarDatos(datosFiltrados);
+  event.preventDefault();
+  actualizarListadoLicitaciones({ resetPagina: true, mostrarEstado: false });
 }
 
 function obtenerVariantesSeleccionadas() {
-  if (palabrasSeleccionadas.length === 0) return [];
-
-  const variantes = new Set();
-  palabrasSeleccionadas.forEach(base => {
-    const entry = palabrasMap.get(base);
-    if (entry) {
-      entry.variantesNormalizadas.forEach(variacion => variantes.add(variacion));
-    }
-  });
-
-  return Array.from(variantes);
+  // Mantenido por compatibilidad; usa obtenerVariantesOriginales para enviar al servidor
+  return obtenerVariantesOriginales();
 }
 
 function ordenarTabla(columna) {
@@ -306,38 +453,47 @@ function ordenarDatos() {
   });
 }
 
-function renderizarPaginacion(totalDatos) {
-  const totalPaginas = Math.ceil(totalDatos / filasPorPagina);
+function renderizarPaginacion() {
   const pagination = document.getElementById('pagination');
   pagination.innerHTML = '';
 
-  if (totalPaginas <= 1) return;
+  const puedeVolver = historialCursoresServidor.length > 0;
+  const puedeAvanzar = hayMasResultadosServidor && Boolean(siguienteCursorServidor);
 
-  let inicio = Math.max(paginaActual - 5, 1);
-  let fin = Math.min(inicio + 9, totalPaginas);
-  if (fin - inicio < 9) inicio = Math.max(fin - 9, 1);
+  if (!puedeVolver && !puedeAvanzar) return;
 
-  if (paginaActual > 1) {
-    pagination.innerHTML += `<li class="page-item"><button class="page-link" onclick="cambiarPagina(${paginaActual - 1})">Anterior</button></li>`;
-  }
-
-  for (let i = inicio; i <= fin; i++) {
-    pagination.innerHTML += `<li class="page-item ${i === paginaActual ? 'active' : ''}"><button class="page-link" onclick="cambiarPagina(${i})">${i}</button></li>`;
-  }
-
-  if (paginaActual < totalPaginas) {
-    pagination.innerHTML += `<li class="page-item"><button class="page-link" onclick="cambiarPagina(${paginaActual + 1})">Siguiente</button></li>`;
-  }
+  pagination.innerHTML += `<li class="page-item ${puedeVolver ? '' : 'disabled'}"><button class="page-link" onclick="cambiarPagina('prev')">Anterior</button></li>`;
+  pagination.innerHTML += `<li class="page-item active"><span class="page-link">${paginaServidor}</span></li>`;
+  pagination.innerHTML += `<li class="page-item ${puedeAvanzar ? '' : 'disabled'}"><button class="page-link" onclick="cambiarPagina('next')">Siguiente</button></li>`;
 }
 
-function cambiarPagina(pagina) {
-  paginaActual = pagina;
+function cambiarPagina(direccion) {
+  if (direccion === 'next') {
+    if (!siguienteCursorServidor || !hayMasResultadosServidor) return;
+    historialCursoresServidor.push(cursorActualServidor);
+    cursorActualServidor = siguienteCursorServidor;
+    paginaServidor = historialCursoresServidor.length + 1;
+  } else if (direccion === 'prev') {
+    if (historialCursoresServidor.length === 0) return;
+    cursorActualServidor = historialCursoresServidor.pop() || null;
+    paginaServidor = historialCursoresServidor.length + 1;
+  } else {
+    return;
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  filtrarDatos(false);
+  actualizarListadoLicitaciones({
+    resetPagina: false,
+    mostrarEstado: false,
+    mostrarSkeleton: true,
+    mensajeCarga: `Cargando pagina ${paginaServidor}...`
+  });
 }
 
 function limpiarFiltros() {
   document.getElementById('filtroTexto').value = '';
+  const periodoEl = document.getElementById('filtroPeriodo');
+  if (periodoEl) periodoEl.value = '';
   textoFiltro = '';
   palabrasSeleccionadas = [];
   renderizarCheckboxes();
@@ -345,37 +501,52 @@ function limpiarFiltros() {
   filtrarDatos();
 }
 
-function descargarCsv() {
-  if (!datosFiltradosActuales.length) return;
+async function descargarCsv() {
+  if (totalServidor === 0) return;
 
-  const encabezados = [
-    'codigo',
-    'estado',
-    'tipo',
-    'nombre',
-    'descripcion',
-    'institucion_nombre',
-    'monto_estimado',
-    'unidad_monetaria',
-    'fecha_inicio',
-    'fecha_final'
-  ];
+  const btn = document.getElementById('btnDescargarCsv');
+  const textoOriginal = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Descargando...'; }
 
-  const filas = datosFiltradosActuales.map(item => {
-    return encabezados.map(campo => escaparCsv(item[campo] ?? '')).join(';');
-  });
+  try {
+    const todasLicitaciones = [];
+    let totalPaginas = 1;
+    for (let p = 1; p <= totalPaginas; p++) {
+      const params = construirParams(p);
+      const cacheKey = `lics_pk_${params.toString()}`;
+      let json = leerCache(cacheKey);
+      if (!json) {
+        const res = await fetch(`api/licitacionesPub.php?${params.toString()}`, { cache: 'no-store' });
+        if (!res.ok) break;
+        json = await res.json();
+        guardarCache(cacheKey, json);
+      }
+      todasLicitaciones.push(...(json.licitaciones || []).filter(item => item.codigo));
+      totalPaginas = Math.max(1, Number(json.paginas) || 1);
+    }
 
-  const contenido = [encabezados.join(';'), ...filas].join('\n');
-  const bytesLatin1 = codificarLatin1(contenido);
-  const blob = new Blob([bytesLatin1], { type: 'text/csv;charset=iso-8859-1;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'licitaciones_por_palabras_clave.csv';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+    const encabezados = [
+      'codigo', 'estado', 'tipo', 'nombre', 'descripcion',
+      'institucion_nombre', 'monto_estimado', 'unidad_monetaria',
+      'fecha_inicio', 'fecha_final'
+    ];
+    const filas = todasLicitaciones.map(item =>
+      encabezados.map(campo => escaparCsv(item[campo] ?? '')).join(';')
+    );
+    const contenido = [encabezados.join(';'), ...filas].join('\n');
+    const bytesLatin1 = codificarLatin1(contenido);
+    const blob = new Blob([bytesLatin1], { type: 'text/csv;charset=iso-8859-1;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'licitaciones_por_palabras_clave.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } finally {
+    if (btn) { btn.disabled = totalServidor === 0; btn.textContent = textoOriginal; }
+  }
 }
 
 function normalizarTexto(texto) {

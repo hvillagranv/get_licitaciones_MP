@@ -5,7 +5,8 @@ let paginaActual = 1;
 let sugerenciasFiltradasActuales = [];
 let perfilCategorias = [];
 let perfilInstituciones = [];
-let enfoqueActual = 'sugeridas';
+let enfoqueActual = 'listado';
+let codigosGuardadosSugerencias = new Set();
 const SUGERENCIAS_POR_PAGINA = 10;
 const filtrosSugerencias = {
   afinidadMinima: 0,
@@ -20,6 +21,16 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function obtenerClaseEstadoSugerencia(estado) {
+  const valor = (estado || '').toString().trim().toLowerCase();
+  if (valor === 'adjudicada') return 'bg-success';
+  if (valor === 'publicada') return 'bg-primary';
+  if (valor === 'cerrada') return 'bg-secondary';
+  if (valor.startsWith('desierta')) return 'bg-warning text-dark';
+  if (valor === 'revocada' || valor === 'suspendida') return 'bg-danger';
+  return 'bg-dark';
 }
 
 function formatearMoneda(valor, moneda = 'CLP') {
@@ -390,7 +401,7 @@ function renderPerfil(data) {
   if (leyenda) {
     leyenda.innerHTML = `
       <strong>Cómo se interpreta la afinidad:</strong><br>
-      La afinidad está normalizada de 0 a 100. Para ordenar las sugerencias se prioriza primero la coincidencia de palabras clave, luego la institución y finalmente la categoría. Si hay empate, se usa el puntaje de afinidad y después la fecha más reciente.
+      La afinidad está normalizada de 0 a 100 y el listado se ordena primero por ese puntaje. Si hay empate, se usan como desempate las coincidencias de palabras clave, institución y categoría, y luego la fecha más reciente.
     `;
   }
 
@@ -420,8 +431,29 @@ async function guardarSugerencia(codigo, button) {
       button.disabled = true;
       button.textContent = 'Guardada';
     }
+
+    codigosGuardadosSugerencias.add(codigo);
   } catch (error) {
     setEstado(error.message, 'danger');
+  }
+}
+
+async function cargarGuardadasSugerencias() {
+  try {
+    const response = await fetch('api/guardadas.php?action=list', {
+      method: 'GET',
+      credentials: 'include'
+    });
+
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      codigosGuardadosSugerencias = new Set();
+      return;
+    }
+
+    codigosGuardadosSugerencias = new Set((data.guardadas || []).map(item => item.codigo));
+  } catch (error) {
+    codigosGuardadosSugerencias = new Set();
   }
 }
 
@@ -479,7 +511,10 @@ function renderSugerencias(lista) {
         </div>
 
         <div class="d-flex flex-wrap gap-2 mt-3">
-          <button class="btn btn-outline-primary btn-sm" data-guardar-codigo="${escapeHtml(item.codigo)}">Guardar</button>
+          <span class="badge ${obtenerClaseEstadoSugerencia(item.estado)} align-self-center">${item.estado || 'Sin estado'}</span>
+          <button class="btn ${codigosGuardadosSugerencias.has(item.codigo) ? 'btn-outline-secondary' : 'btn-warning'} btn-sm" data-guardar-codigo="${escapeHtml(item.codigo)}" ${codigosGuardadosSugerencias.has(item.codigo) ? 'disabled' : ''}>
+            <i class="bi ${codigosGuardadosSugerencias.has(item.codigo) ? 'bi-bookmark-check' : 'bi-bookmark-plus'}"></i> ${codigosGuardadosSugerencias.has(item.codigo) ? 'Guardada' : 'Guardar licitación'}
+          </button>
           <a class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer" href="https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idLicitacion=${encodeURIComponent(item.codigo)}">Ver en Mercado Público</a>
         </div>
       </div>
@@ -583,6 +618,7 @@ async function cargarSugerencias() {
     }
 
     sugerencias = data.sugerencias || [];
+    await cargarGuardadasSugerencias();
     perfilCategorias = data.perfil?.categorias || [];
     perfilInstituciones = data.perfil?.instituciones || [];
     renderPerfil(data);
